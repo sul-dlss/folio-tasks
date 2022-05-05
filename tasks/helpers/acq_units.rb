@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../helpers/folio_request'
+
 # Module to encapsulate methods used by acq_unit rake tasks
 module AcquisitionsUnitsTaskHelpers
+  include FolioRequestHelper
+
   # acquisitions units
   def acq_units_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/acquisitions-units.tsv"), headers: true,
@@ -9,7 +13,7 @@ module AcquisitionsUnitsTaskHelpers
   end
 
   def acq_unit_id(name)
-    response = FolioRequest.new.get_cql('/acquisitions-units-storage/units', "name==#{name}")['acquisitionsUnits']
+    response = @@folio_request.get_cql('/acquisitions-units-storage/units', "name==#{name}")['acquisitionsUnits']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -27,10 +31,10 @@ module AcquisitionsUnitsTaskHelpers
   end
 
   def acq_units_delete(id)
-    FolioRequest.new.delete("/acquisitions-units-storage/units/#{id}")
+    @@folio_request.delete("/acquisitions-units-storage/units/#{id}")
   end
 
   def acq_units_post(obj)
-    FolioRequest.new.post('/acquisitions-units-storage/units', obj.to_json)
+    @@folio_request.post('/acquisitions-units-storage/units', obj.to_json)
   end
 end

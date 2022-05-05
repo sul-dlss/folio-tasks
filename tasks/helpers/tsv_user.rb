@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../helpers/folio_request'
+
 # Module to encapsulate methods used by user_settings rake tasks
 module TsvUserTaskHelpers
+  include FolioRequestHelper
+
   def user_acq_units_and_permission_sets_tsv
     CSV.parse(File.open("#{Settings.tsv}/users/user-acq-units-and-permission-sets.tsv"),
               headers: true, col_sep: "\t").map(&:to_h)
@@ -21,11 +25,11 @@ module TsvUserTaskHelpers
   end
 
   def note_types_post(obj)
-    FolioRequest.new.post('/note-types', obj)
+    @@folio_request.post('/note-types', obj)
   end
 
   def user_id(barcode)
-    FolioRequest.new.get_cql('/users', "barcode=#{barcode}")['users'][0]&.dig('id')
+    @@folio_request.get_cql('/users', "barcode=#{barcode}")['users'][0]&.dig('id')
   end
 
   def note_json(type, note, user)
@@ -45,7 +49,7 @@ module TsvUserTaskHelpers
   end
 
   def user_notes_post(json)
-    FolioRequest.new.post('/notes', json)
+    @@folio_request.post('/notes', json)
   end
 
   def tsv_user

@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../../lib/folio_request'
 require_relative '../helpers/acq_units'
 require 'csv'
 

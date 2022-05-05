@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../helpers/folio_request'
+
 # rubocop: disable Metrics/ModuleLength
 # Module to encapsulate methods used by tenant_settings rake tasks
 module TenantTaskHelpers
-  def folio_request
-    FolioRequest.new
-  end
+  include FolioRequestHelper
 
   # Institutions
   def institutions_csv
@@ -13,7 +13,7 @@ module TenantTaskHelpers
   end
 
   def institutions_post(obj)
-    folio_request.post('/location-units/institutions', obj.to_json)
+    @@folio_request.post('/location-units/institutions', obj.to_json)
   end
 
   # Campuses
@@ -28,7 +28,7 @@ module TenantTaskHelpers
   end
 
   def campuses_post(obj)
-    folio_request.post('/location-units/campuses', obj.to_json)
+    @@folio_request.post('/location-units/campuses', obj.to_json)
   end
 
   # Libraries
@@ -44,7 +44,7 @@ module TenantTaskHelpers
   end
 
   def libraries_post(obj)
-    folio_request.post('/location-units/libraries', obj.to_json)
+    @@folio_request.post('/location-units/libraries', obj.to_json)
   end
 
   #  Service points
@@ -77,23 +77,23 @@ module TenantTaskHelpers
   end
 
   def hold_cql
-    folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Hold')['staffSlips'][0]['id']
+    @@folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Hold')['staffSlips'][0]['id']
   end
 
   def transit_cql
-    folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Transit')['staffSlips'][0]['id']
+    @@folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Transit')['staffSlips'][0]['id']
   end
 
   def pick_slip_cql
-    folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Pick%20slip')['staffSlips'][0]['id']
+    @@folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Pick%20slip')['staffSlips'][0]['id']
   end
 
   def request_delivery_cql
-    folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Request%20delivery')['staffSlips'][0]['id']
+    @@folio_request.get_cql('/staff-slips-storage/staff-slips', 'name==Request%20delivery')['staffSlips'][0]['id']
   end
 
   def service_points_post(obj)
-    folio_request.post('/service-points', obj.to_json)
+    @@folio_request.post('/service-points', obj.to_json)
   end
 
   #  Locations
@@ -121,7 +121,7 @@ module TenantTaskHelpers
   end
 
   def locations_post(obj)
-    folio_request.post('/locations', obj.to_json)
+    @@folio_request.post('/locations', obj.to_json)
   end
 
   # tenant addresses
@@ -147,11 +147,11 @@ module TenantTaskHelpers
   end
 
   def addresses_delete(id)
-    folio_request.delete("/configurations/entries/#{id}")
+    @@folio_request.delete("/configurations/entries/#{id}")
   end
 
   def addresses_post(obj)
-    folio_request.post('/configurations/entries', obj.to_json)
+    @@folio_request.post('/configurations/entries', obj.to_json)
   end
 end
 # rubocop: enable Metrics/ModuleLength

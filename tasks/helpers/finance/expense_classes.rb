@@ -1,13 +1,17 @@
 # frozen_string_literal: true
 
+require_relative '../folio_request'
+
 # Module to encapsulate expense class methods used by finance_settings rake tasks
 module ExpenseClassHelpers
+  include FolioRequestHelper
+
   def expense_classes_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/expense-classes.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def expense_class_id(code)
-    response = FolioRequest.new.get_cql('/finance/expense-classes', "code==#{code}")['expenseClasses']
+    response = @@folio_request.get_cql('/finance/expense-classes', "code==#{code}")['expenseClasses']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -25,10 +29,10 @@ module ExpenseClassHelpers
   end
 
   def expense_class_delete(id)
-    FolioRequest.new.delete("/finance/expense-classes/#{id}")
+    @@folio_request.delete("/finance/expense-classes/#{id}")
   end
 
   def expense_classes_post(obj)
-    FolioRequest.new.post('/finance/expense-classes', obj.to_json)
+    @@folio_request.post('/finance/expense-classes', obj.to_json)
   end
 end

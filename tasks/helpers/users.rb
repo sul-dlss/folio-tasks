@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
+require_relative 'folio_request'
+
 # Module to encapsulate methods used by user_settings rake tasks
 module UsersTaskHelpers
-  def folio_request
-    FolioRequest.new
-  end
+  include FolioRequestHelper
 
   def groups_csv
     CSV.parse(File.open("#{Settings.tsv}/users/patron-groups.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def groups_post(obj)
-    folio_request.post('/groups', obj.to_json)
+    @@folio_request.post('/groups', obj.to_json)
   end
 
   def address_types_json
@@ -19,7 +19,7 @@ module UsersTaskHelpers
   end
 
   def address_types_post(hash)
-    folio_request.post('/addresstypes', hash.to_json)
+    @@folio_request.post('/addresstypes', hash.to_json)
   end
 
   def waivers_json
@@ -27,7 +27,7 @@ module UsersTaskHelpers
   end
 
   def waivers_post(hash)
-    folio_request.post('/waives', hash.to_json)
+    @@folio_request.post('/waives', hash.to_json)
   end
 
   def payments_json
@@ -35,7 +35,7 @@ module UsersTaskHelpers
   end
 
   def payments_post(hash)
-    folio_request.post('/payments', hash.to_json)
+    @@folio_request.post('/payments', hash.to_json)
   end
 
   def refunds_json
@@ -43,7 +43,7 @@ module UsersTaskHelpers
   end
 
   def refunds_post(hash)
-    folio_request.post('/refunds', hash.to_json)
+    @@folio_request.post('/refunds', hash.to_json)
   end
 
   def fee_fine_owners_json
@@ -51,19 +51,19 @@ module UsersTaskHelpers
   end
 
   def fee_fine_owners_post(hash)
-    folio_request.post('/owners', hash.to_json)
+    @@folio_request.post('/owners', hash.to_json)
   end
 
   def user_get(username)
-    folio_request.get_cql('/users', "username==#{username}")
+    @@folio_request.get_cql('/users', "username==#{username}")
   end
 
   def user_update(user)
-    folio_request.post('/user-import', user.to_json)
+    @@folio_request.post('/user-import', user.to_json)
   end
 
   def patron_group_get(id)
-    folio_request.get("/groups/#{id}")
+    @@folio_request.get("/groups/#{id}")
   end
 
   def patron_group(user)
@@ -84,10 +84,10 @@ module UsersTaskHelpers
   end
 
   def permission_sets_post(hash)
-    folio_request.post('/perms/permissions', hash.to_json)
+    @@folio_request.post('/perms/permissions', hash.to_json)
   end
 
   def user_permissions_get(uuid)
-    folio_request.get("/perms/users/#{uuid}/permissions?full=true&indexField=userId")
+    @@folio_request.get("/perms/users/#{uuid}/permissions?full=true&indexField=userId")
   end
 end

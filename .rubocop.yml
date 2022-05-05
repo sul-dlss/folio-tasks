@@ -34,5 +34,9 @@ RSpec/DescribeClass:
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
+Style/ClassVars:
+  Exclude:
+  - 'tasks/helpers/folio_request.rb'
+
 Style/SlicingWithRange:
   Enabled: false

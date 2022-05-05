@@ -2,7 +2,6 @@
 
 require 'csv'
 require 'require_all'
-require_relative '../../lib/folio_request'
 require_rel '../helpers/finance'
 
 namespace :acquisitions do
