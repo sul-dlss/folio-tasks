@@ -1,0 +1,41 @@
+{
+  "jobProfiles": [
+    {
+      "id": "7f7abc55-2424-4a55-9a80-747f3b7cbab4",
+      "name": "SUL load MARC",
+      "description": "",
+      "dataType": "MARC",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Vitus",
+        "lastName": "Tang",
+        "userName": "vtang"
+      },
+      "parentProfiles": [
+
+      ],
+      "childProfiles": [
+
+      ]
+    },
+    {
+      "id": "74a647c1-fab5-4414-8236-a03cda02ded6",
+      "name": "biz library ebooks ",
+      "description": "",
+      "dataType": "MARC",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Kent",
+        "lastName": "Abbott",
+        "userName": "sabbott"
+      },
+      "parentProfiles": [
+
+      ],
+      "childProfiles": [
+
+      ]
+    }
+  ],
+  "totalRecords": 2
+}

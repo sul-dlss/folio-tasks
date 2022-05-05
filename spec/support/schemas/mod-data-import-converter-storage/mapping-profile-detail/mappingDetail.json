@@ -1,0 +1,44 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Mapping profile detail",
+  "type": "object",
+  "javaType": "org.folio.rest.jaxrs.model.MappingDetail",
+  "additionalProperties": false,
+  "properties": {
+    "name": {
+      "description": "name of  mapping detail entity",
+      "type": "string"
+    },
+    "recordType": {
+      "description": "Incoming record type",
+      "type": "string",
+      "$ref": "../entityType.json"
+    },
+    "mappingFields": {
+      "description": "List of fields to be mapped",
+      "type": "array",
+      "items": {
+        "$ref": "mappingRule.json"
+      }
+    },
+    "marcMappingDetails": {
+      "description": "List of MARC mapping details, applicable only for MARC",
+      "type": "array",
+      "items": {
+        "$ref": "marcMappingDetail.json"
+      }
+    },
+    "marcMappingOption": {
+      "description": "MARC field mapping option",
+      "type": "string",
+      "enum": [
+        "UPDATE",
+        "MODIFY"
+      ]
+    }
+  },
+  "required": [
+    "name",
+    "recordType"
+  ]
+}

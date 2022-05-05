@@ -1,0 +1,2447 @@
+{
+  "actionProfiles": [
+    {
+      "id": "0283111b-203b-4da9-869f-cbe55f725346",
+      "name": "SUL create item",
+      "description": "",
+      "action": "CREATE",
+      "folioRecord": "ITEM",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Vitus",
+        "lastName": "Tang",
+        "userName": "vtang"
+      },
+      "parentProfiles": [
+        {
+          "id": "7f7abc55-2424-4a55-9a80-747f3b7cbab4",
+          "contentType": "JOB_PROFILE",
+          "content": {
+            "id": "7f7abc55-2424-4a55-9a80-747f3b7cbab4",
+            "name": "SUL load MARC",
+            "description": "",
+            "dataType": "MARC",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Vitus",
+              "lastName": "Tang",
+              "userName": "vtang"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ]
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ],
+      "childProfiles": [
+        {
+          "id": "8cd22a28-4293-439d-a4c4-193f4a078e65",
+          "contentType": "MAPPING_PROFILE",
+          "content": {
+            "id": "8cd22a28-4293-439d-a4c4-193f4a078e65",
+            "name": "SUL item",
+            "description": "",
+            "incomingRecordType": "MARC_BIBLIOGRAPHIC",
+            "existingRecordType": "ITEM",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Vitus",
+              "lastName": "Tang",
+              "userName": "vtang"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ],
+            "mappingDetails": {
+              "name": "item",
+              "recordType": "ITEM",
+              "mappingFields": [
+                {
+                  "name": "discoverySuppress",
+                  "enabled": "true",
+                  "path": "item.discoverySuppress",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "hrid",
+                  "enabled": "true",
+                  "path": "item.hrid",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "barcode",
+                  "enabled": "true",
+                  "path": "item.barcode",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "accessionNumber",
+                  "enabled": "true",
+                  "path": "item.accessionNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemIdentifier",
+                  "enabled": "true",
+                  "path": "item.itemIdentifier",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "formerIds",
+                  "enabled": "true",
+                  "path": "item.formerIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "statisticalCodeIds",
+                  "enabled": "true",
+                  "path": "item.statisticalCodeIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "materialType.id",
+                  "enabled": "true",
+                  "path": "item.materialType.id",
+                  "value": "\"book\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "1a54b431-2e4f-452d-9cae-9cee66c9a892": "book",
+                    "d9acad2f-2aac-4b48-9097-e6ab85906b25": "text",
+                    "5ee11d91-f7e8-481d-b079-65d708582ccc": "dvd",
+                    "30b3e36a-d3b2-415e-98c2-47fbdf878862": "video recording",
+                    "615b8413-82d5-4203-aa6e-e37984cb5ac3": "electronic resource",
+                    "dd0bf600-dbd9-44ab-9ff2-e2a61a6539f1": "sound recording",
+                    "fd6c6515-d470-4561-9c32-3e3290d4ca98": "microform",
+                    "71fbd940-1027-40a6-8a48-49b44d795e46": "unspecified"
+                  }
+                },
+                {
+                  "name": "copyNumber",
+                  "enabled": "true",
+                  "path": "item.copyNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemLevelCallNumberTypeId",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumberTypeId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "054d460d-d6b9-4469-9e37-7a78a2266655": "National Library of Medicine classification",
+                    "6caca63e-5651-4db6-9247-3205156e9699": "Other scheme",
+                    "d644be8f-deb5-4c4d-8c9e-2291b7c0f46f": "UDC",
+                    "827a2b64-cbf5-4296-8545-130876e4dfc0": "Source specified in subfield $2",
+                    "cd70562c-dd0b-42f6-aa80-ce803d24d4a1": "Shelved separately",
+                    "03dd64d0-5626-4ecd-8ece-4531e0069f35": "Dewey Decimal classification",
+                    "828ae637-dfa3-4265-a1af-5279c436edff": "MOYS",
+                    "512173a7-bd09-490e-b773-17d83f2b63fe": "LC Modified",
+                    "fc388041-6cd0-4806-8a74-ebe3b9ab4c6e": "Superintendent of Documents classification",
+                    "5ba6b62e-6858-490a-8102-5b1369873835": "Title",
+                    "95467209-6d7b-468b-94df-0f5d7ad2747d": "Library of Congress classification",
+                    "28927d76-e097-4f63-8510-e56f2b7a3ad0": "Shelving control number"
+                  }
+                },
+                {
+                  "name": "itemLevelCallNumberPrefix",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumberPrefix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemLevelCallNumber",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemLevelCallNumberSuffix",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumberSuffix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "numberOfPieces",
+                  "enabled": "true",
+                  "path": "item.numberOfPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "descriptionOfPieces",
+                  "enabled": "true",
+                  "path": "item.descriptionOfPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "enumeration",
+                  "enabled": "true",
+                  "path": "item.enumeration",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "chronology",
+                  "enabled": "true",
+                  "path": "item.chronology",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "volume",
+                  "enabled": "true",
+                  "path": "item.volume",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "yearCaption",
+                  "enabled": "true",
+                  "path": "item.yearCaption[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "numberOfMissingPieces",
+                  "enabled": "true",
+                  "path": "item.numberOfMissingPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "missingPieces",
+                  "enabled": "true",
+                  "path": "item.missingPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "missingPiecesDate",
+                  "enabled": "true",
+                  "path": "item.missingPiecesDate",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemDamagedStatusId",
+                  "enabled": "true",
+                  "path": "item.itemDamagedStatusId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "516b82eb-1f19-4a63-8c48-8f1a3e9ff311": "Not Damaged",
+                    "54d1dd76-ea33-4bcb-955b-6b29df4f7930": "Damaged"
+                  }
+                },
+                {
+                  "name": "itemDamagedStatusDate",
+                  "enabled": "true",
+                  "path": "item.itemDamagedStatusDate",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "notes",
+                  "enabled": "true",
+                  "path": "item.notes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "permanentLoanType.id",
+                  "enabled": "true",
+                  "path": "item.permanentLoanType.id",
+                  "value": "\"Can circulate\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "2e48e713-17f3-4c13-a9f8-23845bb210a4": "Reading room",
+                    "2b94c631-fca9-4892-a730-03ee529ffe27": "Can circulate",
+                    "e8b311a6-3b21-43f2-a269-dd9310cb2d0e": "Course reserves",
+                    "a1dc1ce3-d56f-4d8a-b498-d5d674ccc845": "Selected"
+                  }
+                },
+                {
+                  "name": "temporaryLoanType.id",
+                  "enabled": "true",
+                  "path": "item.temporaryLoanType.id",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "2e48e713-17f3-4c13-a9f8-23845bb210a4": "Reading room",
+                    "2b94c631-fca9-4892-a730-03ee529ffe27": "Can circulate",
+                    "e8b311a6-3b21-43f2-a269-dd9310cb2d0e": "Course reserves",
+                    "a1dc1ce3-d56f-4d8a-b498-d5d674ccc845": "Selected"
+                  }
+                },
+                {
+                  "name": "status.name",
+                  "enabled": "true",
+                  "path": "item.status.name",
+                  "value": "\"Available\"",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "circulationNotes",
+                  "enabled": "true",
+                  "path": "item.circulationNotes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "permanentLocation.id",
+                  "enabled": "true",
+                  "path": "item.permanentLocation.id",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)"
+                  }
+                },
+                {
+                  "name": "temporaryLocation.id",
+                  "enabled": "true",
+                  "path": "item.temporaryLocation.id",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)"
+                  }
+                },
+                {
+                  "name": "electronicAccess",
+                  "enabled": "true",
+                  "path": "item.electronicAccess[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                }
+              ],
+              "marcMappingDetails": [
+
+              ]
+            }
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ]
+    },
+    {
+      "id": "5104457e-c491-4cc3-8e47-5850b9c517dc",
+      "name": "SUL create holdings",
+      "description": "",
+      "action": "CREATE",
+      "folioRecord": "HOLDINGS",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Vitus",
+        "lastName": "Tang",
+        "userName": "vtang"
+      },
+      "parentProfiles": [
+        {
+          "id": "7f7abc55-2424-4a55-9a80-747f3b7cbab4",
+          "contentType": "JOB_PROFILE",
+          "content": {
+            "id": "7f7abc55-2424-4a55-9a80-747f3b7cbab4",
+            "name": "SUL load MARC",
+            "description": "",
+            "dataType": "MARC",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Vitus",
+              "lastName": "Tang",
+              "userName": "vtang"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ]
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ],
+      "childProfiles": [
+        {
+          "id": "2cf1a05d-842c-4edf-9ede-dd530f16e0de",
+          "contentType": "MAPPING_PROFILE",
+          "content": {
+            "id": "2cf1a05d-842c-4edf-9ede-dd530f16e0de",
+            "name": "SUL holdings",
+            "description": "",
+            "incomingRecordType": "MARC_BIBLIOGRAPHIC",
+            "existingRecordType": "HOLDINGS",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Vitus",
+              "lastName": "Tang",
+              "userName": "vtang"
+            },
+            "parentProfiles": [
+              {
+                "id": "5104457e-c491-4cc3-8e47-5850b9c517dc",
+                "contentType": "ACTION_PROFILE",
+                "content": {
+                  "id": "5104457e-c491-4cc3-8e47-5850b9c517dc",
+                  "name": "SUL create holdings",
+                  "action": "CREATE",
+                  "deleted": false,
+                  "userInfo": {
+                    "lastName": "Tang",
+                    "userName": "vtang",
+                    "firstName": "Vitus"
+                  },
+                  "description": "",
+                  "folioRecord": "HOLDINGS",
+                  "childProfiles": [
+
+                  ],
+                  "parentProfiles": [
+
+                  ]
+                },
+                "order": 0,
+                "childSnapshotWrappers": [
+
+                ]
+              }
+            ],
+            "childProfiles": [
+
+            ],
+            "mappingDetails": {
+              "name": "holdings",
+              "recordType": "HOLDINGS",
+              "mappingFields": [
+                {
+                  "name": "discoverySuppress",
+                  "enabled": "true",
+                  "path": "holdings.discoverySuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "hrid",
+                  "enabled": "false",
+                  "path": "holdings.discoverySuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "formerIds",
+                  "enabled": "true",
+                  "path": "holdings.formerIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsTypeId",
+                  "enabled": "true",
+                  "path": "holdings.holdingsTypeId",
+                  "value": "\"Monograph\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "0c422f92-0f4d-4d32-8cbe-390ebc33a3e5": "Physical",
+                    "996f93e2-5b5e-4cf2-9168-33ced1f95eed": "Electronic",
+                    "dc35d0ae-e877-488b-8e97-6e41444e6d0a": "Multi-part monograph",
+                    "e6da6c98-6dd0-41bc-8b4b-cfd4bbd9c3ae": "Serial",
+                    "03c9c400-b9e3-4a07-ac0e-05ab470233ed": "Monograph"
+                  }
+                },
+                {
+                  "name": "statisticalCodeIds",
+                  "enabled": "true",
+                  "path": "holdings.statisticalCodeIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "permanentLocationId",
+                  "enabled": "true",
+                  "path": "holdings.permanentLocationId",
+                  "value": "\"Online (E)\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)"
+                  }
+                },
+                {
+                  "name": "temporaryLocationId",
+                  "enabled": "true",
+                  "path": "holdings.temporaryLocationId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)"
+                  }
+                },
+                {
+                  "name": "shelvingOrder",
+                  "enabled": "true",
+                  "path": "holdings.shelvingOrder",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "shelvingTitle",
+                  "enabled": "true",
+                  "path": "holdings.shelvingTitle",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "copyNumber",
+                  "enabled": "true",
+                  "path": "holdings.copyNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "callNumberTypeId",
+                  "enabled": "true",
+                  "path": "holdings.callNumberTypeId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "054d460d-d6b9-4469-9e37-7a78a2266655": "National Library of Medicine classification",
+                    "6caca63e-5651-4db6-9247-3205156e9699": "Other scheme",
+                    "d644be8f-deb5-4c4d-8c9e-2291b7c0f46f": "UDC",
+                    "827a2b64-cbf5-4296-8545-130876e4dfc0": "Source specified in subfield $2",
+                    "cd70562c-dd0b-42f6-aa80-ce803d24d4a1": "Shelved separately",
+                    "03dd64d0-5626-4ecd-8ece-4531e0069f35": "Dewey Decimal classification",
+                    "828ae637-dfa3-4265-a1af-5279c436edff": "MOYS",
+                    "512173a7-bd09-490e-b773-17d83f2b63fe": "LC Modified",
+                    "fc388041-6cd0-4806-8a74-ebe3b9ab4c6e": "Superintendent of Documents classification",
+                    "5ba6b62e-6858-490a-8102-5b1369873835": "Title",
+                    "95467209-6d7b-468b-94df-0f5d7ad2747d": "Library of Congress classification",
+                    "28927d76-e097-4f63-8510-e56f2b7a3ad0": "Shelving control number"
+                  }
+                },
+                {
+                  "name": "callNumberPrefix",
+                  "enabled": "true",
+                  "path": "holdings.callNumberPrefix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "callNumber",
+                  "enabled": "true",
+                  "path": "holdings.callNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "callNumberSuffix",
+                  "enabled": "true",
+                  "path": "holdings.callNumberSuffix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "numberOfItems",
+                  "enabled": "true",
+                  "path": "holdings.numberOfItems",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsStatements",
+                  "enabled": "true",
+                  "path": "holdings.holdingsStatements[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsStatementsForSupplements",
+                  "enabled": "true",
+                  "path": "holdings.holdingsStatementsForSupplements[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsStatementsForIndexes",
+                  "enabled": "true",
+                  "path": "holdings.holdingsStatementsForIndexes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "illPolicyId",
+                  "enabled": "true",
+                  "path": "holdings.illPolicyId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "9e49924b-f649-4b36-ab57-e66e639a9b0e": "Limited lending policy",
+                    "46970b40-918e-47a4-a45d-b1677a2d3d46": "Will lend",
+                    "c51f7aa9-9997-45e6-94d6-b502445aae9d": "Unknown reproduction policy",
+                    "6bc6a71f-d6e2-4693-87f1-f495afddff00": "Will not reproduce",
+                    "b0f97013-87f5-4bab-87f2-ac4a5191b489": "will not lend",
+                    "2b870182-a23d-48e8-917d-9421e5c3ce13": "Will lend hard copy only",
+                    "37fc2702-7ec9-482a-a4e3-5ed9a122ece1": "Unknown lending policy",
+                    "2a572e7b-dfe5-4dee-8a62-b98d26a802e6": "Will reproduce"
+                  }
+                },
+                {
+                  "name": "digitizationPolicy",
+                  "enabled": "true",
+                  "path": "holdings.digitizationPolicy",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "retentionPolicy",
+                  "enabled": "true",
+                  "path": "holdings.retentionPolicy",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "notes",
+                  "enabled": "true",
+                  "path": "holdings.notes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "electronicAccess",
+                  "enabled": "true",
+                  "path": "holdings.electronicAccess[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "acquisitionMethod",
+                  "enabled": "true",
+                  "path": "holdings.acquisitionMethod",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "acquisitionFormat",
+                  "enabled": "true",
+                  "path": "holdings.acquisitionFormat",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "receiptStatus",
+                  "enabled": "true",
+                  "path": "holdings.receiptStatus",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "receivingHistory.entries",
+                  "enabled": "true",
+                  "path": "holdings.receivingHistory.entries[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                }
+              ],
+              "marcMappingDetails": [
+
+              ]
+            }
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ]
+    },
+    {
+      "id": "d697cf79-f739-420b-99f2-d01d7178d0f1",
+      "name": "SUL create instance",
+      "description": "",
+      "action": "CREATE",
+      "folioRecord": "INSTANCE",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Vitus",
+        "lastName": "Tang",
+        "userName": "vtang"
+      },
+      "parentProfiles": [
+        {
+          "id": "7f7abc55-2424-4a55-9a80-747f3b7cbab4",
+          "contentType": "JOB_PROFILE",
+          "content": {
+            "id": "7f7abc55-2424-4a55-9a80-747f3b7cbab4",
+            "name": "SUL load MARC",
+            "description": "",
+            "dataType": "MARC",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Vitus",
+              "lastName": "Tang",
+              "userName": "vtang"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ]
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ],
+      "childProfiles": [
+        {
+          "id": "d10925ce-54a3-434d-9368-f0acb33c857c",
+          "contentType": "MAPPING_PROFILE",
+          "content": {
+            "id": "d10925ce-54a3-434d-9368-f0acb33c857c",
+            "name": "SUL instance",
+            "description": "",
+            "tags": {
+              "tagList": [
+
+              ]
+            },
+            "incomingRecordType": "MARC_BIBLIOGRAPHIC",
+            "existingRecordType": "INSTANCE",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "DelPriore",
+              "lastName": "Alex",
+              "userName": "adlpr"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ],
+            "mappingDetails": {
+              "name": "instance",
+              "recordType": "INSTANCE",
+              "mappingFields": [
+                {
+                  "name": "discoverySuppress",
+                  "enabled": "true",
+                  "path": "instance.discoverySuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "staffSuppress",
+                  "enabled": "true",
+                  "path": "instance.staffSuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "previouslyHeld",
+                  "enabled": "true",
+                  "path": "instance.previouslyHeld",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "hrid",
+                  "enabled": "false",
+                  "path": "instance.hrid",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "source",
+                  "enabled": "false",
+                  "path": "instance.source",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "catalogedDate",
+                  "enabled": "true",
+                  "path": "instance.catalogedDate",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "statusId",
+                  "enabled": "true",
+                  "path": "instance.statusId",
+                  "value": "\"Batch Loaded\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "26f5208e-110a-4394-be29-1569a8c84a65": "Uncataloged",
+                    "52a2ff34-2a12-420d-8539-21aa8d3cf5d8": "Batch Loaded",
+                    "f5cc2ab6-bb92-4cab-b83f-5a3d09261a41": "Not yet assigned",
+                    "2a340d34-6b70-443a-bb1b-1b8d1c65d862": "Other",
+                    "9634a5ab-9228-4703-baf2-4d12ebc77d56": "Cataloged",
+                    "daf2681c-25af-4202-a3fa-e58fdf806183": "Temporary"
+                  }
+                },
+                {
+                  "name": "modeOfIssuanceId",
+                  "enabled": "false",
+                  "path": "instance.modeOfIssuanceId",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "statisticalCodeIds",
+                  "enabled": "true",
+                  "path": "instance.statisticalCodeIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "title",
+                  "enabled": "false",
+                  "path": "instance.title",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "alternativeTitles",
+                  "enabled": "false",
+                  "path": "instance.alternativeTitles[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "indexTitle",
+                  "enabled": "false",
+                  "path": "instance.indexTitle",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "series",
+                  "enabled": "false",
+                  "path": "instance.series[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "precedingTitles",
+                  "enabled": "false",
+                  "path": "instance.precedingTitles[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "succeedingTitles",
+                  "enabled": "false",
+                  "path": "instance.succeedingTitles[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "identifiers",
+                  "enabled": "false",
+                  "path": "instance.identifiers[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "contributors",
+                  "enabled": "false",
+                  "path": "instance.contributors[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "publication",
+                  "enabled": "false",
+                  "path": "instance.publication[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "editions",
+                  "enabled": "false",
+                  "path": "instance.editions[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "physicalDescriptions",
+                  "enabled": "false",
+                  "path": "instance.physicalDescriptions[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "instanceTypeId",
+                  "enabled": "false",
+                  "path": "instance.instanceTypeId",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "natureOfContentTermIds",
+                  "enabled": "true",
+                  "path": "instance.natureOfContentTermIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "instanceFormatIds",
+                  "enabled": "false",
+                  "path": "instance.instanceFormatIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "languages",
+                  "enabled": "false",
+                  "path": "instance.languages[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "publicationFrequency",
+                  "enabled": "false",
+                  "path": "instance.publicationFrequency[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "publicationRange",
+                  "enabled": "false",
+                  "path": "instance.publicationRange[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "notes",
+                  "enabled": "false",
+                  "path": "instance.notes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "electronicAccess",
+                  "enabled": "false",
+                  "path": "instance.electronicAccess[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "subjects",
+                  "enabled": "false",
+                  "path": "instance.subjects[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "classifications",
+                  "enabled": "false",
+                  "path": "instance.classifications[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "parentInstances",
+                  "enabled": "true",
+                  "path": "instance.parentInstances[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "childInstances",
+                  "enabled": "true",
+                  "path": "instance.childInstances[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                }
+              ],
+              "marcMappingDetails": [
+
+              ]
+            }
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ]
+    },
+    {
+      "id": "32351250-2998-49f1-bd60-f1ba0e9f1531",
+      "name": "bizlib create holdings",
+      "description": "",
+      "action": "CREATE",
+      "folioRecord": "HOLDINGS",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Kent",
+        "lastName": "Abbott",
+        "userName": "sabbott"
+      },
+      "parentProfiles": [
+        {
+          "id": "74a647c1-fab5-4414-8236-a03cda02ded6",
+          "contentType": "JOB_PROFILE",
+          "content": {
+            "id": "74a647c1-fab5-4414-8236-a03cda02ded6",
+            "name": "biz library ebooks ",
+            "description": "",
+            "dataType": "MARC",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Kent",
+              "lastName": "Abbott",
+              "userName": "sabbott"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ]
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ],
+      "childProfiles": [
+        {
+          "id": "97070a38-5c1a-45f8-96ce-9946ba390bef",
+          "contentType": "MAPPING_PROFILE",
+          "content": {
+            "id": "97070a38-5c1a-45f8-96ce-9946ba390bef",
+            "name": "bizlib  holdings",
+            "description": "",
+            "incomingRecordType": "MARC_BIBLIOGRAPHIC",
+            "existingRecordType": "HOLDINGS",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Kent",
+              "lastName": "Abbott",
+              "userName": "sabbott"
+            },
+            "parentProfiles": [
+              {
+                "id": "32351250-2998-49f1-bd60-f1ba0e9f1531",
+                "contentType": "ACTION_PROFILE",
+                "content": {
+                  "id": "32351250-2998-49f1-bd60-f1ba0e9f1531",
+                  "name": "bizlib create holdings",
+                  "action": "CREATE",
+                  "deleted": false,
+                  "userInfo": {
+                    "lastName": "Abbott",
+                    "userName": "sabbott",
+                    "firstName": "Kent"
+                  },
+                  "description": "",
+                  "folioRecord": "HOLDINGS",
+                  "childProfiles": [
+
+                  ],
+                  "parentProfiles": [
+
+                  ]
+                },
+                "order": 0,
+                "childSnapshotWrappers": [
+
+                ]
+              }
+            ],
+            "childProfiles": [
+
+            ],
+            "mappingDetails": {
+              "name": "holdings",
+              "recordType": "HOLDINGS",
+              "mappingFields": [
+                {
+                  "name": "discoverySuppress",
+                  "enabled": "true",
+                  "path": "holdings.discoverySuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "hrid",
+                  "enabled": "false",
+                  "path": "holdings.discoverySuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "formerIds",
+                  "enabled": "true",
+                  "path": "holdings.formerIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsTypeId",
+                  "enabled": "true",
+                  "path": "holdings.holdingsTypeId",
+                  "value": "\"Monograph\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "0c422f92-0f4d-4d32-8cbe-390ebc33a3e5": "Physical",
+                    "996f93e2-5b5e-4cf2-9168-33ced1f95eed": "Electronic",
+                    "dc35d0ae-e877-488b-8e97-6e41444e6d0a": "Multi-part monograph",
+                    "e6da6c98-6dd0-41bc-8b4b-cfd4bbd9c3ae": "Serial",
+                    "03c9c400-b9e3-4a07-ac0e-05ab470233ed": "Monograph"
+                  }
+                },
+                {
+                  "name": "statisticalCodeIds",
+                  "enabled": "true",
+                  "path": "holdings.statisticalCodeIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "permanentLocationId",
+                  "enabled": "true",
+                  "path": "holdings.permanentLocationId",
+                  "value": "\"Business Internet Resource (Business-Internet Resource)\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "0313ef16-0db4-4db5-93b9-98cf1e77a6c8": "Science Stacks (SCIENCE-STACKS)",
+                    "7b779ba0-bc67-45ef-b218-796284296d36": "Science Shelved By Title (SCIENCE-SHELBYTITL)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "9596503e-cf4a-471d-a2cc-fe727ef3a5f7": "Business Stacks (BUSINESS-STACKS)",
+                    "05cb6568-6e70-4085-8e97-b29862b9b6f0": "Science Shelved By Series Title (SCIENCE-SHELBYSER)",
+                    "8342d5e3-db94-4d89-8928-520860b78374": "Green Information Center (GREEN-IC)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)",
+                    "5f22e3fc-a400-450b-a5cd-eaa3d77b75a5": "Law Circulation Desk (LAW-CIRC)",
+                    "d5d99938-e15c-49cc-9398-3992a71dc36e": "Business Internet Resource (Business-Internet Resource)",
+                    "8ba31285-6a87-4457-be27-d377af9b4c1e": "Lane Stacks (LANE-STACKS)",
+                    "b8c134cb-a603-43f3-8041-f00fb94b7da5": "HILA Reading Room (HILA-RR)",
+                    "c26b05c8-d09a-4ddb-8ffa-420b58887f88": "Business Career Collection (BUSINESS-CAREER)",
+                    "f8714184-e5d1-4245-84a5-b2f22feb9812": "Green Stacks (GREEN-STACKS)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)"
+                  }
+                },
+                {
+                  "name": "temporaryLocationId",
+                  "enabled": "true",
+                  "path": "holdings.temporaryLocationId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "0313ef16-0db4-4db5-93b9-98cf1e77a6c8": "Science Stacks (SCIENCE-STACKS)",
+                    "7b779ba0-bc67-45ef-b218-796284296d36": "Science Shelved By Title (SCIENCE-SHELBYTITL)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "9596503e-cf4a-471d-a2cc-fe727ef3a5f7": "Business Stacks (BUSINESS-STACKS)",
+                    "05cb6568-6e70-4085-8e97-b29862b9b6f0": "Science Shelved By Series Title (SCIENCE-SHELBYSER)",
+                    "8342d5e3-db94-4d89-8928-520860b78374": "Green Information Center (GREEN-IC)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)",
+                    "5f22e3fc-a400-450b-a5cd-eaa3d77b75a5": "Law Circulation Desk (LAW-CIRC)",
+                    "d5d99938-e15c-49cc-9398-3992a71dc36e": "Business Internet Resource (Business-Internet Resource)",
+                    "8ba31285-6a87-4457-be27-d377af9b4c1e": "Lane Stacks (LANE-STACKS)",
+                    "b8c134cb-a603-43f3-8041-f00fb94b7da5": "HILA Reading Room (HILA-RR)",
+                    "c26b05c8-d09a-4ddb-8ffa-420b58887f88": "Business Career Collection (BUSINESS-CAREER)",
+                    "f8714184-e5d1-4245-84a5-b2f22feb9812": "Green Stacks (GREEN-STACKS)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)"
+                  }
+                },
+                {
+                  "name": "shelvingOrder",
+                  "enabled": "true",
+                  "path": "holdings.shelvingOrder",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "shelvingTitle",
+                  "enabled": "true",
+                  "path": "holdings.shelvingTitle",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "copyNumber",
+                  "enabled": "true",
+                  "path": "holdings.copyNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "callNumberTypeId",
+                  "enabled": "true",
+                  "path": "holdings.callNumberTypeId",
+                  "value": "\"Other scheme\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "054d460d-d6b9-4469-9e37-7a78a2266655": "National Library of Medicine classification",
+                    "6caca63e-5651-4db6-9247-3205156e9699": "Other scheme",
+                    "d644be8f-deb5-4c4d-8c9e-2291b7c0f46f": "UDC",
+                    "827a2b64-cbf5-4296-8545-130876e4dfc0": "Source specified in subfield $2",
+                    "cd70562c-dd0b-42f6-aa80-ce803d24d4a1": "Shelved separately",
+                    "03dd64d0-5626-4ecd-8ece-4531e0069f35": "Dewey Decimal classification",
+                    "828ae637-dfa3-4265-a1af-5279c436edff": "MOYS",
+                    "512173a7-bd09-490e-b773-17d83f2b63fe": "LC Modified",
+                    "fc388041-6cd0-4806-8a74-ebe3b9ab4c6e": "Superintendent of Documents classification",
+                    "5ba6b62e-6858-490a-8102-5b1369873835": "Title",
+                    "95467209-6d7b-468b-94df-0f5d7ad2747d": "Library of Congress classification",
+                    "28927d76-e097-4f63-8510-e56f2b7a3ad0": "Shelving control number"
+                  }
+                },
+                {
+                  "name": "callNumberPrefix",
+                  "enabled": "true",
+                  "path": "holdings.callNumberPrefix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "callNumber",
+                  "enabled": "true",
+                  "path": "holdings.callNumber",
+                  "value": "INTERNET RESOURCE",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "callNumberSuffix",
+                  "enabled": "true",
+                  "path": "holdings.callNumberSuffix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "numberOfItems",
+                  "enabled": "true",
+                  "path": "holdings.numberOfItems",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsStatements",
+                  "enabled": "true",
+                  "path": "holdings.holdingsStatements[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsStatementsForSupplements",
+                  "enabled": "true",
+                  "path": "holdings.holdingsStatementsForSupplements[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "holdingsStatementsForIndexes",
+                  "enabled": "true",
+                  "path": "holdings.holdingsStatementsForIndexes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "illPolicyId",
+                  "enabled": "true",
+                  "path": "holdings.illPolicyId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "9e49924b-f649-4b36-ab57-e66e639a9b0e": "Limited lending policy",
+                    "46970b40-918e-47a4-a45d-b1677a2d3d46": "Will lend",
+                    "c51f7aa9-9997-45e6-94d6-b502445aae9d": "Unknown reproduction policy",
+                    "6bc6a71f-d6e2-4693-87f1-f495afddff00": "Will not reproduce",
+                    "b0f97013-87f5-4bab-87f2-ac4a5191b489": "will not lend",
+                    "2b870182-a23d-48e8-917d-9421e5c3ce13": "Will lend hard copy only",
+                    "37fc2702-7ec9-482a-a4e3-5ed9a122ece1": "Unknown lending policy",
+                    "2a572e7b-dfe5-4dee-8a62-b98d26a802e6": "Will reproduce"
+                  }
+                },
+                {
+                  "name": "digitizationPolicy",
+                  "enabled": "true",
+                  "path": "holdings.digitizationPolicy",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "retentionPolicy",
+                  "enabled": "true",
+                  "path": "holdings.retentionPolicy",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "notes",
+                  "enabled": "true",
+                  "path": "holdings.notes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "electronicAccess",
+                  "enabled": "true",
+                  "path": "holdings.electronicAccess[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "acquisitionMethod",
+                  "enabled": "true",
+                  "path": "holdings.acquisitionMethod",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "acquisitionFormat",
+                  "enabled": "true",
+                  "path": "holdings.acquisitionFormat",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "receiptStatus",
+                  "enabled": "true",
+                  "path": "holdings.receiptStatus",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "receivingHistory.entries",
+                  "enabled": "true",
+                  "path": "holdings.receivingHistory.entries[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                }
+              ],
+              "marcMappingDetails": [
+
+              ]
+            }
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ]
+    },
+    {
+      "id": "4c7d6502-5876-45fa-bbd6-d85bcc1164d1",
+      "name": "bizlib create instance",
+      "description": "",
+      "action": "CREATE",
+      "folioRecord": "INSTANCE",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Kent",
+        "lastName": "Abbott",
+        "userName": "sabbott"
+      },
+      "parentProfiles": [
+        {
+          "id": "74a647c1-fab5-4414-8236-a03cda02ded6",
+          "contentType": "JOB_PROFILE",
+          "content": {
+            "id": "74a647c1-fab5-4414-8236-a03cda02ded6",
+            "name": "biz library ebooks ",
+            "description": "",
+            "dataType": "MARC",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Kent",
+              "lastName": "Abbott",
+              "userName": "sabbott"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ]
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ],
+      "childProfiles": [
+        {
+          "id": "80d7cd8c-bc22-4456-ae75-368d9c739214",
+          "contentType": "MAPPING_PROFILE",
+          "content": {
+            "id": "80d7cd8c-bc22-4456-ae75-368d9c739214",
+            "name": "bizlib instance",
+            "description": "",
+            "tags": {
+              "tagList": [
+
+              ]
+            },
+            "incomingRecordType": "MARC_BIBLIOGRAPHIC",
+            "existingRecordType": "INSTANCE",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Kent",
+              "lastName": "Abbott",
+              "userName": "sabbott"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ],
+            "mappingDetails": {
+              "name": "instance",
+              "recordType": "INSTANCE",
+              "mappingFields": [
+                {
+                  "name": "discoverySuppress",
+                  "enabled": "true",
+                  "path": "instance.discoverySuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "staffSuppress",
+                  "enabled": "true",
+                  "path": "instance.staffSuppress",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "previouslyHeld",
+                  "enabled": "true",
+                  "path": "instance.previouslyHeld",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "hrid",
+                  "enabled": "false",
+                  "path": "instance.hrid",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "source",
+                  "enabled": "false",
+                  "path": "instance.source",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "catalogedDate",
+                  "enabled": "true",
+                  "path": "instance.catalogedDate",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "statusId",
+                  "enabled": "true",
+                  "path": "instance.statusId",
+                  "value": "\"Batch Loaded\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "26f5208e-110a-4394-be29-1569a8c84a65": "Uncataloged",
+                    "52a2ff34-2a12-420d-8539-21aa8d3cf5d8": "Batch Loaded",
+                    "f5cc2ab6-bb92-4cab-b83f-5a3d09261a41": "Not yet assigned",
+                    "2a340d34-6b70-443a-bb1b-1b8d1c65d862": "Other",
+                    "9634a5ab-9228-4703-baf2-4d12ebc77d56": "Cataloged",
+                    "daf2681c-25af-4202-a3fa-e58fdf806183": "Temporary"
+                  }
+                },
+                {
+                  "name": "modeOfIssuanceId",
+                  "enabled": "false",
+                  "path": "instance.modeOfIssuanceId",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "statisticalCodeIds",
+                  "enabled": "true",
+                  "path": "instance.statisticalCodeIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "title",
+                  "enabled": "false",
+                  "path": "instance.title",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "alternativeTitles",
+                  "enabled": "false",
+                  "path": "instance.alternativeTitles[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "indexTitle",
+                  "enabled": "false",
+                  "path": "instance.indexTitle",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "series",
+                  "enabled": "false",
+                  "path": "instance.series[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "precedingTitles",
+                  "enabled": "false",
+                  "path": "instance.precedingTitles[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "succeedingTitles",
+                  "enabled": "false",
+                  "path": "instance.succeedingTitles[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "identifiers",
+                  "enabled": "false",
+                  "path": "instance.identifiers[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "contributors",
+                  "enabled": "false",
+                  "path": "instance.contributors[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "publication",
+                  "enabled": "false",
+                  "path": "instance.publication[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "editions",
+                  "enabled": "false",
+                  "path": "instance.editions[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "physicalDescriptions",
+                  "enabled": "false",
+                  "path": "instance.physicalDescriptions[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "instanceTypeId",
+                  "enabled": "false",
+                  "path": "instance.instanceTypeId",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "natureOfContentTermIds",
+                  "enabled": "true",
+                  "path": "instance.natureOfContentTermIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "instanceFormatIds",
+                  "enabled": "false",
+                  "path": "instance.instanceFormatIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "languages",
+                  "enabled": "false",
+                  "path": "instance.languages[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "publicationFrequency",
+                  "enabled": "false",
+                  "path": "instance.publicationFrequency[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "publicationRange",
+                  "enabled": "false",
+                  "path": "instance.publicationRange[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "notes",
+                  "enabled": "false",
+                  "path": "instance.notes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "electronicAccess",
+                  "enabled": "false",
+                  "path": "instance.electronicAccess[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "subjects",
+                  "enabled": "false",
+                  "path": "instance.subjects[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "classifications",
+                  "enabled": "false",
+                  "path": "instance.classifications[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "parentInstances",
+                  "enabled": "true",
+                  "path": "instance.parentInstances[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "childInstances",
+                  "enabled": "true",
+                  "path": "instance.childInstances[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                }
+              ],
+              "marcMappingDetails": [
+
+              ]
+            }
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ]
+    },
+    {
+      "id": "0db3f2e6-f9a5-4fa2-953a-f0c6df6443d7",
+      "name": "bizlib create item",
+      "description": "",
+      "action": "CREATE",
+      "folioRecord": "ITEM",
+      "deleted": false,
+      "userInfo": {
+        "firstName": "Kent",
+        "lastName": "Abbott",
+        "userName": "sabbott"
+      },
+      "parentProfiles": [
+        {
+          "id": "74a647c1-fab5-4414-8236-a03cda02ded6",
+          "contentType": "JOB_PROFILE",
+          "content": {
+            "id": "74a647c1-fab5-4414-8236-a03cda02ded6",
+            "name": "biz library ebooks ",
+            "description": "",
+            "dataType": "MARC",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Kent",
+              "lastName": "Abbott",
+              "userName": "sabbott"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ]
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ],
+      "childProfiles": [
+        {
+          "id": "69bd70d9-e8ea-40bf-9e47-a25484675427",
+          "contentType": "MAPPING_PROFILE",
+          "content": {
+            "id": "69bd70d9-e8ea-40bf-9e47-a25484675427",
+            "name": "bizlib item",
+            "description": "",
+            "incomingRecordType": "MARC_BIBLIOGRAPHIC",
+            "existingRecordType": "ITEM",
+            "deleted": false,
+            "userInfo": {
+              "firstName": "Kent",
+              "lastName": "Abbott",
+              "userName": "sabbott"
+            },
+            "parentProfiles": [
+
+            ],
+            "childProfiles": [
+
+            ],
+            "mappingDetails": {
+              "name": "item",
+              "recordType": "ITEM",
+              "mappingFields": [
+                {
+                  "name": "discoverySuppress",
+                  "enabled": "true",
+                  "path": "item.discoverySuppress",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "hrid",
+                  "enabled": "true",
+                  "path": "item.hrid",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "barcode",
+                  "enabled": "true",
+                  "path": "item.barcode",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "accessionNumber",
+                  "enabled": "true",
+                  "path": "item.accessionNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemIdentifier",
+                  "enabled": "true",
+                  "path": "item.itemIdentifier",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "formerIds",
+                  "enabled": "true",
+                  "path": "item.formerIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "statisticalCodeIds",
+                  "enabled": "true",
+                  "path": "item.statisticalCodeIds[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "materialType.id",
+                  "enabled": "true",
+                  "path": "item.materialType.id",
+                  "value": "\"book\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "f149f63f-0720-4301-825c-4d0d15f7a8bf": "equipment",
+                    "1a54b431-2e4f-452d-9cae-9cee66c9a892": "book",
+                    "d9acad2f-2aac-4b48-9097-e6ab85906b25": "text",
+                    "6cf391c6-b442-4709-a724-530d1f0a63b7": "map",
+                    "5ee11d91-f7e8-481d-b079-65d708582ccc": "dvd",
+                    "30b3e36a-d3b2-415e-98c2-47fbdf878862": "video recording",
+                    "615b8413-82d5-4203-aa6e-e37984cb5ac3": "electronic resource",
+                    "dd0bf600-dbd9-44ab-9ff2-e2a61a6539f1": "sound recording",
+                    "67ffd0e2-2a5f-43a4-9be4-c52262b8eea9": "serial",
+                    "e27e5fb2-a6fe-4731-b856-b32a8e8d11e9": "dataset",
+                    "fd6c6515-d470-4561-9c32-3e3290d4ca98": "microform",
+                    "71fbd940-1027-40a6-8a48-49b44d795e46": "unspecified"
+                  }
+                },
+                {
+                  "name": "copyNumber",
+                  "enabled": "true",
+                  "path": "item.copyNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemLevelCallNumberTypeId",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumberTypeId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "054d460d-d6b9-4469-9e37-7a78a2266655": "National Library of Medicine classification",
+                    "6caca63e-5651-4db6-9247-3205156e9699": "Other scheme",
+                    "d644be8f-deb5-4c4d-8c9e-2291b7c0f46f": "UDC",
+                    "827a2b64-cbf5-4296-8545-130876e4dfc0": "Source specified in subfield $2",
+                    "cd70562c-dd0b-42f6-aa80-ce803d24d4a1": "Shelved separately",
+                    "03dd64d0-5626-4ecd-8ece-4531e0069f35": "Dewey Decimal classification",
+                    "828ae637-dfa3-4265-a1af-5279c436edff": "MOYS",
+                    "512173a7-bd09-490e-b773-17d83f2b63fe": "LC Modified",
+                    "fc388041-6cd0-4806-8a74-ebe3b9ab4c6e": "Superintendent of Documents classification",
+                    "5ba6b62e-6858-490a-8102-5b1369873835": "Title",
+                    "95467209-6d7b-468b-94df-0f5d7ad2747d": "Library of Congress classification",
+                    "28927d76-e097-4f63-8510-e56f2b7a3ad0": "Shelving control number"
+                  }
+                },
+                {
+                  "name": "itemLevelCallNumberPrefix",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumberPrefix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemLevelCallNumber",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumber",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemLevelCallNumberSuffix",
+                  "enabled": "true",
+                  "path": "item.itemLevelCallNumberSuffix",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "numberOfPieces",
+                  "enabled": "true",
+                  "path": "item.numberOfPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "descriptionOfPieces",
+                  "enabled": "true",
+                  "path": "item.descriptionOfPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "enumeration",
+                  "enabled": "true",
+                  "path": "item.enumeration",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "chronology",
+                  "enabled": "true",
+                  "path": "item.chronology",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "volume",
+                  "enabled": "true",
+                  "path": "item.volume",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "yearCaption",
+                  "enabled": "true",
+                  "path": "item.yearCaption[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "numberOfMissingPieces",
+                  "enabled": "true",
+                  "path": "item.numberOfMissingPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "missingPieces",
+                  "enabled": "true",
+                  "path": "item.missingPieces",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "missingPiecesDate",
+                  "enabled": "true",
+                  "path": "item.missingPiecesDate",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "itemDamagedStatusId",
+                  "enabled": "true",
+                  "path": "item.itemDamagedStatusId",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "516b82eb-1f19-4a63-8c48-8f1a3e9ff311": "Not Damaged",
+                    "54d1dd76-ea33-4bcb-955b-6b29df4f7930": "Damaged"
+                  }
+                },
+                {
+                  "name": "itemDamagedStatusDate",
+                  "enabled": "true",
+                  "path": "item.itemDamagedStatusDate",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "notes",
+                  "enabled": "true",
+                  "path": "item.notes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "permanentLoanType.id",
+                  "enabled": "true",
+                  "path": "item.permanentLoanType.id",
+                  "value": "\"Can circulate\"",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "2e48e713-17f3-4c13-a9f8-23845bb210a4": "Reading room",
+                    "2b94c631-fca9-4892-a730-03ee529ffe27": "Can circulate",
+                    "e8b311a6-3b21-43f2-a269-dd9310cb2d0e": "Course reserves",
+                    "a1dc1ce3-d56f-4d8a-b498-d5d674ccc845": "Selected"
+                  }
+                },
+                {
+                  "name": "temporaryLoanType.id",
+                  "enabled": "true",
+                  "path": "item.temporaryLoanType.id",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "2e48e713-17f3-4c13-a9f8-23845bb210a4": "Reading room",
+                    "2b94c631-fca9-4892-a730-03ee529ffe27": "Can circulate",
+                    "e8b311a6-3b21-43f2-a269-dd9310cb2d0e": "Course reserves",
+                    "a1dc1ce3-d56f-4d8a-b498-d5d674ccc845": "Selected"
+                  }
+                },
+                {
+                  "name": "status.name",
+                  "enabled": "true",
+                  "path": "item.status.name",
+                  "value": "\"Available\"",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "circulationNotes",
+                  "enabled": "true",
+                  "path": "item.circulationNotes[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                },
+                {
+                  "name": "permanentLocation.id",
+                  "enabled": "true",
+                  "path": "item.permanentLocation.id",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "0313ef16-0db4-4db5-93b9-98cf1e77a6c8": "Science Stacks (SCIENCE-STACKS)",
+                    "7b779ba0-bc67-45ef-b218-796284296d36": "Science Shelved By Title (SCIENCE-SHELBYTITL)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "9596503e-cf4a-471d-a2cc-fe727ef3a5f7": "Business Stacks (BUSINESS-STACKS)",
+                    "05cb6568-6e70-4085-8e97-b29862b9b6f0": "Science Shelved By Series Title (SCIENCE-SHELBYSER)",
+                    "8342d5e3-db94-4d89-8928-520860b78374": "Green Information Center (GREEN-IC)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)",
+                    "5f22e3fc-a400-450b-a5cd-eaa3d77b75a5": "Law Circulation Desk (LAW-CIRC)",
+                    "d5d99938-e15c-49cc-9398-3992a71dc36e": "Business Internet Resource (Business-Internet Resource)",
+                    "8ba31285-6a87-4457-be27-d377af9b4c1e": "Lane Stacks (LANE-STACKS)",
+                    "b8c134cb-a603-43f3-8041-f00fb94b7da5": "HILA Reading Room (HILA-RR)",
+                    "c26b05c8-d09a-4ddb-8ffa-420b58887f88": "Business Career Collection (BUSINESS-CAREER)",
+                    "f8714184-e5d1-4245-84a5-b2f22feb9812": "Green Stacks (GREEN-STACKS)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)"
+                  }
+                },
+                {
+                  "name": "temporaryLocation.id",
+                  "enabled": "true",
+                  "path": "item.temporaryLocation.id",
+                  "value": "",
+                  "subfields": [
+
+                  ],
+                  "acceptedValues": {
+                    "184aae84-a5bf-4c6a-85ba-4a7c73026cd5": "Online (E)",
+                    "0313ef16-0db4-4db5-93b9-98cf1e77a6c8": "Science Stacks (SCIENCE-STACKS)",
+                    "7b779ba0-bc67-45ef-b218-796284296d36": "Science Shelved By Title (SCIENCE-SHELBYTITL)",
+                    "fcd64ce1-6995-48f0-840e-89ffa2288371": "Main Library (KU/CC/DI/M)",
+                    "758258bc-ecc1-41b8-abca-f7b610822ffd": "ORWIG ETHNO CD (KU/CC/DI/O)",
+                    "9596503e-cf4a-471d-a2cc-fe727ef3a5f7": "Business Stacks (BUSINESS-STACKS)",
+                    "05cb6568-6e70-4085-8e97-b29862b9b6f0": "Science Shelved By Series Title (SCIENCE-SHELBYSER)",
+                    "8342d5e3-db94-4d89-8928-520860b78374": "Green Information Center (GREEN-IC)",
+                    "53cf956f-c1df-410b-8bea-27f712cca7c0": "Annex (KU/CC/DI/A)",
+                    "b241764c-1466-4e1d-a028-1a3684a5da87": "Popular Reading Collection (KU/CC/DI/P)",
+                    "5f22e3fc-a400-450b-a5cd-eaa3d77b75a5": "Law Circulation Desk (LAW-CIRC)",
+                    "d5d99938-e15c-49cc-9398-3992a71dc36e": "Business Internet Resource (Business-Internet Resource)",
+                    "8ba31285-6a87-4457-be27-d377af9b4c1e": "Lane Stacks (LANE-STACKS)",
+                    "b8c134cb-a603-43f3-8041-f00fb94b7da5": "HILA Reading Room (HILA-RR)",
+                    "c26b05c8-d09a-4ddb-8ffa-420b58887f88": "Business Career Collection (BUSINESS-CAREER)",
+                    "f8714184-e5d1-4245-84a5-b2f22feb9812": "Green Stacks (GREEN-STACKS)",
+                    "f34d27c6-a8eb-461b-acd6-5dea81771e70": "SECOND FLOOR (KU/CC/DI/2)"
+                  }
+                },
+                {
+                  "name": "electronicAccess",
+                  "enabled": "true",
+                  "path": "item.electronicAccess[]",
+                  "value": "",
+                  "subfields": [
+
+                  ]
+                }
+              ],
+              "marcMappingDetails": [
+
+              ]
+            }
+          },
+          "order": 0,
+          "childSnapshotWrappers": [
+
+          ]
+        }
+      ]
+    }
+  ],
+  "totalRecords": 6
+}

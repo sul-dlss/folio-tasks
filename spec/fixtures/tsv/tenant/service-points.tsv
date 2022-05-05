@@ -1,0 +1,3 @@
+name	code	discoveryDisplayName	description	pickupLocation	holdShelfExpiryPeriod	intervalId	printDefaultHold	printDefaultPickSlip	printDefaultRequestDelivery	printDefaultTransit
+sp-name	SP_CODE	Service point desk	service point desc	true	7	Days	false	false	false	false
+service point	SP_CODE2	Service point desk	service point desc	false			false	false	false	false

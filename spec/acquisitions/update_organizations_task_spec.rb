@@ -1,0 +1,73 @@
+# frozen_string_literal: true
+
+require 'rake'
+require 'spec_helper'
+
+describe 'update organizations rake tasks' do
+  let(:update_sul_organizations_task) { Rake.application.invoke_task 'update_org_vendors_sul' }
+  let(:update_law_organizations_task) { Rake.application.invoke_task 'update_org_vendors_law' }
+  let(:update_bus_organizations_task) { Rake.application.invoke_task 'update_org_vendors_business' }
+
+  before do
+    stub_request(:post, 'http://example.com/authn/login')
+      .with(body: Settings.okapi.login_params.to_h)
+
+    stub_request(:get, 'http://example.com/acquisitions-units-storage/units')
+      .with(query: hash_including)
+      .to_return(body: '{ "acquisitionsUnits": [{ "id": "acq-123" }] }')
+
+    stub_request(:get, 'http://example.com/organizations-storage/categories')
+      .with(query: hash_including)
+      .to_return(body: '{ "categories": [{ "id": "cat-123" }] }')
+
+    stub_request(:get, 'http://example.com/organizations/organizations')
+      .with(query: hash_including)
+      .to_return(body: '{ "organizations": [{ "id": "org-123" }] }')
+
+    stub_request(:put, 'http://example.com/organizations/organizations/org-123')
+  end
+
+  context 'when updating SUL organizations' do
+    let(:xml_doc) { update_sul_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit) { update_sul_organizations_task.send(:acq_unit_id, 'SUL') }
+    let(:category_map) { update_sul_organizations_task.send(:category_map) }
+    let(:org_hash) { update_sul_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit, category_map) }
+
+    it 'escapes the parentheses in the vendor ID' do
+      update_sul_organizations_task.send(:organizations_id, org_hash['code'])
+      expect(WebMock).to have_requested(:get, 'http://example.com/organizations/organizations?query=code==%22FAKE%20%281234%29-SUL%22').at_least_once
+    end
+
+    it 'escapes the forward slash in the vendor ID' do
+      org_hash = update_sul_organizations_task.send(:organization_hash, xml_doc[2], 'SUL', acq_unit, category_map)
+      update_sul_organizations_task.send(:organizations_id, org_hash['code'])
+      expect(WebMock).to have_requested(:get, 'http://example.com/organizations/organizations?query=code==%22BARDI/EUR-SUL%22').at_least_once
+    end
+  end
+
+  context 'when updating Law organizations' do
+    let(:xml_doc) { update_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
+    let(:acq_unit) { update_law_organizations_task.send(:acq_unit_id, 'Law') }
+    let(:category_map) { update_law_organizations_task.send(:category_map) }
+    let(:org_hash) { update_law_organizations_task.send(:organization_hash, xml_doc[0], 'Law', acq_unit, category_map) }
+
+    it 'escapes the spaces in the vendor ID' do
+      update_law_organizations_task.send(:organizations_id, org_hash['code'])
+      expect(WebMock).to have_requested(:get, 'http://example.com/organizations/organizations?query=code==%22YALE%20LAW%20REPORT-Law%22').at_least_once
+    end
+  end
+
+  context 'when updating Business organizations' do
+    let(:xml_doc) { update_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
+    let(:acq_unit) { update_bus_organizations_task.send(:acq_unit_id, 'Business') }
+    let(:category_map) { update_bus_organizations_task.send(:category_map) }
+    let(:org_hash) do
+      update_bus_organizations_task.send(:organization_hash, xml_doc[0], 'Business', acq_unit, category_map)
+    end
+
+    it 'escapes the ampersand in the vendor ID' do
+      update_bus_organizations_task.send(:organizations_id, org_hash['code'])
+      expect(WebMock).to have_requested(:get, 'http://example.com/organizations/organizations?query=code==%22D%26B-Business%22').at_least_once
+    end
+  end
+end

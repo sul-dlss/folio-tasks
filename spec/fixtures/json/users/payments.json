@@ -1,0 +1,64 @@
+{
+  "payments": [
+    {
+      "nameMethod": "Cash",
+      "allowedRefundMethod": true,
+      "metadata": {
+        "createdDate": "2022-02-25T19:37:44.034+00:00",
+        "createdByUserId": "ce8489de-33c3-485e-8836-627558422a9a",
+        "updatedDate": "2022-02-25T19:37:44.034+00:00",
+        "updatedByUserId": "ce8489de-33c3-485e-8836-627558422a9a"
+      },
+      "ownerId": "d6f29d4f-f759-43e5-93e6-ec1a6c057915",
+      "id": "2894d0d7-bbe2-4357-9739-a6748f8e5727"
+    },
+    {
+      "nameMethod": "Cash",
+      "allowedRefundMethod": true,
+      "metadata": {
+        "createdDate": "2022-02-25T19:37:51.096+00:00",
+        "createdByUserId": "ce8489de-33c3-485e-8836-627558422a9a",
+        "updatedDate": "2022-02-25T19:37:51.096+00:00",
+        "updatedByUserId": "ce8489de-33c3-485e-8836-627558422a9a"
+      },
+      "ownerId": "859a9bf0-d7fe-40e1-804e-7a29b46160c2",
+      "id": "813da20c-61e8-41e1-9b13-39a80d290a38"
+    },
+    {
+      "nameMethod": "Cash",
+      "allowedRefundMethod": true,
+      "metadata": {
+        "createdDate": "2022-02-25T19:37:57.994+00:00",
+        "createdByUserId": "ce8489de-33c3-485e-8836-627558422a9a",
+        "updatedDate": "2022-02-25T19:37:57.994+00:00",
+        "updatedByUserId": "ce8489de-33c3-485e-8836-627558422a9a"
+      },
+      "ownerId": "6d8e99aa-180b-49da-a676-5f6fbe81da5e",
+      "id": "20e41c50-0ca3-4338-94aa-82d2846c36e2"
+    },
+    {
+      "nameMethod": "Cash",
+      "allowedRefundMethod": true,
+      "metadata": {
+        "createdDate": "2022-02-25T19:38:03.741+00:00",
+        "createdByUserId": "ce8489de-33c3-485e-8836-627558422a9a",
+        "updatedDate": "2022-02-25T19:38:03.741+00:00",
+        "updatedByUserId": "ce8489de-33c3-485e-8836-627558422a9a"
+      },
+      "ownerId": "77493d82-9fb0-4267-b47b-e8c97e40a1e7",
+      "id": "0174644b-e203-4b3f-a63d-64885b51533d"
+    },
+    {
+      "nameMethod": "Cash",
+      "allowedRefundMethod": true,
+      "metadata": {
+        "createdDate": "2022-02-25T19:38:09.824+00:00",
+        "createdByUserId": "ce8489de-33c3-485e-8836-627558422a9a",
+        "updatedDate": "2022-02-25T19:38:09.824+00:00",
+        "updatedByUserId": "ce8489de-33c3-485e-8836-627558422a9a"
+      },
+      "ownerId": "37cf896b-5a61-41e9-a65c-6d59dc885283",
+      "id": "0f75d22a-f4d8-4452-a15a-47ca15aa54a0"
+    }
+  ]
+}

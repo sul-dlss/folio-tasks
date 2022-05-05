@@ -1,0 +1,109 @@
+---
+1234L11:
+  ORDER_TYPE: SUBSCRIPT
+  ORD_DATE_CREATED: '20101027'
+  LIBRARY: LAW
+  VENDOR_ID: PCARD
+  compositePoLines:
+    '5606353':
+      ORD_KEY: '4654500'
+      ORDLINE_NUM: '1'
+      CKEY: '4005247'
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: for online only
+      DIST_DATE_RCVD: '0'
+      HOLDNG_CODE: LAW-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: ALAWFUND
+    '5664451':
+      ORD_KEY: '4654500'
+      ORDLINE_NUM: '2'
+      CKEY: '4005247'
+      ORDLINE_UNIT_LIST_PRICE: "$39.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: for online only (seenote)
+      DIST_DATE_RCVD: '20210910'
+      HOLDNG_CODE: LAW-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$39.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: ALAWFUND
+    '5664464':
+      ORD_KEY: '4654500'
+      ORDLINE_NUM: '3'
+      CKEY: '4005247'
+      ORDLINE_UNIT_LIST_PRICE: "$39.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: for online only (seenote)
+      DIST_DATE_RCVD: '20210910'
+      HOLDNG_CODE: LAW-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$39.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: ALAWFUND
+    '5678268':
+      ORD_KEY: '4654500'
+      ORDLINE_NUM: '4'
+      CKEY: '4005247'
+      ORDLINE_UNIT_LIST_PRICE: "$39.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: for online only (seenote)
+      DIST_DATE_RCVD: '20211014'
+      HOLDNG_CODE: LAW-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$39.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: ALAWFUND
+    '5700356':
+      ORD_KEY: '4654500'
+      ORDLINE_NUM: '5'
+      CKEY: '4005247'
+      ORDLINE_UNIT_LIST_PRICE: "$39.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: online only (seenote)
+      DIST_DATE_RCVD: '20220105'
+      HOLDNG_CODE: LAW-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$39.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: ALAWFUND
+    '5700374':
+      ORD_KEY: '4654500'
+      ORDLINE_NUM: '6'
+      CKEY: '4005247'
+      ORDLINE_UNIT_LIST_PRICE: "$39.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: online only (seenote)
+      DIST_DATE_RCVD: '20220105'
+      HOLDNG_CODE: LAW-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$39.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: ALAWFUND
+  notes:
+  - 'INSTRUCT: Order is for online ed. only'
+  - 'COMMENT: 10/27/10: renewed for 3 years online w/ pcard; lp: amc'
+  - 'COMMENT: 10/23/13: renewed 3-year online w/ pcard; lp: amc'
+  - 'COMMENT: 1/29/21: OK to renew 1-year sub w/ Sergio''s email; lp: amc'
+  - 'COMMENT: 11/12/21: Renewal(s) approved by Beth (ROAM forecasted price); lp: jlk'

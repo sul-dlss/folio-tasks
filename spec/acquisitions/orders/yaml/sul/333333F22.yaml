@@ -1,0 +1,36 @@
+---
+333333F22:
+  ORDER_TYPE: TERMSET
+  ORD_DATE_CREATED: '20220323'
+  LIBRARY: SUL
+  VENDOR_ID: VENDOR
+  compositePoLines:
+    '5729755':
+      ORD_KEY: '4747240'
+      ORDLINE_NUM: '1'
+      CKEY: '4534833'
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: '0'
+      HOLDNG_CODE: SPEC-MSS-H
+      fundDistribution:
+      - FUNDING_TYPE: '3'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUNDA
+      - FUNDING_TYPE: '4'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUNDB
+      SELECTOR: RHW
+      CONTACT: Name <name@example.com>
+  notes:
+  - 'NOTE: vs'
+  - 'COMMENT: Sales agreement, payment to be split over 2 years. vs 3/23/2022'
+  - 'COMMENT: Received remotely items (16 boxes) for accession record.'
+  - 'MULTIYEAR: Phased payment FY2022-FY2023'
+  - 'DESC: papers shipped to RWC, RHW verified all contents arrived. Accession record.'

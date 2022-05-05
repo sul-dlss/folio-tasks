@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+<title>Vendor Cycle List</title>
+<dateCreated>2021-11-17T16:26:21</dateCreated>
+<dateFormat>mm/dd/yyyy</dateFormat>
+<vendor>
+<vendorID>YALE LAW REPORT</vendorID>
+<name>Yale Law Report, Yale Law School</name>
+<vendorAddress>
+<entry name="Customer Number">Customer Number:</entry>
+<entry name="Street">Box 234567</entry>
+<entry name="City, State">New Haven, CT</entry>
+<entry name="Zip">06520-8215</entry>
+<addressIdx>0</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Customer Number">Customer Number:</entry>
+<addressIdx>1</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Customer Number">Customer Number:</entry>
+<addressIdx>2</addressIdx>
+</vendorAddress>
+<ediAddress>
+</ediAddress>
+<fiscalCycle>2022</fiscalCycle>
+</vendor>
+</report>

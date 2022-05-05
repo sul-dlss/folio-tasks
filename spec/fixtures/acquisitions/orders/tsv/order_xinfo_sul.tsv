@@ -1,0 +1,43 @@
+LIB	FY	ORD_ID	XINFO_FIELD	ENTRY	DATA
+SUL	2022	222222F22	NOTE	ENTRY>	aFS<ENTRY
+SUL	2022	333333F22	NOTE	ENTRY>	avs<ENTRY
+SUL	2022	333333F22	COMMENT	ENTRY>	"aSales agreement, payment to be split over 2 years. vs 3/23/2022<ENTRY"
+SUL	2022	333333F22	COMMENT	ENTRY>	"aReceived remotely items (16 boxes) for accession record.<ENTRY"
+SUL	2022	333333F22	MULTIYEAR	ENTRY>	aPhased payment FY2022-FY2023<ENTRY
+SUL	2022	1ABC0000	NOTE	ENTRY>	aFS<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aGLFIX  94454<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aVR: the ""Jahresgabe"" for 2002/2003 has been added to your collection in connection with the blanket order arrangement.  20060208 zp<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aSkulptur in Deutschland : zwischen Franzosischer Revolution und Erstem Weltkrieg (Bd. 1-2), sb=ser; DUP2GIFTS. (md 01/04/2011)<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aPeter Candid (um 1548-1628) : Gemalde - Zeichnungen - Druckgraphik, sb=ser; DUP2GIFTS.  (md 02/24/2011)<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aCurrent price (subscription year 2017): Next year's price (subscription year 2018): Increase: 17.84%   /fs/3/20/2018<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aDUP2GIFTS = Christian Daniel Rauch und Ernst Rietschel (bd.1-2). jks 8/10/21<ENTRY
+SUL	2022	1ABC0000	NOTE	ENTRY>	aFS<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aGLFIX  94454<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aVR: the ""Jahresgabe"" for 2002/2003 has been added to your collection in connection with the blanket order arrangement.  20060208 zp<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aSkulptur in Deutschland : zwischen Franzosischer Revolution und Erstem Weltkrieg (Bd. 1-2), sb=ser; DUP2GIFTS. (md 01/04/2011)<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aPeter Candid (um 1548-1628) : Gemalde - Zeichnungen - Druckgraphik, sb=ser; DUP2GIFTS.  (md 02/24/2011)<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aCurrent price (subscription year 2017): Next year's price (subscription year 2018): Increase: 17.84%   /fs/3/20/2018<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aDUP2GIFTS = Christian Daniel Rauch und Ernst Rietschel (bd.1-2). jks 8/10/21<ENTRY
+SUL	2022	1ABC0000	NOTE	ENTRY>	aFS<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aGLFIX  94454<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aVR: the ""Jahresgabe"" for 2002/2003 has been added to your collection in connection with the blanket order arrangement.  20060208 zp<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aSkulptur in Deutschland : zwischen Franzosischer Revolution und Erstem Weltkrieg (Bd. 1-2), sb=ser; DUP2GIFTS. (md 01/04/2011)<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	"aPeter Candid (um 1548-1628) : Gemalde - Zeichnungen - Druckgraphik, sb=ser; DUP2GIFTS.  (md 02/24/2011)<ENTRY"
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aCurrent price (subscription year 2017): Next year's price (subscription year 2018): Increase: 17.84%   /fs/3/20/2018<ENTRY
+SUL	2022	1ABC0000	COMMENT	ENTRY>	aDUP2GIFTS = Christian Daniel Rauch und Ernst Rietschel (bd.1-2). jks 8/10/21<ENTRY
+SUL	2022	4444444F21	NOTE	ENTRY>	ammd<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	a2022 ed purchased in PDF with pcard  /fs/4/12/2022<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	aSend all future PDF issues to email@example.com zb 20220415<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	a2021 ed purchased in PDF with pcard. zb 20220125<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	a2019 ed purchased in PDF format with pcard. zb 20190405<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	a2018 ed purchased in PDF format with pcard. PDF deposited in SDR. Publisher's standard terms&conditions have been updated. Updated terms to be put in Coral. zb 20181001<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	"aStarting with 2018 edition, we will purchase Academic Package PDF copy (NOT print copies). Purchase by p-card at http://rin.ifpi.org/.  // zb 20171026<ENTRY"
+SUL	2022	555555F12	COMMENT	ENTRY>	"aOLD: Standing order for Academic Package (3 print copies) beginning with 2011 edition. One copy will go to Music, Law, and Business. The print copy is only sold in quantities of 3.  Requires permanent follow-up. Publisher doesn't allow subscription agencies. Needs pre-payment. Purchase Academic Package (3 print copies) at http://rin.ifpi.org/. smc 20120518<ENTRY"
+SUL	2022	555555F12	NOTE	ENTRY>	"aOLD: PAY BY PCARD -- psk 20131106<ENTRY"
+SUL	2022	555555F12	NOTE	ENTRY>	asmc<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	aGLFIX = 53240 -- 20120611 bch<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	a2014 ed. paid by PCARD/fs/4/7/2014<ENTRY
+SUL	2022	555555F12	COMMENT	ENTRY>	a<ENTRY
+SUL	2022	666666F07	INSTRUCT	ENTRY>	aPlease start our electronic ONLY subscription for this journal as soon as possible.<ENTRY
+SUL	2022	666666F07	NOTE	ENTRY>	amvk payaccess 20061030<ENTRY
+SUL	2022	666666F07	BIGDEAL	ENTRY>	aElsevier<ENTRY

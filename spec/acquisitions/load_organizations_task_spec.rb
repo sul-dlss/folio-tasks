@@ -1,0 +1,189 @@
+# frozen_string_literal: true
+
+require 'rake'
+require 'spec_helper'
+
+describe 'organizations rake tasks' do
+  let(:load_categories_task) { Rake.application.invoke_task 'load_org_categories' }
+  let(:load_organizations_task) { Rake.application.invoke_task 'load_org_vendors_sul' }
+  let(:load_law_organizations_task) { Rake.application.invoke_task 'load_org_vendors_law' }
+  let(:load_bus_organizations_task) { Rake.application.invoke_task 'load_org_vendors_business' }
+
+  before do
+    stub_request(:post, 'http://example.com/authn/login')
+      .with(body: Settings.okapi.login_params.to_h)
+
+    stub_request(:post, 'http://example.com/organizations-storage/categories')
+
+    stub_request(:get, 'http://example.com/acquisitions-units-storage/units')
+      .with(query: hash_including)
+      .to_return(body: '{ "acquisitionsUnits": [{ "id": "acq-123" }] }')
+
+    stub_request(:get, 'http://example.com/organizations-storage/categories')
+      .with(query: hash_including)
+      .to_return(body: '{ "categories": [{ "id": "cat-123" }] }')
+
+    stub_request(:post, 'http://example.com/organizations/organizations')
+  end
+
+  context 'when loading organizations categories' do
+    it 'creates the hash key and value for category' do
+      expect(load_categories_task.send(:categories_csv)[0]['value']).to eq 'Claims'
+    end
+  end
+
+  context 'when loading SUL organization data' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { load_organizations_task.send(:acq_unit_id, 'SUL') }
+    let(:category_map) { load_organizations_task.send(:category_map) }
+    let(:org_hash) { load_organizations_task.send(:organization_hash, xml_doc[0], 'SUL', acq_unit_uuid, category_map) }
+
+    it 'creates the hash key and value for name' do
+      expect(org_hash['name']).to eq 'Carpe Diem Fine Books'
+    end
+
+    it 'creates the hash key and value for code' do
+      expect(org_hash['code']).to eq 'CARPEDIEM-SUL'
+    end
+
+    it 'creates the hash key and value for exportToAccounting' do
+      expect(org_hash['exportToAccounting']).to be_truthy
+    end
+
+    it 'creates the hash key and value for status' do
+      expect(org_hash['status']).to eq 'Active'
+    end
+
+    it 'creates the hash key and value for isVendor' do
+      expect(org_hash['isVendor']).to be_truthy
+    end
+
+    it 'creates the hash key and value for erpCode' do
+      expect(org_hash['erpCode']).to eq '123456FEEDER'
+    end
+
+    it 'creates the hash key and value for acqUnitIds' do
+      expect(org_hash['acqUnitIds']).to include 'acq-123'
+    end
+
+    it 'creates an array of address hashes' do
+      expect(org_hash['addresses']).to be_a(Array)
+    end
+
+    it 'creates an address object with hash key and value for addressLine1' do
+      expect(org_hash['addresses'][0]['addressLine1']).to eq '1234 Pearl Street'
+    end
+
+    it 'creates an address object with hash key and value for city' do
+      expect(org_hash['addresses'][0]['city']).to eq 'Monterey'
+    end
+
+    it 'creates an address object with hash key and value for stateRegion' do
+      expect(org_hash['addresses'][0]['stateRegion']).to eq 'CA'
+    end
+
+    it 'creates an address object with hash key and value for zipCode' do
+      expect(org_hash['addresses'][0]['zipCode']).to eq '93940'
+    end
+
+    it 'creates an address object with hash key and value for country' do
+      expect(org_hash['addresses'][0]['country']).to eq 'USA'
+    end
+
+    it 'creates an address object with a primary address' do
+      expect(org_hash['addresses'][1]['isPrimary']).to be_truthy
+    end
+
+    it 'does not create an address object if no primary address selected' do
+      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+                                          category_map)).not_to have_key 'addresses'
+    end
+
+    it 'does not create empty address hash key value pairs' do
+      expect(org_hash['addresses'][1]).not_to have_key 'country'
+    end
+
+    it 'assigns a category to the address' do
+      expect(org_hash['addresses'][0]['categories'][0]).to include 'cat-123'
+    end
+
+    it 'does not create empty hash key value pairs for category' do
+      # <addressIdx>9 should never ever happen from Symphony
+      expect(org_hash['addresses'][3]).not_to have_key 'categories'
+    end
+
+    it 'creates an array of phone number hashes' do
+      expect(org_hash['phoneNumbers']).to be_a(Array)
+    end
+
+    it 'creates a phone object with a primary phone number' do
+      expect(org_hash['phoneNumbers'][2]['isPrimary']).to be_truthy
+    end
+
+    it 'creates a phoneNumbers object with hash key and value for phoneNumber' do
+      expect(org_hash['phoneNumbers'][0]['phoneNumber']).to eq 'tel: 831-555-5555  cel: 831-555-5555'
+    end
+
+    it 'creates a phoneNumbers object with hash key and value for office type' do
+      expect(org_hash['phoneNumbers']).to include(a_hash_including('type' => 'Office'))
+    end
+
+    it 'creates a phoneNumbers object with hash key and value for fax type' do
+      expect(org_hash['phoneNumbers']).to include(a_hash_including('type' => 'Fax'))
+    end
+
+    it 'does not add to the phoneNumbers object if no phoneNumber' do
+      expect(org_hash['phoneNumbers'].size).to eq 6
+    end
+
+    it 'does not create a phoneNumbers object if no primary phone selected' do
+      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+                                          category_map)).not_to have_key 'phoneNumbers'
+    end
+
+    it 'creates an array of email hashes' do
+      expect(org_hash['emails']).to be_a(Array)
+    end
+
+    it 'creates an array with 3 email addresses' do
+      expect(org_hash['emails'].size).to eq 3
+    end
+
+    it 'creates an emails object with hash key and value for value' do
+      expect(org_hash['emails'][0]['value']).to eq 'carpediem@example.com'
+    end
+
+    it 'creates an email object with a primary email' do
+      expect(org_hash['emails'][1]['isPrimary']).to be_truthy
+    end
+
+    it 'does not create an emails object if no primary email selected' do
+      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+                                          category_map)).not_to have_key 'emails'
+    end
+  end
+
+  context 'when loading Law organization data' do
+    let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
+    let(:acq_unit) { load_law_organizations_task.send(:acq_unit_id, 'Law') }
+    let(:category_map) { load_law_organizations_task.send(:category_map) }
+    let(:org_hash) { load_law_organizations_task.send(:organization_hash, xml_doc[0], 'Law', acq_unit, category_map) }
+
+    it 'creates the hash key and value for code with spaces' do
+      expect(org_hash['code']).to eq 'YALE LAW REPORT-Law'
+    end
+  end
+
+  context 'when loading Business organization data' do
+    let(:xml_doc) { load_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
+    let(:acq_unit) { load_bus_organizations_task.send(:acq_unit_id, 'Business') }
+    let(:category_map) { load_bus_organizations_task.send(:category_map) }
+    let(:org_hash) do
+      load_bus_organizations_task.send(:organization_hash, xml_doc[0], 'Business', acq_unit, category_map)
+    end
+
+    it 'creates the hash key and value for code with an ampersand' do
+      expect(org_hash['code']).to eq 'D&B-Business'
+    end
+  end
+end

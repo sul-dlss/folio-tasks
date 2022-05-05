@@ -1,0 +1,33 @@
+# frozen_string_literal: true
+
+# Module to encapsulate finance group methods used by finance_settings rake tasks
+module FinanceGroupHelpers
+  def finance_groups_csv
+    CSV.parse(File.open("#{Settings.tsv}/acquisitions/finance-groups.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
+  def finance_groups_hash(obj)
+    acq_unit_ids = acq_unit_id_list(obj['acqUnit_name'])
+    obj['acqUnitIds'] = acq_unit_ids unless acq_unit_ids&.empty?
+    obj.delete('acqUnit_name')
+
+    obj
+  end
+
+  def finance_group_id(code)
+    response = FolioRequest.new.get_cql('/finance/groups', "code==#{code}")['groups']
+    begin
+      response[0]['id']
+    rescue NoMethodError
+      nil
+    end
+  end
+
+  def finance_groups_delete(id)
+    FolioRequest.new.delete("/finance/groups/#{id}")
+  end
+
+  def finance_groups_post(obj)
+    FolioRequest.new.post('/finance/groups', obj.to_json)
+  end
+end

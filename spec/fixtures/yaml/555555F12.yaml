@@ -1,0 +1,88 @@
+---
+555555F12:
+  ORDER_TYPE: STANDING
+  ORD_DATE_CREATED: '20120507'
+  LIBRARY: SUL
+  VENDOR_ID: VENDOR-9999
+  compositePoLines:
+    '5635368':
+      ORD_KEY: '4683174'
+      ORDLINE_NUM: '1'
+      CKEY: '11716113'
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: SER
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: '0'
+      HOLDNG_CODE: MUSC-REF-H
+      fundDistribution:
+      - FUNDING_TYPE: '2'
+        FUNDING_PERCENT: '25'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      - FUNDING_TYPE: '2'
+        FUNDING_PERCENT: '12'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      - FUNDING_TYPE: '2'
+        FUNDING_PERCENT: '63'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      SELECTOR: jmc
+      CONTACT: Name <name@example.com>
+    '5738377':
+      ORD_KEY: '4683174'
+      ORDLINE_NUM: '3'
+      CKEY: '11716113'
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: SER
+      PARTS_IN_SET: 1/1/22-12/31/22, PMT
+      DIST_DATE_RCVD: '20220415'
+      HOLDNG_CODE: MUSC-REF-H
+      fundDistribution:
+      - FUNDING_TYPE: '2'
+        FUNDING_PERCENT: '25'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 111111-22-ABCD
+        FUND_NAME: ASULFUND
+      - FUNDING_TYPE: '2'
+        FUNDING_PERCENT: '12'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      - FUNDING_TYPE: '2'
+        FUNDING_PERCENT: '63'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      SELECTOR: jmc
+      CONTACT: Name <name@example.com>
+  notes:
+  - 'COMMENT: 2022 ed purchased in PDF with pcard  /fs/4/12/2022'
+  - 'COMMENT: Send all future PDF issues to email@example.com zb 20220415'
+  - 'COMMENT: 2021 ed purchased in PDF with pcard. zb 20220125'
+  - 'COMMENT: 2019 ed purchased in PDF format with pcard. zb 20190405'
+  - 'COMMENT: 2018 ed purchased in PDF format with pcard. PDF deposited in SDR. Publisher''s
+    standard terms&conditions have been updated. Updated terms to be put in Coral.
+    zb 20181001'
+  - 'COMMENT: Starting with 2018 edition, we will purchase Academic Package PDF copy
+    (NOT print copies). Purchase by p-card at http://rin.ifpi.org/.  // zb 20171026'
+  - 'COMMENT: OLD: Standing order for Academic Package (3 print copies) beginning
+    with 2011 edition. One copy will go to Music, Law, and Business. The print copy
+    is only sold in quantities of 3.  Requires permanent follow-up. Publisher doesn''t
+    allow subscription agencies. Needs pre-payment. Purchase Academic Package (3 print
+    copies) at http://rin.ifpi.org/. smc 20120518'
+  - 'NOTE: OLD: PAY BY PCARD -- psk 20131106'
+  - 'NOTE: smc'
+  - 'COMMENT: GLFIX = 53240 -- 20120611 bch'
+  - 'COMMENT: 2014 ed. paid by PCARD/fs/4/7/2014'
+  - 'COMMENT: '
+  - 'COMMENT: 2013 ed. (3 copies) paid by PCARD /fs/10/10/2013'
+  - 'COMMENT: OLD Funding (2018 and forward)'
+  - 'COMMENT: See fund allocation in the FUND field below. Fund amounts converted
+    to percentage due to the order type (recurring). zb 20220412'
+  - 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'

@@ -1,0 +1,79 @@
+---
+1ABC0000:
+  ORDER_TYPE: MEMBERSHIP
+  ORD_DATE_CREATED: '19970830'
+  LIBRARY: SUL
+  VENDOR_ID: VENDOR
+  compositePoLines:
+    '5623693':
+      ORD_KEY: '4671721'
+      ORDLINE_NUM: '1'
+      CKEY: '3275935'
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: SER
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: '0'
+      HOLDNG_CODE: ART-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      SELECTOR: DVK
+      CONTACT: Name
+    '5675888':
+      ORD_KEY: '4671721'
+      ORDLINE_NUM: '2'
+      CKEY: '14018319'
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: SER
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: '20211008'
+      HOLDNG_CODE: ART-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      SELECTOR: DVK
+      CONTACT: Name
+    '5676990':
+      ORD_KEY: '4671721'
+      ORDLINE_NUM: '3'
+      CKEY: '14020059'
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '1'
+      BIB_ENTRY: SER
+      PARTS_IN_SET: v.2016 (published 2021)
+      DIST_DATE_RCVD: '20211012'
+      HOLDNG_CODE: ART-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      SELECTOR: DVK
+      CONTACT: Name
+  notes:
+  - 'NOTE: FS'
+  - 'COMMENT: GLFIX  94454'
+  - 'COMMENT: VR: the "Jahresgabe" for 2002/2003 has been added to your collection
+    in connection with the blanket order arrangement.  20060208 zp'
+  - 'COMMENT: Skulptur in Deutschland : zwischen Franzosischer Revolution und Erstem
+    Weltkrieg (Bd. 1-2), sb=ser; DUP2GIFTS. (md 01/04/2011)'
+  - 'COMMENT: Peter Candid (um 1548-1628) : Gemalde - Zeichnungen - Druckgraphik,
+    sb=ser; DUP2GIFTS.  (md 02/24/2011)'
+  - 'COMMENT: Current price (subscription year 2017): Next year''s price (subscription
+    year 2018): Increase: 17.84%   /fs/3/20/2018'
+  - 'COMMENT: DUP2GIFTS = Christian Daniel Rauch und Ernst Rietschel (bd.1-2). jks
+    8/10/21'
+  - 'COMMENT: ORDUNIT: SE   RECUNIT: SE'
+  - 'COMMENT: BN    XPM: c'
+  - 'COMMENT: OPERATOR ID: pah   ACTION INT: 540'
+  - 'COMMENT: SI: adr   LOC: STACKS   ITYPE: STKS-MONO'
+  - 'FUND: fund'

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+<title>Vendor Cycle List</title>
+<dateCreated>2021-11-17T16:26:21</dateCreated>
+<dateFormat>mm/dd/yyyy</dateFormat>
+<vendor>
+<vendorID>CARPEDIEM</vendorID>
+<customerNumber>123456FEEDER</customerNumber>
+<name>Carpe Diem Fine Books</name>
+<vendorAddress>
+<entry name="Street">1234 Pearl Street</entry>
+<entry name="City, State">Monterey, CA</entry>
+<entry name="Zip">93940</entry>
+<entry name="Country">United States of America</entry>
+<entry name="Phone">tel: 831-555-5555  cel: 831-555-5555</entry>
+<entry name="FAX">831-555-5555</entry>
+<entry name="E-Address">carpediem@example.com</entry>
+<addressIdx>0</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Street">123 Pierce Street</entry>
+<entry name="City, State">Monterey, CA</entry>
+<entry name="Zip">93940</entry>
+<entry name="Phone">831-555-5555</entry>
+<entry name="FAX">831-555-5555 (fax for RUSH orders)</entry>
+<entry name="Email for po/claim">claims_carpediem@example.com</entry>
+<addressIdx>1</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Street">123 Pierce Street</entry>
+<entry name="City, State">Monterey, CA</entry>
+<entry name="Zip">93940</entry>
+<entry name="Phone">831-555-5555</entry>
+<entry name="FAX">831-555-5555</entry>
+<entry name="Email for po/claim">carpediem@example.com</entry>
+<addressIdx>2</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Street">Fake Street</entry>
+<entry name="Zip">93940</entry>
+<addressIdx>9</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Zip">93940</entry>
+</vendorAddress>
+<ediAddress>
+</ediAddress>
+<fiscalCycle>2022</fiscalCycle>
+</vendor>
+<vendor>
+<vendorID>FAKE (1234)</vendorID>
+<customerNumber>0123456</customerNumber>
+<name>Books Vendor</name>
+<vendorAddress>
+<entry name="Customer Number">Customer Number:</entry>
+<addressIdx>0</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="City, State">City</entry>
+<addressIdx>1</addressIdx>
+</vendorAddress>
+</vendor>
+<vendor>
+<vendorID>BARDI/EUR</vendorID>
+<customerNumber>111111111111</customerNumber>
+<name>Bardi Editore</name>
+<vendorAddress>
+<entry name="Street">Via Mia Maria, 1</entry>
+<entry name="City, State">00123 Roma</entry>
+<entry name="Country">ITALY</entry>
+<entry name="Phone">0039-55-5555555</entry>
+<entry name="FAX">0039-55-5555555</entry>
+<entry name="E-Address">info@example.com</entry>
+<addressIdx>0</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Customer Number">Customer Number:</entry>
+<addressIdx>1</addressIdx>
+</vendorAddress>
+<vendorAddress>
+<entry name="Customer Number">Customer Number:</entry>
+<addressIdx>2</addressIdx>
+</vendorAddress>
+<ediAddress>
+</ediAddress>
+<fiscalCycle>2022</fiscalCycle>
+</vendor>
+</report>

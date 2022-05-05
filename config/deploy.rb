@@ -1,0 +1,22 @@
+# frozen_string_literal: true
+
+set :application, 'folio_api_client'
+set :github_token, `git config --get github.token | tr -d '\n'`
+set :repo_url, "https://#{fetch(:github_token)}@github.com/sul-dlss/folio_api_client.git"
+set :user, 'sirsi'
+
+# Default branch is :master
+ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
+
+# Default value for :log_level is :debug
+set :log_level, :info
+
+# Default deploy_to directory is /var/www/my_app_name
+set :deploy_to, "/s/SUL/Bin/#{fetch(:application)}"
+
+set :linked_dirs, %w[config/settings]
+
+# Default value for keep_releases is 5
+set :keep_releases, 3
+
+set :rvm_ruby_version, '2.7.1'
