@@ -17,13 +17,14 @@ namespace :tsv_users do
       membership_hash[key] = obj['id']
     end
     user_acq_units_and_permission_sets_tsv.each do |obj|
-      username = obj['SUNetID']
       acq_unit = obj['Acq Unit']
-      user = user_get(username)['users'].first
       acq_unit_id = acq_unit_hash[acq_unit]
-      if user && acq_unit_id && !membership_hash[acq_unit_id + user['id']]
-        acq_membership_obj = { 'userId' => user['id'], 'acquisitionsUnitId' => acq_unit_id }
-        folio_request.post('/acquisitions-units/memberships', acq_membership_obj.to_json)
+      users = user_get(obj['SUNetID'])
+      users && users['users'].each do |user|
+        if acq_unit_id && !membership_hash[acq_unit_id + user['id']]
+          acq_membership_obj = { 'userId' => user['id'], 'acquisitionsUnitId' => acq_unit_id }
+          folio_request.post('/acquisitions-units/memberships', acq_membership_obj.to_json)
+        end
       end
     end
   end
