@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../helpers/folio_request'
+
 # Module to encapsulate methods used by import_profiles rake tasks
 module DataImportTaskHelpers
+  include FolioRequestHelper
+
   def job_profiles_json
     profile = JSON.parse(File.read("#{Settings.json}/data-import-profiles/jobProfiles.json"))
     profile.delete('totalRecords')
@@ -9,11 +13,11 @@ module DataImportTaskHelpers
   end
 
   def job_profiles_post(obj)
-    FolioRequest.new.post('/data-import-profiles/jobProfiles', obj.to_json)
+    @@folio_request.post('/data-import-profiles/jobProfiles', obj.to_json)
   end
 
   def job_profiles_get(name)
-    response = FolioRequest.new.get_cql('/data-import-profiles/jobProfiles', "name==#{name}")['jobProfiles']
+    response = @@folio_request.get_cql('/data-import-profiles/jobProfiles', "name==#{name}")['jobProfiles']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -28,11 +32,11 @@ module DataImportTaskHelpers
   end
 
   def action_profiles_post(obj)
-    FolioRequest.new.post('/data-import-profiles/actionProfiles', obj.to_json)
+    @@folio_request.post('/data-import-profiles/actionProfiles', obj.to_json)
   end
 
   def action_profiles_get(name)
-    response = FolioRequest.new.get_cql('/data-import-profiles/actionProfiles', "name==#{name}")['actionProfiles']
+    response = @@folio_request.get_cql('/data-import-profiles/actionProfiles', "name==#{name}")['actionProfiles']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -47,11 +51,11 @@ module DataImportTaskHelpers
   end
 
   def mapping_profiles_post(obj)
-    FolioRequest.new.post('/data-import-profiles/mappingProfiles', obj.to_json)
+    @@folio_request.post('/data-import-profiles/mappingProfiles', obj.to_json)
   end
 
   def mapping_profiles_get(name)
-    response = FolioRequest.new.get_cql('/data-import-profiles/mappingProfiles', "name==#{name}")['mappingProfiles']
+    response = @@folio_request.get_cql('/data-import-profiles/mappingProfiles', "name==#{name}")['mappingProfiles']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -85,7 +89,7 @@ module DataImportTaskHelpers
   end
 
   def profile_associations_post(payload, master, detail)
-    FolioRequest.new.post("/data-import-profiles/profileAssociations?master=#{master}&detail=#{detail}",
-                          payload.to_json)
+    @@folio_request.post("/data-import-profiles/profileAssociations?master=#{master}&detail=#{detail}",
+                         payload.to_json)
   end
 end

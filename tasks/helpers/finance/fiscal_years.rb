@@ -1,7 +1,10 @@
 # frozen_string_literal: true
 
+require_relative '../folio_request'
+
 # Module to encapsulate fiscal year methods used by finance_settings rake tasks
 module FiscalYearHelpers
+  include FolioRequestHelper
   def fiscal_years_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/fiscal-years.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
@@ -15,7 +18,7 @@ module FiscalYearHelpers
   end
 
   def fiscal_year_id(code)
-    response = FolioRequest.new.get_cql('/finance/fiscal-years', "code==#{code}")['fiscalYears']
+    response = @@folio_request.get_cql('/finance/fiscal-years', "code==#{code}")['fiscalYears']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -24,10 +27,10 @@ module FiscalYearHelpers
   end
 
   def fiscal_years_delete(id)
-    FolioRequest.new.delete("/finance/fiscal-years/#{id}")
+    @@folio_request.delete("/finance/fiscal-years/#{id}")
   end
 
   def fiscal_years_post(obj)
-    FolioRequest.new.post('/finance/fiscal-years', obj.to_json)
+    @@folio_request.post('/finance/fiscal-years', obj.to_json)
   end
 end

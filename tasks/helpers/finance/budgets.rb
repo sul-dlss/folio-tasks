@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../folio_request'
+
 # Module to encapsulate budget methods used by finance_settings rake tasks
 module BudgetHelpers
+  include FolioRequestHelper
+
   def budgets_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/budgets.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
@@ -25,8 +29,8 @@ module BudgetHelpers
   end
 
   def budget_id(fund_id, fy_id)
-    response = FolioRequest.new.get_cql('/finance/budgets',
-                                        "fundId==#{fund_id}&fiscalYearId=#{fy_id}")['budgets']
+    response = @@folio_request.get_cql('/finance/budgets',
+                                       "fundId==#{fund_id}&fiscalYearId=#{fy_id}")['budgets']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -35,14 +39,14 @@ module BudgetHelpers
   end
 
   def budgets_delete(id)
-    FolioRequest.new.delete("/finance/budgets/#{id}")
+    @@folio_request.delete("/finance/budgets/#{id}")
   end
 
   def budgets_post(obj)
-    FolioRequest.new.post('/finance/budgets', obj.to_json)
+    @@folio_request.post('/finance/budgets', obj.to_json)
   end
 
   def budgets_put(id, obj)
-    FolioRequest.new.put("/finance/budgets/#{id}", obj.to_json)
+    @@folio_request.put("/finance/budgets/#{id}", obj.to_json)
   end
 end

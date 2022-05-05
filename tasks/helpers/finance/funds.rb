@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../folio_request'
+
 # Module to encapsulate fund methods used by finance_settings rake tasks
 module FundHelpers
+  include FolioRequestHelper
+
   def funds_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/funds.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
@@ -24,7 +28,7 @@ module FundHelpers
   end
 
   def fund_id(code)
-    response = FolioRequest.new.get_cql('/finance/funds', "code==#{code}")['funds']
+    response = @@folio_request.get_cql('/finance/funds', "code==#{code}")['funds']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -33,10 +37,10 @@ module FundHelpers
   end
 
   def funds_delete(id)
-    FolioRequest.new.delete("/finance/funds/#{id}")
+    @@folio_request.delete("/finance/funds/#{id}")
   end
 
   def funds_post(obj)
-    FolioRequest.new.post('/finance/funds', obj.to_json)
+    @@folio_request.post('/finance/funds', obj.to_json)
   end
 end

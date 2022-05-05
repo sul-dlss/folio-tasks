@@ -2,7 +2,6 @@
 
 require 'csv'
 require 'require_all'
-require_relative '../../lib/folio_request'
 require_relative '../helpers/acq_units'
 require_rel '../helpers/organizations'
 

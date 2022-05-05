@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../folio_request'
+
 # Module to encapsulate methods used by finance_settings rake tasks
 module LedgerHelpers
+  include FolioRequestHelper
+
   def ledgers_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/ledgers.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
@@ -19,7 +23,7 @@ module LedgerHelpers
   end
 
   def ledger_id(code)
-    response = FolioRequest.new.get_cql('/finance/ledgers', "code==#{code}")['ledgers']
+    response = @@folio_request.get_cql('/finance/ledgers', "code==#{code}")['ledgers']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -28,10 +32,10 @@ module LedgerHelpers
   end
 
   def ledgers_delete(id)
-    FolioRequest.new.delete("/finance/ledgers/#{id}")
+    @@folio_request.delete("/finance/ledgers/#{id}")
   end
 
   def ledgers_post(obj)
-    FolioRequest.new.post('/finance/ledgers', obj.to_json)
+    @@folio_request.post('/finance/ledgers', obj.to_json)
   end
 end

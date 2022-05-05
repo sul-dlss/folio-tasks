@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../folio_request'
+
 # Module to encapsulate org category methods used by organizations rake tasks
 module OrgCategoryTaskHelpers
+  include FolioRequestHelper
+
   def category_map
     {
       '0' => category_id('Payments'),
@@ -16,7 +20,7 @@ module OrgCategoryTaskHelpers
   end
 
   def category_id(value)
-    response = FolioRequest.new.get_cql('/organizations-storage/categories', "value==#{value}")['categories']
+    response = @@folio_request.get_cql('/organizations-storage/categories', "value==#{value}")['categories']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -25,6 +29,6 @@ module OrgCategoryTaskHelpers
   end
 
   def categories_post(obj)
-    FolioRequest.new.post('/organizations-storage/categories', obj.to_json)
+    @@folio_request.post('/organizations-storage/categories', obj.to_json)
   end
 end

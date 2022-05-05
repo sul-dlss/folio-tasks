@@ -1,7 +1,11 @@
 # frozen_string_literal: true
 
+require_relative '../folio_request'
+
 # Module to encapsulate finance group methods used by finance_settings rake tasks
 module FinanceGroupHelpers
+  include FolioRequestHelper
+
   def finance_groups_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/finance-groups.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
@@ -15,7 +19,7 @@ module FinanceGroupHelpers
   end
 
   def finance_group_id(code)
-    response = FolioRequest.new.get_cql('/finance/groups', "code==#{code}")['groups']
+    response = @@folio_request.get_cql('/finance/groups', "code==#{code}")['groups']
     begin
       response[0]['id']
     rescue NoMethodError
@@ -24,10 +28,10 @@ module FinanceGroupHelpers
   end
 
   def finance_groups_delete(id)
-    FolioRequest.new.delete("/finance/groups/#{id}")
+    @@folio_request.delete("/finance/groups/#{id}")
   end
 
   def finance_groups_post(obj)
-    FolioRequest.new.post('/finance/groups', obj.to_json)
+    @@folio_request.post('/finance/groups', obj.to_json)
   end
 end

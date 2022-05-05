@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'csv'
-require_relative '../../lib/folio_request'
 require_relative '../helpers/tenant'
 require_relative '../helpers/uuids'
 
