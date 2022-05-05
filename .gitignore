@@ -1,4 +1,5 @@
 /config/settings/*.yml
+!/config/settings/test.yml
 /log/*
 /tsv
 /xml

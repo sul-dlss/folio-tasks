@@ -4,12 +4,12 @@ require 'rake'
 require 'spec_helper'
 
 describe 'tenant settings rake tasks' do
-  let(:load_institutions_task) { Rake.application.invoke_task 'load_institutions' }
-  let(:load_campuses_task) { Rake.application.invoke_task 'load_campuses' }
-  let(:load_libraries_task) { Rake.application.invoke_task 'load_libraries' }
-  let(:load_service_points_task) { Rake.application.invoke_task 'load_service_points' }
-  let(:load_locations_task) { Rake.application.invoke_task 'load_locations' }
-  let(:load_addresses_task) { Rake.application.invoke_task 'load_tenant_addresses' }
+  let(:load_institutions_task) { Rake.application.invoke_task 'tenant:load_institutions' }
+  let(:load_campuses_task) { Rake.application.invoke_task 'tenant:load_campuses' }
+  let(:load_libraries_task) { Rake.application.invoke_task 'tenant:load_libraries' }
+  let(:load_service_points_task) { Rake.application.invoke_task 'tenant:load_service_points' }
+  let(:load_locations_task) { Rake.application.invoke_task 'tenant:load_locations' }
+  let(:load_addresses_task) { Rake.application.invoke_task 'tenant:load_tenant_addresses' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

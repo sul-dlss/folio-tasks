@@ -4,13 +4,13 @@ require 'rake'
 require 'spec_helper'
 
 describe 'user settings rake tasks' do
-  let(:load_user_groups_task) { Rake.application.invoke_task 'load_user_groups' }
-  let(:load_address_types_task) { Rake.application.invoke_task 'load_address_types' }
-  let(:load_waivers_task) { Rake.application.invoke_task 'load_waivers' }
-  let(:load_payments_task) { Rake.application.invoke_task 'load_payments' }
-  let(:load_refunds_task) { Rake.application.invoke_task 'load_refunds' }
-  let(:load_fee_fine_owners_task) { Rake.application.invoke_task 'load_fee_fine_owners' }
-  let(:load_permission_sets_task) { Rake.application.invoke_task 'load_permission_sets' }
+  let(:load_user_groups_task) { Rake.application.invoke_task 'users:load_user_groups' }
+  let(:load_address_types_task) { Rake.application.invoke_task 'users:load_address_types' }
+  let(:load_waivers_task) { Rake.application.invoke_task 'users:load_waivers' }
+  let(:load_payments_task) { Rake.application.invoke_task 'users:load_payments' }
+  let(:load_refunds_task) { Rake.application.invoke_task 'users:load_refunds' }
+  let(:load_fee_fine_owners_task) { Rake.application.invoke_task 'users:load_fee_fine_owners' }
+  let(:load_permission_sets_task) { Rake.application.invoke_task 'users:load_permission_sets' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

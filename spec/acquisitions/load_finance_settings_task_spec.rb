@@ -4,14 +4,14 @@ require 'rake'
 require 'spec_helper'
 
 describe 'finance settings rake tasks' do
-  let(:load_fund_types_task) { Rake.application.invoke_task 'load_fund_types' }
-  let(:load_expense_classes_task) { Rake.application.invoke_task 'load_expense_classes' }
-  let(:load_fiscal_years_task) { Rake.application.invoke_task 'load_fiscal_years' }
-  let(:load_ledgers_task) { Rake.application.invoke_task 'load_ledgers' }
-  let(:load_finance_groups_task) { Rake.application.invoke_task 'load_finance_groups' }
-  let(:load_funds_task) { Rake.application.invoke_task 'load_funds' }
-  let(:load_budgets_task) { Rake.application.invoke_task 'load_budgets' }
-  let(:load_acq_units_task) { Rake.application.invoke_task 'load_acq_units' }
+  let(:load_fund_types_task) { Rake.application.invoke_task 'acquisitions:load_fund_types' }
+  let(:load_expense_classes_task) { Rake.application.invoke_task 'acquisitions:load_expense_classes' }
+  let(:load_fiscal_years_task) { Rake.application.invoke_task 'acquisitions:load_fiscal_years' }
+  let(:load_ledgers_task) { Rake.application.invoke_task 'acquisitions:load_ledgers' }
+  let(:load_finance_groups_task) { Rake.application.invoke_task 'acquisitions:load_finance_groups' }
+  let(:load_funds_task) { Rake.application.invoke_task 'acquisitions:load_funds' }
+  let(:load_budgets_task) { Rake.application.invoke_task 'acquisitions:load_budgets' }
+  let(:load_acq_units_task) { Rake.application.invoke_task 'acquisitions:load_acq_units' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

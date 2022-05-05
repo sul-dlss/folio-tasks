@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'item settings rake tasks' do
-  let(:load_item_note_types_task) { Rake.application.invoke_task 'load_item_note_types' }
+  let(:load_item_note_types_task) { Rake.application.invoke_task 'inventory:load_item_note_types' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

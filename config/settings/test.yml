@@ -1,0 +1,96 @@
+okapi:
+  url: http://example.com
+  headers:
+    X-Okapi-Tenant: sul
+    User-Agent: FolioApiClient
+  login_params:
+    username: user
+    password: pass
+
+tsv: spec/fixtures/tsv
+tsv_orders: spec/fixtures/acquisitions/orders/tsv
+xml: spec/fixtures/xml
+yaml:
+  sul_orders: spec/acquisitions/orders/yaml/sul
+  law_orders: spec/acquisitions/orders/yaml/law
+  fixtures: spec/fixtures/yaml
+
+# we test against real data we GET from FOLIO before migrating
+json: spec/fixtures/json
+
+# comment this out in order to use the user's real email address:
+user_email_override: foliotesting@lists.stanford.edu
+
+inactive_users_file: 'spec/fixtures/folio_err.log'
+
+# This should be is ordered from highest to lowest Rank
+# https://docs.google.com/spreadsheets/d/10n77Zxgp3GCgwB9pPR80CZzNs6ERDzQkyCuolUQEoG0
+groups_ranked:
+  - Faculty
+  - Staff
+  - Staff-Casual
+  - Fellow
+  - Visiting Scholar
+  - Courtesy
+  - Postdoctoral
+  - Graduate
+  - Undergraduate
+  - Affiliate-Sponsored-Eresources
+
+faculty:
+  - faculty
+  - faculty:slac
+  - faculty:emeritus
+  - faculty:affiliate
+  - faculty:onleave
+  - faculty:otherteaching
+  - faculty:retired
+
+staff:
+  - staff
+  - staff:academic
+  - staff:otherteaching
+  - staff:parttime
+  - staff:temporary
+  - staff:temp
+  - staff:onleave
+  - staff:otherteaching
+  - staff:emeritus
+  - staff:retired
+
+staff_casual:
+  - staff:casual
+
+fellow:
+  - affiliate:fellow
+
+visiting_scholar:
+  - affiliate:visitscholarvs
+  - affiliate:visitscholarvt
+
+courtesy:
+  - affiliate:courtesy
+
+student:
+  - student
+  - student:postdoc
+
+student_recent:
+  - student:recent
+
+student_onleave:
+  - student:onleave
+
+nonactive_types:
+  - student:recent
+  - student:onleave
+  - student:nonactive
+  - staff:nonactive
+  - faculty:nonactive
+
+usergroups:
+  STAFF-NSTR: Instructor
+  STAFF-ACT: Acting Instructor
+  STAFF-CLIN: Clinical Instructor
+  MXF: Consulting Instructor
+  STAFF-LECT: Lecturer
