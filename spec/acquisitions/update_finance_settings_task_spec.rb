@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'finance settings rake tasks' do
-  let(:update_budgets_task) { Rake.application.invoke_task 'update_budgets' }
+  let(:update_budgets_task) { Rake.application.invoke_task 'acquisitions:update_budgets' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

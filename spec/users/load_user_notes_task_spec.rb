@@ -4,8 +4,8 @@ require 'rake'
 require 'spec_helper'
 
 describe 'loading user notes and note types' do
-  let(:load_user_note_types_task) { Rake.application.invoke_task 'load_user_note_types' }
-  let(:load_user_notes_task) { Rake.application.invoke_task 'load_user_notes[circnote]' }
+  let(:load_user_note_types_task) { Rake.application.invoke_task 'tsv_users:load_user_note_types' }
+  let(:load_user_notes_task) { Rake.application.invoke_task 'tsv_users:load_user_notes[circnote]' }
   let(:json_for_note) do
     '{"typeId":"1","type":"circnote","title":"CIRCNOTE NOTE","domain":"users",'\
     '"content":"This patron record should have a circnote",'\

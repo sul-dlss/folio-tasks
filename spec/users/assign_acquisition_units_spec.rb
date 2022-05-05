@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'assign acquisition units rake tasks' do
-  let(:assign_acquisition_units_task) { Rake.application.invoke_task 'assign_acquisition_units' }
+  let(:assign_acquisition_units_task) { Rake.application.invoke_task 'tsv_users:assign_acquisition_units' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

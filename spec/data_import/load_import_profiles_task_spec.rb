@@ -4,10 +4,10 @@ require 'rake'
 require 'spec_helper'
 
 describe 'data import profile rake tasks' do
-  let(:load_job_profiles_task) { Rake.application.invoke_task 'load_job_profiles' }
-  let(:load_action_profiles_task) { Rake.application.invoke_task 'load_action_profiles' }
-  let(:load_mapping_profiles_task) { Rake.application.invoke_task 'load_mapping_profiles' }
-  let(:profile_associations_task) { Rake.application.invoke_task 'create_profile_associations' }
+  let(:load_job_profiles_task) { Rake.application.invoke_task 'data_import:load_job_profiles' }
+  let(:load_action_profiles_task) { Rake.application.invoke_task 'data_import:load_action_profiles' }
+  let(:load_mapping_profiles_task) { Rake.application.invoke_task 'data_import:load_mapping_profiles' }
+  let(:profile_associations_task) { Rake.application.invoke_task 'data_import:create_profile_associations' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

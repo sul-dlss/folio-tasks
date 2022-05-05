@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'loading tsv users who do not have registry ids' do
-  let(:load_tsv_users_task) { Rake.application.invoke_task 'load_tsv_users' }
+  let(:load_tsv_users_task) { Rake.application.invoke_task 'tsv_users:load_tsv_users' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

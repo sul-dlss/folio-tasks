@@ -4,10 +4,10 @@ require 'rake'
 require 'spec_helper'
 
 describe 'organizations rake tasks' do
-  let(:load_categories_task) { Rake.application.invoke_task 'load_org_categories' }
-  let(:load_organizations_task) { Rake.application.invoke_task 'load_org_vendors_sul' }
-  let(:load_law_organizations_task) { Rake.application.invoke_task 'load_org_vendors_law' }
-  let(:load_bus_organizations_task) { Rake.application.invoke_task 'load_org_vendors_business' }
+  let(:load_categories_task) { Rake.application.invoke_task 'acquisitions:load_org_categories' }
+  let(:load_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_sul' }
+  let(:load_law_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_law' }
+  let(:load_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_business' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
