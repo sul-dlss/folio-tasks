@@ -5,7 +5,7 @@ require_relative '../helpers/folio_request'
 # Module to encapsulate methods used by acq_unit rake tasks
 module AcquisitionsUnitsTaskHelpers
   include FolioRequestHelper
-  
+
   # acquisitions units
   def acq_units_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/acquisitions-units.tsv"), headers: true,
