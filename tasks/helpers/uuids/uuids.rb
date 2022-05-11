@@ -6,6 +6,14 @@ require_relative '../folio_request'
 module Uuids
   include FolioRequestHelper
 
+  def acq_units
+    acq_unit_hash = {}
+    @@folio_request.get('/acquisitions-units-storage/units')['acquisitionsUnits'].each do |obj|
+      acq_unit_hash[obj['name']] = obj['id']
+    end
+    acq_unit_hash
+  end
+
   def libraries
     libraries_hash = {}
     @@folio_request.get('/location-units/libraries?limit=99')['loclibs'].each do |obj|
@@ -46,6 +54,26 @@ module Uuids
     service_points_hash
   end
 
+  # rubocop: disable Layout/LineLength
+  def law_organizations
+    organizations_hash = {}
+    acq_id = acq_units.fetch('Law')
+    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
+      organizations_hash[obj['code']] = obj['id']
+    end
+    organizations_hash
+  end
+
+  def sul_organizations
+    organizations_hash = {}
+    acq_id = acq_units.fetch('SUL')
+    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
+      organizations_hash[obj['code']] = obj['id']
+    end
+    organizations_hash
+  end
+  # rubocop: enable Layout/LineLength
+
   def payment_owners
     owners_hash = {}
     @@folio_request.get('/owners?limit=99')['owners'].each do |obj|
@@ -60,6 +88,32 @@ module Uuids
       addresses_hash[obj['code']] = obj['id']
     end
     addresses_hash
+  end
+
+  def law_locations
+    locations_hash = {}
+    campus_id = campuses.fetch('LAW')
+    @@folio_request.get("/locations?limit=500&query=campusId=#{campus_id}")['locations'].each do |obj|
+      locations_hash[obj['code']] = obj['id']
+    end
+    locations_hash
+  end
+
+  def sul_locations
+    locations_hash = {}
+    campus_id = campuses.fetch('SUL')
+    @@folio_request.get("/locations?limit=500&query=campusId=#{campus_id}")['locations'].each do |obj|
+      locations_hash[obj['code']] = obj['id']
+    end
+    locations_hash
+  end
+
+  def material_types
+    material_types_hash = {}
+    @@folio_request.get('/material-types?limit=99')['mtypes'].each do |obj|
+      material_types_hash[obj['name']] = obj['id']
+    end
+    material_types_hash
   end
 
   def note_types
