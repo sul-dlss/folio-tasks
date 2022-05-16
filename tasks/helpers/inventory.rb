@@ -13,4 +13,12 @@ module InventoryTaskHelpers
   def item_note_types_post(obj)
     @@folio_request.post('/item-note-types', obj.to_json)
   end
+
+  def material_types_csv
+    CSV.parse(File.open("#{Settings.tsv}/inventory/material-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
+  def material_types_post(obj)
+    @@folio_request.post('/material-types', obj.to_json)
+  end
 end
