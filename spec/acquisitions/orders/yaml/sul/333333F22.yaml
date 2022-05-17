@@ -9,6 +9,7 @@
       ORD_KEY: '4747240'
       ORDLINE_NUM: '1'
       CKEY: '4534833'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '0'
       BIB_ENTRY: ACQ
@@ -27,10 +28,10 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUNDB
       SELECTOR: RHW
-      CONTACT: Name <name@example.com>
   notes:
   - 'NOTE: vs'
   - 'COMMENT: Sales agreement, payment to be split over 2 years. vs 3/23/2022'
   - 'COMMENT: Received remotely items (16 boxes) for accession record.'
   - 'MULTIYEAR: Phased payment FY2022-FY2023'
+  - 'CONTACT: Name <name@example.com>'
   - 'DESC: papers shipped to RWC, RHW verified all contents arrived. Accession record.'

@@ -1,5 +1,5 @@
 ---
-4444444F21:
+444444F21:
   ORDER_TYPE: FIRM
   ORD_DATE_CREATED: '20200928'
   LIBRARY: SUL
@@ -9,6 +9,7 @@
       ORD_KEY: '4661515'
       ORDLINE_NUM: '1'
       CKEY: '13707766'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '0'
       BIB_ENTRY: ACQ
@@ -22,8 +23,8 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: hel
-      CONTACT: Name, name@example.com, 555-555-5555 / fax 1 555-555-5555
+      FUND: fund
       ACCOUNT: '400958'
   notes:
   - 'NOTE: mmd'
-  - 'FUND: fund'
+  - 'CONTACT: Name, name@example.com, 555-555-5555 / fax 1 555-555-5555'

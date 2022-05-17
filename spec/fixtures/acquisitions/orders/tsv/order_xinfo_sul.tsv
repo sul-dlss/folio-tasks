@@ -25,7 +25,7 @@ SUL	2022	1ABC0000	COMMENT	ENTRY>	"aSkulptur in Deutschland : zwischen Franzosisc
 SUL	2022	1ABC0000	COMMENT	ENTRY>	"aPeter Candid (um 1548-1628) : Gemalde - Zeichnungen - Druckgraphik, sb=ser; DUP2GIFTS.  (md 02/24/2011)<ENTRY"
 SUL	2022	1ABC0000	COMMENT	ENTRY>	aCurrent price (subscription year 2017): Next year's price (subscription year 2018): Increase: 17.84%   /fs/3/20/2018<ENTRY
 SUL	2022	1ABC0000	COMMENT	ENTRY>	aDUP2GIFTS = Christian Daniel Rauch und Ernst Rietschel (bd.1-2). jks 8/10/21<ENTRY
-SUL	2022	4444444F21	NOTE	ENTRY>	ammd<ENTRY
+SUL	2022	444444F21	NOTE	ENTRY>	ammd<ENTRY
 SUL	2022	555555F12	COMMENT	ENTRY>	a2022 ed purchased in PDF with pcard  /fs/4/12/2022<ENTRY
 SUL	2022	555555F12	COMMENT	ENTRY>	aSend all future PDF issues to email@example.com zb 20220415<ENTRY
 SUL	2022	555555F12	COMMENT	ENTRY>	a2021 ed purchased in PDF with pcard. zb 20220125<ENTRY
@@ -41,3 +41,7 @@ SUL	2022	555555F12	COMMENT	ENTRY>	a<ENTRY
 SUL	2022	666666F07	INSTRUCT	ENTRY>	aPlease start our electronic ONLY subscription for this journal as soon as possible.<ENTRY
 SUL	2022	666666F07	NOTE	ENTRY>	amvk payaccess 20061030<ENTRY
 SUL	2022	666666F07	BIGDEAL	ENTRY>	aElsevier<ENTRY
+SUL	2022	777777F02	COMMENT	ENTRY>	aAJA<ENTRY
+SUL	2022	777777F02	COMMENT	ENTRY>	aPrint incl. online per publisher email. 20180503 jhh<ENTRY
+SUL	2022	777777F02	NOTE	ENTRY>	aFS<ENTRY
+SUL	2022	777777F02	COMMENT	ENTRY>	aEC<ENTRY

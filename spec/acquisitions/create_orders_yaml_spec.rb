@@ -21,8 +21,8 @@ describe 'prepare order yaml files' do
 
   context 'when order has one orderline and one fund distribution' do
     it 'creates a yaml file' do
-      fixture_file = YAML.load_file("#{fixture_data}/4444444F21.yaml")
-      test_output = YAML.load_file("#{sul_data_dir}/4444444F21.yaml")
+      fixture_file = YAML.load_file("#{fixture_data}/444444F21.yaml")
+      test_output = YAML.load_file("#{sul_data_dir}/444444F21.yaml")
       expect(test_output).to eq(fixture_file)
     end
   end
@@ -89,5 +89,11 @@ describe 'prepare order yaml files' do
       test_output = YAML.load_file("#{sul_data_dir}/VENDOR_GBP-SH.yaml")
       expect(test_output).to eq(fixture_file)
     end
+  end
+
+  it 'creates a yaml file for SO-COMBO order type' do
+    fixture_file = YAML.load_file("#{fixture_data}/777777F02.yaml")
+    test_output = YAML.load_file("#{sul_data_dir}/777777F02.yaml")
+    expect(test_output).to eq(fixture_file)
   end
 end

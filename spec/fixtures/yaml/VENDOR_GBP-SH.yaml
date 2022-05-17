@@ -9,6 +9,7 @@ VENDOR/GBP-SH:
       ORD_KEY: '4692453'
       ORDLINE_NUM: '1'
       CKEY: '5480334'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '0'
       BIB_ENTRY: ACQ
