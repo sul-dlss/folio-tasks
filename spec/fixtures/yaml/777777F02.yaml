@@ -38,3 +38,6 @@
   - 'COMMENT: v. 7 (2002) rcv''d in Ser. 9/11/2003 aea'
   - 'CONTACT: Name; Ordering Specialist; name@example.com; Tel: 555-555-5555 Fax:
     555-555-5555'
+  tags:
+    tagList:
+    - SULDATA:Hosted_by_vendor

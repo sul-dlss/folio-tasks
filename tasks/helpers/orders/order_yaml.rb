@@ -30,7 +30,8 @@ module OrderYamlTaskHelpers
     note_fields = %w[INSTRUCT NOTE COMMENT MULTIYEAR STREAMING OPENACCESS]
     tag_fields = %w[BIGDEAL DATA]
     return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
-    return map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD'])
+    return map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD']) &&
+                                               tsv_hash['LIB'].eql?('SUL')
   end
 
   def add_orderlin1_xinfo(tsv_hash, yaml_hash)
@@ -63,9 +64,14 @@ module OrderYamlTaskHelpers
   end
 
   def tags(tsv_hash)
-    new_data = cleanup(tsv_hash['DATA'])
-    # prefix DATA with "SUL FIELD:", i.e. "SUL BIGDEAL:"
-    "SUL #{tsv_hash['XINFO_FIELD']}: #{new_data}"
+    new_data = tag_data(tsv_hash['DATA'])
+    # prepend XINFO_FIELD with "SUL" and append ":", i.e. "SULBIGDEAL:"
+    "SUL#{tsv_hash['XINFO_FIELD']}:#{new_data}"
+  end
+
+  def tag_data(data)
+    # strip subfield "a" from the beginning and "<ENTRY" from the end of DATA, replace spaces with underscores
+    data.gsub(/^a{1}/, '').gsub(/<ENTRY$/, '').tr(' ', '_')
   end
 
   def add_orderline_xinfo(tsv_hash, yaml_hash)
