@@ -14,12 +14,30 @@ module Uuids
     acq_unit_hash
   end
 
-  def libraries
-    libraries_hash = {}
-    @@folio_request.get('/location-units/libraries?limit=99')['loclibs'].each do |obj|
-      libraries_hash[obj['code']] = obj['id']
+  def campuses
+    campuses_hash = {}
+    @@folio_request.get('/location-units/campuses?limit=999')['loccamps'].each do |obj|
+      campuses_hash[obj['code']] = obj['id']
     end
-    libraries_hash
+    campuses_hash
+  end
+
+  def law_funds
+    funds_hash = {}
+    ledger_id = ledgers.fetch('LAW')
+    @@folio_request.get("/finance/funds?limit=999&query=ledgerId=#{ledger_id}")['funds'].each do |obj|
+      funds_hash[obj['code']] = obj['id']
+    end
+    funds_hash
+  end
+
+  def sul_funds
+    funds_hash = {}
+    ledger_id = ledgers.fetch('SUL')
+    @@folio_request.get("/finance/funds?limit=999&query=ledgerId=#{ledger_id}")['funds'].each do |obj|
+      funds_hash[obj['code']] = obj['id']
+    end
+    funds_hash
   end
 
   def institutions
@@ -30,64 +48,20 @@ module Uuids
     institutions_hash
   end
 
-  def campuses
-    campuses_hash = {}
-    @@folio_request.get('/location-units/campuses?limit=999')['loccamps'].each do |obj|
-      campuses_hash[obj['code']] = obj['id']
+  def ledgers
+    ledgers_hash = {}
+    @@folio_request.get('/finance/ledgers')['ledgers'].each do |obj|
+      ledgers_hash[obj['code']] = obj['id']
     end
-    campuses_hash
+    ledgers_hash
   end
 
-  def service_points
-    service_points_hash = {}
-    @@folio_request.get('/service-points?limit=999')['servicepoints'].each do |obj|
-      service_points_hash[obj['code']] = obj['id']
+  def libraries
+    libraries_hash = {}
+    @@folio_request.get('/location-units/libraries?limit=99')['loclibs'].each do |obj|
+      libraries_hash[obj['code']] = obj['id']
     end
-    service_points_hash
-  end
-
-  def service_point_names
-    service_points_hash = {}
-    @@folio_request.get('/service-points?limit=999')['servicepoints'].each do |obj|
-      service_points_hash[obj['name']] = obj['id']
-    end
-    service_points_hash
-  end
-
-  # rubocop: disable Layout/LineLength
-  def law_organizations
-    organizations_hash = {}
-    acq_id = acq_units.fetch('Law')
-    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
-      organizations_hash[obj['code']] = obj['id']
-    end
-    organizations_hash
-  end
-
-  def sul_organizations
-    organizations_hash = {}
-    acq_id = acq_units.fetch('SUL')
-    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
-      organizations_hash[obj['code']] = obj['id']
-    end
-    organizations_hash
-  end
-  # rubocop: enable Layout/LineLength
-
-  def payment_owners
-    owners_hash = {}
-    @@folio_request.get('/owners?limit=99')['owners'].each do |obj|
-      owners_hash[obj['owner']] = obj['id']
-    end
-    owners_hash
-  end
-
-  def tenant_addresses
-    addresses_hash = {}
-    @@folio_request.get('/configurations/entries?query=configName==tenant.addresses&limit=99')['configs'].each do |obj|
-      addresses_hash[obj['code']] = obj['id']
-    end
-    addresses_hash
+    libraries_hash
   end
 
   def law_locations
@@ -122,6 +96,58 @@ module Uuids
       note_types[obj['name']] = obj['id']
     end
     note_types
+  end
+
+  # rubocop: disable Layout/LineLength
+  def law_organizations
+    organizations_hash = {}
+    acq_id = acq_units.fetch('Law')
+    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
+      organizations_hash[obj['code']] = obj['id']
+    end
+    organizations_hash
+  end
+
+  def sul_organizations
+    organizations_hash = {}
+    acq_id = acq_units.fetch('SUL')
+    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
+      organizations_hash[obj['code']] = obj['id']
+    end
+    organizations_hash
+  end
+  # rubocop: enable Layout/LineLength
+
+  def payment_owners
+    owners_hash = {}
+    @@folio_request.get('/owners?limit=99')['owners'].each do |obj|
+      owners_hash[obj['owner']] = obj['id']
+    end
+    owners_hash
+  end
+
+  def service_points
+    service_points_hash = {}
+    @@folio_request.get('/service-points?limit=999')['servicepoints'].each do |obj|
+      service_points_hash[obj['code']] = obj['id']
+    end
+    service_points_hash
+  end
+
+  def service_point_names
+    service_points_hash = {}
+    @@folio_request.get('/service-points?limit=999')['servicepoints'].each do |obj|
+      service_points_hash[obj['name']] = obj['id']
+    end
+    service_points_hash
+  end
+
+  def tenant_addresses
+    addresses_hash = {}
+    @@folio_request.get('/configurations/entries?query=configName==tenant.addresses&limit=99')['configs'].each do |obj|
+      addresses_hash[obj['code']] = obj['id']
+    end
+    addresses_hash
   end
 
   def uuid_maps
