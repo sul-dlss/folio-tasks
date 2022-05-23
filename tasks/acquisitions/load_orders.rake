@@ -21,7 +21,7 @@ namespace :acquisitions do
     hldg_code_loc_map = hldg_code_map('acquisitions/sym_hldg_code_location_map.tsv', Uuids.sul_locations)
     uuid_hashes = [Uuids.tenant_addresses, Uuids.sul_organizations, order_type_map, hldg_code_loc_map, Uuids.sul_funds]
     order_yaml_dir = Settings.yaml.sul_orders.to_s
-    order_json_dir = Settings.json.to_s.concat('/orders/sul')
+    order_json_dir = "#{Settings.json}/orders/sul"
     Dir.each_child(order_yaml_dir) do |file|
       order_id, sym_order = get_id_data(YAML.load_file("#{order_yaml_dir}/#{file}"))
       folio_composite_orders = orders_hash(order_id, sym_order, acq_unit_uuid, uuid_hashes)
@@ -38,7 +38,7 @@ namespace :acquisitions do
     hldg_code_loc_map = hldg_code_map('acquisitions/sym_hldg_code_location_map.tsv', Uuids.law_locations)
     uuid_hashes = [Uuids.tenant_addresses, Uuids.law_organizations, order_type_map, hldg_code_loc_map, Uuids.law_funds]
     order_yaml_dir = Settings.yaml.law_orders.to_s
-    order_json_dir = Settings.json.to_s.concat('/orders/law')
+    order_json_dir = "#{Settings.json}/orders/law"
     Dir.each_child(order_yaml_dir) do |file|
       order_id, sym_order = get_id_data(YAML.load_file("#{order_yaml_dir}/#{file}"))
       folio_composite_orders = orders_hash(order_id, sym_order, acq_unit_uuid, uuid_hashes)
