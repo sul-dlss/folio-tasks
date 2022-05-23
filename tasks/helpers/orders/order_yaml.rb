@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # Module to encapsulate methods used by create orders yaml rake tasks
-# rubocop: disable Metrics/ModuleLength
 module OrderYamlTaskHelpers
   def orders_tsv(file)
     CSV.parse(File.open("#{Settings.tsv_orders}/#{file}"), headers: true, col_sep: "\t",
@@ -142,4 +141,3 @@ module OrderYamlTaskHelpers
     }
   end
 end
-# rubocop: enable Metrics/ModuleLength
