@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
-set :application, 'folio_api_client'
+set :application, 'folio-tasks'
 set :github_token, `git config --get github.token | tr -d '\n'`
-set :repo_url, "https://#{fetch(:github_token)}@github.com/sul-dlss/folio_api_client.git"
+set :repo_url, "https://#{fetch(:github_token)}@github.com/sul-dlss/folio-tasks.git"
 set :user, 'sirsi'
 
-# Default branch is :master
+# Default branch is :main
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default value for :log_level is :debug
