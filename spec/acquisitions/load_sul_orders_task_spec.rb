@@ -291,6 +291,10 @@ describe 'load SUL orders rake tasks' do
     it 'has manually add pieces for receiving box checked' do
       expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
     end
+
+    it 'does not have a poLineDescription field' do
+      expect(orders_hash['compositePoLines'][0]['poLineDescription']).to be_nil
+    end
   end
 
   context 'when orders have split funding by percentage' do

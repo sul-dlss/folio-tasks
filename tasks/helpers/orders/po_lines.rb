@@ -18,7 +18,7 @@ module PoLinesHelpers
       'paymentStatus' => payment_status(order_type, order_type_map),
       'receiptStatus' => receipt_status(po_line_data['DIST_DATE_RCVD'], order_type, order_type_map),
       'selector' => po_line_data['SELECTOR'],
-      'poLineDescription' => "FUND: #{po_line_data['FUND']}",
+      'poLineDescription' => add_fund_xinfo_field(po_line_data['FUND']),
       'instanceId' => determine_uuid(po_line_data['CKEY'], Settings.okapi.url.to_s),
       'titleOrPackage' => po_line_data['TITLE'],
       'acquisitionMethod' => acquisition_method(order_type, order_type_map), # string in Iris, UUID in Lotus
@@ -31,6 +31,12 @@ module PoLinesHelpers
     add_eresource(hash, material_type(order_type, order_type_map))
     add_receiving_note(hash, po_line_data['PARTS_IN_SET'])
     hash.compact
+  end
+
+  def add_fund_xinfo_field(data)
+    return if data.nil?
+
+    "FUND: #{data}"
   end
 
   def determine_uuid(legacy_identifier, okapi_url)
