@@ -7,7 +7,8 @@ module OrderTagHelpers
   include FolioRequestHelper
 
   def order_tags_tsv(file)
-    CSV.parse(File.open("#{Settings.tsv_orders}/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv_orders}/#{file}"), headers: true, col_sep: "\t",
+                                                           liberal_parsing: true).map(&:to_h)
   end
 
   def order_tags(file)
