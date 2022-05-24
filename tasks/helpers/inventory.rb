@@ -6,6 +6,14 @@ require_relative '../helpers/folio_request'
 module InventoryTaskHelpers
   include FolioRequestHelper
 
+  def alt_title_types_csv
+    CSV.parse(File.open("#{Settings.tsv}/inventory/alt-title-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
+  def alt_title_types_post(obj)
+    @@folio_request.post('/alternative-title-types', obj.to_json)
+  end
+
   def item_note_types_csv
     CSV.parse(File.open("#{Settings.tsv}/inventory/item-note-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
