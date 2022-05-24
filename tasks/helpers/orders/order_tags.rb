@@ -29,14 +29,14 @@ module OrderTagHelpers
   end
 
   def combine(field, data)
-    "#{add_label(field)}#{cleanup(data.tr(' ', '_'))}" # replace spaces doesn't work in cleanup method for some reason
+    "#{add_label(field)}#{cleanup_tags(data)}"
   end
 
   def add_label(data)
     data.gsub(/^/, 'SUL').gsub(/$/, ':')
   end
 
-  def cleanup(data)
+  def cleanup_tags(data)
     # strip subfield "a" from the beginning and "<ENTRY" from the end of DATA, replace spaces with underscores
     data.gsub(/^a{1}/, '').gsub(/<ENTRY$/, '').tr(' ', '_')
   end
