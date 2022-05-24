@@ -3,7 +3,7 @@
 # Module to encapsulate order type methods used by orders rake tasks
 module OrderTypeHelpers
   def order_type_csv(file)
-    CSV.parse(File.open("#{Settings.tsv}/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv_orders}/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def order_type_mapping(file, material_type_map)

@@ -7,7 +7,7 @@ module HoldingCodeHelpers
   include FolioRequestHelper
 
   def hldg_codes_tsv(file)
-    CSV.parse(File.open("#{Settings.tsv}/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv_orders}/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def hldg_code_map(file, locations_hash)
