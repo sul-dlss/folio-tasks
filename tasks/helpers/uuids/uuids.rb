@@ -6,14 +6,6 @@ require_relative '../folio_request'
 module Uuids
   include FolioRequestHelper
 
-  def acq_units
-    acq_unit_hash = {}
-    @@folio_request.get('/acquisitions-units-storage/units')['acquisitionsUnits'].each do |obj|
-      acq_unit_hash[obj['name']] = obj['id']
-    end
-    acq_unit_hash
-  end
-
   def campuses
     campuses_hash = {}
     @@folio_request.get('/location-units/campuses?limit=999')['loccamps'].each do |obj|
@@ -22,38 +14,12 @@ module Uuids
     campuses_hash
   end
 
-  def law_funds
-    funds_hash = {}
-    ledger_id = ledgers.fetch('LAW')
-    @@folio_request.get("/finance/funds?limit=999&query=ledgerId=#{ledger_id}")['funds'].each do |obj|
-      funds_hash[obj['code']] = obj['id']
-    end
-    funds_hash
-  end
-
-  def sul_funds
-    funds_hash = {}
-    ledger_id = ledgers.fetch('SUL')
-    @@folio_request.get("/finance/funds?limit=999&query=ledgerId=#{ledger_id}")['funds'].each do |obj|
-      funds_hash[obj['code']] = obj['id']
-    end
-    funds_hash
-  end
-
   def institutions
     institutions_hash = {}
     @@folio_request.get('/location-units/institutions')['locinsts'].each do |obj|
       institutions_hash[obj['code']] = obj['id']
     end
     institutions_hash
-  end
-
-  def ledgers
-    ledgers_hash = {}
-    @@folio_request.get('/finance/ledgers')['ledgers'].each do |obj|
-      ledgers_hash[obj['code']] = obj['id']
-    end
-    ledgers_hash
   end
 
   def libraries
@@ -97,26 +63,6 @@ module Uuids
     end
     note_types
   end
-
-  # rubocop: disable Layout/LineLength
-  def law_organizations
-    organizations_hash = {}
-    acq_id = acq_units.fetch('Law')
-    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
-      organizations_hash[obj['code']] = obj['id']
-    end
-    organizations_hash
-  end
-
-  def sul_organizations
-    organizations_hash = {}
-    acq_id = acq_units.fetch('SUL')
-    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
-      organizations_hash[obj['code']] = obj['id']
-    end
-    organizations_hash
-  end
-  # rubocop: enable Layout/LineLength
 
   def payment_owners
     owners_hash = {}
