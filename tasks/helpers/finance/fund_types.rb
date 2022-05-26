@@ -10,15 +10,6 @@ module FundTypeHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/fund-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def fund_type_id(name)
-    response = @@folio_request.get_cql('/finance/fund-types', "name==#{name}")['fundTypes']
-    begin
-      response[0]['id']
-    rescue NoMethodError
-      nil
-    end
-  end
-
   def fund_types_delete(id)
     @@folio_request.delete("/finance/fund-types/#{id}")
   end

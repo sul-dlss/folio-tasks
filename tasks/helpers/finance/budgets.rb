@@ -10,32 +10,24 @@ module BudgetHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/budgets.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def budgets_hash(obj)
-    fund_id = fund_id(obj['fundCode'])
-    fy_id = fiscal_year_id(obj['fiscalYearCode'])
+  def budgets_hash(obj, uuid_maps)
+    bus_funds, law_funds, sul_funds, acq_units, fiscal_years, expense_classes = uuid_maps
 
     new_obj = { 'name' => "#{obj['fundCode']}-#{obj['fiscalYearCode']}",
                 'budgetStatus' => 'Active',
                 'allocated' => obj['allocated'],
-                'fundId' => fund_id,
-                'fiscalYearId' => fy_id }
-    new_obj.store('acqUnitIds', acq_unit_id_list(obj['acqUnit_name'])) unless obj['acqUnit_name'].nil?
+                'fundId' => fund_id(obj['fundCode'], bus_funds, law_funds, sul_funds, obj['acqUnit_name']),
+                'fiscalYearId' => fiscal_years.fetch(obj['fiscalYearCode'], nil) }
+    new_obj.store('acqUnitIds', acq_unit_id_list(obj['acqUnit_name'], acq_units)) unless obj['acqUnit_name'].nil?
     unless obj['expenseClass_code'].nil?
-      new_obj.store('statusExpenseClasses',
-                    expense_class_id_list(obj['expenseClass_code']))
+      new_obj.store('statusExpenseClasses', expense_class_id_list(obj['expenseClass_code'], expense_classes))
     end
 
-    new_obj
+    new_obj.compact
   end
 
-  def budget_id(fund_id, fy_id)
-    response = @@folio_request.get_cql('/finance/budgets',
-                                       "fundId==#{fund_id}&fiscalYearId=#{fy_id}")['budgets']
-    begin
-      response[0]['id']
-    rescue NoMethodError
-      nil
-    end
+  def budget_id(name, budgets_hash)
+    budgets_hash.fetch(name, nil)
   end
 
   def budgets_delete(id)

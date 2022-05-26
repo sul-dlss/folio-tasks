@@ -10,21 +10,12 @@ module FinanceGroupHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/finance-groups.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def finance_groups_hash(obj)
-    acq_unit_ids = acq_unit_id_list(obj['acqUnit_name'])
+  def finance_groups_hash(obj, acq_units_uuids)
+    acq_unit_ids = acq_unit_id_list(obj['acqUnit_name'], acq_units_uuids)
     obj['acqUnitIds'] = acq_unit_ids unless acq_unit_ids&.empty?
     obj.delete('acqUnit_name')
 
     obj
-  end
-
-  def finance_group_id(code)
-    response = @@folio_request.get_cql('/finance/groups', "code==#{code}")['groups']
-    begin
-      response[0]['id']
-    rescue NoMethodError
-      nil
-    end
   end
 
   def finance_groups_delete(id)

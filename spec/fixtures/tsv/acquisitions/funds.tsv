@@ -1,2 +1,2 @@
 ledgerCode	fundName	fundId	fundType	groupCode	externalAccountNo	acqUnit_name
-LEDGER	FUND_NAME	FUND_NAME	OPERATING	FUND-SOME	1234567-890-AABBC	SUL
+LEDGER_2020	FUND_NAME	FUND_NAME	Dummy	DUMMY	1234567-890-AABBC	acq_unit1

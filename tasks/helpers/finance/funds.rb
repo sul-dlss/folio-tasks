@@ -10,29 +10,33 @@ module FundHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/funds.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def funds_hash(obj)
-    ledger = ledger_id(obj['ledgerCode'])
+  def funds_hash(obj, uuid_maps)
+    ledgers, acq_units, finance_groups, fund_types = uuid_maps
 
     new_obj = { 'fund' => {
       'name' => obj['fundName'],
       'code' => obj['fundId'],
       'externalAccountNo' => obj['externalAccountNo'],
       'fundStatus' => 'Active',
-      'ledgerId' => ledger
-    } }
-    new_obj['fund'].store('fundTypeId', fund_type_id(obj['fundType'])) unless obj['fundType'].nil?
-    new_obj['fund'].store('acqUnitIds', acq_unit_id_list(obj['acqUnit_name'])) unless obj['acqUnit_name'].nil?
-    new_obj.store('groupIds', [finance_group_id(obj['groupCode'])]) unless obj['groupCode'].nil?
+      'ledgerId' => ledgers.fetch(obj['ledgerCode'], nil)
+    }.compact }
+    new_obj['fund'].store('fundTypeId', fund_types.fetch(obj['fundType'], nil)) unless obj['fundType'].nil?
+    unless obj['acqUnit_name'].nil?
+      new_obj['fund'].store('acqUnitIds', acq_unit_id_list(obj['acqUnit_name'], acq_units))
+    end
+    new_obj.store('groupIds', [finance_groups.fetch(obj['groupCode'], nil)]) unless obj['groupCode'].nil?
 
     new_obj
   end
 
-  def fund_id(code)
-    response = @@folio_request.get_cql('/finance/funds', "code==#{code}")['funds']
-    begin
-      response[0]['id']
-    rescue NoMethodError
-      nil
+  def fund_id(fund_code, bus_funds, law_funds, sul_funds, acq_unit_name)
+    case acq_unit_name
+    when 'Business'
+      bus_funds.fetch(fund_code, nil)
+    when 'Law'
+      law_funds.fetch(fund_code, nil)
+    when 'SUL'
+      sul_funds.fetch(fund_code, nil)
     end
   end
 

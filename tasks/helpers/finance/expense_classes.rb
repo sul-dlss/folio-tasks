@@ -10,19 +10,10 @@ module ExpenseClassHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/expense-classes.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def expense_class_id(code)
-    response = @@folio_request.get_cql('/finance/expense-classes', "code==#{code}")['expenseClasses']
-    begin
-      response[0]['id']
-    rescue NoMethodError
-      nil
-    end
-  end
-
-  def expense_class_id_list(codes)
+  def expense_class_id_list(codes, expense_class_uuids)
     list = []
     codes&.split(/,\s*/)&.each do |code|
-      list << { 'expenseClassId' => expense_class_id(code) }
+      list << { 'expenseClassId' => expense_class_uuids.fetch(code, nil) }
     end
     # list = [{ 'expenseClassId' => 'abc-123' }, { 'expenseClassId' => 'xyz-456' }]
     list

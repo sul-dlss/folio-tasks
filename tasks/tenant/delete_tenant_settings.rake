@@ -2,11 +2,10 @@
 
 require 'csv'
 require_relative '../helpers/tenant'
-require_relative '../helpers/uuids'
+require_relative '../helpers/uuids/uuids'
 
 namespace :tenant do
-  include TenantTaskHelpers
-  include Uuids
+  include TenantTaskHelpers, Uuids
 
   desc 'delete tenant addresses from folio'
   task :delete_tenant_addresses do
