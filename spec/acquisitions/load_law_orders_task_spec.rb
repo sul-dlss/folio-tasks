@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe 'load LAW orders rake tasks' do
   let(:load_law_orders_task) { Rake.application.invoke_task 'acquisitions:load_orders_law' }
-  let(:acq_unit_uuid) { load_law_orders_task.send(:acq_unit_id, 'Law') }
+  let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
   let(:order_type_map) do
     load_law_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types)
   end
@@ -13,7 +13,8 @@ describe 'load LAW orders rake tasks' do
     load_law_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.law_locations)
   end
   let(:uuid_hashes) do
-    [Uuids.tenant_addresses, Uuids.law_organizations, order_type_map, hldg_code_map, Uuids.law_funds]
+    [Uuids.tenant_addresses, AcquisitionsUuidsHelpers.law_organizations, order_type_map, hldg_code_map,
+     AcquisitionsUuidsHelpers.law_funds]
   end
   let(:law_order_yaml_dir) { Settings.yaml.law_orders.to_s }
   let(:order_id) do

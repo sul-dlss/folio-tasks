@@ -3,23 +3,19 @@
 require 'csv'
 require 'require_all'
 require_rel '../helpers/orders'
-require_relative '../helpers/acq_units'
-require_relative '../helpers/finance/funds'
-require_relative '../helpers/uuids'
+require_rel '../helpers/uuids'
 require_relative '../../lib/folio_uuid'
 
 namespace :acquisitions do
-  include OrdersTaskHelpers, PoLinesHelpers, OrderTypeHelpers, HoldingCodeHelpers
-  include AcquisitionsUnitsTaskHelpers
-  include FundHelpers
-  include Uuids
+  include OrdersTaskHelpers, PoLinesHelpers, OrderTypeHelpers, HoldingCodeHelpers, Uuids, AcquisitionsUuidsHelpers
 
   desc 'load SUL orders into folio'
   task :load_orders_sul do
-    acq_unit_uuid = acq_unit_id('SUL')
+    acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil)
     order_type_map = order_type_mapping('order_type_map.tsv', Uuids.material_types)
     hldg_code_loc_map = hldg_code_map('sym_hldg_code_location_map.tsv', Uuids.sul_locations)
-    uuid_hashes = [Uuids.tenant_addresses, Uuids.sul_organizations, order_type_map, hldg_code_loc_map, Uuids.sul_funds]
+    uuid_hashes = [Uuids.tenant_addresses, AcquisitionsUuidsHelpers.sul_organizations, order_type_map,
+                   hldg_code_loc_map, AcquisitionsUuidsHelpers.sul_funds]
     order_yaml_dir = Settings.yaml.sul_orders.to_s
     order_json_dir = "#{Settings.json_orders}/sul"
     Dir.each_child(order_yaml_dir) do |file|
@@ -40,10 +36,11 @@ namespace :acquisitions do
 
   desc 'load LAW orders into folio'
   task :load_orders_law do
-    acq_unit_uuid = acq_unit_id('Law')
+    acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil)
     order_type_map = order_type_mapping('order_type_map.tsv', Uuids.material_types)
     hldg_code_loc_map = hldg_code_map('sym_hldg_code_location_map.tsv', Uuids.law_locations)
-    uuid_hashes = [Uuids.tenant_addresses, Uuids.law_organizations, order_type_map, hldg_code_loc_map, Uuids.law_funds]
+    uuid_hashes = [Uuids.tenant_addresses, AcquisitionsUuidsHelpers.law_organizations, order_type_map,
+                   hldg_code_loc_map, AcquisitionsUuidsHelpers.law_funds]
     order_yaml_dir = Settings.yaml.law_orders.to_s
     order_json_dir = "#{Settings.json_orders}/law"
     Dir.each_child(order_yaml_dir) do |file|

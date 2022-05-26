@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe 'load SUL orders rake tasks' do
   let(:load_sul_orders_task) { Rake.application.invoke_task 'acquisitions:load_orders_sul' }
-  let(:acq_unit_uuid) { load_sul_orders_task.send(:acq_unit_id, 'SUL') }
+  let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
   let(:order_type_map) do
     load_sul_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types)
   end
@@ -13,7 +13,8 @@ describe 'load SUL orders rake tasks' do
     load_sul_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.sul_locations)
   end
   let(:uuid_hashes) do
-    [Uuids.tenant_addresses, Uuids.sul_organizations, order_type_map, hldg_code_map, Uuids.sul_funds]
+    [Uuids.tenant_addresses, AcquisitionsUuidsHelpers.sul_organizations, order_type_map, hldg_code_map,
+     AcquisitionsUuidsHelpers.sul_funds]
   end
   let(:sul_order_yaml_dir) { Settings.yaml.sul_orders.to_s }
 
