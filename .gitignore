@@ -3,4 +3,4 @@
 /log/*
 /tsv
 /xml
-/json
+/json/**/*.json

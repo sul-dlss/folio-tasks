@@ -94,21 +94,21 @@ module DataImportTaskHelpers
   end
 
   def pull_action_profiles
-    hash = @@folio_request.get('/data-import-profiles/actionProfiles?withRelations=true')
+    hash = @@folio_request.get('/data-import-profiles/actionProfiles?withRelations=true&limit=999')
     trim_hash(hash, 'actionProfiles')
     remove_values(hash, 'userInfo')
     hash.to_json
   end
 
   def pull_job_profiles
-    hash = @@folio_request.get('/data-import-profiles/jobProfiles')
+    hash = @@folio_request.get('/data-import-profiles/jobProfiles?limit=999')
     trim_hash(hash, 'jobProfiles')
     remove_values(hash, 'userInfo')
     hash.to_json
   end
 
   def pull_mapping_profiles
-    hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true')
+    hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true&limit=999')
     trim_hash(hash, 'mappingProfiles')
     remove_values(hash, 'userInfo')
     hash.to_json

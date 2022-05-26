@@ -82,3 +82,9 @@ task pull_all_json_data: %i[users:pull_waivers
                             data_import:pull_job_profiles
                             data_import:pull_mapping_profiles
                             data_import:pull_action_profiles]
+
+desc 'Load all data import profile'
+task load_all_data_import_profiles: %i[data_import:load_job_profiles
+                                       data_import:load_action_profiles
+                                       data_import:load_mapping_profiles
+                                       data_import:create_profile_associations]
