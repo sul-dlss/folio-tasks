@@ -17,7 +17,9 @@ describe 'organizations rake tasks' do
 
     stub_request(:get, 'http://example.com/acquisitions-units-storage/units')
       .with(query: hash_including)
-      .to_return(body: '{ "acquisitionsUnits": [{ "id": "acq-123" }] }')
+      .to_return(body: '{ "acquisitionsUnits": [{ "id": "acq-123", "name": "SUL" },
+                                                { "id": "acq-123", "name": "Law" },
+                                                { "id": "acq-123", "name": "Business" }] }')
 
     stub_request(:get, 'http://example.com/organizations-storage/categories')
       .with(query: hash_including)
@@ -34,7 +36,7 @@ describe 'organizations rake tasks' do
 
   context 'when loading SUL organization data' do
     let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
-    let(:acq_unit_uuid) { load_organizations_task.send(:acq_unit_id, 'SUL') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:category_map) { load_organizations_task.send(:category_map) }
     let(:org_hash) { load_organizations_task.send(:organization_hash, xml_doc[0], 'SUL', acq_unit_uuid, category_map) }
 
@@ -165,9 +167,11 @@ describe 'organizations rake tasks' do
 
   context 'when loading Law organization data' do
     let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
-    let(:acq_unit) { load_law_organizations_task.send(:acq_unit_id, 'Law') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
     let(:category_map) { load_law_organizations_task.send(:category_map) }
-    let(:org_hash) { load_law_organizations_task.send(:organization_hash, xml_doc[0], 'Law', acq_unit, category_map) }
+    let(:org_hash) do
+      load_law_organizations_task.send(:organization_hash, xml_doc[0], 'Law', acq_unit_uuid, category_map)
+    end
 
     it 'creates the hash key and value for code with spaces' do
       expect(org_hash['code']).to eq 'YALE LAW REPORT-Law'
@@ -176,10 +180,10 @@ describe 'organizations rake tasks' do
 
   context 'when loading Business organization data' do
     let(:xml_doc) { load_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
-    let(:acq_unit) { load_bus_organizations_task.send(:acq_unit_id, 'Business') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Business', nil) }
     let(:category_map) { load_bus_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_bus_organizations_task.send(:organization_hash, xml_doc[0], 'Business', acq_unit, category_map)
+      load_bus_organizations_task.send(:organization_hash, xml_doc[0], 'Business', acq_unit_uuid, category_map)
     end
 
     it 'creates the hash key and value for code with an ampersand' do

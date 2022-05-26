@@ -2,11 +2,10 @@
 
 require 'csv'
 require_relative '../helpers/tenant'
-require_relative '../helpers/uuids'
+require_relative '../helpers/uuids/uuids'
 
 namespace :tenant do
-  include TenantTaskHelpers
-  include Uuids
+  include TenantTaskHelpers, Uuids
 
   desc 'load institution settings into folio'
   task :load_institutions do

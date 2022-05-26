@@ -12,19 +12,10 @@ module AcquisitionsUnitsTaskHelpers
                                                                                 col_sep: "\t").map(&:to_h)
   end
 
-  def acq_unit_id(name)
-    response = @@folio_request.get_cql('/acquisitions-units-storage/units', "name==#{name}")['acquisitionsUnits']
-    begin
-      response[0]['id']
-    rescue NoMethodError
-      nil
-    end
-  end
-
-  def acq_unit_id_list(names)
+  def acq_unit_id_list(names, acq_units_uuids)
     list = []
     names&.split(/,\s*/)&.each do |name|
-      list << acq_unit_id(name)
+      list << acq_units_uuids.fetch(name, nil)
     end
     # list = ['acq-123', 'acq-456']
     list

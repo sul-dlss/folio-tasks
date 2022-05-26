@@ -3,15 +3,20 @@
 require 'csv'
 require 'require_all'
 require_rel '../helpers/finance'
+require_relative '../helpers/uuids/acquisitions'
 
 namespace :acquisitions do
-  include BudgetHelpers
+  include BudgetHelpers, AcquisitionsUuidsHelpers
 
   desc 'update budgets in folio'
   task :update_budgets do
+    uuid_maps = [AcquisitionsUuidsHelpers.bus_funds, AcquisitionsUuidsHelpers.law_funds,
+                 AcquisitionsUuidsHelpers.sul_funds, AcquisitionsUuidsHelpers.acq_units,
+                 AcquisitionsUuidsHelpers.fiscal_years, AcquisitionsUuidsHelpers.expense_classes]
+    budgets = AcquisitionsUuidsHelpers.budgets
     budgets_csv.each do |obj|
-      hash = budgets_hash(obj)
-      id = budget_id(hash['fundId'], hash['fiscalYearId'])
+      hash = budgets_hash(obj, uuid_maps)
+      id = budget_id(hash['name'], budgets)
       budgets_put(id, hash)
     end
   end

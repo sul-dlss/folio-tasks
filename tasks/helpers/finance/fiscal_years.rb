@@ -9,21 +9,12 @@ module FiscalYearHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/fiscal-years.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def fiscal_years_hash(obj)
-    acq_unit_ids = acq_unit_id_list(obj['acqUnit_name'])
+  def fiscal_years_hash(obj, acq_units_uuids)
+    acq_unit_ids = acq_unit_id_list(obj['acqUnit_name'], acq_units_uuids)
     obj['acqUnitIds'] = acq_unit_ids unless acq_unit_ids&.empty?
     obj.delete('acqUnit_name')
 
     obj
-  end
-
-  def fiscal_year_id(code)
-    response = @@folio_request.get_cql('/finance/fiscal-years', "code==#{code}")['fiscalYears']
-    begin
-      response[0]['id']
-    rescue NoMethodError
-      nil
-    end
   end
 
   def fiscal_years_delete(id)

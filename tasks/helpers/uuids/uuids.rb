@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'folio_request'
+require_relative '../folio_request'
 
 # Folio UUIDs
 module Uuids
