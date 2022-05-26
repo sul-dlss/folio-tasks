@@ -6,6 +6,10 @@ module OrganizationsTaskHelpers
     Nokogiri::XML(File.open("#{Settings.xml}/#{file}")).xpath('//vendor')
   end
 
+  def organizations_tsv(file)
+    CSV.parse(File.open("#{Settings.tsv}/acquisitions/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
   def organization_hash(obj, acq_unit, acq_unit_uuid, map)
     hash = {
       'name' => obj.at_xpath('name')&.text,
@@ -23,6 +27,16 @@ module OrganizationsTaskHelpers
     hash.store('emails', org_emails(obj, map))
 
     hash.compact
+  end
+
+  def organization_hash_update(obj, acq_unit_uuid)
+    obj['code'] = "#{obj['code']}-SUL"
+    obj['status'] = 'Active'
+    obj['isVendor'] = false
+    obj['aliases'] = [{ value: obj['aliases'] }] if obj['aliases']
+    obj['urls'] = [{ value: obj['urls'] }] if obj['urls']
+    obj['acqUnitIds'] = [acq_unit_uuid.to_s]
+    obj
   end
 
   def vendor_code(obj, acq_unit)
