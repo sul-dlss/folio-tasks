@@ -48,10 +48,19 @@ task delete_tenant_settings: %i[tenant:delete_tenant_addresses
                                 tenant:delete_institutions]
 
 desc 'Load all user settings [groups, address_types, waivers, refunds]'
-task load_user_settings: %i[load_user_groups load_address_types load_waivers load_refunds load_fee_fine_owners load_payments]
+task load_user_settings: %i[users:load_user_groups
+                            users:load_waivers
+                            users:load_refunds
+                            users:load_fee_fine_owners
+                            users:load_payments]
+      # users:load_address_types - now loaded by default reference data
 
 desc 'Loads all Acquisitions Units, Tenant, User and Finance settings'
-task load_new_data_and_settings: %i[load_user_settings load_tenant_settings acquisitions:load_acq_units load_finance_settings load_organizations_all]
+task load_new_data_and_settings: %i[load_user_settings
+                                    load_tenant_settings
+                                    acquisitions:load_acq_units
+                                    load_finance_settings
+                                    load_organizations_all]
 
 desc 'Prepare SUL order data'
 task prepare_sul_orders: %i[acquisitions:create_sul_orders_yaml
@@ -64,3 +73,12 @@ task prepare_law_orders: %i[acquisitions:create_law_orders_yaml
                             acquisitions:add_law_order_xinfo_to_yaml
                             acquisitions:add_law_orderlin1_xinfo_to_yaml
                             acquisitions:add_law_orderline_xinfo_to_yaml]
+
+desc 'Pull all json data (use STAGE=orig)'
+task pull_all_json_data: %i[users:pull_waivers
+                            users:pull_refunds
+                            users:pull_owners
+                            users:pull_payments
+                            data_import:pull_job_profiles
+                            data_import:pull_mapping_profiles
+                            data_import:pull_action_profiles]

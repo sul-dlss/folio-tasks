@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe 'user settings rake tasks' do
   let(:load_user_groups_task) { Rake.application.invoke_task 'users:load_user_groups' }
-  let(:load_address_types_task) { Rake.application.invoke_task 'users:load_address_types' }
+  # let(:load_address_types_task) { Rake.application.invoke_task 'users:load_address_types' }
   let(:load_waivers_task) { Rake.application.invoke_task 'users:load_waivers' }
   let(:load_payments_task) { Rake.application.invoke_task 'users:load_payments' }
   let(:load_refunds_task) { Rake.application.invoke_task 'users:load_refunds' }
@@ -35,13 +35,14 @@ describe 'user settings rake tasks' do
     end
   end
 
-  context 'when creating address types' do
-    let(:address_types_json) { load_address_types_task.send(:address_types_json) }
+  # Using instead the default reference data address types
+  # context 'when creating address types' do
+  #   let(:address_types_json) { load_address_types_task.send(:address_types_json) }
 
-    it 'supplies valid json for posting address types' do
-      expect(address_types_json['addressTypes'].sample).to match_json_schema('mod-users', 'addresstype')
-    end
-  end
+  #   it 'supplies valid json for posting address types' do
+  #     expect(address_types_json['addressTypes'].sample).to match_json_schema('mod-users', 'addresstype')
+  #   end
+  # end
 
   context 'when creating waivers' do
     let(:waivers_json) { load_waivers_task.send(:waivers_json) }

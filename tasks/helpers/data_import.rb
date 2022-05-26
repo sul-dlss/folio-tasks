@@ -92,4 +92,38 @@ module DataImportTaskHelpers
     @@folio_request.post("/data-import-profiles/profileAssociations?master=#{master}&detail=#{detail}",
                          payload.to_json)
   end
+
+  def pull_action_profiles
+    hash = @@folio_request.get('/data-import-profiles/actionProfiles?withRelations=true')
+    trim_hash(hash, 'actionProfiles')
+    remove_values(hash, 'userInfo')
+    hash.to_json
+  end
+
+  def pull_job_profiles
+    hash = @@folio_request.get('/data-import-profiles/jobProfiles')
+    trim_hash(hash, 'jobProfiles')
+    remove_values(hash, 'userInfo')
+    hash.to_json
+  end
+
+  def pull_mapping_profiles
+    hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true')
+    trim_hash(hash, 'mappingProfiles')
+    remove_values(hash, 'userInfo')
+    hash.to_json
+  end
+
+  def remove_values(hash, key_name)
+    hash.each do |k, v|
+      if k == key_name
+        hash.delete(k)
+      elsif v.is_a?(Hash)
+        remove_values(v, key_name)
+      elsif v.is_a?(Array)
+        v.flatten.each { |x| remove_values(x, key_name) if x.is_a?(Hash) }
+      end
+    end
+    hash
+  end
 end
