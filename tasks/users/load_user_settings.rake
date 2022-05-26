@@ -13,12 +13,13 @@ namespace :users do
     end
   end
 
-  desc 'load address types into folio'
-  task :load_address_types do
-    address_types_json['addressTypes'].each do |obj|
-      address_types_post(obj)
-    end
-  end
+  # Using instead the default reference data address types
+  # desc 'load address types into folio'
+  # task :load_address_types do
+  #   address_types_json['addressTypes'].each do |obj|
+  #     address_types_post(obj)
+  #   end
+  # end
 
   desc 'load waivers into folio'
   task :load_waivers do

@@ -40,6 +40,7 @@ module TenantTaskHelpers
     campus_uuid = campus_uuid_map.fetch(obj['campus'])
 
     obj['campusId'] = campus_uuid
+    obj.delete('campus')
     obj
   end
 

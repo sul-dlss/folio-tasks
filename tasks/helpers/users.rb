@@ -47,7 +47,7 @@ module UsersTaskHelpers
   end
 
   def fee_fine_owners_json
-    JSON.parse(File.read("#{Settings.json}/users/fee_fine_owners.orig.json"))
+    JSON.parse(File.read("#{Settings.json}/users/fee_fine_owners.json"))
   end
 
   def fee_fine_owners_post(hash)
@@ -80,7 +80,7 @@ module UsersTaskHelpers
   end
 
   def permission_sets_json
-    JSON.parse(File.read("#{Settings.json}/users/permission_sets.orig.json"))
+    JSON.parse(File.read("#{Settings.json}/users/permission_sets.json"))
   end
 
   def permission_sets_post(hash)
@@ -89,5 +89,29 @@ module UsersTaskHelpers
 
   def user_permissions_get(uuid)
     @@folio_request.get("/perms/users/#{uuid}/permissions?full=true&indexField=userId")
+  end
+
+  def pull_waivers
+    hash = @@folio_request.get('/waives')
+    trim_hash(hash, 'waivers')
+    hash.to_json
+  end
+
+  def pull_refunds
+    hash = @@folio_request.get('/refunds')
+    trim_hash(hash, 'refunds')
+    hash.to_json
+  end
+
+  def pull_owners
+    hash = @@folio_request.get('/owners')
+    trim_hash(hash, 'owners')
+    hash.to_json
+  end
+
+  def pull_payments
+    hash = @@folio_request.get('/payments')
+    trim_hash(hash, 'payments')
+    hash.to_json
   end
 end
