@@ -8,6 +8,7 @@ describe 'organizations rake tasks' do
   let(:load_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_sul' }
   let(:load_law_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_law' }
   let(:load_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_business' }
+  let(:load_coral_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_coral' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -38,7 +39,9 @@ describe 'organizations rake tasks' do
     let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:category_map) { load_organizations_task.send(:category_map) }
-    let(:org_hash) { load_organizations_task.send(:organization_hash, xml_doc[0], 'SUL', acq_unit_uuid, category_map) }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'SUL', acq_unit_uuid, category_map)
+    end
 
     it 'creates the hash key and value for name' do
       expect(org_hash['name']).to eq 'Carpe Diem Fine Books'
@@ -97,7 +100,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'does not create an address object if no primary address selected' do
-      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
                                           category_map)).not_to have_key 'addresses'
     end
 
@@ -139,7 +142,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'does not create a phoneNumbers object if no primary phone selected' do
-      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
                                           category_map)).not_to have_key 'phoneNumbers'
     end
 
@@ -160,7 +163,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'does not create an emails object if no primary email selected' do
-      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
                                           category_map)).not_to have_key 'emails'
     end
   end
@@ -170,7 +173,7 @@ describe 'organizations rake tasks' do
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
     let(:category_map) { load_law_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_law_organizations_task.send(:organization_hash, xml_doc[0], 'Law', acq_unit_uuid, category_map)
+      load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_map)
     end
 
     it 'creates the hash key and value for code with spaces' do
@@ -183,11 +186,59 @@ describe 'organizations rake tasks' do
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Business', nil) }
     let(:category_map) { load_bus_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_bus_organizations_task.send(:organization_hash, xml_doc[0], 'Business', acq_unit_uuid, category_map)
+      load_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid, category_map)
     end
 
     it 'creates the hash key and value for code with an ampersand' do
       expect(org_hash['code']).to eq 'D&B-Business'
+    end
+  end
+
+  context 'when loading a CORAL organization data with all fields' do
+    let(:coral_tsv) { load_coral_organizations_task.send(:organizations_tsv, 'CORAL_organizations.tsv') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_coral_organizations_task.send(:organization_hash_update, coral_tsv[0], acq_unit_uuid)
+    end
+
+    it 'creates the hash code with SUL appended' do
+      expect(org_hash['code']).to eq 'NATUREAMERICA-SUL'
+    end
+
+    it 'creates the status to Active' do
+      expect(org_hash['status']).to eq 'Active'
+    end
+
+    it 'creates an array for aliases' do
+      expect(org_hash['aliases']).to eq [{ value: 'Nature America' }]
+    end
+
+    it 'creates an array for urls' do
+      expect(org_hash['urls']).to eq [{ value: 'http://www.nature.com' }]
+    end
+
+    it 'creates acqUnitIds are with value' do
+      expect(org_hash['acqUnitIds']).to eq [acq_unit_uuid]
+    end
+  end
+
+  context 'when loading a CORAL organization data with missing fields' do
+    let(:coral_tsv) { load_coral_organizations_task.send(:organizations_tsv, 'CORAL_organizations.tsv') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_coral_organizations_task.send(:organization_hash_update, coral_tsv[1], acq_unit_uuid)
+    end
+
+    it 'creates the hash code with SUL appended' do
+      expect(org_hash['code']).to eq 'RIGHTFILMS-SUL'
+    end
+
+    it 'asserts that aliases is not in hash' do
+      expect(org_hash['aliases']).to be_nil
+    end
+
+    it 'asserts that urls is not in hash' do
+      expect(org_hash['urls']).to be_nil
     end
   end
 end

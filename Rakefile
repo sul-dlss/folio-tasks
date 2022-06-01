@@ -26,11 +26,12 @@ task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:load_finance_groups
                                acquisitions:load_funds
                                acquisitions:load_budgets]
-desc 'Loads all organization settings and data: [organization categories, organizations for SUL, Business, and Law]'
+desc 'Loads all organization settings and data: [organization categories, organizations for SUL, Business, and Law, and CORAL]'
 task load_organizations_all: %i[acquisitions:load_org_categories
                                 acquisitions:load_org_vendors_sul
                                 acquisitions:load_org_vendors_business
-                                acquisitions:load_org_vendors_law]
+                                acquisitions:load_org_vendors_law
+                                acquisitions:load_org_coral]
 desc 'Delete all finance settings: [budgets, funds, finance_groups, ledgers, fiscal_years, fund_types, expense classes]'
 task delete_finance_settings: %i[acquisitions:delete_budgets
                                  acquisitions:delete_funds

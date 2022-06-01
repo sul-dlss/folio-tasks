@@ -32,7 +32,7 @@ describe 'update organizations rake tasks' do
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('SUL', nil) }
     let(:category_map) { update_sul_organizations_task.send(:category_map) }
     let(:org_hash) do
-      update_sul_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid, category_map)
+      update_sul_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_map)
     end
 
     it 'escapes the parentheses in the vendor ID' do
@@ -41,7 +41,8 @@ describe 'update organizations rake tasks' do
     end
 
     it 'escapes the forward slash in the vendor ID' do
-      org_hash = update_sul_organizations_task.send(:organization_hash, xml_doc[2], 'SUL', acq_unit_uuid, category_map)
+      org_hash = update_sul_organizations_task.send(:organization_hash_from_xml, xml_doc[2], 'SUL', acq_unit_uuid,
+                                                    category_map)
       update_sul_organizations_task.send(:organizations_id, org_hash['code'])
       expect(WebMock).to have_requested(:get, 'http://example.com/organizations/organizations?query=code==%22BARDI/EUR-SUL%22').at_least_once
     end
@@ -52,7 +53,7 @@ describe 'update organizations rake tasks' do
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('Law', nil) }
     let(:category_map) { update_law_organizations_task.send(:category_map) }
     let(:org_hash) do
-      update_law_organizations_task.send(:organization_hash, xml_doc[0], 'Law', acq_unit_uuid, category_map)
+      update_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_map)
     end
 
     it 'escapes the spaces in the vendor ID' do
@@ -66,7 +67,8 @@ describe 'update organizations rake tasks' do
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('Business', nil) }
     let(:category_map) { update_bus_organizations_task.send(:category_map) }
     let(:org_hash) do
-      update_bus_organizations_task.send(:organization_hash, xml_doc[0], 'Business', acq_unit_uuid, category_map)
+      update_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid,
+                                         category_map)
     end
 
     it 'escapes the ampersand in the vendor ID' do
