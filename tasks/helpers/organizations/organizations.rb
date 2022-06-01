@@ -6,7 +6,7 @@ module OrganizationsTaskHelpers
     Nokogiri::XML(File.open("#{Settings.xml}/#{file}")).xpath('//vendor')
   end
 
-  def organization_hash(obj, acq_unit, acq_unit_uuid, map)
+  def organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, map)
     hash = {
       'name' => obj.at_xpath('name')&.text,
       'code' => vendor_code(obj, acq_unit),

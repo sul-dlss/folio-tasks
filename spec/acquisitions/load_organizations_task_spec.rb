@@ -38,7 +38,7 @@ describe 'organizations rake tasks' do
     let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:category_map) { load_organizations_task.send(:category_map) }
-    let(:org_hash) { load_organizations_task.send(:organization_hash, xml_doc[0], 'SUL', acq_unit_uuid, category_map) }
+    let(:org_hash) { load_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'SUL', acq_unit_uuid, category_map) }
 
     it 'creates the hash key and value for name' do
       expect(org_hash['name']).to eq 'Carpe Diem Fine Books'
@@ -97,7 +97,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'does not create an address object if no primary address selected' do
-      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
                                           category_map)).not_to have_key 'addresses'
     end
 
@@ -139,7 +139,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'does not create a phoneNumbers object if no primary phone selected' do
-      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
                                           category_map)).not_to have_key 'phoneNumbers'
     end
 
@@ -160,7 +160,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'does not create an emails object if no primary email selected' do
-      expect(load_organizations_task.send(:organization_hash, xml_doc[1], 'SUL', acq_unit_uuid,
+      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
                                           category_map)).not_to have_key 'emails'
     end
   end
@@ -170,7 +170,7 @@ describe 'organizations rake tasks' do
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
     let(:category_map) { load_law_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_law_organizations_task.send(:organization_hash, xml_doc[0], 'Law', acq_unit_uuid, category_map)
+      load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_map)
     end
 
     it 'creates the hash key and value for code with spaces' do
@@ -183,7 +183,7 @@ describe 'organizations rake tasks' do
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Business', nil) }
     let(:category_map) { load_bus_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_bus_organizations_task.send(:organization_hash, xml_doc[0], 'Business', acq_unit_uuid, category_map)
+      load_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid, category_map)
     end
 
     it 'creates the hash key and value for code with an ampersand' do
