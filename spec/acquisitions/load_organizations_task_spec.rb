@@ -8,6 +8,7 @@ describe 'organizations rake tasks' do
   let(:load_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_sul' }
   let(:load_law_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_law' }
   let(:load_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_business' }
+  let(:load_coral_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_coral' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -188,6 +189,54 @@ describe 'organizations rake tasks' do
 
     it 'creates the hash key and value for code with an ampersand' do
       expect(org_hash['code']).to eq 'D&B-Business'
+    end
+  end
+
+  context 'when loading a CORAL organization data with all fields' do
+    let(:coral_tsv) { load_coral_organizations_task.send(:organizations_tsv, 'CORAL_organizations.tsv') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_coral_organizations_task.send(:organization_hash_update, coral_tsv[0], acq_unit_uuid)
+    end
+
+    it 'creates the hash code with SUL appended' do
+      expect(org_hash['code']).to eq 'NATUREAMERICA-SUL'
+    end
+
+    it 'creates the status to Active' do
+      expect(org_hash['status']).to eq 'Active'
+    end
+
+    it 'creates an array for aliases' do
+      expect(org_hash['aliases']).to eq [{ value: 'Nature America' }]
+    end
+
+    it 'creates an array for urls' do
+      expect(org_hash['urls']).to eq [{ value: 'http://www.nature.com' }]
+    end
+
+    it 'creates acqUnitIds are with value' do
+      expect(org_hash['acqUnitIds']).to eq [acq_unit_uuid]
+    end
+  end
+
+  context 'when loading a CORAL organization data with missing fields' do
+    let(:coral_tsv) { load_coral_organizations_task.send(:organizations_tsv, 'CORAL_organizations.tsv') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_coral_organizations_task.send(:organization_hash_update, coral_tsv[1], acq_unit_uuid)
+    end
+
+    it 'creates the hash code with SUL appended' do
+      expect(org_hash['code']).to eq 'RIGHTFILMS-SUL'
+    end
+
+    it 'asserts that aliases is not in hash' do
+      expect(org_hash['aliases']).to be_nil
+    end
+
+    it 'asserts that urls is not in hash' do
+      expect(org_hash['urls']).to be_nil
     end
   end
 end
