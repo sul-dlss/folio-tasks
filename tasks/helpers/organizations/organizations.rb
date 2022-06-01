@@ -39,6 +39,16 @@ module OrganizationsTaskHelpers
     obj
   end
 
+  def migrate_error_orgs(acq_unit, acq_unit_uuid)
+    {
+      'name' => "#{acq_unit} Migration Error",
+      'code' => "MIGRATE-ERR-#{acq_unit}",
+      'status' => 'Active',
+      'isVendor' => true,
+      'acqUnitIds' => [acq_unit_uuid]
+    }
+  end
+
   def vendor_code(obj, acq_unit)
     "#{obj.at_xpath('vendorID')&.text}-#{acq_unit}"
   end

@@ -26,8 +26,9 @@ task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:load_finance_groups
                                acquisitions:load_funds
                                acquisitions:load_budgets]
-desc 'Loads all organization settings and data: [organization categories, organizations for SUL, Business, and Law, and CORAL]'
+desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
 task load_organizations_all: %i[acquisitions:load_org_categories
+                                acquisitions:load_org_migrate_err
                                 acquisitions:load_org_vendors_sul
                                 acquisitions:load_org_vendors_business
                                 acquisitions:load_org_vendors_law

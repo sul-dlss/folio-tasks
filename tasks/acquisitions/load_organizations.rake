@@ -18,6 +18,13 @@ namespace :acquisitions do
     end
   end
 
+  desc 'load migration error org into folio'
+  task :load_org_migrate_err do
+    AcquisitionsUuidsHelpers.acq_units.slice('SUL', 'Law').each do |name, uuid|
+      organizations_post(migrate_error_orgs(name, uuid))
+    end
+  end
+
   desc 'load SUL vendor organizations into folio'
   task :load_org_vendors_sul do
     acq_unit = 'SUL'
