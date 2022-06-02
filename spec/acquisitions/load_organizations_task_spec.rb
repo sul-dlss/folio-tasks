@@ -5,6 +5,7 @@ require 'spec_helper'
 
 describe 'organizations rake tasks' do
   let(:load_categories_task) { Rake.application.invoke_task 'acquisitions:load_org_categories' }
+  let(:load_migrate_err_task) { Rake.application.invoke_task 'acquisitions:load_org_migrate_err' }
   let(:load_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_sul' }
   let(:load_law_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_law' }
   let(:load_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_business' }
@@ -32,6 +33,22 @@ describe 'organizations rake tasks' do
   context 'when loading organizations categories' do
     it 'creates the hash key and value for category' do
       expect(load_categories_task.send(:categories_csv)[0]['value']).to eq 'Claims'
+    end
+  end
+
+  context 'when loading migration error organizations' do
+    let(:org_hash) { load_migrate_err_task.send(:migrate_error_orgs, 'SUL', 'acq-123') }
+
+    it 'creates the hash key and value for name' do
+      expect(org_hash['name']).to eq 'SUL Migration Error'
+    end
+
+    it 'creates the hash key and value for code' do
+      expect(org_hash['code']).to eq 'MIGRATE-ERR-SUL'
+    end
+
+    it 'creates the hash key and value for acqUnitIds' do
+      expect(org_hash['acqUnitIds']).to include 'acq-123'
     end
   end
 
