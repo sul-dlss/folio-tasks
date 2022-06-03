@@ -15,7 +15,7 @@ module FundHelpers
 
     new_obj = { 'fund' => {
       'name' => obj['fundName'],
-      'code' => obj['fundId'],
+      'code' => obj['fundCode'],
       'externalAccountNo' => obj['externalAccountNo'],
       'fundStatus' => 'Active',
       'ledgerId' => ledgers.fetch(obj['ledgerCode'], nil)

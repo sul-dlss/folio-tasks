@@ -28,7 +28,7 @@ namespace :acquisitions do
     law_funds = AcquisitionsUuidsHelpers.law_funds
     sul_funds = AcquisitionsUuidsHelpers.sul_funds
     funds_csv.each do |obj|
-      id = fund_id(obj['fundId'], bus_funds, law_funds, sul_funds, obj['acqUnit_name'])
+      id = fund_id(obj['fundCode'], bus_funds, law_funds, sul_funds, obj['acqUnit_name'])
       funds_delete(id)
     end
   end

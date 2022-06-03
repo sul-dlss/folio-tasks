@@ -193,7 +193,7 @@ describe 'finance settings rake tasks' do
     end
 
     it 'creates the hash key and value for fund code' do
-      expect(fund['code']).to eq 'FUND_NAME'
+      expect(fund['code']).to eq 'FUND_NAME-SUL'
     end
 
     it 'creates the hash key and value for externalAccountNo' do
