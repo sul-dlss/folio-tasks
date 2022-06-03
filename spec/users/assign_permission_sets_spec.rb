@@ -51,7 +51,7 @@ describe 'assign permission sets rake task' do
     end
 
     it 'has a hash with keys of the columns in the tsv file' do
-      expect(assign_permission_sets_task.send(:user_acq_units_and_permission_sets_tsv)[0].keys.size).to eq 5
+      expect(assign_permission_sets_task.send(:user_acq_units_and_permission_sets_tsv)[0].keys.size).to eq 6
     end
 
     it 'has SUNetId of sunetId1' do
