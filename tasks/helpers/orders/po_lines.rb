@@ -74,17 +74,16 @@ module PoLinesHelpers
 
   def distribution_hash(distribution, hldg_code, funds)
     if hldg_code.match?(/^LAW/)
-      # Law uses FUND_NAME for folio fund code
       {
-        'code' => distribution['FUND_NAME'],
-        'fundId' => funds.fetch(distribution['FUND_NAME'], nil),
+        'code' => "#{distribution['FUND_NAME']}-Law",
+        'fundId' => funds.fetch("#{distribution['FUND_NAME']}-Law", nil),
         'distributionType' => distribution_type(distribution['FUNDING_TYPE']),
         'value' => distribution_value(distribution)
       }
     else
       {
-        'code' => distribution['FUND_ID'],
-        'fundId' => funds.fetch(distribution['FUND_ID'], nil),
+        'code' => "#{distribution['FUND_NAME']}-SUL",
+        'fundId' => funds.fetch("#{distribution['FUND_NAME']}-SUL", nil),
         'distributionType' => distribution_type(distribution['FUNDING_TYPE']),
         'value' => distribution_value(distribution)
       }

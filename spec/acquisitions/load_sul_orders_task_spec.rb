@@ -46,7 +46,8 @@ describe 'load SUL orders rake tasks' do
 
     stub_request(:get, 'http://example.com/finance/funds')
       .with(query: hash_including)
-      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "11111-22-ABCD" }] }')
+      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "ASULFUNDA-SUL" },
+                                    { "id": "fund-123", "code": "ASULFUNDB-SUL" }] }')
 
     stub_request(:get, 'http://example.com/material-types')
       .with(query: hash_including)
@@ -282,7 +283,7 @@ describe 'load SUL orders rake tasks' do
     end
 
     it 'has the correct fund name in the field code' do
-      expect(po_line_fund_dist[0]['code']).to eq '11111-22-ABCD'
+      expect(po_line_fund_dist[0]['code']).to eq 'ASULFUNDA-SUL'
     end
 
     it 'has the correct UUID in the field fundId' do
@@ -321,7 +322,7 @@ describe 'load SUL orders rake tasks' do
     end
 
     it 'has the correct fund name in the field code' do
-      expect(po_line_fund_dist[0]['code']).to eq '11111-22-ABCD'
+      expect(po_line_fund_dist[0]['code']).to eq 'ASULFUNDA-SUL'
     end
 
     it 'has the correct UUID in the field fundId' do

@@ -50,7 +50,7 @@ describe 'load LAW orders rake tasks' do
 
     stub_request(:get, 'http://example.com/finance/funds')
       .with(query: hash_including)
-      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "BLAWFUND" }] }')
+      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "BLAWFUND-Law" }] }')
 
     stub_request(:get, 'http://example.com/material-types')
       .with(query: hash_including)
@@ -108,7 +108,7 @@ describe 'load LAW orders rake tasks' do
 
   context 'when Symphony fund name is used for Folio fund code' do
     it 'has the correct fund name in the field code' do
-      expect(orders_hash['compositePoLines'][0]['fundDistribution'][0]['code']).to eq 'BLAWFUND'
+      expect(orders_hash['compositePoLines'][0]['fundDistribution'][0]['code']).to eq 'BLAWFUND-Law'
     end
 
     it 'has the correct UUID in the field fundId' do
