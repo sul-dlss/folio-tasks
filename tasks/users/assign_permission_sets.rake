@@ -10,6 +10,7 @@ namespace :tsv_users do
     psets_from_cols = user_acq_units_and_permission_sets_tsv[0].keys
     psets_from_cols.delete('SUNetID')
     psets_from_cols.delete('Acq Unit')
+    psets_from_cols.delete('Service Point')
     pset_hash = {}
     @@folio_request.get('/perms/permissions?length=10000&query=(mutable==true)')['permissions'].each do |permission|
       pset_hash[permission['displayName']] = permission['id']
