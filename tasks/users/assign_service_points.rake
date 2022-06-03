@@ -15,10 +15,12 @@ namespace :tsv_users do
       users = user_get(obj['SUNetID'])
       service_point_id && users && users['users'].each do |user|
         path = "/request-preference-storage/request-preference?query=userId%3D%3D#{user['id']}"
-        request_pref = @@folio_request.get(path)['requestPreferences'][0]
-        request_pref['defaultServicePointId'] = service_point_id
-        path = "/request-preference-storage/request-preference/#{request_pref['id']}"
-        @@folio_request.put(path, request_pref.to_json)
+        request_prefs = @@folio_request.get(path)['requestPreferences']
+        next unless request_prefs.size.positive?
+
+        request_prefs[0]['defaultServicePointId'] = service_point_id
+        path = "/request-preference-storage/request-preference/#{request_prefs[0]['id']}"
+        @@folio_request.put(path, request_prefs[0].to_json)
       end
     end
   end
