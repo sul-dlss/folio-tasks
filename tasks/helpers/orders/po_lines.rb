@@ -48,17 +48,17 @@ module PoLinesHelpers
       'currency' => 'USD'
     }
     if format.match?(/Physical|Other/)
-      cost.store('listUnitPrice', dollars_to_json_num(list_price))
+      cost.store('listUnitPrice', dollars_to_float(list_price))
       cost.store('quantityPhysical', 1)
     end
     if format.include?('Electronic')
-      cost.store('listUnitPriceElectronic', dollars_to_json_num(list_price))
+      cost.store('listUnitPriceElectronic', dollars_to_float(list_price))
       cost.store('quantityElectronic', 1)
     end
     if format.include?('P/E Mix')
-      cost.store('listUnitPrice', dollars_to_json_num(list_price))
+      cost.store('listUnitPrice', dollars_to_float(list_price))
       cost.store('quantityPhysical', 1)
-      cost.store('listUnitPriceElectronic', dollars_to_json_num(list_price))
+      cost.store('listUnitPriceElectronic', dollars_to_float(list_price))
       cost.store('quantityElectronic', 1)
     end
     cost.compact
@@ -97,8 +97,8 @@ module PoLinesHelpers
 
   def distribution_value(distribution)
     return distribution['FUNDING_PERCENT'].to_i if distribution_type(distribution['FUNDING_TYPE']).eql?('percentage')
-    return dollars_to_json_num(distribution['FUNDING_AMT_ENCUM']) if distribution_type(distribution['FUNDING_TYPE'])
-                                                                     .eql?('amount')
+    return dollars_to_float(distribution['FUNDING_AMT_ENCUM']) if distribution_type(distribution['FUNDING_TYPE'])
+                                                                  .eql?('amount')
   end
 
   def add_locations(po_line_hash, hldg_code, hldg_code_loc_map)

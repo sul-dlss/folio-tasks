@@ -136,25 +136,13 @@ module OrdersTaskHelpers
     return "#{date[0..3]}-#{date[4..5]}-#{date[6..7]}" unless date.eql?('0')
   end
 
-  def dollars_to_json_num(dollars)
+  def dollars_to_float(dollars)
     dollars.scan(/[.0-9]/).join.to_f
   end
 
   def folio_org_format(vendor, library)
     library = library.capitalize if library.eql?('LAW')
     "#{vendor}-#{library}"
-  end
-
-  def write_json_to_file(dir, file, obj)
-    File.open("#{dir}/#{file.tr('.yaml', '.json')}", 'w') do |f|
-      f.puts obj.to_json
-    end
-  end
-
-  def write_okapi_response_to_file(dir, file, response)
-    File.open("#{dir}/#{file.tr('.yaml', '.json')}", 'a') do |f|
-      f.puts response.to_json
-    end
   end
 
   def orders_post(obj)
