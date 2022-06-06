@@ -68,7 +68,7 @@ module TsvUserTaskHelpers
   def transform_user(user)
     user['username'] = user.values[0]
     user['barcode'] = user.values[0]
-    user['externalSystemId'] = user.values[1] #.to_i.abs.to_s
+    user['externalSystemId'] = user.values[1]
     user['patronGroup'] = 'Courtesy'
     user['personal'] = user_personal(user)
     user['enrollmentDate'] = enrollment(user['PRIV_GRANTED'])
