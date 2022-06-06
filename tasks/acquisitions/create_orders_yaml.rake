@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
-require_relative '../helpers/orders/order_yaml'
+require 'require_all'
+require_rel '../helpers/orders'
 
 namespace :acquisitions do
   include OrderYamlTaskHelpers

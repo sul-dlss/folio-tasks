@@ -63,14 +63,7 @@ module OrderYamlTaskHelpers
   end
 
   def tags(tsv_hash)
-    new_data = tag_data(tsv_hash['DATA'])
-    # prepend XINFO_FIELD with "SUL" and append ":", i.e. "SULBIGDEAL:"
-    "SUL#{tsv_hash['XINFO_FIELD']}:#{new_data}"
-  end
-
-  def tag_data(data)
-    # strip subfield "a" from the beginning and "<ENTRY" from the end of DATA, replace spaces with underscores
-    data.gsub(/^a{1}/, '').gsub(/<ENTRY$/, '').tr(' ', '_')
+    OrderTagHelpers.combine(tsv_hash['XINFO_FIELD'], tsv_hash['DATA'])
   end
 
   def add_orderline_xinfo(tsv_hash, yaml_hash)

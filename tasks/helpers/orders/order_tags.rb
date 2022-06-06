@@ -30,14 +30,14 @@ module OrderTagHelpers
   end
 
   def combine(field, data)
-    "#{add_label(field)}#{cleanup_tags(data)}"
+    "#{add_label(field)}#{cleanup_tag_data(data)}"
   end
 
   def add_label(data)
     data.gsub(/^/, 'SUL').gsub(/$/, ':')
   end
 
-  def cleanup_tags(data)
+  def cleanup_tag_data(data)
     # strip subfield "a" from the beginning and "<ENTRY" from the end of DATA, replace spaces with underscores
     data.gsub(/^a{1}/, '').gsub(/<ENTRY$/, '').tr(' ', '_')
   end
