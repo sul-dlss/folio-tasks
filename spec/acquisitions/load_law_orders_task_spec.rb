@@ -42,7 +42,7 @@ describe 'load LAW orders rake tasks' do
     stub_request(:get, 'http://example.com/organizations/organizations')
       .with(query: hash_including)
       .to_return(body: '{ "organizations": [{ "id": "org-123", "code": "PCARD-Law" },
-                                            { "id": "org-456", "code": "STANFORD-Law" }]
+                                            { "id": "org-456", "code": "MIGRATE-ERR-Law" }]
                         }')
     stub_request(:get, 'http://example.com/finance/ledgers')
       .with(query: hash_including)
@@ -113,6 +113,12 @@ describe 'load LAW orders rake tasks' do
 
     it 'has the correct UUID in the field fundId' do
       expect(orders_hash['compositePoLines'][0]['fundDistribution'][0]['fundId']).to eq 'fund-123'
+    end
+  end
+
+  context 'when vendor does not exist in Folio' do
+    it 'has the correct vendor UUID' do
+      expect(orders_hash['vendor']).to eq 'org-456'
     end
   end
 end

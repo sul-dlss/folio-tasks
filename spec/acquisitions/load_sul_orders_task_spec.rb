@@ -37,7 +37,7 @@ describe 'load SUL orders rake tasks' do
     stub_request(:get, 'http://example.com/organizations/organizations')
       .with(query: hash_including)
       .to_return(body: '{ "organizations": [{ "id": "org-123", "code": "VENDOR-SUL" },
-                                            { "id": "org-456", "code": "VENDOR-9999-SUL" },
+                                            { "id": "org-456", "code": "MIGRATE-ERR-SUL" },
                                             { "id": "org-789", "code": "VENDOR/GBP-SUL" }]
                         }')
     stub_request(:get, 'http://example.com/finance/ledgers')
@@ -571,6 +571,20 @@ describe 'load SUL orders rake tasks' do
 
     it 'has an eresource material type of book' do
       expect(orders_hash['compositePoLines'].sample['eresource']['materialType']).to eq 'mat-123'
+    end
+  end
+
+  context 'when vendor does not exist in Folio' do
+    let(:order_id) do
+      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).shift
+    end
+    let(:sym_order) do
+      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).pop
+    end
+    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+
+    it 'has the correct vendor UUID' do
+      expect(orders_hash['vendor']).to eq 'org-456'
     end
   end
 end

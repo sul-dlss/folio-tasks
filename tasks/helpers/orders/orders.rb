@@ -18,7 +18,7 @@ module OrdersTaskHelpers
       'dateOrdered' => date_format(sym_order['ORD_DATE_CREATED']),
       'poNumber' => cleanup_po_num(order_id),
       'orderType' => order_type(sym_order['ORDER_TYPE'], order_type_map),
-      'vendor' => organizations.fetch(folio_org_format(sym_order['VENDOR_ID'], sym_order['LIBRARY'])),
+      'vendor' => vendor_uuid(sym_order['VENDOR_ID'], sym_order['LIBRARY'], organizations),
       'manualPo' => false,
       'reEncumber' => reencumber?(order_type(sym_order['ORDER_TYPE'], order_type_map)),
       'acqUnitIds' => [acq_unit_uuid],
@@ -31,6 +31,16 @@ module OrdersTaskHelpers
     add_notes(composite_orders, sym_order)
     add_tags(composite_orders, sym_order)
     composite_orders.compact
+  end
+
+  def vendor_uuid(vendor_id, order_library, organizations)
+    case order_library
+    when 'LAW'
+      default_vendor = organizations.fetch('MIGRATE-ERR-Law', nil)
+    when 'SUL'
+      default_vendor = organizations.fetch('MIGRATE-ERR-SUL', nil)
+    end
+    organizations.fetch(folio_org_format(vendor_id, order_library), default_vendor)
   end
 
   def add_composite_po_lines(composite_orders, sym_order, order_type_map, hldg_code_loc_map, funds)
