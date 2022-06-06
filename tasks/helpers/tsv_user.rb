@@ -3,6 +3,7 @@
 require_relative '../helpers/folio_request'
 
 # Module to encapsulate methods used by user_settings rake tasks
+# rubocop: disable Metrics/ModuleLength
 module TsvUserTaskHelpers
   include FolioRequestHelper
 
@@ -67,19 +68,25 @@ module TsvUserTaskHelpers
   def transform_user(user)
     user['username'] = user.values[0]
     user['barcode'] = user.values[0]
+    user['externalSystemId'] = user.values[1] #.to_i.abs.to_s
     user['patronGroup'] = 'Courtesy'
-    user['personal'] = {
+    user['personal'] = user_personal(user)
+    user['enrollmentDate'] = enrollment(user['PRIV_GRANTED'])
+    user['expirationDate'] = expiration(user['PRIV_EXPIRED'])
+    user_group = Settings.usergroups.to_h[user['PATRON_CODE'].to_sym].to_s
+    user['customFields'] = { 'usergroup' => user_group } unless user_group.size.zero?
+    remove_temp_keys(user)
+    user
+  end
+
+  def user_personal(user)
+    {
       'lastName' => last_name(user['NAME']),
       'firstName' => first_name(user['NAME']),
       'middleName' => middle_name(user['NAME']),
       'email' => user['EMAIL'],
-      'addresses' => address(user)
+      'addresses' => [address(user)]
     }
-    user['enrollmentDate'] = enrollment(user['PRIV_GRANTED'])
-    user['expirationDate'] = expiration(user['PRIV_EXPIRED'])
-    user['customFields'] = { 'usergroup' => Settings.usergroups.to_h[user['PATRON_CODE'].to_sym].to_s }
-    remove_temp_keys(user)
-    user
   end
 
   def remove_temp_keys(user)
@@ -130,3 +137,4 @@ module TsvUserTaskHelpers
     }
   end
 end
+# rubocop: enable Metrics/ModuleLength

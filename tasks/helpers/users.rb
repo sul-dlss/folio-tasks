@@ -58,8 +58,8 @@ module UsersTaskHelpers
     @@folio_request.get_cql('/users', "username==#{username}")
   end
 
-  def user_update(user)
-    @@folio_request.post('/user-import', user.to_json)
+  def user_update(users)
+    @@folio_request.post('/user-import', users.to_json)
   end
 
   def patron_group_get(id)
