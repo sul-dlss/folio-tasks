@@ -7,7 +7,8 @@ describe 'load SUL orders rake tasks' do
   let(:load_sul_orders_task) { Rake.application.invoke_task 'acquisitions:load_orders_sul' }
   let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
   let(:order_type_map) do
-    load_sul_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types)
+    load_sul_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types,
+                              AcquisitionsUuidsHelpers.acquisition_methods)
   end
   let(:hldg_code_map) do
     load_sul_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.sul_locations)
@@ -54,6 +55,12 @@ describe 'load SUL orders rake tasks' do
       .to_return(body: '{ "mtypes": [{ "id": "mat-123", "name": "book" },
                                      { "id": "mat-456", "name": "serial" },
                                      { "id": "mat-789", "name": "unspecified" }]
+                        }')
+
+    stub_request(:get, 'http://example.com/orders/acquisition-methods')
+      .with(query: hash_including)
+      .to_return(body: '{ "acquisitionMethods": [{ "id": "acq-123", "value": "Other" },
+                                                 { "id": "acq-456", "value": "Purchase" }]
                         }')
 
     stub_request(:get, 'http://example.com/location-units/campuses?limit=999')
@@ -585,6 +592,20 @@ describe 'load SUL orders rake tasks' do
 
     it 'has the correct vendor UUID' do
       expect(orders_hash['vendor']).to eq 'org-456'
+    end
+  end
+
+  context 'when acquisition method does not exist in Folio' do
+    let(:order_id) do
+      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).shift
+    end
+    let(:sym_order) do
+      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).pop
+    end
+    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+
+    it 'has the acquisitions method UUID for Other' do
+      expect(orders_hash['compositePoLines'].sample['acquisitionMethod']).to eq 'acq-123'
     end
   end
 end

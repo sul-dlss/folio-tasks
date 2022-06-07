@@ -7,7 +7,8 @@ describe 'load LAW orders rake tasks' do
   let(:load_law_orders_task) { Rake.application.invoke_task 'acquisitions:load_orders_law' }
   let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
   let(:order_type_map) do
-    load_law_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types)
+    load_law_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types,
+                              AcquisitionsUuidsHelpers.acquisition_methods)
   end
   let(:hldg_code_map) do
     load_law_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.law_locations)
@@ -56,6 +57,12 @@ describe 'load LAW orders rake tasks' do
       .with(query: hash_including)
       .to_return(body: '{ "mtypes": [{ "id": "mat-123", "name": "book" },
                                      { "id": "mat-456", "name": "serial" }]
+                        }')
+
+    stub_request(:get, 'http://example.com/orders/acquisition-methods')
+      .with(query: hash_including)
+      .to_return(body: '{ "acquisitionMethods": [{ "id": "acq-123", "value": "Other" },
+                                                 { "id": "acq-456", "value": "Purchase" }]
                         }')
 
     stub_request(:get, 'http://example.com/location-units/campuses?limit=999')
@@ -119,6 +126,12 @@ describe 'load LAW orders rake tasks' do
   context 'when vendor does not exist in Folio' do
     it 'has the correct vendor UUID' do
       expect(orders_hash['vendor']).to eq 'org-456'
+    end
+  end
+
+  context 'when acquisition method exists in Folio' do
+    it 'has the correct acquisitions method UUID' do
+      expect(orders_hash['compositePoLines'].sample['acquisitionMethod']).to eq 'acq-456'
     end
   end
 end

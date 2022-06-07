@@ -6,13 +6,14 @@ module OrderTypeHelpers
     CSV.parse(File.open("#{Settings.tsv_orders}/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def order_type_mapping(file, material_type_map)
+  def order_type_mapping(file, material_type_map, acq_method_map)
     map = {}
     order_type_csv(file).each do |row|
       map[row['Symph_order_type']] = row.to_h
     end
     map.each_value do |obj|
       obj['materialType'] = material_type_uuid(obj['materialType'], material_type_map)
+      obj['acquisitionMethod'] = acquisition_method_uuid(obj['acquisitionMethod'], acq_method_map)
     end
     map
   end
@@ -22,9 +23,13 @@ module OrderTypeHelpers
   end
 
   def acquisition_method(field, map)
-    # this needs to return the UUID for Lotus
-    # see https://github.com/sul-dlss/folio_api_client/issues/102
     map.dig(field, 'acquisitionMethod')
+  end
+
+  def acquisition_method_uuid(value, acq_method_map)
+    return acq_method_map['Other'] if acq_method_map[value].nil?
+
+    acq_method_map[value]
   end
 
   def order_format(field, map)

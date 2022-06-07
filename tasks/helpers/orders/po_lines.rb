@@ -21,7 +21,7 @@ module PoLinesHelpers
       'poLineDescription' => add_fund_xinfo_field(po_line_data['FUND']),
       'instanceId' => determine_uuid(po_line_data['CKEY'], Settings.okapi.url.to_s),
       'titleOrPackage' => po_line_data['TITLE'],
-      'acquisitionMethod' => acquisition_method(order_type, order_type_map), # string in Iris, UUID in Lotus
+      'acquisitionMethod' => acquisition_method(order_type, order_type_map),
       'source' => 'API',
       'cost' => add_cost(po_line_data['ORDLINE_UNIT_LIST_PRICE'], order_format(order_type, order_type_map)),
       'fundDistribution' => add_fund_data(po_line_data['fundDistribution'], po_line_data['HOLDNG_CODE'], funds)

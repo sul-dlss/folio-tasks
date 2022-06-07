@@ -14,6 +14,14 @@ module AcquisitionsUuidsHelpers
     acq_unit_hash
   end
 
+  def acquisition_methods
+    acq_method_hash = {}
+    @@folio_request.get('/orders/acquisition-methods?limit=50')['acquisitionMethods'].each do |obj|
+      acq_method_hash[obj['value']] = obj['id']
+    end
+    acq_method_hash
+  end
+
   def budgets
     budgets_hash = {}
     @@folio_request.get('/finance/budgets?limit=999')['budgets'].each do |obj|
