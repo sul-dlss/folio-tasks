@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Module to encapsulate methods used by orders rake tasks to create po lines
+# rubocop: disable Metrics/ModuleLength
 module PoLinesHelpers
   def add_po_line(orderlines, order_type, order_type_map, hldg_code_loc_map, funds)
     po_lines = []
@@ -47,21 +48,28 @@ module PoLinesHelpers
     cost = {
       'currency' => 'USD'
     }
-    if format.match?(/Physical|Other/)
-      cost.store('listUnitPrice', dollars_to_float(list_price))
-      cost.store('quantityPhysical', 1)
-    end
-    if format.include?('Electronic')
-      cost.store('listUnitPriceElectronic', dollars_to_float(list_price))
-      cost.store('quantityElectronic', 1)
-    end
-    if format.include?('P/E Mix')
-      cost.store('listUnitPrice', dollars_to_float(list_price))
-      cost.store('quantityPhysical', 1)
-      cost.store('listUnitPriceElectronic', dollars_to_float(list_price))
-      cost.store('quantityElectronic', 1)
+    case format
+    when 'Electronic Resource'
+      add_eresource_cost(cost, list_price)
+    when 'P/E Mix'
+      add_physical_cost(cost, list_price)
+      add_eresource_cost(cost, list_price)
+    else
+      add_physical_cost(cost, list_price)
     end
     cost.compact
+  end
+
+  def add_physical_cost(cost, list_price)
+    cost.store('listUnitPrice', dollars_to_float(list_price))
+    cost.store('quantityPhysical', 1)
+    cost
+  end
+
+  def add_eresource_cost(cost, list_price)
+    cost.store('listUnitPriceElectronic', dollars_to_float(list_price))
+    cost.store('quantityElectronic', 1)
+    cost
   end
 
   def add_fund_data(fund_data, hldg_code, funds)
@@ -108,21 +116,21 @@ module PoLinesHelpers
       'locationId' => hldg_code_loc_map.fetch(hldg_code, nil),
       'quantity' => 1
     }
-    locations.store('quantityElectronic', 1) if po_line_hash['orderFormat'].match?(/Electronic|Mix/)
-    locations.store('quantityPhysical', 1) if po_line_hash['orderFormat'].match?(/Physical|Mix/)
+    locations.store('quantityElectronic', 1) if po_line_hash['orderFormat']&.match?(/Electronic|Mix/)
+    locations.store('quantityPhysical', 1) if po_line_hash['orderFormat']&.match?(/Physical|Mix/)
     po_line_hash.store('locations', [locations.compact]) # json schema expects an array
     po_line_hash
   end
 
   def add_eresource(po_line_hash, material_type)
-    if po_line_hash['orderFormat'].match?(/Electronic|Mix/)
+    if po_line_hash['orderFormat']&.match?(/Electronic|Mix/)
       po_line_hash.store('eresource', eresource_physical_hash(material_type))
     end
     po_line_hash
   end
 
   def add_physical(po_line_hash, material_type)
-    if po_line_hash['orderFormat'].match?(/Physical|Mix/)
+    if po_line_hash['orderFormat']&.match?(/Physical|Mix/)
       po_line_hash.store('physical', eresource_physical_hash(material_type))
     end
     po_line_hash
@@ -148,3 +156,4 @@ module PoLinesHelpers
     }
   end
 end
+# rubocop: enable Metrics/ModuleLength
