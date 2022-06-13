@@ -71,11 +71,18 @@ task prepare_sul_orders: %i[acquisitions:create_sul_orders_yaml
                             acquisitions:add_sul_orderlin1_xinfo_to_yaml
                             acquisitions:add_sul_orderline_xinfo_to_yaml]
 
+desc 'Load SUL order data and tags'
+task load_orders_tags_sul: %i[acquisitions:load_tags_orders_sul
+                              acquisitions:load_orders_sul]
+
 desc 'Prepare LAW order data'
 task prepare_law_orders: %i[acquisitions:create_law_orders_yaml
                             acquisitions:add_law_order_xinfo_to_yaml
                             acquisitions:add_law_orderlin1_xinfo_to_yaml
                             acquisitions:add_law_orderline_xinfo_to_yaml]
+
+desc 'Load LAW order data'
+task load_orders_law: %i[acquisitions:load_orders_law]
 
 desc 'Pull all json data (use STAGE=orig)'
 task pull_all_json_data: %i[users:pull_waivers

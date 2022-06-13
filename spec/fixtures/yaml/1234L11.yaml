@@ -9,6 +9,7 @@
       ORD_KEY: '4654500'
       ORDLINE_NUM: '1'
       CKEY: '4005247'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '0'
       BIB_ENTRY: ACQ
@@ -25,6 +26,7 @@
       ORD_KEY: '4654500'
       ORDLINE_NUM: '2'
       CKEY: '4005247'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$39.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: ACQ
@@ -41,6 +43,7 @@
       ORD_KEY: '4654500'
       ORDLINE_NUM: '3'
       CKEY: '4005247'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$39.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: ACQ
@@ -57,6 +60,7 @@
       ORD_KEY: '4654500'
       ORDLINE_NUM: '4'
       CKEY: '4005247'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$39.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: ACQ
@@ -73,6 +77,7 @@
       ORD_KEY: '4654500'
       ORDLINE_NUM: '5'
       CKEY: '4005247'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$39.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: ACQ
@@ -89,6 +94,7 @@
       ORD_KEY: '4654500'
       ORDLINE_NUM: '6'
       CKEY: '4005247'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$39.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: ACQ

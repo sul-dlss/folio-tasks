@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # Module to encapsulate methods used by create orders yaml rake tasks
-# rubocop: disable Metrics/ModuleLength
 module OrderYamlTaskHelpers
   def orders_tsv(file)
     CSV.parse(File.open("#{Settings.tsv_orders}/#{file}"), headers: true, col_sep: "\t",
@@ -30,11 +29,12 @@ module OrderYamlTaskHelpers
     note_fields = %w[INSTRUCT NOTE COMMENT MULTIYEAR STREAMING OPENACCESS]
     tag_fields = %w[BIGDEAL DATA]
     return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
-    return map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD'])
+    return map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD']) &&
+                                               tsv_hash['LIB'].eql?('SUL')
   end
 
   def add_orderlin1_xinfo(tsv_hash, yaml_hash)
-    note_fields = %w[DESC COMMENT NOTIFY FUND]
+    note_fields = %w[DESC COMMENT CONTACT NOTIFY]
     return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
   end
 
@@ -63,13 +63,11 @@ module OrderYamlTaskHelpers
   end
 
   def tags(tsv_hash)
-    new_data = cleanup(tsv_hash['DATA'])
-    # prefix DATA with "SUL FIELD:", i.e. "SUL BIGDEAL:"
-    "SUL #{tsv_hash['XINFO_FIELD']}: #{new_data}"
+    OrderTagHelpers.combine(tsv_hash['XINFO_FIELD'], tsv_hash['DATA'])
   end
 
   def add_orderline_xinfo(tsv_hash, yaml_hash)
-    fields = %w[ACCOUNT CONTACT SELECTOR]
+    fields = %w[ACCOUNT FUND SELECTOR]
     return modify_orderline(tsv_hash, yaml_hash) if fields.include?(tsv_hash['XINFO_FIELD'])
   end
 
@@ -114,6 +112,7 @@ module OrderYamlTaskHelpers
         'ORD_KEY' => (obj['ORD_KEY']).to_s,
         'ORDLINE_NUM' => (obj['ORDLINE_NUM']).to_s,
         'CKEY' => (obj['CKEY']).to_s,
+        'TITLE' => (obj['TITLE']).to_s,
         'ORDLINE_UNIT_LIST_PRICE' => (obj['ORDLINE_UNIT_LIST_PRICE']).to_s,
         'COPIES_RCVD' => (obj['COPIES_RCVD']).to_s,
         'BIB_ENTRY' => (obj['BIB_ENTRY']).to_s,
@@ -135,4 +134,3 @@ module OrderYamlTaskHelpers
     }
   end
 end
-# rubocop: enable Metrics/ModuleLength

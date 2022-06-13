@@ -9,6 +9,7 @@
       ORD_KEY: '4683174'
       ORDLINE_NUM: '1'
       CKEY: '11716113'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '0'
       BIB_ENTRY: SER
@@ -32,11 +33,12 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: jmc
-      CONTACT: Name <name@example.com>
+      FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%
     '5738377':
       ORD_KEY: '4683174'
       ORDLINE_NUM: '3'
       CKEY: '11716113'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: SER
@@ -60,7 +62,7 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: jmc
-      CONTACT: Name <name@example.com>
+      FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%
   notes:
   - 'COMMENT: 2022 ed purchased in PDF with pcard  /fs/4/12/2022'
   - 'COMMENT: Send all future PDF issues to email@example.com zb 20220415'
@@ -81,8 +83,8 @@
   - 'COMMENT: GLFIX = 53240 -- 20120611 bch'
   - 'COMMENT: 2014 ed. paid by PCARD/fs/4/7/2014'
   - 'COMMENT: '
+  - 'CONTACT: Name <name@example.com>'
   - 'COMMENT: 2013 ed. (3 copies) paid by PCARD /fs/10/10/2013'
   - 'COMMENT: OLD Funding (2018 and forward)'
   - 'COMMENT: See fund allocation in the FUND field below. Fund amounts converted
     to percentage due to the order type (recurring). zb 20220412'
-  - 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'

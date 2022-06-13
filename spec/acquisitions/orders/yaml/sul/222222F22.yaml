@@ -9,6 +9,7 @@
       ORD_KEY: '4749842'
       ORDLINE_NUM: '1'
       CKEY: '14192300'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$1000.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: ACQ
@@ -27,8 +28,8 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUNDB
       SELECTOR: BLS
-      CONTACT: 'Name; Ordering Specialist; name@example.com; Tel: 555-555-5555 Fax:
-        555-555-5555'
+      FUND: '50%: ASULFUNDA; 50%: ASULFUNDB'
   notes:
   - 'NOTE: FS'
-  - 'FUND: 50%: FUND; 50%: FUND'
+  - 'CONTACT: Name; Ordering Specialist; name@example.com; Tel: 555-555-5555 Fax:
+    555-555-5555'

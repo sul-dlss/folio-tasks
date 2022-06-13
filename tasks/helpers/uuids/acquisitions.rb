@@ -14,6 +14,14 @@ module AcquisitionsUuidsHelpers
     acq_unit_hash
   end
 
+  def acquisition_methods
+    acq_method_hash = {}
+    @@folio_request.get('/orders/acquisition-methods?limit=50')['acquisitionMethods'].each do |obj|
+      acq_method_hash[obj['value']] = obj['id']
+    end
+    acq_method_hash
+  end
+
   def budgets
     budgets_hash = {}
     @@folio_request.get('/finance/budgets?limit=999')['budgets'].each do |obj|
@@ -88,4 +96,24 @@ module AcquisitionsUuidsHelpers
     end
     ledgers_hash
   end
+
+  # rubocop: disable Layout/LineLength
+  def law_organizations
+    organizations_hash = {}
+    acq_id = acq_units.fetch('Law')
+    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
+      organizations_hash[obj['code']] = obj['id']
+    end
+    organizations_hash
+  end
+
+  def sul_organizations
+    organizations_hash = {}
+    acq_id = acq_units.fetch('SUL')
+    @@folio_request.get("/organizations/organizations?limit=3000&query=acqUnitIds=#{acq_id}")['organizations'].each do |obj|
+      organizations_hash[obj['code']] = obj['id']
+    end
+    organizations_hash
+  end
+  # rubocop: enable Layout/LineLength
 end

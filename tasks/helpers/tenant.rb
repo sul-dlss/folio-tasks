@@ -2,7 +2,6 @@
 
 require_relative '../helpers/folio_request'
 
-# rubocop: disable Metrics/ModuleLength
 # Module to encapsulate methods used by tenant_settings rake tasks
 module TenantTaskHelpers
   include FolioRequestHelper
@@ -155,4 +154,3 @@ module TenantTaskHelpers
     @@folio_request.post('/configurations/entries', obj.to_json)
   end
 end
-# rubocop: enable Metrics/ModuleLength

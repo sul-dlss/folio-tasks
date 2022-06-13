@@ -9,6 +9,7 @@
       ORD_KEY: '4671721'
       ORDLINE_NUM: '1'
       CKEY: '3275935'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '0'
       BIB_ENTRY: SER
@@ -22,11 +23,12 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: DVK
-      CONTACT: Name
+      FUND: fund
     '5675888':
       ORD_KEY: '4671721'
       ORDLINE_NUM: '2'
       CKEY: '14018319'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: SER
@@ -40,11 +42,12 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: DVK
-      CONTACT: Name
+      FUND: fund
     '5676990':
       ORD_KEY: '4671721'
       ORDLINE_NUM: '3'
       CKEY: '14020059'
+      TITLE: A title
       ORDLINE_UNIT_LIST_PRICE: "$0.00"
       COPIES_RCVD: '1'
       BIB_ENTRY: SER
@@ -58,7 +61,7 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: DVK
-      CONTACT: Name
+      FUND: fund
   notes:
   - 'NOTE: FS'
   - 'COMMENT: GLFIX  94454'
@@ -72,8 +75,8 @@
     year 2018): Increase: 17.84%   /fs/3/20/2018'
   - 'COMMENT: DUP2GIFTS = Christian Daniel Rauch und Ernst Rietschel (bd.1-2). jks
     8/10/21'
+  - 'CONTACT: Name'
   - 'COMMENT: ORDUNIT: SE   RECUNIT: SE'
   - 'COMMENT: BN    XPM: c'
   - 'COMMENT: OPERATOR ID: pah   ACTION INT: 540'
   - 'COMMENT: SI: adr   LOC: STACKS   ITYPE: STKS-MONO'
-  - 'FUND: fund'

@@ -9,6 +9,7 @@ gem 'http'
 gem 'nokogiri'
 gem 'rake'
 gem 'require_all'
+gem 'uuidtools'
 
 group :development, :test do
   gem 'json-schema'
