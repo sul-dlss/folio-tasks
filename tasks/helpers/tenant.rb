@@ -57,7 +57,7 @@ module TenantTaskHelpers
     duration = obj['holdShelfExpiryPeriod']
     interval = obj['intervalId']
 
-    if obj['pickupLocation'] == 'true'
+    if obj['pickupLocation'].casecmp('true').zero?
       (obj['holdShelfExpiryPeriod'] = { 'duration' => duration, 'intervalId' => interval })
     end
 
