@@ -27,6 +27,11 @@ task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:load_funds
                                acquisitions:load_budgets
                                acquisitions:update_budgets]
+
+desc 'Load all order settings'
+task load_order_settings: %i[acquisitions:load_acq_methods,
+                             acquisitions:load_po_lines_limit]
+
 desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
 task load_organizations_all: %i[acquisitions:load_org_categories
                                 acquisitions:load_org_migrate_err
@@ -34,6 +39,7 @@ task load_organizations_all: %i[acquisitions:load_org_categories
                                 acquisitions:load_org_vendors_business
                                 acquisitions:load_org_vendors_law
                                 acquisitions:load_org_coral]
+
 desc 'Delete all finance settings: [budgets, funds, finance_groups, ledgers, fiscal_years, fund_types, expense classes]'
 task delete_finance_settings: %i[acquisitions:delete_budgets
                                  acquisitions:delete_funds
@@ -42,6 +48,7 @@ task delete_finance_settings: %i[acquisitions:delete_budgets
                                  acquisitions:delete_fiscal_years
                                  acquisitions:delete_expense_classes
                                  acquisitions:delete_fund_types]
+
 desc 'Delete all tenant settings: [addresses, locations, service_points, libraries, campuses, institutions]'
 task delete_tenant_settings: %i[tenant:delete_tenant_addresses
                                 tenant:delete_locations
@@ -58,11 +65,12 @@ task load_user_settings: %i[users:load_user_groups
                             users:load_payments]
       # users:load_address_types - now loaded by default reference data
 
-desc 'Loads all Acquisitions Units, Tenant, User and Finance settings'
+desc 'Loads all User, Tenant, Acquisitions Units, Finance, and Order Settings, and Organization settings and data'
 task load_new_data_and_settings: %i[load_user_settings
                                     load_tenant_settings
                                     acquisitions:load_acq_units
                                     load_finance_settings
+                                    load_order_settings
                                     load_organizations_all]
 
 desc 'Prepare SUL order data'
