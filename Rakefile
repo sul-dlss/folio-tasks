@@ -98,3 +98,9 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_action_profiles
                                        data_import:load_mapping_profiles
                                        data_import:create_profile_associations]
+
+desc 'Load all inventory settings'
+task load_all_inventory_settings: %i[inventory:load_alt_title_types
+                                     inventory:load_item_loan_types
+                                     inventory:load_item_note_types
+                                     inventory:load_material_types]
