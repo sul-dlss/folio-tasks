@@ -96,7 +96,7 @@ ruby bin/folio_get_json.rb '/perms/permissions?length=10000&query=(mutable==true
 ### Loading Orders
 The `prepare_*_orders` and `load_orders_*` rake tasks should be run from the Symphony server since the tasks need tsv and yaml files that are generated there.
 1. Run `/s/SUL/Bin/folio_symphony_extract/acquisitions/orders/run_reports.ksh` to get current order data for migration from Symphony.
-2. Copy the `order_type_map.tsv` and `sym_hldg_code_location_map.tsv` files from the [FOLIO Ops shared drive](https://drive.google.com/drive/folders/1sKScaSRk86ZJfIV0YOpZJbU0iuzkUj48?usp=sharing) to the `Settings.tsv_orders` directory.
+2. Copy the `order_type_map.tsv` and `sym_hldg_code_location_map.tsv` files from the [FOLIO Ops shared drive](https://drive.google.com/drive/folders/1-FWsDUcc3DRa3sw6jzh4Puvbn-LRcQ-4?usp=sharing) to the `Settings.tsv_orders` directory.
 3. Optionally, delete the yaml files in the `Settings.yaml.*` directories, using the tasks `acquisitions:delete_*_order_yaml`.
 4. Consolidate all the order tsv data into one yaml file per order by running the `prepare_*_orders` rake tasks.
 5. Load orders to FOLIO using the `load_orders_*` rake tasks. This is a long-running task, so it is best to run it in a `screen` session on the Symphony server.
