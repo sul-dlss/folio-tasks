@@ -1,0 +1,2 @@
+label	harvestingStatus	harvestVia	serviceUrl	customerId	requestorId	apiKey	serviceType	reportRelease	requestedReports
+Provider Name	active	sushi	https://example.com/reports/	customer1234	somebody@example.com		cs50	5	TR
