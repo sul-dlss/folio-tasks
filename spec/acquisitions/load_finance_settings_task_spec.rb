@@ -57,7 +57,7 @@ describe 'finance settings rake tasks' do
     stub_request(:post, 'http://example.com/finance/funds')
     stub_request(:get, 'http://example.com/finance/funds')
       .with(query: hash_including)
-      .to_return(body: '{ "funds": [{ "id": "abc-123", "code": "1234567-890-AABCD" }] }')
+      .to_return(body: '{ "funds": [{ "id": "abc-123", "code": "FUND_NAME-SUL" }] }')
 
     stub_request(:post, 'http://example.com/finance/budgets')
   end
@@ -230,7 +230,7 @@ describe 'finance settings rake tasks' do
     end
 
     it 'creates the hash key and value for budget name' do
-      expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['name']).to eq '1234567-890-AABCD-FYCODE'
+      expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['name']).to eq 'FUND_NAME-SUL-FYCODE'
     end
 
     it 'creates the hash key and value for budgetStatus' do

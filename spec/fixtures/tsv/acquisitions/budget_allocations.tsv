@@ -1,0 +1,2 @@
+fundCode	fiscalYearCode	acqUnit_name	amount	currency	source	transactionType	description
+FUND_NAME-SUL	FYCODE	SUL	10000	USD	User	Allocation	Fiscal year rollover budget allocations.
