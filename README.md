@@ -35,6 +35,7 @@ folio:
   url: https://folio-test.dev.sul.stanford.edu
 
 tsv: tsv
+tsv_orders: tsv/acquisitions/orders
 json: json
 ```
 
