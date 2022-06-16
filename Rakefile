@@ -10,7 +10,7 @@ end
 # Import external rake tasks
 Dir.glob('tasks/**/*.rake').each { |r| import r }
 
-desc 'Loads all tenant settings: [addresses, locations, service_points, libraries, campuses, institutions]'
+desc 'Loads all tenant settings: [institutions, campuses, libraries, service_points, locations, addresses]'
 task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_campuses
                               tenant:load_libraries
@@ -18,7 +18,7 @@ task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_locations
                               tenant:load_tenant_addresses]
 
-desc 'Loads all finance settings: [budgets, funds, finance_groups, ledgers, fiscal_years, fund_types, expense classes]'
+desc 'Loads all finance settings: [fund_types, expense classes, fiscal_years, ledgers, finance_groups, funds, budgets, allocations]'
 task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:load_expense_classes
                                acquisitions:load_fiscal_years
@@ -26,9 +26,9 @@ task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:load_finance_groups
                                acquisitions:load_funds
                                acquisitions:load_budgets
-                               acquisitions:update_budgets]
+                               acquisitions:allocate_budgets]
 
-desc 'Load all order settings'
+desc 'Load all order settings: [acquisition methods, po lines limit]'
 task load_order_settings: %i[acquisitions:load_acq_methods
                              acquisitions:load_po_lines_limit]
 
@@ -57,7 +57,7 @@ task delete_tenant_settings: %i[tenant:delete_tenant_addresses
                                 tenant:delete_campuses
                                 tenant:delete_institutions]
 
-desc 'Load all user settings [groups, address_types, waivers, refunds]'
+desc 'Load all user settings [groups, waivers, refunds, fee fine owners, payments]'
 task load_user_settings: %i[users:load_user_groups
                             users:load_waivers
                             users:load_refunds
@@ -73,23 +73,23 @@ task load_new_data_and_settings: %i[load_user_settings
                                     load_order_settings
                                     load_organizations_all]
 
-desc 'Prepare SUL order data'
+desc 'Prepare SUL order data: [create yaml files, add order and orderline xinfo to yaml files]'
 task prepare_sul_orders: %i[acquisitions:create_sul_orders_yaml
                             acquisitions:add_sul_order_xinfo_to_yaml
                             acquisitions:add_sul_orderlin1_xinfo_to_yaml
                             acquisitions:add_sul_orderline_xinfo_to_yaml]
 
-desc 'Load SUL order data and tags'
+desc 'Load SUL order data and tags: [tags for SUL order, SUL orders]'
 task load_orders_tags_sul: %i[acquisitions:load_tags_orders_sul
                               acquisitions:load_orders_sul]
 
-desc 'Prepare LAW order data'
+desc 'Prepare LAW order data: [create yaml files, add order and orderline xinfo to yaml files]'
 task prepare_law_orders: %i[acquisitions:create_law_orders_yaml
                             acquisitions:add_law_order_xinfo_to_yaml
                             acquisitions:add_law_orderlin1_xinfo_to_yaml
                             acquisitions:add_law_orderline_xinfo_to_yaml]
 
-desc 'Load LAW order data'
+desc 'Load LAW order data: [Law orders]'
 task load_orders_law: %i[acquisitions:load_orders_law]
 
 desc 'Pull all json data (use STAGE=orig)'
@@ -107,7 +107,7 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_mapping_profiles
                                        data_import:create_profile_associations]
 
-desc 'Load all inventory settings'
+desc 'Load all inventory settings: [alt title types, item loan typs, item note types, material types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_item_loan_types
                                      inventory:load_item_note_types
