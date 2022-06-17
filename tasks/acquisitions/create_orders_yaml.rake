@@ -16,6 +16,7 @@ namespace :acquisitions do
         new_data = modify_order_data(obj, yaml_hash)
         modify_yaml_file(new_data, filename) unless new_data.nil?
       else
+        puts "writing #{filename}"
         write_yaml_file(obj, filename)
       end
     end
@@ -30,6 +31,7 @@ namespace :acquisitions do
 
       yaml_hash = YAML.load_file(filename)
       new_data = add_order_xinfo(obj, yaml_hash)
+      puts "updating #{filename}"
       modify_yaml_file(new_data, filename) unless new_data.nil?
     end
   end
@@ -43,6 +45,7 @@ namespace :acquisitions do
 
       yaml_hash = YAML.load_file(filename)
       new_data = add_orderlin1_xinfo(obj, yaml_hash)
+      puts "updating #{filename}"
       modify_yaml_file(new_data, filename) unless new_data.nil?
     end
   end
@@ -56,6 +59,7 @@ namespace :acquisitions do
 
       yaml_hash = YAML.load_file(filename)
       new_data = add_orderline_xinfo(obj, yaml_hash)
+      puts "updating #{filename}"
       modify_yaml_file(new_data, filename) unless new_data.nil?
     end
   end
@@ -68,8 +72,10 @@ namespace :acquisitions do
       if File.exist?(filename)
         yaml_hash = YAML.load_file(filename)
         new_data = modify_order_data(obj, yaml_hash)
+        puts "updating #{filename}"
         modify_yaml_file(new_data, filename) unless new_data.nil?
       else
+        puts "writing #{filename}"
         write_yaml_file(obj, filename)
       end
     end
@@ -84,6 +90,7 @@ namespace :acquisitions do
 
       yaml_hash = YAML.load_file(filename)
       new_data = add_order_xinfo(obj, yaml_hash)
+      puts "updating #{filename}"
       modify_yaml_file(new_data, filename) unless new_data.nil?
     end
   end
@@ -97,6 +104,7 @@ namespace :acquisitions do
 
       yaml_hash = YAML.load_file(filename)
       new_data = add_orderlin1_xinfo(obj, yaml_hash)
+      puts "updating #{filename}"
       modify_yaml_file(new_data, filename) unless new_data.nil?
     end
   end
@@ -110,6 +118,7 @@ namespace :acquisitions do
 
       yaml_hash = YAML.load_file(filename)
       new_data = add_orderline_xinfo(obj, yaml_hash)
+      puts "updating #{filename}"
       modify_yaml_file(new_data, filename) unless new_data.nil?
     end
   end
