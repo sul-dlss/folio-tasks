@@ -12,7 +12,8 @@ module TsvUserTaskHelpers
   end
 
   def users_tsv
-    CSV.parse(File.open("#{Settings.tsv}/users/tsv_users.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/users/tsv_users.tsv"), liberal_parsing: true, headers: true, col_sep: "\t")
+       .map(&:to_h)
   end
 
   def user_notes(note_type)

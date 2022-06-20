@@ -30,6 +30,7 @@ namespace :tsv_users do
 
   desc 'load all user note types and notes'
   task :load_all_user_notes_types do
+    Rake::Task['tsv_users:load_user_note_types'].invoke
     task = Rake::Task['tsv_users:load_user_notes']
     user_note_types.each do |hash|
       type = hash['name']
