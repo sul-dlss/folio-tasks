@@ -4,14 +4,14 @@ require 'rake'
 require 'spec_helper'
 
 describe 'load SUL orders rake tasks' do
-  let(:load_sul_orders_task) { Rake.application.invoke_task 'acquisitions:load_orders_sul' }
+  let(:transform_sul_orders_task) { Rake.application.invoke_task 'acquisitions:transform_orders_sul' }
   let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
   let(:order_type_map) do
-    load_sul_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types,
-                              AcquisitionsUuidsHelpers.acquisition_methods)
+    transform_sul_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types,
+                                   AcquisitionsUuidsHelpers.acquisition_methods)
   end
   let(:hldg_code_map) do
-    load_sul_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.sul_locations)
+    transform_sul_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.sul_locations)
   end
   let(:uuid_hashes) do
     [Uuids.tenant_addresses, AcquisitionsUuidsHelpers.sul_organizations, order_type_map, hldg_code_map,
@@ -81,12 +81,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when one-time orders have been received' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has the approved box checked' do
       expect(orders_hash['approved']).to be_truthy
@@ -147,12 +147,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when one-time orders have not been received' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/444444F21.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/444444F21.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/444444F21.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/444444F21.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has receipt status of Awaiting Receipt' do
       expect(orders_hash['compositePoLines'][0]['receiptStatus']).to eq 'Awaiting Receipt'
@@ -173,12 +173,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when orders are ongoing subscriptions' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has isSubscription is true' do
       expect(orders_hash['ongoing']['isSubscription']).to be_truthy
@@ -219,12 +219,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when orders are ongoing but not subscriptions' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has order type of ongoing' do
       expect(orders_hash['orderType']).to eq 'Ongoing'
@@ -269,12 +269,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when orders have split funding by amount' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/333333F22.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/333333F22.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/333333F22.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/333333F22.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
     let(:po_line_fund_dist) { orders_hash['compositePoLines'][0]['fundDistribution'] }
 
     it 'has distribution type of amount' do
@@ -308,12 +308,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when orders have split funding by percentage' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
     let(:po_line_fund_dist) { orders_hash['compositePoLines'][0]['fundDistribution'] }
 
     it 'has distribution type of percentage' do
@@ -339,12 +339,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when extended info notes map to FOLIO order and po line fields' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has order xinfo and orderline1 xinfo notes as list of notes' do
       expect(orders_hash['notes']).to be_kind_of Array
@@ -367,28 +367,28 @@ describe 'load SUL orders rake tasks' do
     end
 
     it 'does not have empty note fields' do
-      order_id, sym_order = load_sul_orders_task.send(:get_id_data,
-                                                      YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml"))
-      order = load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes)
+      order_id, sym_order = transform_sul_orders_task.send(:get_id_data,
+                                                           YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml"))
+      order = transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes)
       expect(order['notes']).not_to include 'COMMENT: '
     end
 
     it 'has FUND in the poLineDescription field' do
-      order_id, sym_order = load_sul_orders_task.send(:get_id_data,
-                                                      YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml"))
-      order = load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes)
+      order_id, sym_order = transform_sul_orders_task.send(:get_id_data,
+                                                           YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml"))
+      order = transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes)
       expect(order['compositePoLines'][0]['poLineDescription']).to eq 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'
     end
   end
 
   context 'when order format is physical resource' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/222222F22.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has a locations object with quantityPhysical' do
       expect(orders_hash['compositePoLines'][0]['locations'][0]['quantityPhysical']).to eq 1
@@ -437,12 +437,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when order format is electronic resource' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has a locations object with quantityElectronic' do
       expect(orders_hash['compositePoLines'][0]['locations'][0]['quantityElectronic']).to eq 1
@@ -499,12 +499,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when order format is other' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/VENDOR_GBP-SH.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/VENDOR_GBP-SH.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/VENDOR_GBP-SH.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/VENDOR_GBP-SH.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'removes forward slashes and hyphens from poNumber' do
       expect(orders_hash['poNumber']).to eq 'VENDORGBPSH'
@@ -533,12 +533,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when order format is P/E Mix' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/777777F02.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/777777F02.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/777777F02.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/777777F02.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has a locations object with quantityElectronic' do
       expect(orders_hash['compositePoLines'][0]['locations'][0]['quantityElectronic']).to eq 1
@@ -583,12 +583,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when vendor does not exist in Folio' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has the correct vendor UUID' do
       expect(orders_hash['vendor']).to eq 'org-456'
@@ -597,12 +597,12 @@ describe 'load SUL orders rake tasks' do
 
   context 'when acquisition method does not exist in Folio' do
     let(:order_id) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).shift
     end
     let(:sym_order) do
-      load_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).pop
     end
-    let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
     it 'has the acquisitions method UUID for Other' do
       expect(orders_hash['compositePoLines'].sample['acquisitionMethod']).to eq 'acq-123'

@@ -81,6 +81,7 @@ task prepare_sul_orders: %i[acquisitions:create_sul_orders_yaml
 
 desc 'Load SUL order data and tags: [tags for SUL order, SUL orders]'
 task load_orders_tags_sul: %i[acquisitions:load_tags_orders_sul
+                              acquisitions:transform_orders_sul
                               acquisitions:load_orders_sul]
 
 desc 'Prepare LAW order data: [create yaml files, add order and orderline xinfo to yaml files]'
@@ -90,7 +91,7 @@ task prepare_law_orders: %i[acquisitions:create_law_orders_yaml
                             acquisitions:add_law_orderline_xinfo_to_yaml]
 
 desc 'Load LAW order data: [Law orders]'
-task load_orders_law: %i[acquisitions:load_orders_law]
+task load_orders_law: %i[acquisitions:transform_orders_law acquisitions:load_orders_law]
 
 desc 'Pull all json data (use STAGE=orig)'
 task pull_all_json_data: %i[users:pull_waivers
