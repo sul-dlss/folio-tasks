@@ -33,7 +33,7 @@ class PatronGroups
       )
   end
 
-  def undergraduate
+  def undergrad
     @aff['type'].start_with?('student') && affiliation_description.include?('undergraduate')
   end
 

@@ -26,16 +26,16 @@ inactive_users_file: 'spec/fixtures/folio_err.log'
 # This should be is ordered from highest to lowest Rank
 # https://docs.google.com/spreadsheets/d/10n77Zxgp3GCgwB9pPR80CZzNs6ERDzQkyCuolUQEoG0
 groups_ranked:
-  - Faculty
-  - Staff
-  - Staff-Casual
-  - Fellow
-  - Visiting Scholar
-  - Courtesy
-  - Postdoctoral
-  - Graduate
-  - Undergraduate
-  - Affiliate-Sponsored-Eresources
+  - faculty
+  - staff
+  - staff-casual
+  - fellow
+  - visiting scholar
+  - courtesy
+  - postdoctoral
+  - graduate
+  - undergraduate
+  - affiliate-sponsored-eresources
 
 faculty:
   - faculty

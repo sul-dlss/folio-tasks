@@ -66,7 +66,7 @@ RSpec.describe XmlUser do
       # end
 
       it 'has the correct patron group' do
-        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'Staff'
+        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'staff'
       end
     end
 
@@ -90,7 +90,7 @@ RSpec.describe XmlUser do
       end
 
       it 'has the correct patron group' do
-        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'Postdoctoral'
+        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'postdoctoral'
       end
     end
 
@@ -100,7 +100,7 @@ RSpec.describe XmlUser do
       end
 
       it 'has the correct patron group' do
-        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'Graduate'
+        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'graduate'
       end
     end
 
@@ -114,7 +114,7 @@ RSpec.describe XmlUser do
         # no patronGroup b/c active is false (effective and until dates are nil)
         # in Symphony, user record gets no USER_PROFILE and therefore not loaded
         # Should these get FOLIO records?
-        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'Affiliate-Sponsored-Eresources'
+        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'affiliate-sponsored-eresources'
       end
     end
   end
