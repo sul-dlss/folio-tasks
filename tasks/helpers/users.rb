@@ -114,4 +114,10 @@ module UsersTaskHelpers
     trim_hash(hash, 'payments')
     hash.to_json
   end
+
+  def pull_permission_sets
+    hash = @@folio_request.get('/perms/permissions?limit=9999&length=9999&query=mutable==true')
+    trim_hash(hash, 'permissions')
+    hash.to_json
+  end
 end

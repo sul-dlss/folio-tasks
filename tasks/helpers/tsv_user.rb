@@ -69,7 +69,7 @@ module TsvUserTaskHelpers
     user['username'] = user.values[0]
     user['barcode'] = user.values[0]
     user['externalSystemId'] = user.values[1]
-    user['patronGroup'] = 'Courtesy'
+    user['patronGroup'] = 'courtesy'
     user['personal'] = user_personal(user)
     user['enrollmentDate'] = enrollment(user['PRIV_GRANTED'])
     user['expirationDate'] = expiration(user['PRIV_EXPIRED'])
