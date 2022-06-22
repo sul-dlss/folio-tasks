@@ -35,6 +35,13 @@ namespace :users do
       File.open("#{dir}/users/payments.json", 'w') { |file| file.puts pull_payments }
     end
   end
+
+  desc 'pull permission sets from original folio instance (use STAGE=orig yaml)'
+  task :pull_permission_sets do
+    json_files.each do |dir|
+      File.open("#{dir}/users/permission_sets.json", 'w') { |file| file.puts pull_permission_sets }
+    end
+  end
 end
 
 namespace :data_import do
