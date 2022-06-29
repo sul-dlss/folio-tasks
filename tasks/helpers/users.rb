@@ -54,6 +54,14 @@ module UsersTaskHelpers
     @@folio_request.post('/owners', hash.to_json)
   end
 
+  def fee_fine_manual_charges_json
+    JSON.parse(File.read("#{Settings.json}/users/fee_fine_manual_charges.json"))
+  end
+
+  def fee_fine_manual_charges_post(hash)
+    @@folio_request.post('/feefines', hash.to_json)
+  end
+
   def user_get(username)
     @@folio_request.get_cql('/users', "username==#{username}")
   end
@@ -106,6 +114,12 @@ module UsersTaskHelpers
   def pull_owners
     hash = @@folio_request.get('/owners')
     trim_hash(hash, 'owners')
+    hash.to_json
+  end
+
+  def pull_manual_charges
+    hash = @@folio_request.get_cql('/feefines', 'automatic==false')
+    trim_hash(hash, 'feefines')
     hash.to_json
   end
 

@@ -1,0 +1,48 @@
+{
+  "$schema" : "http://json-schema.org/draft-04/schema#",
+  "title": "Manual Fees/Fines Table Settings schema",
+  "description": "Fees/fines that are used by the entire library system. They can be a set of fees / fines shared throughout the library or fees / fines that are unique to a specific customer service",
+  "type": "object",
+  "properties": {
+    "automatic": {
+      "description": "A flag to indicate that fee/fine was created automatically.",
+      "type": "boolean",
+      "default": false
+    },
+    "feeFineType": {
+      "description": "Description of fee/fine that is up to the discretion of the user",
+      "type": "string"
+    },
+    "defaultAmount": {
+      "description": "Amount of fee or fine, which may be overridden. ",
+      "javaType": "org.folio.rest.domain.MonetaryValue",
+      "type": "number"
+    },
+    "chargeNoticeId": {
+      "description": "ID of the charge notice template",
+      "$ref": "raml-util/schemas/uuid.schema"
+    },
+    "actionNoticeId": {
+      "description": "ID of the action notice template",
+      "$ref": "raml-util/schemas/uuid.schema"
+    },
+    "ownerId": {
+      "description": "ID of the owner",
+      "$ref": "raml-util/schemas/uuid.schema"
+    },
+    "metadata" : {
+      "description": "Metadata about creation to fee/fine, provided by the server",
+      "type" : "object",
+      "$ref" : "raml-util/schemas/metadata.schema"
+    },
+    "id": {
+      "description": "Fee/fine id, UUID",
+      "$ref": "raml-util/schemas/uuid.schema"
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "feeFineType",
+    "automatic"
+   ]
+}

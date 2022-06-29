@@ -62,6 +62,7 @@ task load_user_settings: %i[users:load_user_groups
                             users:load_waivers
                             users:load_refunds
                             users:load_fee_fine_owners
+                            users:load_fee_fine_manual_charges
                             users:load_payments]
       # users:load_address_types - now loaded by default reference data
 
@@ -96,6 +97,7 @@ desc 'Pull all json data (use STAGE=orig)'
 task pull_all_json_data: %i[users:pull_waivers
                             users:pull_refunds
                             users:pull_owners
+                            users:pull_manual_charges
                             users:pull_payments
                             data_import:pull_job_profiles
                             data_import:pull_mapping_profiles

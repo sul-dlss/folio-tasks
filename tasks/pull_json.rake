@@ -36,6 +36,13 @@ namespace :users do
     end
   end
 
+  desc 'pull manual charges from original folio instance (use STAGE=orig yaml)'
+  task :pull_manual_charges do
+    json_files.each do |dir|
+      File.open("#{dir}/users/fee_fine_manual_charges.json", 'w') { |file| file.puts pull_manual_charges }
+    end
+  end
+
   desc 'pull permission sets from original folio instance (use STAGE=orig yaml)'
   task :pull_permission_sets do
     json_files.each do |dir|
