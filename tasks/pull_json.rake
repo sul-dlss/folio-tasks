@@ -3,6 +3,7 @@
 require_relative 'helpers/users'
 require_relative 'helpers/data_import'
 require_relative 'helpers/circulation'
+require_relative 'helpers/courses'
 
 namespace :users do
   include UsersTaskHelpers
@@ -148,6 +149,26 @@ namespace :circulation do
   task :pull_request_policies do
     json_files.each do |dir|
       File.open("#{dir}/circulation/request-policies.json", 'w') { |file| file.puts pull_request_policies }
+    end
+  end
+end
+
+namespace :courses do
+  include CoursesTaskHelpers
+
+  json_files = %i[json spec/fixtures/json]
+
+  desc 'pull course terms from original folio instance (use STAGE=orig yaml)'
+  task :pull_course_terms do
+    json_files.each do |dir|
+      File.open("#{dir}/courses/terms.json", 'w') { |file| file.puts pull_course_terms }
+    end
+  end
+
+  desc 'pull request policies from original folio instance (use STAGE=orig yaml)'
+  task :pull_course_depts do
+    json_files.each do |dir|
+      File.open("#{dir}/courses/departments.json", 'w') { |file| file.puts pull_course_depts }
     end
   end
 end

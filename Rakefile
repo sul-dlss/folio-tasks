@@ -110,7 +110,9 @@ task pull_all_json_data: %i[users:pull_waivers
                             circulation:pull_patron_notice_policies
                             circulation:pull_patron_notice_templates
                             circulation:pull_request_cancellation_reasons
-                            circulation:pull_request_policies]
+                            circulation:pull_request_policies
+                            courses:pull_course_terms
+                            courses:pull_course_depts]
 
 desc 'Load all data import profile'
 task load_all_data_import_profiles: %i[data_import:load_job_profiles

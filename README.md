@@ -81,6 +81,8 @@ Use the `STAGE=orig rake pull_all_json_data` to pull json from a folio instance 
 - circulation/patron-notice-templates.json
 - circulation/cancellation-reasons.json
 - circulation/request-policies.json
+- courses/terms.json
+- courses/departments.json
 
 ### Run tests to verify the validity of the downloaded files
 - `rspec spec/users`
