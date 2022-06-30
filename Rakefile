@@ -101,7 +101,16 @@ task pull_all_json_data: %i[users:pull_waivers
                             users:pull_payments
                             data_import:pull_job_profiles
                             data_import:pull_mapping_profiles
-                            data_import:pull_action_profiles]
+                            data_import:pull_action_profiles
+                            circulation:pull_circ_rules
+                            circulation:pull_fixed_due_date_sched
+                            circulation:pull_loan_policies
+                            circulation:pull_overdue_fines
+                            circulation:pull_lost_item_fees
+                            circulation:pull_patron_notice_policies
+                            circulation:pull_patron_notice_templates
+                            circulation:pull_request_cancellation_reasons
+                            circulation:pull_request_policies]
 
 desc 'Load all data import profile'
 task load_all_data_import_profiles: %i[data_import:load_job_profiles
