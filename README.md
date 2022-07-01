@@ -64,6 +64,7 @@ Copy all the the contents recursively from the external Migration files `tsv`, a
 ### Get JSON data from a running FOLIO instance
 Use the `STAGE=orig rake pull_all_json_data` to pull json from a folio instance defined in a `config/settings/orig.json` yaml file. This will include the following json files and save them to both the `json/` and `spec/fixtures/json/` folder:
 - users/fee_fine_owners.json
+- users/fee_fine_manual_charges.json
 - users/payments.json
 - users/permission_sets.json
 - users/refunds.json
@@ -71,12 +72,23 @@ Use the `STAGE=orig rake pull_all_json_data` to pull json from a folio instance 
 - data-import-profiles/actionProfiles.json
 - data-import-profiles/jobProfiles.json
 - data-import-profiles/mappingProfiles.json
+- circulation/circulation-rules.json
+- circulation/fixed-due-date-schedules.json
+- circulation/loan-policies.json
+- circulation/overdue-fines-policies.json
+- circulation/lost-item-fees-policies.json
+- circulation/patron-notice-policies.json
+- circulation/patron-notice-templates.json
+- circulation/cancellation-reasons.json
+- circulation/request-policies.json
+- courses/terms.json
+- courses/departments.json
 
 ### Run tests to verify the validity of the downloaded files
 - `rspec spec/users`
 - `rspec spec/data_import`
 
-It may be becessary to replace the `spec/fixtures/support` files with new ones from the https://github.com/folio-org/ repo if the json schema tests fail.
+It may be necessary to replace the `spec/fixtures/support` files with new ones from the https://github.com/folio-org/ repo if the json schema tests fail.
 
 ### Loading TSV Users
 - To get a tsv file with headers of Symphony user records to convert to FOLIO json, run this command on the Symphony server on a collection of user keys:

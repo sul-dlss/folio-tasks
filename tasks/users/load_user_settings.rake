@@ -48,4 +48,11 @@ namespace :users do
       fee_fine_owners_post(obj)
     end
   end
+
+  desc 'load fee-fine manual charges into folio'
+  task :load_fee_fine_manual_charges do
+    fee_fine_manual_charges_json['feefines'].each do |obj|
+      fee_fine_manual_charges_post(obj)
+    end
+  end
 end

@@ -10,6 +10,7 @@ describe 'user settings rake tasks' do
   let(:load_payments_task) { Rake.application.invoke_task 'users:load_payments' }
   let(:load_refunds_task) { Rake.application.invoke_task 'users:load_refunds' }
   let(:load_fee_fine_owners_task) { Rake.application.invoke_task 'users:load_fee_fine_owners' }
+  let(:load_fee_fine_manual_charges_task) { Rake.application.invoke_task 'users:load_fee_fine_manual_charges' }
   let(:load_permission_sets_task) { Rake.application.invoke_task 'users:load_permission_sets' }
 
   before do
@@ -22,6 +23,7 @@ describe 'user settings rake tasks' do
     stub_request(:post, 'http://example.com/payments')
     stub_request(:post, 'http://example.com/refunds')
     stub_request(:post, 'http://example.com/owners')
+    stub_request(:post, 'http://example.com/feefines')
     stub_request(:post, 'http://example.com/perms/permissions')
   end
 
@@ -73,6 +75,14 @@ describe 'user settings rake tasks' do
 
     it 'supplies valid json for posting fee-fine owners' do
       expect(fee_fine_owners_json['owners'].sample).to match_json_schema('mod-feesfines', 'ownerdata')
+    end
+  end
+
+  context 'when creating fee_fine_manual_charges' do
+    let(:fee_fine_manual_charges_json) { load_fee_fine_manual_charges_task.send(:fee_fine_manual_charges_json) }
+
+    it 'supplies valid json for posting fee-fine manual charges' do
+      expect(fee_fine_manual_charges_json['feefines'].sample).to match_json_schema('mod-feesfines', 'feefinedata')
     end
   end
 
