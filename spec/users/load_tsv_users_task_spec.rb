@@ -67,7 +67,7 @@ describe 'loading tsv users who do not have registry ids' do
   end
 
   context 'when deleting the superceeded tsv data' do
-    it 'removes the temprary fields' do
+    it 'removes the temporary fields' do
       %w[UNIV_ID NAME ADDR_LINE1 ADDR_LINE2 CITY STATE ZIP EMAIL PRIV_GRANTED PRIV_EXPIRED].each do |field|
         grp = load_tsv_users_task.send(:users_tsv, 'tsv_users.tsv')
         expect(load_tsv_users_task.send(:tsv_user, grp)['users'][0][field]).to be_nil
