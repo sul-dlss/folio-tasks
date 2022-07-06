@@ -12,8 +12,8 @@ module TsvUserTaskHelpers
               headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def users_tsv
-    CSV.parse(File.open("#{Settings.tsv}/users/tsv_users.tsv"), liberal_parsing: true, headers: true, col_sep: "\t")
+  def users_tsv(file)
+    CSV.parse(File.open("#{Settings.tsv}/users/#{file}"), liberal_parsing: true, headers: true, col_sep: "\t")
        .map(&:to_h)
   end
 
@@ -64,6 +64,24 @@ module TsvUserTaskHelpers
     end
     user_hash['totalRecords'] = size
     user_hash
+  end
+
+  def app_user(user)
+    user['id'] = deterministic_user_id(user['username'])
+    user['personal'] = { 'lastName' => user['username'] }
+    user.delete('password')
+    user
+  end
+
+  def app_user_credentials(user)
+    {
+      'userId' => deterministic_user_id(user['username']),
+      'password' => user['password']
+    }
+  end
+
+  def app_user_id_hash(user)
+    { 'userId' => deterministic_user_id(user['username']) }
   end
 
   def transform_user(user)

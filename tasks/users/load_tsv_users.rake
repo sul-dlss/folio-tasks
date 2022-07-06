@@ -7,8 +7,20 @@ namespace :tsv_users do
 
   desc 'load users from tsv file'
   task :load_tsv_users do
-    users_tsv.each_slice(500) do |group|
+    users_tsv('tsv_users.tsv').each_slice(500) do |group|
       user_update(tsv_user(group))
+    end
+  end
+
+  desc 'load app users from tsv file'
+  task :load_app_users do
+    users_tsv('app_users.tsv').each do |user|
+      user_post(app_user(user))
+      user_login(app_user_credentials(user))
+      puts 'Creating user record in permissions table'
+      user_perms(app_user_id_hash(user))
+      puts 'Creating user record in service point table'
+      user_service_point(app_user_id_hash(user))
     end
   end
 

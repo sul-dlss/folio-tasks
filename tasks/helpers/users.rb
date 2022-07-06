@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require_relative 'folio_request'
+require_relative '../../lib/folio_uuid'
 
 # Module to encapsulate methods used by user_settings rake tasks
 module UsersTaskHelpers
@@ -64,6 +65,26 @@ module UsersTaskHelpers
 
   def user_get(username)
     @@folio_request.get_cql('/users', "username==#{username}")
+  end
+
+  def deterministic_user_id(username)
+    FolioUuid.new.generate(Settings.okapi.url.to_s, 'users', username)
+  end
+
+  def user_login(credentials)
+    @@folio_request.post('/authn/credentials', credentials.to_json)
+  end
+
+  def user_perms(permissions)
+    @@folio_request.post('/perms/users', permissions.to_json)
+  end
+
+  def user_service_point(service_point)
+    @@folio_request.post('/service-points-users', service_point.to_json)
+  end
+
+  def user_post(user)
+    @@folio_request.post('/users', user.to_json)
   end
 
   def user_update(users)
