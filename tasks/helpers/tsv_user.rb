@@ -65,20 +65,6 @@ module TsvUserTaskHelpers
     user_hash['totalRecords'] = size
     user_hash
   end
-  # def tsv_user
-  #   users_tsv.each_slice(1000) do |group|
-  #     size = 0
-  #     user_hash = { 'users' => [], 'deactivateMissingUsers' => false, 'updateOnlyPresentFields' => true }
-  #     group.each do |user|
-  #       size += 1
-  #       transform_user(user)
-  #       user_hash['users'] << user
-  #     end
-  #     user_hash['totalRecords'] = size
-  #     # user_update(user_hash)
-  #     puts user_hash.class
-  #   end
-  # end
 
   def transform_user(user)
     user['username'] = user.values[0]
