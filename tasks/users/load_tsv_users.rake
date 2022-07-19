@@ -7,9 +7,8 @@ namespace :tsv_users do
 
   desc 'load users from tsv file'
   task :load_tsv_users do
-    # user_update(tsv_user)
     users_tsv.each_slice(500) do |group|
-      tsv_user(group)
+      user_update(tsv_user(group))
     end
   end
 
