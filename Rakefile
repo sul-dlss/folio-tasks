@@ -99,6 +99,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             users:pull_owners
                             users:pull_manual_charges
                             users:pull_payments
+                            users:pull_permission_sets
                             data_import:pull_job_profiles
                             data_import:pull_mapping_profiles
                             data_import:pull_action_profiles

@@ -3,6 +3,7 @@
 require_relative '../helpers/folio_request'
 
 # Module to encapsulate methods used by user_settings rake tasks
+# rubocop: disable Metrics/ModuleLength
 module TsvUserTaskHelpers
   include FolioRequestHelper
 
@@ -53,10 +54,10 @@ module TsvUserTaskHelpers
     @@folio_request.post('/notes', json)
   end
 
-  def tsv_user
+  def tsv_user(group)
     size = 0
     user_hash = { 'users' => [], 'deactivateMissingUsers' => false, 'updateOnlyPresentFields' => true }
-    users_tsv.each do |user|
+    group.each do |user|
       size += 1
       transform_user(user)
       user_hash['users'] << user
@@ -136,4 +137,61 @@ module TsvUserTaskHelpers
       'postalCode' => user['ZIP']
     }
   end
+
+  def psets_from_cols
+    psets = user_acq_units_and_permission_sets_tsv[0].keys
+    psets.delete('SUNetID')
+    psets.delete('Acq Unit')
+    psets.delete('Service Point')
+    psets
+  end
+
+  def perms_assign
+    pset_hash = {}
+    @@folio_request.get('/perms/permissions?length=10000&query=(mutable==true)')['permissions'].each do |permission|
+      pset_hash[permission['displayName']] = permission['id']
+    end
+    reset_user_perms(pset_hash)
+  end
+
+  # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+  def reset_user_perms(pset_hash)
+    user_acq_units_and_permission_sets_tsv.each do |line|
+      username = user_get(line['SUNetID'])
+      username && username['users'].each do |user|
+        user_permissions_get(user['id'])['permissionNames'].each do |permission|
+          if permission['mutable'] && (psets_from_cols.include? permission['displayName'])
+            @@folio_request
+              .delete("/perms/users/#{user['id']}/permissions/#{permission['permissionName']}?indexField=userId")
+          end
+        end
+        psets_from_cols.each do |pset|
+          if line[pset] && pset_hash[pset]
+            pset_obj = { 'permissionName' => pset_hash[pset] }
+            @@folio_request.post("/perms/users/#{user['id']}/permissions?indexField=userId", pset_obj.to_json)
+          end
+        end
+      end
+    end
+  end
+  # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
+
+  def service_points_assign
+    service_point_hash = service_points
+    user_acq_units_and_permission_sets_tsv.each do |obj|
+      service_point = obj['Service Point']
+      service_point_id = service_point_hash[service_point]
+      users = user_get(obj['SUNetID'])
+      service_point_id && users && users['users'].each do |user|
+        path = "/request-preference-storage/request-preference?query=userId%3D%3D#{user['id']}"
+        request_prefs = @@folio_request.get(path)['requestPreferences']
+        next unless request_prefs.size.positive?
+
+        request_prefs[0]['defaultServicePointId'] = service_point_id
+        path = "/request-preference-storage/request-preference/#{request_prefs[0]['id']}"
+        @@folio_request.put(path, request_prefs[0].to_json)
+      end
+    end
+  end
 end
+# rubocop: enable Metrics/ModuleLength
