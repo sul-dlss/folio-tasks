@@ -195,19 +195,13 @@ module TsvUserTaskHelpers
   # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
   def service_points_assign
-    service_point_hash = service_points
+    service_point_hash = Uuids.service_points
     user_acq_units_and_permission_sets_tsv.each do |obj|
       service_point = obj['Service Point']
       service_point_id = service_point_hash[service_point]
       users = user_get(obj['SUNetID'])
       service_point_id && users && users['users'].each do |user|
-        path = "/request-preference-storage/request-preference?query=userId%3D%3D#{user['id']}"
-        request_prefs = @@folio_request.get(path)['requestPreferences']
-        next unless request_prefs.size.positive?
-
-        request_prefs[0]['defaultServicePointId'] = service_point_id
-        path = "/request-preference-storage/request-preference/#{request_prefs[0]['id']}"
-        @@folio_request.put(path, request_prefs[0].to_json)
+        user_service_point(user_service_point_hash(user['id'], service_point_id))
       end
     end
   end

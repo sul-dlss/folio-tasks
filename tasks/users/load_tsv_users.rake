@@ -19,8 +19,6 @@ namespace :tsv_users do
       user_login(app_user_credentials(user))
       puts 'Creating user record in permissions table'
       user_perms(app_user_id_hash(user))
-      puts 'Creating user record in service point table'
-      user_service_point(app_user_id_hash(user))
     end
   end
 

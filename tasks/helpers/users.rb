@@ -83,6 +83,14 @@ module UsersTaskHelpers
     @@folio_request.post('/service-points-users', service_point.to_json)
   end
 
+  def user_service_point_hash(user_id, service_point_id)
+    {
+      'userId' => user_id,
+      'servicePointsIds' => [service_point_id],
+      'defaultServicePointId' => service_point_id
+    }
+  end
+
   def user_post(user)
     @@folio_request.post('/users', user.to_json)
   end
