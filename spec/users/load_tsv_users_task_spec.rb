@@ -17,7 +17,6 @@ describe 'loading tsv users who do not have registry ids' do
     stub_request(:post, 'http://example.com/users')
     stub_request(:post, 'http://example.com/authn/credentials')
     stub_request(:post, 'http://example.com/perms/users')
-    stub_request(:post, 'http://example.com/service-points-users')
   end
 
   it 'has a hash size that matches the number of lines in the tsv file' do
