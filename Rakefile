@@ -57,7 +57,7 @@ task delete_tenant_settings: %i[tenant:delete_tenant_addresses
                                 tenant:delete_campuses
                                 tenant:delete_institutions]
 
-desc 'Load all user settings [groups, waivers, refunds, fee fine owners, payments]'
+desc 'Load all user settings [groups, waivers, refunds, fee fine owners, fee fine manual charges, payments]'
 task load_user_settings: %i[users:load_user_groups
                             users:load_waivers
                             users:load_refunds
