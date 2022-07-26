@@ -1,0 +1,31 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Template content",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "header": {
+      "type": "string",
+      "pattern": "\\S+.*",
+      "description": "Template for header"
+    },
+    "body": {
+      "type": "string",
+      "pattern": "\\S+.*",
+      "description": "Template for body"
+    },
+    "attachments": {
+      "description": "List of attachments",
+      "id": "attachments",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "$ref": "attachment.json"
+      }
+    }
+  },
+  "required": [
+    "header",
+    "body"
+  ]
+}
