@@ -137,6 +137,16 @@ task load_circ_settings: %i[circulation:load_fixed_due_date_sched
                             circulation:load_request_cancellation_reasons
                             circulation:load_request_policies]
 
+desc 'Delete all circulation settings'
+task delete_circ_settings: %i[circulation:delete_request_policies
+                              circulation:delete_request_cancellation_reasons
+                              circulation:delete_patron_notice_templates
+                              circulation:delete_patron_notice_policies
+                              circulation:delete_overdue_fines
+                              circulation:delete_lost_item_fees
+                              circulation:delete_loan_policies
+                              circulation:delete_fixed_due_date_sched]
+
 desc 'Load all course reserve settings: [course terms, departments]'
 task load_course_reserve_settings: %i[courses:load_course_terms
                                       courses:load_course_depts]

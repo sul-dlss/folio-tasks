@@ -14,12 +14,20 @@ module CirculationTaskHelpers
     @@folio_request.post('/fixed-due-date-schedule-storage/fixed-due-date-schedules', hash.to_json)
   end
 
+  def fixed_due_date_sched_delete(id)
+    @@folio_request.delete("/fixed-due-date-schedule-storage/fixed-due-date-schedules/#{id}")
+  end
+
   def loan_policies_json
     JSON.parse(File.read("#{Settings.json}/circulation/loan-policies.json"))
   end
 
   def loan_policies_post(hash)
     @@folio_request.post('/loan-policy-storage/loan-policies', hash.to_json)
+  end
+
+  def loan_policies_delete(id)
+    @@folio_request.delete("/loan-policy-storage/loan-policies/#{id}")
   end
 
   def lost_item_fees_json
@@ -30,12 +38,20 @@ module CirculationTaskHelpers
     @@folio_request.post('/lost-item-fees-policies', hash.to_json)
   end
 
+  def lost_item_fees_delete(id)
+    @@folio_request.delete("/lost-item-fees-policies/#{id}")
+  end
+
   def overdue_fines_json
     JSON.parse(File.read("#{Settings.json}/circulation/overdue-fines-policies.json"))
   end
 
   def overdue_fines_post(hash)
     @@folio_request.post('/overdue-fines-policies', hash.to_json)
+  end
+
+  def overdue_fines_delete(id)
+    @@folio_request.delete("/overdue-fines-policies/#{id}")
   end
 
   def patron_notice_policies_json
@@ -46,12 +62,20 @@ module CirculationTaskHelpers
     @@folio_request.post('/patron-notice-policy-storage/patron-notice-policies', hash.to_json)
   end
 
+  def patron_notice_policies_delete(id)
+    @@folio_request.delete("/patron-notice-policy-storage/patron-notice-policies/#{id}")
+  end
+
   def patron_notice_templates_json
     JSON.parse(File.read("#{Settings.json}/circulation/patron-notice-templates.json"))
   end
 
   def patron_notice_templates_post(hash)
     @@folio_request.post('/templates', hash.to_json)
+  end
+
+  def patron_notice_templates_delete(id)
+    @@folio_request.delete("/templates/#{id}")
   end
 
   def request_cancellation_reasons_json
@@ -62,12 +86,20 @@ module CirculationTaskHelpers
     @@folio_request.post('/cancellation-reason-storage/cancellation-reasons', hash.to_json)
   end
 
+  def request_cancellation_reasons_delete(id)
+    @@folio_request.delete("/cancellation-reason-storage/cancellation-reasons/#{id}")
+  end
+
   def request_policies_json
     JSON.parse(File.read("#{Settings.json}/circulation/request-policies.json"))
   end
 
   def request_policies_post(hash)
     @@folio_request.post('/request-policy-storage/request-policies', hash.to_json)
+  end
+
+  def request_policies_delete(id)
+    @@folio_request.delete("/request-policy-storage/request-policies/#{id}")
   end
 
   def pull_circ_rules
