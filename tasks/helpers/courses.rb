@@ -6,6 +6,22 @@ require_relative 'folio_request'
 module CoursesTaskHelpers
   include FolioRequestHelper
 
+  def course_terms_json
+    JSON.parse(File.read("#{Settings.json}/courses/terms.json"))
+  end
+
+  def course_terms_post(hash)
+    @@folio_request.post('/coursereserves/terms', hash.to_json)
+  end
+
+  def course_depts_json
+    JSON.parse(File.read("#{Settings.json}/courses/departments.json"))
+  end
+
+  def course_depts_post(hash)
+    @@folio_request.post('/coursereserves/departments', hash.to_json)
+  end
+
   def pull_course_terms
     hash = @@folio_request.get('/coursereserves/terms')
     trim_hash(hash, 'terms')
