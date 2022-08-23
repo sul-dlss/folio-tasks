@@ -32,6 +32,7 @@ class XmlUser
     @priv_groups = []
   end
 
+  # rubocop:disable Metrics/AbcSize
   def process_xml_lines(xml)
     File.readlines(xml).each do |xmlline|
       init_arrays
@@ -44,6 +45,8 @@ class XmlUser
       next if @person_hash['username'].nil? || @person_hash['externalSystemId'].nil?
 
       privgroups(Nokogiri::XML(xmlline).xpath('//Person/privgroup'))
+      proximity(Nokogiri::XML(xmlline).xpath('//Person/identifier[@type="proximity"]'))
+      mobile_id(Nokogiri::XML(xmlline).xpath('//Person/identifier[@type="mobileid"]'))
       name(Nokogiri::XML(xmlline).xpath('//Person/name[@type="display"]'))
       email(Nokogiri::XML(xmlline).xpath('//Person/email'))
       mobile_phone(Nokogiri::XML(xmlline).xpath('//Person/telephone[@type="mobile"]'))
@@ -53,11 +56,20 @@ class XmlUser
       add_user_to_hash
     end
   end
+  # rubocop:enable Metrics/AbcSize
 
   def privgroups(nodes)
     nodes.each do |priv|
       @priv_groups.push(priv.child.text)
     end
+  end
+
+  def proximity(node)
+    @person_hash['customFields']['proximityChipId'] = node.children.first&.content&.strip
+  end
+
+  def mobile_id(node)
+    @person_hash['customFields']['mobileId'] = node.children.first&.content&.strip
   end
 
   def person(nodes)

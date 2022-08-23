@@ -60,6 +60,14 @@ RSpec.describe XmlUser do
         expect(JSON.parse(result.to_json)['users'][0]['customFields']['secondaffiliation']).to eq 'staff:academic'
       end
 
+      it 'sets the proximityChipId custom field' do
+        expect(JSON.parse(result.to_json)['users'][0]['customFields']['proximityChipId']).to eq '0123456'
+      end
+
+      it 'sets the mobileId custom field' do
+        expect(JSON.parse(result.to_json)['users'][0]['customFields']['mobileId']).to eq '0511111'
+      end
+
       # Use to test workgroup permissions or remove this method if we end up not needing this.
       # it 'has custom workgroup field if there is a folio privgroup' do
       #   expect(JSON.parse(result.to_json)['users'][0]['customFields']['workgroup']).to eq 'folio:circ-staff'
