@@ -20,7 +20,7 @@ module PoLinesHelpers
       'receiptStatus' => receipt_status(po_line_data['DIST_DATE_RCVD'], order_type, order_type_map),
       'selector' => po_line_data['SELECTOR'],
       'poLineDescription' => add_fund_xinfo_field(po_line_data['FUND']),
-      'instanceId' => determine_uuid(po_line_data['CKEY'], Settings.okapi.url.to_s),
+      'instanceId' => determine_instance_uuid(po_line_data['CKEY'], Settings.okapi.url.to_s),
       'titleOrPackage' => po_line_data['TITLE'],
       'acquisitionMethod' => acquisition_method(order_type, order_type_map),
       'source' => 'API',
@@ -40,7 +40,7 @@ module PoLinesHelpers
     "FUND: #{data}"
   end
 
-  def determine_uuid(legacy_identifier, okapi_url)
+  def determine_instance_uuid(legacy_identifier, okapi_url)
     FolioUuid.new.generate(okapi_url, 'instances', legacy_identifier.prepend('a'))
   end
 

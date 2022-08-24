@@ -97,6 +97,14 @@ module AcquisitionsUuidsHelpers
     ledgers_hash
   end
 
+  def orders
+    orders_hash = {}
+    @@folio_request.get('/orders/composite-orders?limit=99999')['purchaseOrders'].each do |obj|
+      orders_hash[obj['poNumber']] = obj['id']
+    end
+    orders_hash
+  end
+
   # rubocop: disable Layout/LineLength
   def law_organizations
     organizations_hash = {}
