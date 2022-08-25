@@ -88,6 +88,10 @@ describe 'load SUL orders rake tasks' do
     end
     let(:orders_hash) { load_sul_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
+    it 'has a UUID in the id field' do
+      expect(orders_hash['id']).to eq '702e48f3-2931-5c47-9767-07211e561303'
+    end
+
     it 'has the approved box checked' do
       expect(orders_hash['approved']).to be_truthy
     end

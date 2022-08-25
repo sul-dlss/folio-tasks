@@ -13,6 +13,7 @@ module OrdersTaskHelpers
   def orders_hash(order_id, sym_order, acq_unit_uuid, uuid_hashes)
     addresses, organizations, order_type_map, hldg_code_loc_map, funds = uuid_hashes
     composite_orders = {
+      'id' => determine_order_uuid(cleanup_po_num(order_id), Settings.okapi.url.to_s),
       'approved' => true,
       'approvalDate' => date_format(sym_order['ORD_DATE_CREATED']),
       'dateOrdered' => date_format(sym_order['ORD_DATE_CREATED']),
@@ -31,6 +32,10 @@ module OrdersTaskHelpers
     add_notes(composite_orders, sym_order)
     add_tags(composite_orders, sym_order)
     composite_orders.compact
+  end
+
+  def determine_order_uuid(legacy_identifier, okapi_url)
+    FolioUuid.new.generate(okapi_url, 'orders', legacy_identifier)
   end
 
   def vendor_uuid(vendor_id, order_library, organizations)
@@ -157,5 +162,9 @@ module OrdersTaskHelpers
 
   def orders_post(obj)
     @@folio_request.post('/orders/composite-orders', obj.to_json)
+  end
+
+  def orders_delete(id)
+    @@folio_request.delete("/orders/composite-orders/#{id}")
   end
 end

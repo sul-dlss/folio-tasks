@@ -23,10 +23,10 @@ Metrics/ClassLength:
   Max: 120
 
 Metrics/ModuleLength:
-  Max: 130
+  Max: 132
 
 Metrics/MethodLength:
-  Max: 20
+  Max: 22
 
 RSpec/DescribeClass:
   Enabled: false
