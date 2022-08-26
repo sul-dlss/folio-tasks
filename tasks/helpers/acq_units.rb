@@ -29,25 +29,8 @@ module AcquisitionsUnitsTaskHelpers
     @@folio_request.post('/acquisitions-units-storage/units', obj.to_json)
   end
 
-  def acq_unit_hash
-    acq_unit_hash = {}
-    @@folio_request.get('/acquisitions-units/units')['acquisitionsUnits'].each do |obj|
-      acq_unit_hash[obj['name']] = obj['id']
-    end
-    acq_unit_hash
-  end
-
-  def membership_hash
-    membership_hash = {}
-    @@folio_request.get('/acquisitions-units/memberships?limit=10000')['acquisitionsUnitMemberships'].each do |obj|
-      key = obj['acquisitionsUnitId'] + obj['userId']
-      membership_hash[key] = obj['id']
-    end
-    membership_hash
-  end
-
-  def acq_units_assign
-    user_acq_units_and_permission_sets_tsv.each do |obj|
+  def acq_units_assign(acq_unit_hash, membership_hash)
+    TsvUserTaskHelpers.user_acq_units_and_permission_sets_tsv.each do |obj|
       acq_unit = obj['Acq Unit']
       acq_unit_id = acq_unit_hash[acq_unit]
       users = user_get(obj['SUNetID'])

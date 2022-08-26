@@ -2,12 +2,13 @@
 
 require_relative '../helpers/tsv_user'
 require_relative '../helpers/acq_units'
+require_relative '../helpers/uuids/acquisitions'
 
 namespace :tsv_users do
-  include TsvUserTaskHelpers, AcquisitionsUnitsTaskHelpers
+  include TsvUserTaskHelpers, AcquisitionsUnitsTaskHelpers, AcquisitionsUuidsHelpers
 
   desc 'assign acquisition units to a user'
   task :assign_acquisition_units do
-    acq_units_assign
+    acq_units_assign(AcquisitionsUuidsHelpers.acq_units, AcquisitionsUuidsHelpers.acq_unit_membership)
   end
 end

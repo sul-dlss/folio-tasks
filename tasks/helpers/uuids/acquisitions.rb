@@ -8,10 +8,19 @@ module AcquisitionsUuidsHelpers
 
   def acq_units
     acq_unit_hash = {}
-    @@folio_request.get('/acquisitions-units-storage/units')['acquisitionsUnits'].each do |obj|
+    @@folio_request.get('/acquisitions-units/units')['acquisitionsUnits'].each do |obj|
       acq_unit_hash[obj['name']] = obj['id']
     end
     acq_unit_hash
+  end
+
+  def acq_unit_membership
+    membership_hash = {}
+    @@folio_request.get('/acquisitions-units/memberships?limit=10000')['acquisitionsUnitMemberships'].each do |obj|
+      key = obj['acquisitionsUnitId'] + obj['userId']
+      membership_hash[key] = obj['id']
+    end
+    membership_hash
   end
 
   def acquisition_methods
