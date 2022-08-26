@@ -26,6 +26,20 @@ module AcquisitionsUnitsTaskHelpers
   end
 
   def acq_units_post(obj)
-    @@folio_request.post('/acquisitions-units-storage/units', obj.to_json)
+    @@folio_request.post('/acquisitions-units/units', obj.to_json)
+  end
+
+  def acq_units_assign(acq_unit_hash, membership_hash)
+    TsvUserTaskHelpers.user_acq_units_and_permission_sets_tsv.each do |obj|
+      acq_unit = obj['Acq Unit']
+      acq_unit_id = acq_unit_hash[acq_unit]
+      users = user_get(obj['SUNetID'])
+      users && users['users'].each do |user|
+        if acq_unit_id && !membership_hash[acq_unit_id + user['id']]
+          acq_membership_obj = { 'userId' => user['id'], 'acquisitionsUnitId' => acq_unit_id }
+          @@folio_request.post('/acquisitions-units/memberships', acq_membership_obj.to_json)
+        end
+      end
+    end
   end
 end

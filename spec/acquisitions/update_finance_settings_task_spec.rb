@@ -23,7 +23,7 @@ describe 'finance settings rake tasks' do
       .to_return(body: '{ "expenseClasses": [{ "id": "exp-123", "code": "12345" },
                                              { "id": "exp-456", "code": "67890" }] }')
 
-    stub_request(:get, 'http://example.com/acquisitions-units-storage/units')
+    stub_request(:get, 'http://example.com/acquisitions-units/units')
       .with(query: hash_including)
       .to_return(body: '{ "acquisitionsUnits": [{ "id": "acq-123", "name": "acq_unit1" },
                                                 { "id": "acq-456", "name": "acq_unit2" },
