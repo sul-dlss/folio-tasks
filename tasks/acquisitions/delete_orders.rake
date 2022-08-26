@@ -10,7 +10,8 @@ namespace :acquisitions do
   desc 'delete all orders from folio'
   task :delete_all_orders do
     orders_hash = AcquisitionsUuidsHelpers.orders
-    orders_hash.values do |id|
+    orders_hash.each_value do |id|
+      puts "deleting order #{id}"
       orders_delete(id)
     end
   end
