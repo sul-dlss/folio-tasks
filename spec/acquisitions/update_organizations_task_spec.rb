@@ -12,7 +12,7 @@ describe 'update organizations rake tasks' do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)
 
-    stub_request(:get, 'http://example.com/acquisitions-units-storage/units')
+    stub_request(:get, 'http://example.com/acquisitions-units/units')
       .with(query: hash_including)
       .to_return(body: '{ "acquisitionsUnits": [{ "id": "acq-123" }] }')
 

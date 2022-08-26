@@ -26,7 +26,7 @@ module AcquisitionsUnitsTaskHelpers
   end
 
   def acq_units_post(obj)
-    @@folio_request.post('/acquisitions-units-storage/units', obj.to_json)
+    @@folio_request.post('/acquisitions-units/units', obj.to_json)
   end
 
   def acq_units_assign(acq_unit_hash, membership_hash)
