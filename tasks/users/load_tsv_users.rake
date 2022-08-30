@@ -15,8 +15,8 @@ namespace :tsv_users do
   desc 'load app users from tsv file'
   task :load_app_users do
     users_tsv('app_users.tsv').each do |user|
-      user_post(app_user(user))
       user_login(app_user_credentials(user))
+      user_post(app_user(user))
       puts 'Creating user record in permissions table'
       user_perms(app_user_id_hash(user))
     end
