@@ -30,6 +30,10 @@ class FolioRequest
     puts JSON.pretty_generate(JSON.parse(authenticated_request(path)))
   end
 
+  def post_no_body(path)
+    parse(authenticated_request(path, method: :post))
+  end
+
   def post(path, json)
     parse(authenticated_request(path, method: :post, body: json))
   end
