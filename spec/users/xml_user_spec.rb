@@ -61,11 +61,11 @@ RSpec.describe XmlUser do
       end
 
       it 'sets the proximityChipId custom field' do
-        expect(JSON.parse(result.to_json)['users'][0]['customFields']['proximityChipId']).to eq '0123456'
+        expect(JSON.parse(result.to_json)['users'][0]['customFields']['proximitychipid']).to eq '0123456'
       end
 
       it 'sets the mobileId custom field' do
-        expect(JSON.parse(result.to_json)['users'][0]['customFields']['mobileId']).to eq '0511111'
+        expect(JSON.parse(result.to_json)['users'][0]['customFields']['mobileid']).to eq '0511111'
       end
 
       # Use to test workgroup permissions or remove this method if we end up not needing this.
