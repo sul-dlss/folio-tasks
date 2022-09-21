@@ -20,7 +20,7 @@ describe 'loading tsv users who do not have registry ids' do
   end
 
   it 'has a hash size that matches the number of lines in the tsv file' do
-    expect(load_tsv_users_task.send(:tsv_user, grp)['users'].size).to eq 2
+    expect(load_tsv_users_task.send(:tsv_user, grp)['users'].size).to eq 4
   end
 
   context 'when creating the new user hash' do
@@ -61,7 +61,15 @@ describe 'loading tsv users who do not have registry ids' do
     end
 
     it 'has a totalRecords size in the hash' do
-      expect(load_tsv_users_task.send(:tsv_user, grp)['totalRecords']).to eq 2
+      expect(load_tsv_users_task.send(:tsv_user, grp)['totalRecords']).to eq 4
+    end
+
+    it 'maps a user for BUS-guest' do
+      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][2]['patronGroup']).to eq 'BUS-guest'
+    end
+
+    it 'does not include a usergroup if mapping is not in settings config' do
+      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][3]['customFields']['usergroup']).to be_nil
     end
   end
 

@@ -84,16 +84,29 @@ module TsvUserTaskHelpers
     { 'userId' => deterministic_user_id(user['username']) }
   end
 
+  def tsv_patron_group(user)
+    return 'courtesy' unless user['PATRON_CODE']
+
+    code = Settings.courtesygroups.to_h[user['PATRON_CODE'].to_sym].to_s
+    code.empty? ? 'courtesy' : code
+  end
+
+  def user_group(user)
+    return {} unless user['PATRON_CODE']
+
+    user_group = Settings.usergroups.to_h[user['PATRON_CODE'].to_sym].to_s
+    { 'usergroup' => user_group } unless user_group.size.zero?
+  end
+
   def transform_user(user)
     user['username'] = user.values[0]
     user['barcode'] = user.values[0]
     user['externalSystemId'] = user.values[1]
-    user['patronGroup'] = 'courtesy'
+    user['patronGroup'] = tsv_patron_group(user)
     user['personal'] = user_personal(user)
     user['enrollmentDate'] = enrollment(user['PRIV_GRANTED'])
     user['expirationDate'] = expiration(user['PRIV_EXPIRED'])
-    user_group = Settings.usergroups.to_h[user['PATRON_CODE'].to_sym].to_s
-    user['customFields'] = { 'usergroup' => user_group } unless user_group.size.zero?
+    user['customFields'] = user_group(user)
     remove_temp_keys(user)
     user
   end
