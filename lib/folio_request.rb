@@ -2,7 +2,6 @@
 
 require 'config'
 require 'http'
-require 'socket'
 Config.load_and_set_settings(Config.setting_files('config', ENV['STAGE'] || 'dev'))
 
 # Class to post user data to FOLIO Users module
@@ -55,6 +54,7 @@ class FolioRequest
   def session_token
     @session_token ||= begin
       response = request('/authn/login', json: Settings.okapi.login_params, method: :post)
+      puts response.body
       response['x-okapi-token']
     end
   end
@@ -63,7 +63,7 @@ class FolioRequest
     request(path, headers: headers.merge('x-okapi-token': session_token), **other)
   end
 
-  def request(path, headers: { 'X-Forwarded-For': ip_addr }, method: :get, **other)
+  def request(path, headers: {}, method: :get, **other)
     HTTP
       .headers(default_headers.merge(headers))
       .request(method, base_url + path, **other)
@@ -75,11 +75,5 @@ class FolioRequest
 
   def default_headers
     DEFAULT_HEADERS.merge(Settings.okapi.headers || {})
-  end
-
-  def ip_addr
-    IPSocket.getaddress(Socket.gethostname)
-  rescue SocketError
-    '0.0.0.0'
   end
 end
