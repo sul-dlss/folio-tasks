@@ -162,6 +162,5 @@ class XmlUser
     @hash[:users] << @person_hash
 
     @hash[:totalRecords] = @hash[:users].size
-    pp @hash
   end
 end
