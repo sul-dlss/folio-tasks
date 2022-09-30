@@ -3,6 +3,5 @@
 require_relative '../lib/folio_request'
 require 'json'
 path = ARGV[0]
-json = File.read(ARGV[1])
 folio = FolioRequest.new
-folio.put(path, json)
+ARGV.length.positive? ? folio.put(path, ARGV[1]) : folio.put(path)

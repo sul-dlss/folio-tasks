@@ -78,6 +78,13 @@ namespace :data_import do
       File.open("#{dir}/data-import-profiles/mappingProfiles.json", 'w') { |file| file.puts pull_mapping_profiles }
     end
   end
+
+  desc 'pull matchProfiles from original folio instance (use STAGE=orig yaml)'
+  task :pull_match_profiles do
+    json_files.each do |dir|
+      File.open("#{dir}/data-import-profiles/matchProfiles.json", 'w') { |file| file.puts pull_match_profiles }
+    end
+  end
 end
 
 namespace :circulation do

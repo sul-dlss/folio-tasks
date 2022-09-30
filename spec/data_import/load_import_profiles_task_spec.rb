@@ -7,7 +7,9 @@ describe 'data import profile rake tasks' do
   let(:load_job_profiles_task) { Rake.application.invoke_task 'data_import:load_job_profiles' }
   let(:load_action_profiles_task) { Rake.application.invoke_task 'data_import:load_action_profiles' }
   let(:load_mapping_profiles_task) { Rake.application.invoke_task 'data_import:load_mapping_profiles' }
-  let(:profile_associations_task) { Rake.application.invoke_task 'data_import:create_profile_associations' }
+  let(:profile_associations_task) do
+    Rake.application.invoke_task 'data_import:create_profile_associations'
+  end
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -16,6 +18,7 @@ describe 'data import profile rake tasks' do
     stub_request(:post, 'http://example.com/data-import-profiles/jobProfiles')
     stub_request(:post, 'http://example.com/data-import-profiles/actionProfiles')
     stub_request(:post, 'http://example.com/data-import-profiles/mappingProfiles')
+    stub_request(:post, 'http://example.com/data-import-profiles/matchProfiles')
 
     stub_request(:post, 'http://example.com/data-import-profiles/profileAssociations')
       .with(query: hash_including)
@@ -23,6 +26,10 @@ describe 'data import profile rake tasks' do
     stub_request(:get, 'http://example.com/data-import-profiles/actionProfiles')
       .with(query: hash_including)
       .to_return(body: '{ "actionProfiles": [{ "id": "0283111b-203b-4da9-869f-cbe55f725346" }] }')
+
+    stub_request(:get, 'http://example.com/data-import-profiles/matchProfiles')
+      .with(query: hash_including)
+      .to_return(body: '{ "matchProfiles": [{ "id": "88888888-AAAA-4444-AAAA-123456789012" }] }')
 
     stub_request(:get, 'http://example.com/data-import-profiles/jobProfiles')
       .with(query: hash_including)
@@ -61,7 +68,7 @@ describe 'data import profile rake tasks' do
     end
   end
 
-  context 'when loading profile associations' do
+  context 'when loading action profile associations' do
     let(:action_profiles_json) { profile_associations_task.send(:action_profiles_json) }
     let(:profile_associations_ids) do
       profile_associations_task.send(:profile_associations_ids, action_profiles_json.values.sample[0])
@@ -79,9 +86,17 @@ describe 'data import profile rake tasks' do
                                             )
     end
 
-    it 'creates valid profile associations json for parent profile' do
+    it 'creates valid profile associations json for job parent profile' do
       expect(profile_associations_task.send(:profile_associations_payload,
                                             profile_associations_ids[1], 'JOB_PROFILE',
+                                            profile_associations_ids[0], 'ACTION_PROFILE')).to match_json_schema(
+                                              'mod-data-import-converter-storage', 'profileAssociation'
+                                            )
+    end
+
+    it 'creates valid profile associations json for match parent profile' do
+      expect(profile_associations_task.send(:profile_associations_payload,
+                                            profile_associations_ids[1], 'MATCH_PROFILE',
                                             profile_associations_ids[0], 'ACTION_PROFILE')).to match_json_schema(
                                               'mod-data-import-converter-storage', 'profileAssociation'
                                             )
