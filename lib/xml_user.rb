@@ -65,11 +65,17 @@ class XmlUser
   end
 
   def proximity(node)
-    @person_hash['customFields']['proximitychipid'] = node.children.first&.content&.strip
+    proximity_chip_id = node.children.first&.content&.strip
+    return unless proximity_chip_id
+
+    @person_hash['customFields']['proximitychipid'] = proximity_chip_id
   end
 
   def mobile_id(node)
-    @person_hash['customFields']['mobileid'] = node.children.first&.content&.strip
+    mobile_id = node.children.first&.content&.strip
+    return unless mobile_id
+
+    @person_hash['customFields']['mobileid'] = mobile_id
   end
 
   def person(nodes)
