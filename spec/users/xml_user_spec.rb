@@ -125,5 +125,19 @@ RSpec.describe XmlUser do
         expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'affiliate-sponsored-eresources'
       end
     end
+
+    context 'when there is no custom field value' do
+      before do
+        result.process_xml_lines('spec/fixtures/xml/users/no_custom_fields.xml.txt')
+      end
+
+      it 'does not include proximitychipid in the custom fields' do
+        expect(JSON.parse(result.to_json)['users'][0]['customFields']).not_to include('proximitychipid')
+      end
+
+      it 'does not include mobileid in the custom fields' do
+        expect(JSON.parse(result.to_json)['users'][0]['customFields']).not_to include('mobileid')
+      end
+    end
   end
 end

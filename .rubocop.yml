@@ -20,7 +20,7 @@ Metrics/BlockLength:
     - 'tasks/**/*'
 
 Metrics/ClassLength:
-  Max: 120
+  Max: 132
 
 Metrics/ModuleLength:
   Max: 132
