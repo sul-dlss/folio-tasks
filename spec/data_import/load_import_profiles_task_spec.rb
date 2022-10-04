@@ -7,8 +7,8 @@ describe 'data import profile rake tasks' do
   let(:load_job_profiles_task) { Rake.application.invoke_task 'data_import:load_job_profiles' }
   let(:load_action_profiles_task) { Rake.application.invoke_task 'data_import:load_action_profiles' }
   let(:load_mapping_profiles_task) { Rake.application.invoke_task 'data_import:load_mapping_profiles' }
-  let(:profile_associations_task) do
-    Rake.application.invoke_task 'data_import:create_profile_associations'
+  let(:load_profile_associations_task) do
+    Rake.application.invoke_task 'data_import:load_profile_associations'
   end
 
   before do
@@ -49,6 +49,15 @@ describe 'data import profile rake tasks' do
     end
   end
 
+  context 'when loading match profiles' do
+    let(:match_profiles_json) { load_action_profiles_task.send(:match_profiles_json) }
+
+    it 'creates a json object' do
+      expect(match_profiles_json.values.sample[0]).to match_json_schema('mod-data-import-converter-storage',
+                                                                        'matchProfile')
+    end
+  end
+
   context 'when loading action profiles' do
     let(:action_profiles_json) { load_action_profiles_task.send(:action_profiles_json) }
 
@@ -68,38 +77,12 @@ describe 'data import profile rake tasks' do
     end
   end
 
-  context 'when loading action profile associations' do
-    let(:action_profiles_json) { profile_associations_task.send(:action_profiles_json) }
-    let(:profile_associations_ids) do
-      profile_associations_task.send(:profile_associations_ids, action_profiles_json.values.sample[0])
-    end
+  context 'when loading profile associations' do
+    let(:profile_associations_json) { load_profile_associations_task.send(:profile_associations_json) }
 
-    it 'creates array of uuids' do
-      expect(profile_associations_ids).to be_kind_of(Array)
-    end
-
-    it 'creates valid profile associations json for child profile' do
-      expect(profile_associations_task.send(:profile_associations_payload,
-                                            profile_associations_ids[0], 'ACTION_PROFILE',
-                                            profile_associations_ids[2], 'MAPPING_PROFILE')).to match_json_schema(
-                                              'mod-data-import-converter-storage', 'profileAssociation'
-                                            )
-    end
-
-    it 'creates valid profile associations json for job parent profile' do
-      expect(profile_associations_task.send(:profile_associations_payload,
-                                            profile_associations_ids[1], 'JOB_PROFILE',
-                                            profile_associations_ids[0], 'ACTION_PROFILE')).to match_json_schema(
-                                              'mod-data-import-converter-storage', 'profileAssociation'
-                                            )
-    end
-
-    it 'creates valid profile associations json for match parent profile' do
-      expect(profile_associations_task.send(:profile_associations_payload,
-                                            profile_associations_ids[1], 'MATCH_PROFILE',
-                                            profile_associations_ids[0], 'ACTION_PROFILE')).to match_json_schema(
-                                              'mod-data-import-converter-storage', 'profileAssociation'
-                                            )
+    it 'creates a json object' do
+      expect(profile_associations_json.values.sample[0]).to match_json_schema('mod-data-import-converter-storage',
+                                                                              'profileAssociation')
     end
   end
 end
