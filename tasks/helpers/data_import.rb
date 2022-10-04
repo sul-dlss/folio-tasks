@@ -3,7 +3,6 @@
 require_relative '../helpers/folio_request'
 
 # Module to encapsulate methods used by import_profiles rake tasks
-# rubocop: disable Metrics/ModuleLength
 module DataImportTaskHelpers
   include FolioRequestHelper
 
@@ -76,50 +75,13 @@ module DataImportTaskHelpers
     end
   end
 
+  def profile_associations_json
+    JSON.parse(File.read("#{Settings.json}/data-import-profiles/profileAssociations.json"))
+  end
+
   def import_profile_hash(obj)
     payload = {}
     payload['profile'] = obj
-    payload
-  end
-
-  def profile_associations_ids(obj)
-    name = CGI.escape(obj['name'])
-    uuid = action_profiles_get(name)
-    parent_name = parent_name(obj)
-    parent_job_uuid = job_profiles_get(parent_name)
-    parent_match_uuid = match_profiles_get(parent_name)
-    child_name = child_name(obj)
-    child_uuid = mapping_profiles_get(child_name)
-    [uuid, parent_job_uuid, parent_match_uuid, child_uuid]
-  end
-
-  def parent_name(obj)
-    return unless obj.dig('parentProfiles', 0, 'content')
-
-    CGI.escape(obj['parentProfiles'][0]['content']['name'])
-  end
-
-  def child_name(obj)
-    return unless obj.dig('childProfiles', 0)
-
-    CGI.escape(obj['childProfiles'][0]['content']['name'])
-  end
-
-  def profile_associations_payload(master_id, master_type, detail_id, detail_type)
-    order = detail_type.eql?('MAPPING_PROFILE') ? 0 : 1
-    payload = {
-      masterProfileId: master_id,
-      masterProfileType: master_type,
-      detailProfileId: detail_id,
-      detailProfileType: detail_type,
-      order: order
-    }
-
-    if master_id.nil?
-      puts "HERE: #{payload}"
-      return
-    end
-
     payload
   end
 
@@ -132,7 +94,6 @@ module DataImportTaskHelpers
     hash = @@folio_request.get('/data-import-profiles/actionProfiles?withRelations=true&limit=999')
     trim_hash(hash, 'actionProfiles')
     remove_values(hash, 'userInfo')
-    remove_values(hash, 'id')
     hash.to_json
   end
 
@@ -140,7 +101,6 @@ module DataImportTaskHelpers
     hash = @@folio_request.get('/data-import-profiles/jobProfiles?limit=999')
     trim_hash(hash, 'jobProfiles')
     remove_values(hash, 'userInfo')
-    remove_values(hash, 'id')
     hash.to_json
   end
 
@@ -148,7 +108,6 @@ module DataImportTaskHelpers
     hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true&limit=999')
     trim_hash(hash, 'mappingProfiles')
     remove_values(hash, 'userInfo')
-    remove_values(hash, 'id')
     hash.to_json
   end
 
@@ -156,7 +115,23 @@ module DataImportTaskHelpers
     hash = @@folio_request.get('/data-import-profiles/matchProfiles?withRelations=true&limit=999')
     trim_hash(hash, 'matchProfiles')
     remove_values(hash, 'userInfo')
-    remove_values(hash, 'id')
+    hash.to_json
+  end
+
+  def pull_profile_associations
+    hash = { 'profileAssociations' => [] }
+    master = %w[JOB ACTION MATCH]
+    master.each do |profile_m|
+      details = master == 'ACTION' ? %w[ACTION MAPPING MATCH] : %w[ACTION MATCH]
+      details.each do |profile_d|
+        profile_associations = @@folio_request.get(
+          "/data-import-profiles/profileAssociations?master=#{profile_m}_PROFILE&detail=#{profile_d}_PROFILE"
+        )
+        profile_associations['profileAssociations'].each do |obj|
+          hash['profileAssociations'].append(obj)
+        end
+      end
+    end
     hash.to_json
   end
 
@@ -173,4 +148,3 @@ module DataImportTaskHelpers
     hash
   end
 end
-# rubocop: enable Metrics/ModuleLength

@@ -85,6 +85,15 @@ namespace :data_import do
       File.open("#{dir}/data-import-profiles/matchProfiles.json", 'w') { |file| file.puts pull_match_profiles }
     end
   end
+
+  desc 'pull_profile_associations'
+  task :pull_profile_associations do
+    json_files.each do |dir|
+      File.open("#{dir}/data-import-profiles/profileAssociations.json", 'w') do |file|
+        file.puts pull_profile_associations
+      end
+    end
+  end
 end
 
 namespace :circulation do
