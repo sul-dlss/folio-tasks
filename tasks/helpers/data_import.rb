@@ -11,7 +11,6 @@ module DataImportTaskHelpers
   end
 
   def job_profiles_post(obj)
-    puts obj
     @@folio_request.post('/data-import-profiles/jobProfiles', obj.to_json)
   end
 
