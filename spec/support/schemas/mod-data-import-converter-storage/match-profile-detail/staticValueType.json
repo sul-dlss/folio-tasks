@@ -1,0 +1,12 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Static value type enum",
+  "type": "string",
+  "additionalProperties": false,
+  "enum": [
+    "TEXT",
+    "NUMBER",
+    "DATE_RANGE",
+    "EXACT_DATE"
+  ]
+}

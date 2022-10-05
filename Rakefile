@@ -102,7 +102,9 @@ task pull_all_json_data: %i[users:pull_waivers
                             users:pull_permission_sets
                             data_import:pull_job_profiles
                             data_import:pull_mapping_profiles
+                            data_import:pull_match_profiles
                             data_import:pull_action_profiles
+                            data_import:pull_profile_associations
                             circulation:pull_circ_rules
                             circulation:pull_fixed_due_date_sched
                             circulation:pull_loan_policies
@@ -115,11 +117,19 @@ task pull_all_json_data: %i[users:pull_waivers
                             courses:pull_course_terms
                             courses:pull_course_depts]
 
-desc 'Load all data import profile'
+desc 'Pull all data import profile json data (use STAGE=orig)'
+task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles
+                                        data_import:pull_mapping_profiles
+                                        data_import:pull_match_profiles
+                                        data_import:pull_action_profiles
+                                        data_import:pull_profile_associations]
+
+desc 'Load all data import profiles [job, match, action, mapping, and associations]'
 task load_all_data_import_profiles: %i[data_import:load_job_profiles
+                                       data_import:load_match_profiles
                                        data_import:load_action_profiles
                                        data_import:load_mapping_profiles
-                                       data_import:create_profile_associations]
+                                       data_import:load_profile_associations]
 
 desc 'Load all inventory settings: [alt title types, item loan typs, item note types, material types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types

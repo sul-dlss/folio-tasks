@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "description": "Enum of data value types",
+  "type": "string",
+  "additionalProperties": false,
+  "enum": [
+    "VALUE_FROM_RECORD",
+    "STATIC_VALUE"
+  ]
+}

@@ -7,9 +7,7 @@ module DataImportTaskHelpers
   include FolioRequestHelper
 
   def job_profiles_json
-    profile = JSON.parse(File.read("#{Settings.json}/data-import-profiles/jobProfiles.json"))
-    profile.delete('totalRecords')
-    profile
+    JSON.parse(File.read("#{Settings.json}/data-import-profiles/jobProfiles.json"))
   end
 
   def job_profiles_post(obj)
@@ -25,10 +23,25 @@ module DataImportTaskHelpers
     end
   end
 
+  def match_profiles_json
+    JSON.parse(File.read("#{Settings.json}/data-import-profiles/matchProfiles.json"))
+  end
+
+  def match_profiles_post(obj)
+    @@folio_request.post('/data-import-profiles/matchProfiles', obj.to_json)
+  end
+
+  def match_profiles_get(name)
+    response = @@folio_request.get_cql('/data-import-profiles/matchProfiles', "name==#{name}")['matchProfiles']
+    begin
+      response[0]['id']
+    rescue NoMethodError
+      nil
+    end
+  end
+
   def action_profiles_json
-    profile = JSON.parse(File.read("#{Settings.json}/data-import-profiles/actionProfiles.json"))
-    profile.delete('totalRecords')
-    profile
+    JSON.parse(File.read("#{Settings.json}/data-import-profiles/actionProfiles.json"))
   end
 
   def action_profiles_post(obj)
@@ -45,9 +58,7 @@ module DataImportTaskHelpers
   end
 
   def mapping_profiles_json
-    profile = JSON.parse(File.read("#{Settings.json}/data-import-profiles/mappingProfiles.json"))
-    profile.delete('totalRecords')
-    profile
+    JSON.parse(File.read("#{Settings.json}/data-import-profiles/mappingProfiles.json"))
   end
 
   def mapping_profiles_post(obj)
@@ -63,29 +74,14 @@ module DataImportTaskHelpers
     end
   end
 
+  def profile_associations_json
+    JSON.parse(File.read("#{Settings.json}/data-import-profiles/profileAssociations.json"))
+  end
+
   def import_profile_hash(obj)
     payload = {}
     payload['profile'] = obj
     payload
-  end
-
-  def profile_associations_ids(obj)
-    name = CGI.escape(obj['name'])
-    uuid = action_profiles_get(name)
-    parent_name = CGI.escape(obj['parentProfiles'][0]['content']['name'])
-    parent_uuid = job_profiles_get(parent_name)
-    child_name = CGI.escape(obj['childProfiles'][0]['content']['name'])
-    child_uuid = mapping_profiles_get(child_name)
-    [uuid, parent_uuid, child_uuid]
-  end
-
-  def profile_associations_payload(master_id, master_type, detail_id, detail_type)
-    order = detail_type.eql?('MAPPING_PROFILE') ? 0 : 1
-    { masterProfileId: master_id,
-      masterProfileType: master_type,
-      detailProfileId: detail_id,
-      detailProfileType: detail_type,
-      order: order }
   end
 
   def profile_associations_post(payload, master, detail)
@@ -111,6 +107,30 @@ module DataImportTaskHelpers
     hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true&limit=999')
     trim_hash(hash, 'mappingProfiles')
     remove_values(hash, 'userInfo')
+    hash.to_json
+  end
+
+  def pull_match_profiles
+    hash = @@folio_request.get('/data-import-profiles/matchProfiles?withRelations=true&limit=999')
+    trim_hash(hash, 'matchProfiles')
+    remove_values(hash, 'userInfo')
+    hash.to_json
+  end
+
+  def pull_profile_associations
+    hash = { 'profileAssociations' => [] }
+    master = %w[JOB ACTION MATCH]
+    master.each do |profile_m|
+      details = master == 'ACTION' ? %w[ACTION MAPPING MATCH] : %w[ACTION MATCH]
+      details.each do |profile_d|
+        profile_associations = @@folio_request.get(
+          "/data-import-profiles/profileAssociations?master=#{profile_m}_PROFILE&detail=#{profile_d}_PROFILE"
+        )
+        profile_associations['profileAssociations'].each do |obj|
+          hash['profileAssociations'].append(obj)
+        end
+      end
+    end
     hash.to_json
   end
 

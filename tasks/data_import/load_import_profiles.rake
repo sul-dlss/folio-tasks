@@ -35,15 +35,21 @@ namespace :data_import do
     end
   end
 
-  desc 'create data import profile associations in folio'
-  task :create_profile_associations do
-    action_profiles_json.each_value do |v|
+  desc 'load match profiles into folio'
+  task :load_match_profiles do
+    match_profiles_json.each_value do |v|
       v.each do |obj|
-        uuid, parent_uuid, child_uuid = profile_associations_ids(obj)
-        child_association = profile_associations_payload(uuid, 'ACTION_PROFILE', child_uuid, 'MAPPING_PROFILE')
-        profile_associations_post(child_association, 'ACTION_PROFILE', 'MAPPING_PROFILE')
-        parent_association = profile_associations_payload(parent_uuid, 'JOB_PROFILE', uuid, 'ACTION_PROFILE')
-        profile_associations_post(parent_association, 'JOB_PROFILE', 'ACTION_PROFILE')
+        payload = import_profile_hash(obj)
+        match_profiles_post(payload)
+      end
+    end
+  end
+
+  desc 'load profile associations into folio'
+  task :load_profile_associations do
+    profile_associations_json.each_value do |v|
+      v.each do |obj|
+        profile_associations_post(obj, obj['masterProfileType'], obj['detailProfileType'])
       end
     end
   end
