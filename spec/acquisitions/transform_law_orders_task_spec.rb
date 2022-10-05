@@ -3,15 +3,15 @@
 require 'rake'
 require 'spec_helper'
 
-describe 'load LAW orders rake tasks' do
-  let(:load_law_orders_task) { Rake.application.invoke_task 'acquisitions:load_orders_law' }
+describe 'transform LAW orders rake tasks' do
+  let(:transform_law_orders_task) { Rake.application.invoke_task 'acquisitions:transform_law_orders' }
   let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
   let(:order_type_map) do
-    load_law_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types,
-                              AcquisitionsUuidsHelpers.acquisition_methods)
+    transform_law_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types,
+                                   AcquisitionsUuidsHelpers.acquisition_methods)
   end
   let(:hldg_code_map) do
-    load_law_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.law_locations)
+    transform_law_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.law_locations)
   end
   let(:uuid_hashes) do
     [Uuids.tenant_addresses, AcquisitionsUuidsHelpers.law_organizations, order_type_map, hldg_code_map,
@@ -19,18 +19,16 @@ describe 'load LAW orders rake tasks' do
   end
   let(:law_order_yaml_dir) { Settings.yaml.law_orders.to_s }
   let(:order_id) do
-    load_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/56789L02.yaml")).shift
+    transform_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/56789L02.yaml")).shift
   end
   let(:sym_order) do
-    load_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/56789L02.yaml")).pop
+    transform_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/56789L02.yaml")).pop
   end
-  let(:orders_hash) { load_law_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+  let(:orders_hash) { transform_law_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)
-
-    stub_request(:post, 'http://example.com/orders/composite-orders')
 
     stub_request(:get, 'http://example.com/acquisitions-units/units')
       .with(query: hash_including)

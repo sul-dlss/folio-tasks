@@ -74,24 +74,22 @@ task load_new_data_and_settings: %i[load_user_settings
                                     load_order_settings
                                     load_organizations_all]
 
-desc 'Prepare SUL order data: [create yaml files, add order and orderline xinfo to yaml files]'
-task prepare_sul_orders: %i[acquisitions:create_sul_orders_yaml
-                            acquisitions:add_sul_order_xinfo_to_yaml
-                            acquisitions:add_sul_orderlin1_xinfo_to_yaml
-                            acquisitions:add_sul_orderline_xinfo_to_yaml]
+desc 'Process Symphony order data for SUL and LAW: [create yaml files, add xinfo fields to yaml, transform to folio orders]'
+task prepare_orders: %i[acquisitions:create_sul_orders_yaml
+                        acquisitions:add_sul_order_xinfo
+                        acquisitions:add_sul_orderlin1
+                        acquisitions:add_sul_orderline
+                        acquisitions:transform_sul_orders
+                        acquisitions:create_law_orders_yaml
+                        acquisitions:add_law_order_xinfo
+                        acquisitions:add_law_orderlin1_xinfo
+                        acquisitions:add_law_orderline_xinfo
+                        acquisitions:transform_law_orders]
 
-desc 'Load SUL order data and tags: [tags for SUL order, SUL orders]'
-task load_orders_tags_sul: %i[acquisitions:load_tags_orders_sul
-                              acquisitions:load_orders_sul]
-
-desc 'Prepare LAW order data: [create yaml files, add order and orderline xinfo to yaml files]'
-task prepare_law_orders: %i[acquisitions:create_law_orders_yaml
-                            acquisitions:add_law_order_xinfo_to_yaml
-                            acquisitions:add_law_orderlin1_xinfo_to_yaml
-                            acquisitions:add_law_orderline_xinfo_to_yaml]
-
-desc 'Load LAW order data: [Law orders]'
-task load_orders_law: %i[acquisitions:load_orders_law]
+desc 'Load SUL and LAW order data and SUL order tags'
+task load_orders: %i[acquisitions:load_tags_orders_sul
+                     acquisitions:load_sul_orders[10]
+                     acquisitions:load_law_orders[10]]
 
 desc 'Pull all json data (use STAGE=orig)'
 task pull_all_json_data: %i[users:pull_waivers

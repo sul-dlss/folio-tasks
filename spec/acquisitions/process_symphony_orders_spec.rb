@@ -10,13 +10,13 @@ describe 'prepare order yaml files' do
 
   before do
     Rake.application.invoke_task 'acquisitions:create_sul_orders_yaml'
-    Rake.application.invoke_task 'acquisitions:add_sul_order_xinfo_to_yaml'
-    Rake.application.invoke_task 'acquisitions:add_sul_orderlin1_xinfo_to_yaml'
-    Rake.application.invoke_task 'acquisitions:add_sul_orderline_xinfo_to_yaml'
+    Rake.application.invoke_task 'acquisitions:add_sul_order_xinfo'
+    Rake.application.invoke_task 'acquisitions:add_sul_orderlin1_xinfo'
+    Rake.application.invoke_task 'acquisitions:add_sul_orderline_xinfo'
     Rake.application.invoke_task 'acquisitions:create_law_orders_yaml'
-    Rake.application.invoke_task 'acquisitions:add_law_order_xinfo_to_yaml'
-    Rake.application.invoke_task 'acquisitions:add_law_orderlin1_xinfo_to_yaml'
-    Rake.application.invoke_task 'acquisitions:add_law_orderline_xinfo_to_yaml'
+    Rake.application.invoke_task 'acquisitions:add_law_order_xinfo'
+    Rake.application.invoke_task 'acquisitions:add_law_orderlin1_xinfo'
+    Rake.application.invoke_task 'acquisitions:add_law_orderline_xinfo'
   end
 
   context 'when order has one orderline and one fund distribution' do

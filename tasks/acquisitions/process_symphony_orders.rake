@@ -6,7 +6,7 @@ require_rel '../helpers/orders'
 namespace :acquisitions do
   include OrderYamlTaskHelpers
 
-  desc 'create SUL orders yaml files'
+  desc 'process Symphony orders for SUL'
   task :create_sul_orders_yaml do
     data_dir = Settings.yaml.sul_orders.to_s
     orders_tsv('orders_sul.tsv').each do |obj|
@@ -23,7 +23,7 @@ namespace :acquisitions do
   end
 
   desc 'add order xinfo fields to order yaml files'
-  task :add_sul_order_xinfo_to_yaml do
+  task :add_sul_order_xinfo do
     data_dir = Settings.yaml.sul_orders.to_s
     orders_tsv('order_xinfo_sul.tsv').each do |obj|
       filename = "#{data_dir}/#{obj['ORD_ID'].to_s.tr('/', '_')}.yaml"
@@ -37,7 +37,7 @@ namespace :acquisitions do
   end
 
   desc 'add orderline 1 xinfo fields to order yaml files'
-  task :add_sul_orderlin1_xinfo_to_yaml do
+  task :add_sul_orderlin1_xinfo do
     data_dir = Settings.yaml.sul_orders.to_s
     orders_tsv('orderlin1_xinfo_sul.tsv').each do |obj|
       filename = "#{data_dir}/#{obj['ORD_ID'].to_s.tr('/', '_')}.yaml"
@@ -51,7 +51,7 @@ namespace :acquisitions do
   end
 
   desc 'add orderline xinfo fields to order yaml files'
-  task :add_sul_orderline_xinfo_to_yaml do
+  task :add_sul_orderline_xinfo do
     data_dir = Settings.yaml.sul_orders.to_s
     orders_tsv('orderlin_xinfo_sul.tsv').each do |obj|
       filename = "#{data_dir}/#{obj['ORD_ID'].to_s.tr('/', '_')}.yaml"
@@ -64,7 +64,7 @@ namespace :acquisitions do
     end
   end
 
-  desc 'create LAW orders yaml files'
+  desc 'process Symphony orders for LAW'
   task :create_law_orders_yaml do
     data_dir = Settings.yaml.law_orders.to_s
     orders_tsv('orders_law.tsv').each do |obj|
@@ -82,7 +82,7 @@ namespace :acquisitions do
   end
 
   desc 'add order xinfo fields to order yaml files'
-  task :add_law_order_xinfo_to_yaml do
+  task :add_law_order_xinfo do
     data_dir = Settings.yaml.law_orders.to_s
     orders_tsv('order_xinfo_law.tsv').each do |obj|
       filename = "#{data_dir}/#{obj['ORD_ID'].to_s.tr('/', '_')}.yaml"
@@ -96,7 +96,7 @@ namespace :acquisitions do
   end
 
   desc 'add orderline 1 xinfo fields to order yaml files'
-  task :add_law_orderlin1_xinfo_to_yaml do
+  task :add_law_orderlin1_xinfo do
     data_dir = Settings.yaml.law_orders.to_s
     orders_tsv('orderlin1_xinfo_law.tsv').each do |obj|
       filename = "#{data_dir}/#{obj['ORD_ID'].to_s.tr('/', '_')}.yaml"
@@ -110,7 +110,7 @@ namespace :acquisitions do
   end
 
   desc 'add orderline xinfo fields to order yaml files'
-  task :add_law_orderline_xinfo_to_yaml do
+  task :add_law_orderline_xinfo do
     data_dir = Settings.yaml.law_orders.to_s
     orders_tsv('orderlin_xinfo_law.tsv').each do |obj|
       filename = "#{data_dir}/#{obj['ORD_ID'].to_s.tr('/', '_')}.yaml"
