@@ -7,6 +7,7 @@ require_relative '../folio_request'
 require_relative '../../../lib/folio_uuid'
 
 # Module to encapsulate methods used by orders rake tasks
+# rubocop: disable Metrics/ModuleLength
 module OrdersTaskHelpers
   include AcquisitionsUuidsHelpers, FolioRequestHelper, HoldingCodeHelpers, OrderTypeHelpers,
           PoLinesHelpers, Uuids
@@ -23,7 +24,7 @@ module OrdersTaskHelpers
   end
 
   def transform_law_orders
-    law_uuids =  uuid_hashes('Law')
+    law_uuids = uuid_hashes('Law')
     Dir.each_child(Settings.yaml.law_orders.to_s) do |file|
       order_id, sym_order = get_id_data(YAML.load_file("#{Settings.yaml.law_orders}/#{file}"))
       folio_composite_orders = orders_hash(order_id, sym_order, law_uuids)
@@ -214,3 +215,4 @@ module OrdersTaskHelpers
     @@folio_request.delete("/orders/composite-orders/#{id}")
   end
 end
+# rubocop: enable Metrics/ModuleLength

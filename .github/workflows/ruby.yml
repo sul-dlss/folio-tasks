@@ -20,7 +20,7 @@ jobs:
     - name: Run Rubocop
       run: bundle exec rake rubocop
     - name: Prepare test directories
-      run: | -
+      run: |
         mkdir -p spec/fixtures/acquisitions/orders/json/law
         mkdir -p spec/fixtures/acquisitions/orders/json/sul
     - name: Run tests
