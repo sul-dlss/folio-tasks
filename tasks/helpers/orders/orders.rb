@@ -3,15 +3,57 @@
 require_relative '../folio_request'
 
 # Module to encapsulate methods used by orders rake tasks
+# rubocop: disable Metrics/ModuleLength
 module OrdersTaskHelpers
   include FolioRequestHelper
+
+  def transform_sul_orders
+    sul_uuids = uuid_hashes('SUL')
+    Dir.each_child(Settings.yaml.sul_orders.to_s) do |file|
+      order_id, sym_order = get_id_data(YAML.load_file("#{Settings.yaml.sul_orders}/#{file}"))
+      folio_composite_orders = orders_hash(order_id, sym_order, sul_uuids)
+      File.open("#{Settings.json_orders}/sul/#{file.tr('.yaml', '.json')}", 'w') do |f|
+        f.puts folio_composite_orders.to_json
+      end
+    end
+  end
+
+  def transform_law_orders
+    law_uuids = uuid_hashes('Law')
+    Dir.each_child(Settings.yaml.law_orders.to_s) do |file|
+      order_id, sym_order = get_id_data(YAML.load_file("#{Settings.yaml.law_orders}/#{file}"))
+      folio_composite_orders = orders_hash(order_id, sym_order, law_uuids)
+      File.open("#{Settings.json_orders}/law/#{file.tr('.yaml', '.json')}", 'w') do |f|
+        f.puts folio_composite_orders.to_json
+      end
+    end
+  end
+
+  def acq_unit_uuid(lib)
+    acq_units.fetch(lib, nil)
+  end
+
+  def order_type_map
+    order_type_mapping('order_type_map.tsv', material_types, acquisition_methods)
+  end
+
+  def hldg_code_loc_map(lib)
+    uuids = lib == 'SUL' ? sul_locations : law_locations
+    hldg_code_map('sym_hldg_code_location_map.tsv', uuids)
+  end
+
+  def uuid_hashes(lib)
+    orgs = lib == 'SUL' ? sul_organizations : law_organizations
+    funds = lib == 'SUL' ? sul_funds : law_funds
+    [acq_unit_uuid(lib), tenant_addresses, orgs, order_type_map, hldg_code_loc_map(lib), funds]
+  end
 
   def get_id_data(yaml_hash)
     [yaml_hash.keys.first, yaml_hash.values.first]
   end
 
-  def orders_hash(order_id, sym_order, acq_unit_uuid, uuid_hashes)
-    addresses, organizations, order_type_map, hldg_code_loc_map, funds = uuid_hashes
+  def orders_hash(order_id, sym_order, uuid_hashes)
+    acq_unit_uuid, addresses, organizations, order_type_map, hldg_code_loc_map, funds = uuid_hashes
     composite_orders = {
       'id' => determine_order_uuid(cleanup_po_num(order_id), Settings.okapi.url.to_s),
       'approved' => true,
@@ -168,3 +210,4 @@ module OrdersTaskHelpers
     @@folio_request.delete("/orders/composite-orders/#{id}")
   end
 end
+# rubocop: enable Metrics/ModuleLength
