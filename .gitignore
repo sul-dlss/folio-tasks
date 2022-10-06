@@ -4,3 +4,4 @@
 /tsv
 /xml
 /json/**/*.json
+spec/fixtures/acquisitions/orders/json

@@ -14,7 +14,7 @@ describe 'transform LAW orders rake tasks' do
     transform_law_orders_task.send(:hldg_code_map, 'sym_hldg_code_location_map.tsv', Uuids.law_locations)
   end
   let(:uuid_hashes) do
-    [Uuids.tenant_addresses, AcquisitionsUuidsHelpers.law_organizations, order_type_map, hldg_code_map,
+    [acq_unit_uuid, Uuids.tenant_addresses, AcquisitionsUuidsHelpers.law_organizations, order_type_map, hldg_code_map,
      AcquisitionsUuidsHelpers.law_funds]
   end
   let(:law_order_yaml_dir) { Settings.yaml.law_orders.to_s }
@@ -24,7 +24,7 @@ describe 'transform LAW orders rake tasks' do
   let(:sym_order) do
     transform_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/56789L02.yaml")).pop
   end
-  let(:orders_hash) { transform_law_orders_task.send(:orders_hash, order_id, sym_order, acq_unit_uuid, uuid_hashes) }
+  let(:orders_hash) { transform_law_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

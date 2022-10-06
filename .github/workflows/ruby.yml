@@ -19,5 +19,9 @@ jobs:
       run: bundle install --without production
     - name: Run Rubocop
       run: bundle exec rake rubocop
+    - name: Prepare test directories
+      run: | -
+        mkdir -p spec/fixtures/acquisitions/orders/json/law
+        mkdir -p spec/fixtures/acquisitions/orders/json/sul
     - name: Run tests
       run: bundle exec rspec

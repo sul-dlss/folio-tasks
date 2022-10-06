@@ -18,6 +18,8 @@ yaml:
 # we test against real data we GET from FOLIO before migrating
 json: spec/fixtures/json
 
+json_orders: spec/fixtures/acquisitions/orders/json
+
 # comment this out in order to use the user's real email address:
 user_email_override: foliotesting@lists.stanford.edu
 
