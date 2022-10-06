@@ -1,16 +1,11 @@
 # frozen_string_literal: true
 
-require 'require_all'
-require_rel '../uuids'
-require_rel '../orders'
 require_relative '../folio_request'
-require_relative '../../../lib/folio_uuid'
 
 # Module to encapsulate methods used by orders rake tasks
 # rubocop: disable Metrics/ModuleLength
 module OrdersTaskHelpers
-  include AcquisitionsUuidsHelpers, FolioRequestHelper, HoldingCodeHelpers, OrderTypeHelpers,
-          PoLinesHelpers, Uuids
+  include FolioRequestHelper
 
   def transform_sul_orders
     sul_uuids = uuid_hashes('SUL')

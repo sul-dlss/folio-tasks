@@ -1,10 +1,14 @@
 # frozen_string_literal: true
 
 require 'csv'
-require_relative '../helpers/orders/orders'
+require 'require_all'
+require_rel '../helpers/orders'
+require_rel '../helpers/uuids'
+require_relative '../../lib/folio_uuid'
 
 namespace :acquisitions do
-  include OrdersTaskHelpers
+  include AcquisitionsUuidsHelpers, FolioRequestHelper, HoldingCodeHelpers, OrdersTaskHelpers, OrderTypeHelpers,
+          PoLinesHelpers, Uuids
 
   desc 'transform SUL orders to folio orders'
   task :transform_sul_orders do
