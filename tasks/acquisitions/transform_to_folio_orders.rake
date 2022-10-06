@@ -50,4 +50,16 @@ namespace :acquisitions do
       end
     end
   end
+
+  desc 'delete sul folio order json files'
+  task :delete_sul_order_json do
+    data_dir = "#{Settings.json_orders}/sul"
+    Dir.each_child(data_dir) { |i| File.delete("#{data_dir}/#{i}") }
+  end
+
+  desc 'delete law folio order json files'
+  task :delete_law_order_json do
+    data_dir = "#{Settings.json_orders}/law"
+    Dir.each_child(data_dir) { |i| File.delete("#{data_dir}/#{i}") }
+  end
 end
