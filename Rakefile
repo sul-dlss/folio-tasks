@@ -77,8 +77,8 @@ task load_new_data_and_settings: %i[load_user_settings
 desc 'Process Symphony order data for SUL and LAW: [create yaml files, add xinfo fields to yaml, transform to folio orders]'
 task prepare_orders: %i[acquisitions:create_sul_orders_yaml
                         acquisitions:add_sul_order_xinfo
-                        acquisitions:add_sul_orderlin1
-                        acquisitions:add_sul_orderline
+                        acquisitions:add_sul_orderlin1_xinfo
+                        acquisitions:add_sul_orderline_xinfo
                         acquisitions:transform_sul_orders
                         acquisitions:create_law_orders_yaml
                         acquisitions:add_law_order_xinfo
