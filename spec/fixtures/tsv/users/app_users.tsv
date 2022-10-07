@@ -1,2 +1,3 @@
-username	password	active
-app_user	password	true
+username	password	active	EMAIL	NAME	PATRON_GROUP
+app_user	password	true		App, user
+access1	circpass	true	foliotesting@lists.stanford.edu	Access1, Test	staff

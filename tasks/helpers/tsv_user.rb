@@ -68,8 +68,12 @@ module TsvUserTaskHelpers
 
   def app_user(user)
     user['id'] = deterministic_user_id(user['username'])
-    user['personal'] = { 'lastName' => user['username'] }
+    user['personal'] = user_personal(user)
+    user['patronGroup'] = patron_group_id(user['PATRON_GROUP'])
     user.delete('password')
+    user.delete('EMAIL')
+    user.delete('NAME')
+    user.delete('PATRON_GROUP')
     user
   end
 
@@ -82,6 +86,13 @@ module TsvUserTaskHelpers
 
   def app_user_id_hash(user)
     { 'userId' => deterministic_user_id(user['username']) }
+  end
+
+  def patron_group_id(group)
+    user_group = @@folio_request.get_cql('/groups', "group==#{group}")
+    return if user_group.nil?
+
+    user_group['usergroups'][0]['id']
   end
 
   def tsv_patron_group(user)
@@ -112,13 +123,18 @@ module TsvUserTaskHelpers
   end
 
   def user_personal(user)
-    {
-      'lastName' => last_name(user['NAME']),
-      'firstName' => first_name(user['NAME']),
-      'middleName' => middle_name(user['NAME']),
-      'email' => user['EMAIL'],
-      'addresses' => [address(user)]
-    }
+    personal = {}
+    last = last_name(user['NAME'])
+    first = first_name(user['NAME'])
+    middle = middle_name(user['NAME'])
+    email = user['EMAIL']
+
+    personal['lastName'] = last unless last.nil?
+    personal['firstName'] = first unless first.nil?
+    personal['middleName'] = middle unless middle.nil?
+    personal['email'] = email unless email.nil?
+    personal['addresses'] = [address(user)] unless check_address(user)
+    personal
   end
 
   def remove_temp_keys(user)
@@ -157,6 +173,13 @@ module TsvUserTaskHelpers
 
   def enrollment(str)
     str.match?(/\d{8}/) ? Date.parse(str, '%Y%m%d').strftime('%Y-%m-%d') : ''
+  end
+
+  def check_address(user)
+    failed = false
+    vals = %w[ADDR_LINE1 ADDR_LINE2 CITY STATE ZIP]
+    vals.each { |v| failed = true if user[v].nil? }
+    failed
   end
 
   def address(user)
