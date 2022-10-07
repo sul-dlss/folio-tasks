@@ -11,7 +11,7 @@ describe 'loading tsv users who do not have registry ids' do
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
-    .with(body: Settings.okapi.login_params.to_h)
+      .with(body: Settings.okapi.login_params.to_h)
 
     stub_request(:post, 'http://example.com/user-import')
     stub_request(:post, 'http://example.com/users')
