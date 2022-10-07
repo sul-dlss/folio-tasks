@@ -67,9 +67,10 @@ module TsvUserTaskHelpers
   end
 
   def app_user(user)
+    group_id = patron_group_id(user['PATRON_GROUP'])
     user['id'] = deterministic_user_id(user['username'])
     user['personal'] = user_personal(user)
-    user['patronGroup'] = patron_group_id(user['PATRON_GROUP'])
+    user['patronGroup'] = group_id unless group_id.nil?
     user.delete('password')
     user.delete('EMAIL')
     user.delete('NAME')
