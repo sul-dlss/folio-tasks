@@ -12,6 +12,11 @@ namespace :acquisitions do
     batch_post_orders("#{Settings.json_orders}/sul", args[:size].to_i)
   end
 
+  desc 'multi-thread modify SUL orders with pool size'
+  task :update_sul_orders, [:size] do |_, args|
+    batch_put_orders("#{Settings.json_orders}/sul", args[:size].to_i)
+  end
+
   desc 'multi-thread load LAW orders with pool size'
   task :load_law_orders, [:size] do |_, args|
     batch_post_orders("#{Settings.json_orders}/law", args[:size].to_i)

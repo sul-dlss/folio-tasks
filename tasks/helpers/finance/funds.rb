@@ -47,4 +47,8 @@ module FundHelpers
   def funds_post(obj)
     @@folio_request.post('/finance/funds', obj.to_json)
   end
+
+  def funds_put(id, obj)
+    @@folio_request.put("/finance/funds/#{id}", obj.to_json)
+  end
 end

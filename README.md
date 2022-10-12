@@ -105,15 +105,33 @@ Then copy the tsv_users.tsv file to the `tsv` folder and run the `load_tsv-users
 ```
 ruby bin/folio_get_json.rb '/perms/permissions?length=10000&query=(mutable==true)' } | jq 'del(.totalRecords) | del(.permissions[] .childOf, .permissions[] .grantedTo, .permissions[] .dummy, .permissions[] .deprecated, .permissions[] .metadata)' > json/users/permission_sets.orig.json
 ```
+### Loading New Finance Settings
+When there is a new fiscal year, some finance data needs to be re-loaded or updated. There might be new funds, new associations with funds and groups, new organizations, new budgets, etc. Here are the steps to take:
+- rake acquisitions:update_expense_classes
+- rake acquisitions:load_fiscal_years
+- rake acquisitions:load_ledgers
+- rake acquisitions:load_funds
+- rake acquisitions:update_funds
+- rake acquisitions:load_budgets
+- rake acquisitions:update_budgets
+- rake acquisitions:allocate_budgets
+- rake acquisitions:load_org_vendors_sul
+- rake acquisitions:load_org_vendors_business
+- rake acquisitions:load_org_vendors_law
+
+If any of the organizations changed, one could also run `rake acquisitions:update_org_vendors_*`.
+
 
 ### Loading Orders
-The `prepare_*_orders` and `load_orders_*` rake tasks should be run from the Symphony server since the tasks need tsv and yaml files that are generated there.
+The `prepare_orders` and `load_orders` rake tasks should be run from the Symphony server since the tasks need tsv, yaml, and json files that are generated there.
 1. Run `/s/SUL/Bin/folio_symphony_extract/acquisitions/orders/run_reports.ksh` to get current order data for migration from Symphony.
 2. Copy the `order_type_map.tsv` and `sym_hldg_code_location_map.tsv` files from the [FOLIO Ops shared drive](https://drive.google.com/drive/folders/1-FWsDUcc3DRa3sw6jzh4Puvbn-LRcQ-4?usp=sharing) to the `Settings.tsv_orders` directory.
-3. Optionally, delete the yaml files in the `Settings.yaml.*` directories, using the tasks `acquisitions:delete_*_order_yaml`.
-4. Consolidate all the order tsv data into one yaml file per order by running the `prepare_*_orders` rake tasks.
-5. Load orders to FOLIO using the `load_orders_*` rake tasks. This is a long-running task, so it is best to run it in a `screen` session on the Symphony server.
-6. Monitor progress by checking the json files written to the `Settings.json_orders` directory.
+3. Optionally, delete the yaml and json files in the `Settings.yaml.*` and `Settings.json_orders.*` directories, using the tasks `acquisitions:delete_*_order_yaml` and `acquisitions:delete_*_order_json`.
+4. Process the Symphony order tsv data and transform to FOLIO order json by running `STAGE=prod rake prepare_orders`. Use the appropriate `STAGE` for whichever environment the orders will be loaded to.
+5. Load orders to FOLIO using `STAGE=prod rake load_orders[20]`. This is a long-running task, so it is best to run it in a `screen` session on the Symphony server.
+
+#### Using screen session
+From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S load_orders`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake acquisitions:load_orders[50]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
 
 ## Development notes
 When a new task is created add the task definition to the `Rakefile` and also to the `load_new_data_and_settings` array

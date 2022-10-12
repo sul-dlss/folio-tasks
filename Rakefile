@@ -87,10 +87,12 @@ task prepare_orders: %i[acquisitions:create_sul_orders_yaml
                         acquisitions:add_law_orderline_xinfo
                         acquisitions:transform_law_orders]
 
-desc 'Load SUL and LAW order data and SUL order tags'
-task load_orders: %i[acquisitions:load_tags_orders_sul
-                     acquisitions:load_sul_orders[10]
-                     acquisitions:load_law_orders[10]]
+desc 'Multi-thread load SUL and LAW order data with pool size and load SUL order tags'
+task :load_orders, [:size] do |task, args|
+  Rake::Task['acquisitions:load_tags_orders_sul'].invoke
+  Rake::Task['acquisitions:load_sul_orders'].invoke args[:size]
+  Rake::Task['acquisitions:load_law_orders'].invoke args[:size]
+end
 
 desc 'Pull all json data (use STAGE=orig)'
 task pull_all_json_data: %i[users:pull_waivers

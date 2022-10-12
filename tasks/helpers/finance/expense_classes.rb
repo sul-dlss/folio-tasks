@@ -10,6 +10,10 @@ module ExpenseClassHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/expense-classes.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
+  def expense_class_id(code, expense_class_uuids)
+    expense_class_uuids.fetch(code, nil)
+  end
+
   def expense_class_id_list(codes, expense_class_uuids)
     list = []
     codes&.split(/,\s*/)&.each do |code|
@@ -25,5 +29,9 @@ module ExpenseClassHelpers
 
   def expense_classes_post(obj)
     @@folio_request.post('/finance/expense-classes', obj.to_json)
+  end
+
+  def expense_class_put(id, obj)
+    @@folio_request.put("/finance/expense-classes/#{id}", obj.to_json)
   end
 end
