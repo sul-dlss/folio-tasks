@@ -17,6 +17,10 @@ describe 'loading tsv users who do not have registry ids' do
     stub_request(:post, 'http://example.com/users')
     stub_request(:post, 'http://example.com/authn/credentials')
     stub_request(:post, 'http://example.com/perms/users')
+
+    stub_request(:get, 'http://example.com/groups')
+      .with(query: hash_including)
+      .to_return(body: '{ "usergroups": [ { "id": "abc-123" } ] }')
   end
 
   it 'has a hash size that matches the number of lines in the tsv file' do
@@ -91,6 +95,54 @@ describe 'loading tsv users who do not have registry ids' do
 
     it 'creates a hash without password' do
       expect(load_app_users_task.send(:app_user, app_user_data.first)).not_to have_key('password')
+    end
+  end
+
+  context 'when creating an app user without email or patronGroup' do
+    it 'does not include email in the user data' do
+      expect(load_app_users_task.send(:app_user, app_user_data.first)).not_to have_key('email')
+    end
+
+    it 'does not include patronGroup in the user data' do
+      expect(load_app_users_task.send(:app_user, app_user_data.first)).to have_key('patronGroup')
+    end
+  end
+
+  context 'when creating an app user with personal information' do
+    it 'does not include email in the user data' do
+      expect(load_app_users_task.send(:app_user, app_user_data.first)).not_to have_key('EMAIL')
+    end
+
+    it 'does not include patronGroup in the user data' do
+      expect(load_app_users_task.send(:app_user, app_user_data.first)).not_to have_key('PATRON_GROUP')
+    end
+
+    it 'includes an email address if present' do
+      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['personal']).to have_key('email')
+    end
+
+    it 'includes a username' do
+      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['username']).to eq('access1')
+    end
+
+    it 'includes the active flag' do
+      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['active']).to be_truthy
+    end
+
+    it 'includes a first name' do
+      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['personal']).to have_key('firstName')
+    end
+
+    it 'includes a last name' do
+      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['personal']).to have_key('lastName')
+    end
+
+    it 'does not include a middle name' do
+      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['personal']).not_to have_key('middleName')
+    end
+
+    it 'does not include an address' do
+      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['personal']).not_to have_key('addresses')
     end
   end
 end
