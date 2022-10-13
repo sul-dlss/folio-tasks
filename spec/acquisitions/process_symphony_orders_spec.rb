@@ -96,4 +96,10 @@ describe 'prepare order yaml files' do
     test_output = YAML.load_file("#{sul_data_dir}/777777F02.yaml")
     expect(test_output).to eq(fixture_file)
   end
+
+  it 'creates a yaml file for SUBSCRIPT order type' do
+    fixture_file = YAML.load_file("#{fixture_data}/888888F07.yaml")
+    test_output = YAML.load_file("#{sul_data_dir}/888888F07.yaml")
+    expect(test_output).to eq(fixture_file)
+  end
 end
