@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 # Module to encapsulate methods used by orders rake tasks to create po lines
-# rubocop: disable Metrics/ModuleLength
 module PoLinesHelpers
   def add_po_line(orderlines, order_type, order_type_map, hldg_code_loc_map, funds)
     po_lines = []
@@ -110,14 +109,19 @@ module PoLinesHelpers
   end
 
   def add_locations(po_line_hash, hldg_code, hldg_code_loc_map)
-    return po_line_hash if po_line_hash['orderFormat'].eql?('Other')
-
     locations = {
       'locationId' => hldg_code_loc_map.fetch(hldg_code, nil),
       'quantity' => 1
     }
-    locations.store('quantityElectronic', 1) if po_line_hash['orderFormat']&.match?(/Electronic|Mix/)
-    locations.store('quantityPhysical', 1) if po_line_hash['orderFormat']&.match?(/Physical|Mix/)
+    case po_line_hash['orderFormat']
+    when 'Electronic Resource'
+      locations.store('quantityElectronic', 1)
+    when 'P/E Mix'
+      locations.store('quantityElectronic', 1)
+      locations.store('quantityPhysical', 1)
+    else
+      locations.store('quantityPhysical', 1) # Physical Resource and Other
+    end
     po_line_hash.store('locations', [locations.compact]) # json schema expects an array
     po_line_hash
   end
@@ -130,7 +134,7 @@ module PoLinesHelpers
   end
 
   def add_physical(po_line_hash, material_type)
-    if po_line_hash['orderFormat']&.match?(/Physical|Mix/)
+    if po_line_hash['orderFormat']&.match?(/Physical|Mix|Other/)
       po_line_hash.store('physical', eresource_physical_hash(material_type))
     end
     po_line_hash
@@ -156,4 +160,3 @@ module PoLinesHelpers
     }
   end
 end
-# rubocop: enable Metrics/ModuleLength

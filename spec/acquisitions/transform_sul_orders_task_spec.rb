@@ -516,8 +516,12 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['poNumber']).to match(/^[a-zA-Z0-9]{1,22}$/)
     end
 
-    it 'has a locations object' do
-      expect(orders_hash['compositePoLines'][0]).to have_key 'locations'
+    it 'has orderFormat Other' do
+      expect(orders_hash['compositePoLines'].sample['orderFormat']).to eq 'Other'
+    end
+
+    it 'has a locations object with quantityPhysical' do
+      expect(orders_hash['compositePoLines'][0]['locations'][0]['quantityPhysical']).to eq 1
     end
 
     it 'has a cost object with listUnitPrice' do
@@ -531,6 +535,10 @@ describe 'transform SUL orders rake tasks' do
     it 'has a cost object with currency' do
       expect(orders_hash['compositePoLines'][0]['cost']['currency']).to eq 'USD'
     end
+
+    it 'has a physical object with materialType for unspecified' do
+      expect(orders_hash['compositePoLines'][0]['physical']['materialType']).to eq 'mat-789'
+    end
   end
 
   context 'when order format is P/E Mix' do
@@ -541,6 +549,10 @@ describe 'transform SUL orders rake tasks' do
       transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/777777F02.yaml")).pop
     end
     let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
+
+    it 'has orderFormat P/E Mix' do
+      expect(orders_hash['compositePoLines'].sample['orderFormat']).to eq 'P/E Mix'
+    end
 
     it 'has a locations object with quantityElectronic' do
       expect(orders_hash['compositePoLines'][0]['locations'][0]['quantityElectronic']).to eq 1
