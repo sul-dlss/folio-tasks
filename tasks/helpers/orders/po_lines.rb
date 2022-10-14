@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 # Module to encapsulate methods used by orders rake tasks to create po lines
+# rubocop: disable Metrics/ModuleLength
 module PoLinesHelpers
   def add_po_line(orderlines, order_type, order_type_map, hldg_code_loc_map, funds)
     po_lines = []
@@ -160,3 +161,4 @@ module PoLinesHelpers
     }
   end
 end
+# rubocop: enable Metrics/ModuleLength
