@@ -118,10 +118,6 @@ RSpec.describe XmlUser do
       end
 
       it 'has the correct patron group' do
-        pending 'should these be loaded to FOLIO?'
-        # no patronGroup b/c active is false (effective and until dates are nil)
-        # in Symphony, user record gets no USER_PROFILE and therefore not loaded
-        # Should these get FOLIO records?
         expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'affiliate-sponsored-eresources'
       end
     end
