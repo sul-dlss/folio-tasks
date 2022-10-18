@@ -38,7 +38,8 @@ class PatronGroups
   end
 
   def affiliate_sponsored_eresources
-    @aff['type'] == 'affiliate:sponsored' && @priv_groups.include?('stanford:library-eresources-eligible')
+    @priv_groups.include?('stanford:affiliate-sponsored') &&
+      @priv_groups.include?('stanford:library-eresources-eligible')
   end
 
   def affiliation_affdata
