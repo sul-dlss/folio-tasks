@@ -1,0 +1,35 @@
+---
+888888F07:
+  ORDER_TYPE: SUBSCRIPT
+  ORD_DATE_CREATED: '20061018'
+  LIBRARY: SUL
+  VENDOR_ID: VENDOR
+  compositePoLines:
+    '5810508':
+      ORD_KEY: '4810607'
+      ORDLINE_NUM: '1'
+      CKEY: '6652962'
+      TITLE: A title
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: SER
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: '0'
+      HOLDNG_CODE: GRN-SER-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 11111-22-ABCD
+        FUND_NAME: ASULFUND
+      SELECTOR: sbs
+      ACCOUNT: CAX040S
+      FUND: romance
+  notes:
+  - 'INSTRUCT: Please begin a subscription with nos. 1-5 (2002-2006) to continue until
+    cancelled. Please advise us if you cannot supply. Thank you very much. jrv  18
+    October 2006'
+  - 'NOTE: JRV'
+  - 'DESC: address: ADEN c/o Name, 11, street, zip Nantes, France'
+  - 'CONTACT: Jane; e-mail = name@example.com; fax = +1-555-555-5555; telephone =
+    +1-555-555-5555'

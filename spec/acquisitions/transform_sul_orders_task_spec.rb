@@ -51,7 +51,7 @@ describe 'transform SUL orders rake tasks' do
     stub_request(:get, 'http://example.com/material-types')
       .with(query: hash_including)
       .to_return(body: '{ "mtypes": [{ "id": "mat-123", "name": "book" },
-                                     { "id": "mat-456", "name": "serial" },
+                                     { "id": "mat-456", "name": "periodical" },
                                      { "id": "mat-789", "name": "unspecified" }]
                         }')
 
@@ -175,10 +175,10 @@ describe 'transform SUL orders rake tasks' do
 
   context 'when orders are ongoing subscriptions' do
     let(:order_id) do
-      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/888888F07.yaml")).shift
     end
     let(:sym_order) do
-      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/888888F07.yaml")).pop
     end
     let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
 
@@ -199,7 +199,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has receipt status of Ongoing even though po_line has date received' do
-      expect(orders_hash['compositePoLines'][1]['receiptStatus']).to eq 'Ongoing'
+      expect(orders_hash['compositePoLines'][0]['receiptStatus']).to eq 'Ongoing'
     end
 
     it 'has manually add pieces for receiving box checked' do
@@ -214,17 +214,17 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['shipTo']).to eq 'entry-1234'
     end
 
-    it 'has a material type of book' do
-      expect(orders_hash['compositePoLines'].sample['physical']['materialType']).to eq 'mat-123'
+    it 'has a material type of periodical' do
+      expect(orders_hash['compositePoLines'].sample['physical']['materialType']).to eq 'mat-456'
     end
   end
 
   context 'when orders are ongoing but not subscriptions' do
     let(:order_id) do
-      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).shift
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).shift
     end
     let(:sym_order) do
-      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/1ABC0000.yaml")).pop
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml")).pop
     end
     let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
 
@@ -245,7 +245,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'po line with received item has a receipt date' do
-      expect(orders_hash['compositePoLines'][1]['receiptDate']).to eq '2021-10-08'
+      expect(orders_hash['compositePoLines'][1]['receiptDate']).to eq '2022-04-15'
     end
 
     it 'has manually add pieces for receiving box checked' do
@@ -257,11 +257,11 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'po line with parts in set has a details object with receivingNote' do
-      expect(orders_hash['compositePoLines'][2]['details']['receivingNote']).to eq 'v.2016 (published 2021)'
+      expect(orders_hash['compositePoLines'][1]['details']['receivingNote']).to eq '1/1/22-12/31/22, PMT'
     end
 
-    it 'has a material type of serial' do
-      expect(orders_hash['compositePoLines'].sample['physical']['materialType']).to eq 'mat-456'
+    it 'has a material type of book' do
+      expect(orders_hash['compositePoLines'].sample['physical']['materialType']).to eq 'mat-123'
     end
 
     it 'has a title in titleOrPackage' do
@@ -499,7 +499,7 @@ describe 'transform SUL orders rake tasks' do
     end
   end
 
-  context 'when order format is other' do
+  context 'when acquisition method is Shipping' do
     let(:order_id) do
       transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/VENDOR_GBP-SH.yaml")).shift
     end
@@ -516,8 +516,12 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['poNumber']).to match(/^[a-zA-Z0-9]{1,22}$/)
     end
 
-    it 'does not have a locations object' do
-      expect(orders_hash['compositePoLines'][0]).not_to have_key 'locations'
+    it 'has orderFormat Other' do
+      expect(orders_hash['compositePoLines'].sample['orderFormat']).to eq 'Other'
+    end
+
+    it 'has a locations object with quantityPhysical' do
+      expect(orders_hash['compositePoLines'][0]['locations'][0]['quantityPhysical']).to eq 1
     end
 
     it 'has a cost object with listUnitPrice' do
@@ -531,6 +535,10 @@ describe 'transform SUL orders rake tasks' do
     it 'has a cost object with currency' do
       expect(orders_hash['compositePoLines'][0]['cost']['currency']).to eq 'USD'
     end
+
+    it 'has a physical object with materialType for unspecified' do
+      expect(orders_hash['compositePoLines'][0]['physical']['materialType']).to eq 'mat-789'
+    end
   end
 
   context 'when order format is P/E Mix' do
@@ -541,6 +549,10 @@ describe 'transform SUL orders rake tasks' do
       transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/777777F02.yaml")).pop
     end
     let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
+
+    it 'has orderFormat P/E Mix' do
+      expect(orders_hash['compositePoLines'].sample['orderFormat']).to eq 'P/E Mix'
+    end
 
     it 'has a locations object with quantityElectronic' do
       expect(orders_hash['compositePoLines'][0]['locations'][0]['quantityElectronic']).to eq 1

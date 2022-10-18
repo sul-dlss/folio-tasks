@@ -210,6 +210,10 @@ module OrdersTaskHelpers
     @@folio_request.put("/orders/composite-orders/#{id}", obj.to_json)
   end
 
+  def orders_storage_put(id, obj)
+    @@folio_request.put("/orders-storage/purchase-orders/#{id}", obj.to_json)
+  end
+
   def orders_delete(id)
     @@folio_request.delete("/orders/composite-orders/#{id}")
   end
