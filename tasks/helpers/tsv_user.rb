@@ -198,6 +198,7 @@ module TsvUserTaskHelpers
     psets.delete('SUNetID')
     psets.delete('Acq Unit')
     psets.delete('Service Point')
+    psets.delete('Notes')
     psets
   end
 
