@@ -128,14 +128,17 @@ module TsvUserTaskHelpers
     last = last_name(user['NAME'])
     first = first_name(user['NAME'])
     middle = middle_name(user['NAME'])
-    email = user['EMAIL']
 
     personal['lastName'] = last unless last.nil?
     personal['firstName'] = first unless first.nil?
     personal['middleName'] = middle unless middle.nil?
-    personal['email'] = email unless email.nil?
+    personal['email'] = email_address(user)
     personal['addresses'] = [address(user)] unless check_address(user)
     personal
+  end
+
+  def email_address(user)
+    Settings.user_email_override || user['EMAIL'] || ''
   end
 
   def remove_temp_keys(user)
