@@ -5,6 +5,7 @@ require 'spec_helper'
 
 describe 'assign permission sets rake task' do
   let(:assign_permission_sets_task) { Rake.application.invoke_task 'tsv_users:assign_permission_sets' }
+  let(:psets_from_cols) { TsvUserTaskHelpers.psets_from_cols }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -51,7 +52,7 @@ describe 'assign permission sets rake task' do
     end
 
     it 'has a hash with keys of the columns in the tsv file' do
-      expect(assign_permission_sets_task.send(:user_acq_units_and_permission_sets_tsv)[0].keys.size).to eq 6
+      expect(psets_from_cols.size).to eq 3
     end
 
     it 'has SUNetId of sunetId1' do
