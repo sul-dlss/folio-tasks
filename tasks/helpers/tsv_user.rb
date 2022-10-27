@@ -128,7 +128,8 @@ module TsvUserTaskHelpers
     last = last_name(user['NAME'])
     first = first_name(user['NAME'])
     middle = middle_name(user['NAME'])
-    email = user['EMAIL']
+    # email = user['EMAIL']
+    email = 'foliotesting@lists,stanford.edu'
 
     personal['lastName'] = last unless last.nil?
     personal['firstName'] = first unless first.nil?
