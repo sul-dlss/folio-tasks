@@ -72,6 +72,10 @@ class FolioRequest
     Settings.okapi.url
   end
 
+  def make_path(path)
+    path.start_with?('/') ? path.strip : "/#{path.strip}"
+  end
+
   def default_headers
     DEFAULT_HEADERS.merge(Settings.okapi.headers || {})
   end
