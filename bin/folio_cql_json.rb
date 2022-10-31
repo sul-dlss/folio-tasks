@@ -2,7 +2,7 @@
 
 require_relative '../lib/folio_request'
 require 'json'
-path = ARGV[0]
-query = ARGV[1]
 folio = FolioRequest.new
+path = folio.make_path(ARGV[0])
+query = ARGV[1]
 folio.get_cql_json(path, query)
