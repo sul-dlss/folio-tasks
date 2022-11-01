@@ -2,6 +2,6 @@
 
 require_relative '../lib/folio_request'
 require 'json'
-path = ARGV[0]
 folio = FolioRequest.new
+path = folio.make_path(ARGV[0])
 folio.delete(path)

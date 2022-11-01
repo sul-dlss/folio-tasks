@@ -133,6 +133,13 @@ The `prepare_orders` and `load_orders` rake tasks should be run from the Symphon
 #### Using screen session
 From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S load_orders`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake acquisitions:load_orders[50]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
 
+### App user for edge_connexion
+
+Running the `rake tsv_users:load_app_users` task, get the id for the `edge_conn` user under the response `Creating user record in permissions table` then do a folio POST to:
+```
+'perms/users/{id}/permissions' json/users/connexion_permission.json
+```
+
 ## Development notes
 When a new task is created add the task definition to the `Rakefile` and also to the `load_new_data_and_settings` array
 if the task is something that should be loaded into a new instance of FOLIO.
