@@ -49,7 +49,7 @@ namespace :data_import do
   task :load_profile_associations do
     profile_associations_json.each_value do |v|
       v.each do |obj|
-        profile_associations_post(obj, obj['masterProfileType'], obj['detailProfileType'])
+        profile_associations_load(obj, obj['masterProfileType'], obj['detailProfileType'])
       end
     end
   end
