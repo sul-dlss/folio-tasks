@@ -85,8 +85,13 @@ module DataImportTaskHelpers
   end
 
   def profile_associations_post(payload, master, detail)
-    @@folio_request.post("/data-import-profiles/profileAssociations?master=#{master}&detail=#{detail}",
+    @@folio_request.post("/data-import-profiles/profileAssociations?detail=#{detail}&master=#{master}",
                          payload.to_json)
+  end
+
+  def profile_associations_put(payload, master, detail)
+    @@folio_request.put("/data-import-profiles/profileAssociations/#{payload['id']}?detail=#{detail}&master=#{master}",
+                        payload.to_json)
   end
 
   def pull_action_profiles
@@ -121,7 +126,7 @@ module DataImportTaskHelpers
     hash = { 'profileAssociations' => [] }
     master = %w[JOB ACTION MATCH]
     master.each do |profile_m|
-      details = master == 'ACTION' ? %w[ACTION MAPPING MATCH] : %w[ACTION MATCH]
+      details = profile_m == 'ACTION' ? %w[ACTION MAPPING MATCH] : %w[ACTION MATCH]
       details.each do |profile_d|
         profile_associations = @@folio_request.get(
           "/data-import-profiles/profileAssociations?master=#{profile_m}_PROFILE&detail=#{profile_d}_PROFILE"
@@ -132,6 +137,16 @@ module DataImportTaskHelpers
       end
     end
     hash.to_json
+  end
+
+  def profile_associations_load(payload, master, detail)
+    uuids = profile_associations_ids
+
+    if uuids.include?(payload['id'])
+      profile_associations_put(payload, master, detail)
+    else
+      profile_associations_post(payload, master, detail)
+    end
   end
 
   def remove_values(hash, key_name)

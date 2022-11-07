@@ -96,6 +96,16 @@ module Uuids
     addresses_hash
   end
 
+  def profile_associations_ids
+    uuids = []
+    associations = JSON.parse(pull_profile_associations)
+
+    associations['profileAssociations'].each do |obj|
+      uuids.push(obj['id'])
+    end
+    uuids
+  end
+
   def uuid_maps
     [institutions, campuses, libraries, service_points]
   end

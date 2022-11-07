@@ -19,7 +19,7 @@ group :development, :test do
   gem 'rubocop-rake', require: false
   gem 'rubocop-rspec'
   gem 'webmock'
-
+  gem 'byebug'
 end
 
 group :deployment do

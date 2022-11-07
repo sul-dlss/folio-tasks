@@ -7,9 +7,6 @@ describe 'data import profile rake tasks' do
   let(:load_job_profiles_task) { Rake.application.invoke_task 'data_import:load_job_profiles' }
   let(:load_action_profiles_task) { Rake.application.invoke_task 'data_import:load_action_profiles' }
   let(:load_mapping_profiles_task) { Rake.application.invoke_task 'data_import:load_mapping_profiles' }
-  let(:load_profile_associations_task) do
-    Rake.application.invoke_task 'data_import:load_profile_associations'
-  end
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -74,15 +71,6 @@ describe 'data import profile rake tasks' do
       WebMock.allow_net_connect!
       expect(mapping_profiles_json.values.sample[0]).to match_json_schema('mod-data-import-converter-storage',
                                                                           'mappingProfile')
-    end
-  end
-
-  context 'when loading profile associations' do
-    let(:profile_associations_json) { load_profile_associations_task.send(:profile_associations_json) }
-
-    it 'creates a json object' do
-      expect(profile_associations_json.values.sample[0]).to match_json_schema('mod-data-import-converter-storage',
-                                                                              'profileAssociation')
     end
   end
 end
