@@ -3,7 +3,6 @@
 require_relative '../folio_request'
 
 # Module to encapsulate methods used by orders rake tasks
-# rubocop: disable Metrics/ModuleLength
 module OrdersTaskHelpers
   include FolioRequestHelper
 
@@ -218,4 +217,3 @@ module OrdersTaskHelpers
     @@folio_request.delete("/orders/composite-orders/#{id}")
   end
 end
-# rubocop: enable Metrics/ModuleLength

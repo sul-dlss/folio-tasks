@@ -20,10 +20,10 @@ Metrics/BlockLength:
     - 'tasks/**/*'
 
 Metrics/ClassLength:
-  Max: 132
+  Enabled: false
 
 Metrics/ModuleLength:
-  Max: 132
+  Enabled: false
 
 Metrics/MethodLength:
   Max: 22

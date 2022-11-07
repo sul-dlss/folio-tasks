@@ -3,7 +3,6 @@
 require_relative '../helpers/folio_request'
 
 # Module to encapsulate methods used by user_settings rake tasks
-# rubocop: disable Metrics/ModuleLength
 module TsvUserTaskHelpers
   include FolioRequestHelper
 
@@ -247,4 +246,3 @@ module TsvUserTaskHelpers
     end
   end
 end
-# rubocop: enable Metrics/ModuleLength
