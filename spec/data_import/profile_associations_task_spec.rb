@@ -2,7 +2,6 @@
 
 require 'rake'
 require 'spec_helper'
-require 'securerandom'
 
 describe 'pulling and loading profile associations' do
   let(:load_profile_associations_task) do
