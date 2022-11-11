@@ -20,3 +20,12 @@ set :linked_dirs, %w[config/settings]
 set :keep_releases, 3
 
 set :rvm_ruby_version, '2.7.1'
+
+namespace :deploy do
+  desc 'deploy folio-tasks'
+  task :config do
+    on roles(:app) do
+      upload! "config/settings/#{fetch(:stage)}.yml", "#{release_path}/config/settings"
+    end
+  end
+end

@@ -49,6 +49,10 @@ vault login -method oidc mount=oidc-dev
 ```
 vault kv get -field=content puppet/application/folio-tasks/config/settings/prod > config/settings/prod.yml
 ```
+- Upload the config as part of the capistrano deployment:
+```
+cap prod deploy deploy:config
+```
 
 ## Environments
 The `tsv` setting is to specify the directory that contains the tsv source files for loading. This is
