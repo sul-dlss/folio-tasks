@@ -39,6 +39,17 @@ tsv_orders: tsv/acquisitions/orders
 json: json
 ```
 
+## Server Configuration
+After deploying `folio-tasks` to the server, pull in the configuration from vault:
+- Log in using OIDC:
+```
+vault login -method oidc mount=oidc-dev
+```
+- Get the settings from vault:
+```
+vault kv get -field=content puppet/application/folio-tasks/config/settings/prod > config/settings/prod.yml
+```
+
 ## Environments
 The `tsv` setting is to specify the directory that contains the tsv source files for loading. This is
 important for running the tests where the tsv source files are mock files in the `spec/fixtures/tsv` folder.
