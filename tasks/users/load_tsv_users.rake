@@ -5,9 +5,16 @@ require_relative '../helpers/tsv_user'
 namespace :tsv_users do
   include TsvUserTaskHelpers
 
-  desc 'load users from tsv file'
+  desc 'load non-registry users from tsv file'
   task :load_tsv_users do
     users_tsv('tsv_users.tsv').each_slice(500) do |group|
+      user_update(tsv_user(group))
+    end
+  end
+
+  desc 'load expired users from tsv file'
+  task :load_expired_users do
+    users_tsv('expired_users.tsv').each_slice(500) do |group|
       user_update(tsv_user(group))
     end
   end
