@@ -105,6 +105,21 @@ courtesygroups:
   FAC-RLCPB: SUL-institution
   DOC-RLCPB: SUL-institution
 
+policygroups:
+  CNS: staff
+  CNF: faculty
+  CNAC: staff
+  REU: undergrad
+  RED: graduate
+  REG: graduate
+  MXAC: staff
+  MXF: faculty
+  MXAS: courtesy
+  MXD: graduate
+  MXS: staff
+  LAWFEE: courtesy
+  MXALUM: courtesy
+
 usergroups:
   STAFF-NSTR: Instructor
   STAFF-ACT: Acting Instructor

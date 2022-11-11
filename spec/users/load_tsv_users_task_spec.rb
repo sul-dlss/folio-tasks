@@ -37,7 +37,7 @@ describe 'loading tsv users who do not have registry ids' do
     end
 
     it 'creates a hash with a patronGroup' do
-      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][0]['patronGroup']).to eq 'courtesy'
+      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][3]['patronGroup']).to eq 'courtesy'
     end
 
     it 'creates a hash with en enrollment date' do

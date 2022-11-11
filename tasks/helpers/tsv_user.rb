@@ -98,8 +98,19 @@ module TsvUserTaskHelpers
   def tsv_patron_group(user)
     return 'courtesy' unless user['PATRON_CODE']
 
-    code = Settings.courtesygroups.to_h[user['PATRON_CODE'].to_sym].to_s
-    code.empty? ? 'courtesy' : code
+    usergroup = Settings.usergroups.to_h[user['PATRON_CODE'].to_sym].to_s
+    policygroup = Settings.policygroups.to_h[user['PATRON_CODE'].to_sym].to_s
+    courtesygroup = Settings.courtesygroups.to_h[user['PATRON_CODE'].to_sym].to_s
+
+    return 'courtesy' unless [usergroup, policygroup, courtesygroup].any?
+
+    if !usergroup.empty?
+      usergroup
+    elsif !policygroup.empty?
+      policygroup
+    elsif !courtesygroup.empty?
+      courtesygroup
+    end
   end
 
   def user_group(user)
@@ -110,16 +121,23 @@ module TsvUserTaskHelpers
   end
 
   def transform_user(user)
-    user['username'] = user.values[0]
+    user['username'] = user_name(user)
     user['barcode'] = user.values[0]
     user['externalSystemId'] = user.values[1]
     user['patronGroup'] = tsv_patron_group(user)
     user['personal'] = user_personal(user)
-    user['enrollmentDate'] = enrollment(user['PRIV_GRANTED'])
-    user['expirationDate'] = expiration(user['PRIV_EXPIRED'])
+    user['enrollmentDate'] = enrollment(user['PRIV_GRANTED'])&.strftime('%Y-%m-%d')
+    user['expirationDate'] = expiration(user['PRIV_EXPIRED'])&.strftime('%Y-%m-%d')
     user['customFields'] = user_group(user)
+    user['active'] = active(user)
     remove_temp_keys(user)
     user
+  end
+
+  def user_name(user)
+    return user.values[0] unless user['SUNET']
+
+    user['SUNET']
   end
 
   def user_personal(user)
@@ -153,6 +171,7 @@ module TsvUserTaskHelpers
     user.delete('PRIV_GRANTED')
     user.delete('PRIV_EXPIRED')
     user.delete('PATRON_CODE')
+    user.delete('SUNET')
     user
   end
 
@@ -170,12 +189,19 @@ module TsvUserTaskHelpers
     first.split[0] unless first.nil?
   end
 
+  def active(user)
+    expiry = expiration(user['PRIV_EXPIRED'])
+    return false if expiry.nil?
+
+    expiry > Date.today || false
+  end
+
   def expiration(str)
-    str.match?(/\d{8}/) ? Date.parse(str, '%Y%m%d').strftime('%Y-%m-%d') : ''
+    str.match?(/\d{8}/) ? Date.parse(str, '%Y%m%d') : nil
   end
 
   def enrollment(str)
-    str.match?(/\d{8}/) ? Date.parse(str, '%Y%m%d').strftime('%Y-%m-%d') : ''
+    str.match?(/\d{8}/) ? Date.parse(str, '%Y%m%d') : nil
   end
 
   def check_address(user)
