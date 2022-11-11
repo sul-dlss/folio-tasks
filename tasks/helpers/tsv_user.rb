@@ -96,13 +96,13 @@ module TsvUserTaskHelpers
   end
 
   def tsv_patron_group(user)
-    return 'courtesy' unless user['PATRON_CODE']
+    return Settings.defaultgroup unless user['PATRON_CODE']
 
     usergroup = Settings.usergroups.to_h[user['PATRON_CODE'].to_sym].to_s
     policygroup = Settings.policygroups.to_h[user['PATRON_CODE'].to_sym].to_s
     courtesygroup = Settings.courtesygroups.to_h[user['PATRON_CODE'].to_sym].to_s
 
-    return 'courtesy' unless [usergroup, policygroup, courtesygroup].any?
+    return Settings.defaultgroup unless [usergroup, policygroup, courtesygroup].any?
 
     if !usergroup.empty?
       usergroup

@@ -126,3 +126,5 @@ usergroups:
   STAFF-CLIN: Clinical Instructor
   MXF: Consulting Instructor
   STAFF-LECT: Lecturer
+
+defaultgroup: courtesy
