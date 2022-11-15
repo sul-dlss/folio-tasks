@@ -4,6 +4,7 @@ require_relative 'helpers/users'
 require_relative 'helpers/data_import'
 require_relative 'helpers/circulation'
 require_relative 'helpers/courses'
+require_relative 'helpers/configurations'
 
 namespace :users do
   include UsersTaskHelpers
@@ -185,6 +186,21 @@ namespace :courses do
   task :pull_course_depts do
     json_files.each do |dir|
       File.open("#{dir}/courses/departments.json", 'w') { |file| file.puts pull_course_depts }
+    end
+  end
+end
+
+namespace :configurations do
+  include ConfigurationsTaskHelpers
+
+  modules = %i[BULKEDIT CHECKOUT FAST_ADD ORG]
+
+  desc 'pull module configurations'
+  task :pull_configurations do
+    modules.each do |config|
+      File.open("json/configurations/#{config}.json", 'w') do |file|
+        file.puts pull_configurations(config.to_s)
+      end
     end
   end
 end
