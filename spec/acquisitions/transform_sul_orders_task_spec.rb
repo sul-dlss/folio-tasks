@@ -494,8 +494,8 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['billTo']).to eq 'entry-1234'
     end
 
-    it 'does not have a shipTo address' do
-      expect(orders_hash).not_to have_key 'shipTo'
+    it 'has a shipTo address' do
+      expect(orders_hash['shipTo']).to eq 'entry-1234'
     end
   end
 

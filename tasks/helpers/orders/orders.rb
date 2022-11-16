@@ -110,12 +110,22 @@ module OrdersTaskHelpers
   def address_codes
     {
       'SUL' => 'SUL_ACQUISITIONS',
+      'AFRACQ' => 'SUL_ACQUISITIONS',
+      'DIGACQ' => 'SUL_ACQUISITIONS',
+      'GEACQ' => 'SUL_ACQUISITIONS',
+      'GOV' => 'SUL_ACQUISITIONS',
+      'MEACQ' => 'SUL_ACQUISITIONS',
       'ACQ' => 'SUL_ACQUISITIONS',
       'SER' => 'SUL_SERIALS',
-      'EAL' => 'SUL_EAL',
-      'MUS' => 'SUL_MUSIC',
+      'MESER' => 'SUL_SERIALS',
+      'EALACQ' => 'SUL_EAL',
+      'MUSACQ' => 'SUL_MUSIC',
       'LAW' => 'LAW_LIBRARY_ACQUISITIONS'
     }
+  end
+
+  def default_shipto(addresses)
+    addresses.fetch('SUL_ACQUISITIONS', nil)
   end
 
   def bill_to_uuid(library, addresses)
@@ -127,7 +137,7 @@ module OrdersTaskHelpers
     if library.eql?('LAW')
       addresses.fetch(address_codes.fetch(library), nil)
     else
-      addresses.fetch(address_codes.fetch(bib_entry, nil), nil)
+      addresses.fetch(address_codes.fetch(bib_entry, nil), default_shipto(addresses))
     end
   end
 
