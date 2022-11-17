@@ -13,8 +13,8 @@ namespace :tsv_users do
   end
 
   desc 'load expired users from tsv file'
-  task :load_expired_users do
-    users_tsv('expired_users.tsv').each_slice(500) do |group|
+  task :load_non_registry_users do
+    users_tsv('non_reg_users.tsv').each_slice(500) do |group|
       user_update(tsv_user(group))
     end
   end
