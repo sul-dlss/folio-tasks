@@ -20,7 +20,7 @@ namespace :tenant do
   task :delete_locations do
     folio = FolioRequest.new
 
-    tsv_contents = CSV.read('tsv/locations.tsv', { col_sep: "\t" })
+    tsv_contents = CSV.read('tsv/tenant/locations.tsv', { col_sep: "\t", quote_char: nil })
     tsv_contents.shift
     tsv_contents.each do |row|
       code = row[0]
@@ -40,7 +40,7 @@ namespace :tenant do
   task :delete_service_points do
     folio = FolioRequest.new
 
-    tsv_contents = CSV.read('tsv/service-points.tsv', { col_sep: "\t" })
+    tsv_contents = CSV.read('tsv/tenant/service-points.tsv', { col_sep: "\t" })
     tsv_contents.shift
     tsv_contents.each do |row|
       code = row[1]
@@ -60,7 +60,7 @@ namespace :tenant do
   task :delete_libraries do
     folio = FolioRequest.new
 
-    tsv_contents = CSV.read('tsv/libraries.tsv', { col_sep: "\t" })
+    tsv_contents = CSV.read('tsv/tenant/libraries.tsv', { col_sep: "\t" })
     tsv_contents.shift
     tsv_contents.each do |row|
       code = row[2]
@@ -80,7 +80,7 @@ namespace :tenant do
   task :delete_campuses do
     folio = FolioRequest.new
 
-    tsv_contents = CSV.read('tsv/campuses.tsv', { col_sep: "\t" })
+    tsv_contents = CSV.read('tsv/tenant/campuses.tsv', { col_sep: "\t" })
     tsv_contents.shift
     tsv_contents.each do |row|
       code = row[1]
@@ -100,7 +100,7 @@ namespace :tenant do
   task :delete_institutions do
     folio = FolioRequest.new
 
-    tsv_contents = CSV.read('tsv/institutions.tsv', { col_sep: "\t" })
+    tsv_contents = CSV.read('tsv/tenant/institutions.tsv', { col_sep: "\t" })
     tsv_contents.shift
     tsv_contents.each do |row|
       code = row[1]
