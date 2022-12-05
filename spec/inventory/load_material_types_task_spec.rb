@@ -19,5 +19,13 @@ describe 'material types rake tasks' do
     it 'creates the hash key and value for a material type name' do
       expect(load_material_types_task.send(:material_types_csv)[3]['name']).to eq 'accessories 4'
     end
+
+    it 'creates the hash key and value for a material type id' do
+      expect(load_material_types_task.send(:material_types_csv)[3]['id']).to eq '77d4dcd5-a0de-42c3-bd9d-627be43c391f'
+    end
+
+    it 'creates the hash key and value for a material type source' do
+      expect(load_material_types_task.send(:material_types_csv)[3]['source']).to eq 'local'
+    end
   end
 end

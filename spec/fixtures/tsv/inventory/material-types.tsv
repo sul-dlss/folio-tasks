@@ -1,21 +1,24 @@
-name
-accessories 1
-accessories 2
-accessories 3
-accessories 4
-av equipment 1
-av equipment 2
-av equipment 3
-archival
-kit
-laptop
-library equipment 1
-library equipment 2
-library equipment 3
-map
-multimedia
-periodical
-portable device 1
-portable device 2
-portable device 3
-score
+name	source	id
+accessories 1	local	ccfa26aa-127b-4b0f-a48b-24c499638321
+accessories 2	local	b08aefa4-f1f1-4e90-bb6a-d82111d7df72
+accessories 3	local	2af191fb-cb1b-4209-942a-899cce59d122
+accessories 4	local	77d4dcd5-a0de-42c3-bd9d-627be43c391f
+av equipment 1	local	62a258de-c8d5-451e-9c10-6284a1e30fcc
+av equipment 2	local	28e77e70-c340-44dc-896e-1b305e9750f2
+av equipment 3	local	88d757ff-fb12-48a9-89f7-dae1ba654390
+archival	local	3b67152f-19a5-4a7e-a998-c9524b3c85b8
+database	local	96d6e471-91da-4daa-902c-c0a655bb505f
+dataset	local	d2a01ce5-3b50-4485-8785-aa6ed0120743
+kit	local	473e3126-08e5-42cf-b4db-f1ee081c7d0a
+laptop	local	41103ab8-0029-42a7-8597-f3c6563913b4
+library equipment 1	local	10672185-63a7-40e0-9d14-c8d4f3a5daec
+library equipment 2	local	e0520c6b-f635-455e-9272-588393691fa7
+library equipment 3	local	f4e7c49b-9b17-4c18-a8fb-22113a7eeefb
+map	local	851b4a99-c64f-4e47-91d3-fcdcdfbf9f36
+multimedia	local	097ce47e-afca-42f3-b47a-88c7d77617b5
+periodical	local	655defdd-c839-464f-bb37-3657208e6970
+portable device 1	local	2b21ec33-9400-4eea-9e29-e898129982bf
+portable device 2	local	62a4f45a-9b42-4159-a336-4a32483fac7b
+portable device 3	local	7bddd21b-b9c0-4c90-a765-630f91157113
+score	local	5e74635c-ed1c-40e7-8e93-ac8264e3efc0
+software	local	c273ee40-e44b-40a9-86e1-b6a953615b8e
