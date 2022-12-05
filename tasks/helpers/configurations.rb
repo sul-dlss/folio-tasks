@@ -19,4 +19,8 @@ module ConfigurationsTaskHelpers
   def config_entry_post(hash)
     @@folio_request.post('/configurations/entries', hash.to_json)
   end
+
+  def config_entry_delete(id)
+    @@folio_request.delete("/configurations/entries/#{id}")
+  end
 end

@@ -193,7 +193,7 @@ end
 namespace :configurations do
   include ConfigurationsTaskHelpers
 
-  modules = %i[BULKEDIT CHECKOUT FAST_ADD ORG]
+  modules = %i[BULKEDIT CHECKOUT FAST_ADD ORG TENANT]
 
   desc 'pull module configurations'
   task :pull_configurations do
