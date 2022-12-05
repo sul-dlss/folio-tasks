@@ -84,7 +84,8 @@ module XmlUserHelpers
   end
 
   def effective?
-    (effective_date.nil? || effective_date <= Date.today)
+    # new staff will have effective_date = tomorrow
+    (effective_date.nil? || effective_date <= Date.today || effective_date == Date.today + 1)
   end
 
   def effective_date
