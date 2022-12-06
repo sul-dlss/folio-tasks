@@ -17,10 +17,14 @@ module ConfigurationsTaskHelpers
   end
 
   def config_entry_post(hash)
+    email_host(hash) if hash['code'] == 'EMAIL_SMTP_HOST'
     @@folio_request.post('/configurations/entries', hash.to_json)
   end
 
   def config_entry_delete(id)
     @@folio_request.delete("/configurations/entries/#{id}")
+  end
+  def email_host(hash)
+    hash['value'] = "mail.#{Settings.namespace}.svc.cluster.local"
   end
 end

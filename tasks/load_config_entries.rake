@@ -14,7 +14,7 @@ namespace :configurations do
     end
   end
 
-  desc 'load configurations for specified module: BULKEDIT CHECKOUT FAST_ADD ORG TENANT'
+  desc 'load configurations for specified module: BULKEDIT CHECKOUT FAST_ADD ORG SMTP_SERVER TENANT'
   task :load_module_configurations, [:module] do |_, args|
     file = "#{args[:module]}.json"
     config_entry_json(file)['configs'].each do |obj|

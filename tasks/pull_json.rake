@@ -193,7 +193,7 @@ end
 namespace :configurations do
   include ConfigurationsTaskHelpers
 
-  modules = %i[BULKEDIT CHECKOUT FAST_ADD ORG TENANT]
+  modules = %i[BULKEDIT CHECKOUT FAST_ADD ORG SMTP_SERVER TENANT]
 
   desc 'pull module configurations'
   task :pull_configurations do
@@ -201,6 +201,13 @@ namespace :configurations do
       File.open("json/configurations/#{config}.json", 'w') do |file|
         file.puts pull_configurations(config.to_s)
       end
+    end
+  end
+
+  desc 'pull configurations for specified module: BULKEDIT CHECKOUT FAST_ADD ORG SMTP_SERVER TENANT'
+  task :pull_module_configurations, [:module] do |_, args|
+    File.open("#{Settings.json}/configurations/#{args[:module]}.json", 'w') do |file|
+      file.puts pull_configurations(args[:module])
     end
   end
 end

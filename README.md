@@ -174,6 +174,6 @@ ruby bin/folio_get.rb '/users'
 
 For a POST:
 ```bash
-ruby bin/folio_post.rb '/configurations/entries' 'json/email/config_smtp_server_ssl.json'
+ruby bin/folio_post.rb '/configurations/entries' 'json/configurations/SMTP_SERVER.json'
 ...
 ```
