@@ -30,8 +30,7 @@ task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:allocate_budgets]
 
 desc 'Load all order settings: [acquisition methods, po lines limit]'
-task load_order_settings: %i[acquisitions:load_acq_methods
-                             acquisitions:load_po_lines_limit]
+task load_order_settings: %i[acquisitions:load_acq_methods]
 
 desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
 task load_organizations_all: %i[acquisitions:load_org_categories

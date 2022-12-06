@@ -14,11 +14,19 @@ namespace :configurations do
     end
   end
 
-  desc 'load configurations for specified module: BULKEDIT CHECKOUT FAST_ADD ORG SMTP_SERVER TENANT'
+  desc 'load configurations for specified module: BULKEDIT CHECKOUT FAST_ADD ORDERS ORG SMTP_SERVER TENANT USERSBL'
   task :load_module_configurations, [:module] do |_, args|
     file = "#{args[:module]}.json"
     config_entry_json(file)['configs'].each do |obj|
       config_entry_post(obj)
+    end
+  end
+
+  desc 'update configurations for specified module: BULKEDIT CHECKOUT FAST_ADD ORDERS ORG SMTP_SERVER TENANT USERSBL'
+  task :update_module_configurations, [:module] do |_, args|
+    file = "#{args[:module]}.json"
+    config_entry_json(file)['configs'].each do |obj|
+      config_entry_put(obj)
     end
   end
 end

@@ -14,17 +14,4 @@ module OrderSettingsHelpers
   def acq_methods_post(obj)
     @@folio_request.post('/orders/acquisition-methods', obj.to_json)
   end
-
-  def po_lines_limit
-    {
-      'module' => 'ORDERS',
-      'configName' => 'poLines-limit',
-      'enabled' => true,
-      'value' => '999'
-    }
-  end
-
-  def po_lines_limit_post(obj)
-    @@folio_request.post('/configurations/entries', obj.to_json)
-  end
 end
