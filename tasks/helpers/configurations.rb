@@ -12,8 +12,36 @@ module ConfigurationsTaskHelpers
     hash.to_json
   end
 
+  def load_configs
+    Settings.configurations.each do |config|
+      config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+        config_entry_post(updated_config_entry_json(obj))
+      end
+    end
+  end
+
+  def update_configs
+    Settings.configurations.each do |config|
+      config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+        config_entry_put(updated_config_entry_json(obj))
+      end
+    end
+  end
+
+  def load_module_configs(config)
+    config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+      config_entry_post(updated_config_entry_json(obj))
+    end
+  end
+
+  def update_module_configs(config)
+    config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+      config_entry_put(updated_config_entry_json(obj))
+    end
+  end
+
   def config_entry_json(file)
-    JSON.parse(File.read("#{Settings.json}/configurations/#{file}"))
+    JSON.parse(File.read(file))
   end
 
   def updated_config_entry_json(hash)
