@@ -16,15 +16,17 @@ module ConfigurationsTaskHelpers
     JSON.parse(File.read("#{Settings.json}/configurations/#{file}"))
   end
 
-  def config_entry_post(hash)
+  def updated_config_entry_json(hash)
     email_host(hash) if hash['code'] == 'EMAIL_SMTP_HOST'
     hostname(hash) if hash['code'] == 'FOLIO_HOST'
+    hash
+  end
+
+  def config_entry_post(hash)
     @@folio_request.post('/configurations/entries', hash.to_json)
   end
 
   def config_entry_put(hash)
-    email_host(hash) if hash['code'] == 'EMAIL_SMTP_HOST'
-    hostname(hash) if hash['code'] == 'FOLIO_HOST'
     @@folio_request.put("/configurations/entries/#{hash['id']}", hash.to_json)
   end
 

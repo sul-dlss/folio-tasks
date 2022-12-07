@@ -198,7 +198,7 @@ namespace :configurations do
   desc 'pull module configurations'
   task :pull_configurations do
     modules.each do |config|
-      File.open("json/configurations/#{config}.json", 'w') do |file|
+      File.open("#{Settings.json}/configurations/#{config}.json", 'w') do |file|
         file.puts pull_configurations(config.to_s)
       end
     end

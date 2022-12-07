@@ -9,7 +9,7 @@ namespace :configurations do
   task :load_configurations do
     Dir.each_child("#{Settings.json}/configurations") do |file|
       config_entry_json(file)['configs'].each do |obj|
-        config_entry_post(obj)
+        config_entry_post(updated_config_entry_json(obj))
       end
     end
   end
@@ -18,7 +18,7 @@ namespace :configurations do
   task :load_module_configurations, [:module] do |_, args|
     file = "#{args[:module]}.json"
     config_entry_json(file)['configs'].each do |obj|
-      config_entry_post(obj)
+      config_entry_post(updated_config_entry_json(obj))
     end
   end
 
@@ -26,7 +26,7 @@ namespace :configurations do
   task :update_module_configurations, [:module] do |_, args|
     file = "#{args[:module]}.json"
     config_entry_json(file)['configs'].each do |obj|
-      config_entry_put(obj)
+      config_entry_put(updated_config_entry_json(obj))
     end
   end
 end
