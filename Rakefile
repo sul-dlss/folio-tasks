@@ -15,8 +15,7 @@ task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_campuses
                               tenant:load_libraries
                               tenant:load_service_points
-                              tenant:load_locations
-                              tenant:load_tenant_addresses]
+                              tenant:load_locations]
 
 desc 'Loads all finance settings: [fund_types, expense classes, fiscal_years, ledgers, finance_groups, funds, budgets, allocations]'
 task load_finance_settings: %i[acquisitions:load_fund_types
@@ -29,9 +28,8 @@ task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:update_budgets
                                acquisitions:allocate_budgets]
 
-desc 'Load all order settings: [acquisition methods, po lines limit]'
-task load_order_settings: %i[acquisitions:load_acq_methods
-                             acquisitions:load_po_lines_limit]
+desc 'Load all order settings: [acquisition methods]'
+task load_order_settings: %i[acquisitions:load_acq_methods]
 
 desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
 task load_organizations_all: %i[acquisitions:load_org_categories
@@ -51,8 +49,7 @@ task delete_finance_settings: %i[acquisitions:delete_budgets
                                  acquisitions:delete_fund_types]
 
 desc 'Delete all tenant settings: [addresses, locations, service_points, libraries, campuses, institutions]'
-task delete_tenant_settings: %i[tenant:delete_tenant_addresses
-                                tenant:delete_locations
+task delete_tenant_settings: %i[tenant:delete_locations
                                 tenant:delete_service_points
                                 tenant:delete_libraries
                                 tenant:delete_campuses
@@ -67,8 +64,9 @@ task load_user_settings: %i[users:load_user_groups
                             users:load_payments]
       # users:load_address_types - now loaded by default reference data
 
-desc 'Loads all User, Tenant, Acquisitions Units, Finance, and Order Settings, and Organization settings and data'
-task load_new_data_and_settings: %i[load_user_settings
+desc 'Loads all Configurations, User, Tenant, Acquisitions Units, Finance, and Order Settings, and Organization settings and data'
+task load_new_data_and_settings: %i[configurations:load_configurations
+                                    load_user_settings
                                     load_tenant_settings
                                     acquisitions:load_acq_units
                                     load_finance_settings
@@ -115,7 +113,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             circulation:pull_patron_notice_templates
                             circulation:pull_request_cancellation_reasons
                             circulation:pull_request_policies
-                            configurations:pull_configurations
+                            configurations:pull_configs
                             courses:pull_course_terms
                             courses:pull_course_depts]
 
@@ -132,6 +130,9 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_action_profiles
                                        data_import:load_mapping_profiles
                                        data_import:load_profile_associations]
+
+desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD ORDERS ORG SMTP_SERVER TENANT USERSBL]'
+task load_all_configurations: %i[configurations:load_configs]
 
 desc 'Load all inventory settings: [alt title types, item loan typs, item note types, material types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types

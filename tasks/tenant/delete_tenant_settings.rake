@@ -2,19 +2,9 @@
 
 require 'csv'
 require_relative '../helpers/tenant'
-require_relative '../helpers/uuids/uuids'
 
 namespace :tenant do
-  include TenantTaskHelpers, Uuids
-
-  desc 'delete tenant addresses from folio'
-  task :delete_tenant_addresses do
-    addresses_csv.each do |obj|
-      hash = addresses_hash(obj)
-      id = Uuids.tenant_addresses.fetch(hash['code'])
-      addresses_delete(id)
-    end
-  end
+  include TenantTaskHelpers
 
   desc 'delete location settings from folio'
   task :delete_locations do

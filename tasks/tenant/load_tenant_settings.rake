@@ -48,12 +48,4 @@ namespace :tenant do
       locations_post(hash)
     end
   end
-
-  desc 'load tenant addresses into folio'
-  task :load_tenant_addresses do
-    addresses_csv.each do |obj|
-      hash = addresses_hash(obj)
-      addresses_post(hash)
-    end
-  end
 end

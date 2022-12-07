@@ -123,34 +123,4 @@ module TenantTaskHelpers
   def locations_post(obj)
     @@folio_request.post('/locations', obj.to_json)
   end
-
-  # tenant addresses
-  def addresses_csv
-    CSV.parse(File.open("#{Settings.tsv}/tenant/addresses.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
-  def addresses_hash(obj)
-    {
-      'module' => 'TENANT',
-      'configName' => 'tenant.addresses',
-      'code' => obj['name'].to_s.upcase.gsub(/\s/, '_'),
-      'enabled' => true,
-      'value' => {
-        'name' => obj['name'],
-        'address' => "#{obj['dept']}\n"\
-                     "#{obj['university']}\n"\
-                     "#{obj['street']}\n"\
-                     "#{obj['city']}, #{obj['state']} #{obj['zipcode']}\n"\
-                     "#{obj['country']}"
-      }.to_json
-    }
-  end
-
-  def addresses_delete(id)
-    @@folio_request.delete("/configurations/entries/#{id}")
-  end
-
-  def addresses_post(obj)
-    @@folio_request.post('/configurations/entries', obj.to_json)
-  end
 end

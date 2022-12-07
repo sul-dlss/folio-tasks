@@ -12,11 +12,61 @@ module ConfigurationsTaskHelpers
     hash.to_json
   end
 
+  def load_configs
+    Settings.configurations.each do |config|
+      config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+        config_entry_post(updated_config_entry_json(obj))
+      end
+    end
+  end
+
+  def update_configs
+    Settings.configurations.each do |config|
+      config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+        config_entry_put(updated_config_entry_json(obj))
+      end
+    end
+  end
+
+  def load_module_configs(config)
+    config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+      config_entry_post(updated_config_entry_json(obj))
+    end
+  end
+
+  def update_module_configs(config)
+    config_entry_json("#{Settings.json}/configurations/#{config}.json")['configs'].each do |obj|
+      config_entry_put(updated_config_entry_json(obj))
+    end
+  end
+
   def config_entry_json(file)
-    JSON.parse(File.read("#{Settings.json}/configurations/#{file}"))
+    JSON.parse(File.read(file))
+  end
+
+  def updated_config_entry_json(hash)
+    email_host(hash) if hash['code'] == 'EMAIL_SMTP_HOST'
+    hostname(hash) if hash['code'] == 'FOLIO_HOST'
+    hash
   end
 
   def config_entry_post(hash)
     @@folio_request.post('/configurations/entries', hash.to_json)
+  end
+
+  def config_entry_put(hash)
+    @@folio_request.put("/configurations/entries/#{hash['id']}", hash.to_json)
+  end
+
+  def config_entry_delete(id)
+    @@folio_request.delete("/configurations/entries/#{id}")
+  end
+
+  def email_host(hash)
+    hash['value'] = "mail.#{Settings.namespace}.svc.cluster.local"
+  end
+
+  def hostname(hash)
+    hash['value'] = Settings.folio.url
   end
 end

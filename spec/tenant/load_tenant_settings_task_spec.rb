@@ -43,8 +43,6 @@ describe 'tenant settings rake tasks' do
     stub_request(:get, 'http://example.com/locations')
       .with(query: hash_including)
       .to_return(body: '{ "locations": [{ "id": "abc-123", "name": "Green Stacks", "code": "GREEN" }] }')
-
-    stub_request(:post, 'http://example.com/configurations/entries')
   end
 
   context 'when loading institutions' do
@@ -231,21 +229,6 @@ describe 'tenant settings rake tasks' do
 
     it 'removes the hash key for primaryServicePointCode' do
       expect(location_hash).not_to have_key 'primaryServicePointCode'
-    end
-  end
-
-  context 'when loading tenant addresses' do
-    let(:addresses_csv) { load_addresses_task.send(:addresses_csv) }
-    let(:addresses_hash) { load_addresses_task.send(:addresses_hash, addresses_csv[0]) }
-
-    it 'creates the hash keys and values for value' do
-      # rubocop: disable Layout/LineLength
-      expect(addresses_hash['value']).to eq '{"name":"SUL Acquisitions","address":"Department\\nStanford University\\nStreet address\\nStanford, CA 94305-6004\\nUSA"}'
-      # rubocop: enable Layout/LineLength
-    end
-
-    it 'creates the hash keys and values for code' do
-      expect(addresses_hash['code']).to eq 'SUL_ACQUISITIONS'
     end
   end
 end

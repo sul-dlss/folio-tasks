@@ -1,0 +1,48 @@
+{
+  "configs": [{
+    "id": "427039ff-baef-4651-997d-e1fe81f23d70",
+    "module": "SMTP_SERVER",
+    "configName": "smtp",
+    "code": "EMAIL_SMTP_HOST",
+    "description": "server smtp postfix relay host",
+    "default": true,
+    "enabled": true,
+    "value": "mail.folio-test.svc.cluster.local"
+  }, {
+    "id": "861c48a3-0287-46df-98e6-717fcaf669cf",
+    "module": "SMTP_SERVER",
+    "configName": "smtp",
+    "code": "EMAIL_SMTP_PORT",
+    "description": "server smtp postfix relay port",
+    "default": true,
+    "enabled": true,
+    "value": "999"
+  }, {
+    "id": "aadd83d4-4f64-4217-9562-4b5d1914a178",
+    "module": "SMTP_SERVER",
+    "configName": "smtp",
+    "code": "EMAIL_USERNAME",
+    "description": "server email username",
+    "default": true,
+    "enabled": false,
+    "value": "folio@example.org"
+  }, {
+    "id": "5db02c5a-04c7-4ce9-ab01-3c401745851a",
+    "module": "SMTP_SERVER",
+    "configName": "smtp",
+    "code": "EMAIL_PASSWORD",
+    "description": "server email password",
+    "default": true,
+    "enabled": false,
+    "value": "abc123"
+  }, {
+    "id": "71483d8d-f903-4d9d-aac5-2b1bf12597ab",
+    "module": "SMTP_SERVER",
+    "configName": "smtp",
+    "code": "EMAIL_FROM",
+    "description": "server email from",
+    "default": true,
+    "enabled": true,
+    "value": "folio@example.org"
+  }]
+}
