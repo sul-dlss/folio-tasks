@@ -60,4 +60,9 @@ namespace :circulation do
       request_policies_post(obj)
     end
   end
+
+  desc 'load circulation rules into folio'
+  task :load_circ_rules do
+    circulation_rules_put(circulation_rules_json)
+  end
 end

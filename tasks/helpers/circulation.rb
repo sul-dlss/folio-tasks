@@ -6,6 +6,14 @@ require_relative 'folio_request'
 module CirculationTaskHelpers
   include FolioRequestHelper
 
+  def circulation_rules_json
+    JSON.parse(File.read("#{Settings.json}/circulation/circulation-rules.json"))
+  end
+
+  def circulation_rules_put(hash)
+    @@folio_request.put('/circulation/rules', hash.to_json)
+  end
+
   def fixed_due_date_sched_json
     JSON.parse(File.read("#{Settings.json}/circulation/fixed-due-date-schedules.json"))
   end
