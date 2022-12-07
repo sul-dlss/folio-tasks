@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe 'load config entries rake tasks' do
   let(:load_configurations_task) do
-    Rake.application.invoke_task 'configurations:load_module_configurations[SMTP_SERVER]'
+    Rake.application.invoke_task 'configurations:load_module_configs[SMTP_SERVER]'
   end
 
   before do

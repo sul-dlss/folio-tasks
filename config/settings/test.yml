@@ -16,6 +16,8 @@ yaml:
   fixtures: spec/fixtures/yaml
 
 namespace: test
+configurations:
+  - SMTP_SERVER
 
 # we test against real data we GET from FOLIO before migrating
 json: spec/fixtures/json

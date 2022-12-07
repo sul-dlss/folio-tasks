@@ -113,7 +113,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             circulation:pull_patron_notice_templates
                             circulation:pull_request_cancellation_reasons
                             circulation:pull_request_policies
-                            configurations:pull_configurations
+                            configurations:pull_configs
                             courses:pull_course_terms
                             courses:pull_course_depts]
 
@@ -132,7 +132,7 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_profile_associations]
 
 desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD ORDERS ORG SMTP_SERVER TENANT USERSBL]'
-task load_all_configurations: %i[configurations:load_configurations]
+task load_all_configurations: %i[configurations:load_configs]
 
 desc 'Load all inventory settings: [alt title types, item loan typs, item note types, material types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
