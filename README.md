@@ -98,10 +98,13 @@ Use the `STAGE=orig rake pull_all_json_data` to pull json from a folio instance 
 - circulation/request-policies.json
 - courses/terms.json
 - courses/departments.json
+- configurations/<MODULE>.json (not saved to `spec/fixtures/json`)
 
 ### Run tests to verify the validity of the downloaded files
 - `rspec spec/users`
 - `rspec spec/data_import`
+- `rspec spec/circulation`
+- `rspec spec/courses`
 
 It may be necessary to replace the `spec/fixtures/support` files with new ones from the https://github.com/folio-org/ repo if the json schema tests fail.
 
@@ -116,7 +119,7 @@ cat univ_id.keys | sort -u | seluser -iU -oBEDX.9023.X.9024.X.9015.X.9016.X.9005
 Then copy the tsv_users.tsv file to the `tsv` folder and run the `load_tsv-users` rake task.
 
 ### Loading Permission Sets
-- To get all of the permission sets (filter out the regular permissons) use the mutable==true query:
+- To get all of the permission sets (filter out the regular permissions) use the mutable==true query:
 ```
 ruby bin/folio_get_json.rb '/perms/permissions?length=10000&query=(mutable==true)' } | jq 'del(.totalRecords) | del(.permissions[] .childOf, .permissions[] .grantedTo, .permissions[] .dummy, .permissions[] .deprecated, .permissions[] .metadata)' > json/users/permission_sets.orig.json
 ```
@@ -138,15 +141,16 @@ If any of the organizations changed, one could also run `rake acquisitions:updat
 
 
 ### Loading Orders
-The `prepare_orders` and `load_orders` rake tasks should be run from the Symphony server since the tasks need tsv, yaml, and json files that are generated there.
+The `prepare_orders` and `load_orders[1]` rake tasks should be run from the Symphony server since the tasks need tsv, yaml, and json files that are generated there.
 1. Run `/s/SUL/Bin/folio_symphony_extract/acquisitions/orders/run_reports.ksh` to get current order data for migration from Symphony.
-2. Copy the `order_type_map.tsv` and `sym_hldg_code_location_map.tsv` files from the [FOLIO Ops shared drive](https://drive.google.com/drive/folders/1-FWsDUcc3DRa3sw6jzh4Puvbn-LRcQ-4?usp=sharing) to the `Settings.tsv_orders` directory.
-3. Optionally, delete the yaml and json files in the `Settings.yaml.*` and `Settings.json_orders.*` directories, using the tasks `acquisitions:delete_*_order_yaml` and `acquisitions:delete_*_order_json`.
-4. Process the Symphony order tsv data and transform to FOLIO order json by running `STAGE=prod rake prepare_orders`. Use the appropriate `STAGE` for whichever environment the orders will be loaded to.
-5. Load orders to FOLIO using `STAGE=prod rake load_orders[20]`. This is a long-running task, so it is best to run it in a `screen` session on the Symphony server.
+1. Copy the `order_type_map.tsv` and `sym_hldg_code_location_map.tsv` files from the [FOLIO Ops shared drive](https://drive.google.com/drive/folders/1-FWsDUcc3DRa3sw6jzh4Puvbn-LRcQ-4?usp=sharing) to the `Settings.tsv_orders` directory.
+1. Optionally, delete the yaml and json files in the `Settings.yaml.*` and `Settings.json_orders.*` directories, using the tasks `acquisitions:delete_*_order_yaml` and `acquisitions:delete_*_order_json`.
+1. Process the Symphony order tsv data and transform to FOLIO order json by running `STAGE=prod rake prepare_orders`. Use the appropriate `STAGE` for whichever environment the orders will be loaded to so the UUIDs are created for the correct environment.
+1. Load orders to FOLIO using `STAGE=prod rake load_orders[1]`. The argument passed is the number of threads to use to load orders. In testing, we found that anything more than 1 loads the orders incorrectly and the related encumbrance transactions do not load. This is a long-running task, so it is best to run it in a `screen` session on the Symphony server.
+1. Optionally, there are tasks for updating purchase orders and po lines. These might be helpful to correct any orders that didn't load completely. E.g. `rake update_orders[1,sul]`.
 
 #### Using screen session
-From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S load_orders`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake acquisitions:load_orders[50]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
+From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake acquisitions:load_orders[1]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
 
 ### App user for edge_connexion
 
