@@ -65,7 +65,7 @@ task load_user_settings: %i[users:load_user_groups
       # users:load_address_types - now loaded by default reference data
 
 desc 'Loads all Configurations, User, Tenant, Acquisitions Units, Finance, and Order Settings, and Organization settings and data'
-task load_new_data_and_settings: %i[configurations:load_configurations
+task load_new_data_and_settings: %i[configurations:load_configs
                                     load_user_settings
                                     load_tenant_settings
                                     acquisitions:load_acq_units
@@ -134,13 +134,13 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
 desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD ORDERS ORG SMTP_SERVER TENANT USERSBL]'
 task load_all_configurations: %i[configurations:load_configs]
 
-desc 'Load all inventory settings: [alt title types, item loan typs, item note types, material types]'
+desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_item_loan_types
                                      inventory:load_item_note_types
                                      inventory:load_material_types]
 
-desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies]'
+desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, circ rules]'
 task load_circ_settings: %i[circulation:load_fixed_due_date_sched
                             circulation:load_loan_policies
                             circulation:load_lost_item_fees
@@ -148,7 +148,8 @@ task load_circ_settings: %i[circulation:load_fixed_due_date_sched
                             circulation:load_patron_notice_policies
                             circulation:load_patron_notice_templates
                             circulation:load_request_cancellation_reasons
-                            circulation:load_request_policies]
+                            circulation:load_request_policies
+                            circulation:load_circ_rules]
 
 desc 'Delete all circulation settings'
 task delete_circ_settings: %i[circulation:delete_request_policies
