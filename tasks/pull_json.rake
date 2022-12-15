@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'helpers/tenant'
+require_relative 'helpers/inventory'
 require_relative 'helpers/users'
 require_relative 'helpers/data_import'
 require_relative 'helpers/circulation'
@@ -15,8 +15,14 @@ def open_file_and_pull(namespace, name, helper)
   end
 end
 
-namespace :tenant do |namespace|
-  helper = TenantTaskHelpers
+namespace :inventory do |namespace|
+  helper = InventoryTaskHelpers
+
+  desc 'pull statistical codes types and codes from original folio instance (use STAGE=orig yaml)'
+  task :pull_statistical_codes_and_types do
+    Rake::Task['inventory:pull_statistical_code_types'].invoke
+    Rake::Task['inventory:pull_statistical_codes'].invoke
+  end
 
   desc 'pull statistical code types from original folio instance (use STAGE=orig yaml)'
   task :pull_statistical_code_types do

@@ -115,7 +115,8 @@ task pull_all_json_data: %i[users:pull_waivers
                             circulation:pull_request_policies
                             configurations:pull_configs
                             courses:pull_course_terms
-                            courses:pull_course_depts]
+                            courses:pull_course_depts
+                            inventory:pull_statistical_codes_and_types]
 
 desc 'Pull all data import profile json data (use STAGE=orig)'
 task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles

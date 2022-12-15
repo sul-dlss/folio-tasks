@@ -37,4 +37,32 @@ module InventoryTaskHelpers
   def material_types_post(obj)
     @@folio_request.post('/material-types', obj.to_json)
   end
+
+  def pull_statistical_code_types
+    hash = @@folio_request.get('/statistical-code-types')
+    trim_hash(hash, 'statisticalCodeTypes')
+    hash.to_json
+  end
+
+  def statistical_code_types_post(obj)
+    @@folio_request.post('/statistical-code-types', obj.to_json)
+  end
+
+  def statistical_code_types_json
+    JSON.parse(File.read("#{Settings.json}/inventory/statistical_code_types.json"))
+  end
+
+  def pull_statistical_codes
+    hash = @@folio_request.get('/statistical-codes')
+    trim_hash(hash, 'statisticalCodes')
+    hash.to_json
+  end
+
+  def statistical_codes_post(obj)
+    @@folio_request.post('/statistical-codes', obj.to_json)
+  end
+
+  def statistical_codes_json
+    JSON.parse(File.read("#{Settings.json}/inventory/statistical_codes.json"))
+  end
 end
