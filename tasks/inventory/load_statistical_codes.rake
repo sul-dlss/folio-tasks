@@ -8,7 +8,6 @@ namespace :inventory do
 
   desc 'load statistical code types into folio'
   task :load_statistical_code_types do
-    # puts statistical_code_types_json['statisticalCodeTypes']
     statistical_code_types_json['statisticalCodeTypes'].each do |obj|
       statistical_code_types_post(obj)
     end
