@@ -35,6 +35,12 @@ namespace :inventory do |namespace|
     name = 'statistical_codes'
     open_file_and_pull(namespace, name, helper)
   end
+
+  desc 'pull instance note types from original folio instance (use STAGE=orig yaml)'
+  task :pull_instance_note_types do
+    name = 'instance_note_types'
+    open_file_and_pull(namespace, name, helper)
+  end
 end
 
 namespace :users do |namespace|

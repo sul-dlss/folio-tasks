@@ -19,4 +19,11 @@ namespace :inventory do
       statistical_codes_post(obj)
     end
   end
+
+  desc 'load instance note types into folio'
+  task :load_instance_note_types do
+    instance_note_types_json.each do |obj|
+      instance_note_types_post(obj)
+    end
+  end
 end
