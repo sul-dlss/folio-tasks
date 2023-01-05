@@ -45,7 +45,6 @@ module InventoryTaskHelpers
   end
 
   def statistical_code_types_post(obj)
-    puts obj.to_json
     @@folio_request.post('/statistical-code-types', obj.to_json)
   end
 
