@@ -39,7 +39,7 @@ module InventoryTaskHelpers
   end
 
   def pull_statistical_code_types
-    hash = @@folio_request.get('/statistical-code-types')
+    hash = @@folio_request.get_cql('/statistical-code-types', "source='local'")
     trim_hash(hash, 'statisticalCodeTypes')
     hash.to_json
   end
@@ -53,7 +53,7 @@ module InventoryTaskHelpers
   end
 
   def pull_statistical_codes
-    hash = @@folio_request.get('/statistical-codes')
+    hash = @@folio_request.get_cql('/statistical-codes', "source='local'")
     trim_hash(hash, 'statisticalCodes')
     hash.to_json
   end
