@@ -65,4 +65,18 @@ module InventoryTaskHelpers
   def statistical_codes_json
     JSON.parse(File.read("#{Settings.json}/inventory/statistical_codes.json"))
   end
+
+  def pull_instance_note_types
+    hash = @@folio_request.get_cql('/instance-note-types', "source='local'")
+    trim_hash(hash, 'instanceNoteTypes')
+    hash.to_json
+  end
+
+  def instance_note_types_json
+    JSON.parse(File.read("#{Settings.json}/inventory/instance_note_types.json"))
+  end
+
+  def instance_note_types_post(obj)
+    @@folio_request.post('/instance-note-types', obj.to_json)
+  end
 end
