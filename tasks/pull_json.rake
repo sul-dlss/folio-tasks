@@ -172,7 +172,7 @@ namespace :circulation do |namespace|
   end
 end
 
-namespace :courses do
+namespace :courses do |namespace|
   include CoursesTaskHelpers
 
   desc 'pull course terms from original folio instance (use STAGE=orig yaml)'

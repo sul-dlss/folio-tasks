@@ -19,7 +19,8 @@ describe 'statistical codes rake tasks' do
     let(:statistical_code_types_json) { load_statistical_code_types.send(:statistical_code_types_json) }
 
     it 'supplies valid json for loading statistical code types' do
-      expect(statistical_code_types_json['statisticalCodeTypes'].sample).to match_json_schema('mod-inventory-storage', 'statisticalcodetype')
+      expect(statistical_code_types_json['statisticalCodeTypes'].sample).to match_json_schema('mod-inventory-storage',
+                                                                                              'statisticalcodetype')
     end
   end
 
@@ -27,7 +28,8 @@ describe 'statistical codes rake tasks' do
     let(:statistical_codes_json) { load_statistical_code_types.send(:statistical_codes_json) }
 
     it 'supplies valid json for loading statistical codes' do
-      expect(statistical_codes_json['statisticalCodes'].sample).to match_json_schema('mod-inventory-storage', 'statisticalcode')
+      expect(statistical_codes_json['statisticalCodes'].sample).to match_json_schema('mod-inventory-storage',
+                                                                                     'statisticalcode')
     end
   end
 end
