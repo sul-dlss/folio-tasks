@@ -115,7 +115,8 @@ task pull_all_json_data: %i[users:pull_waivers
                             circulation:pull_request_policies
                             configurations:pull_configs
                             courses:pull_course_terms
-                            courses:pull_course_depts]
+                            courses:pull_course_depts
+                            inventory:pull_statistical_codes_and_types]
 
 desc 'Pull all data import profile json data (use STAGE=orig)'
 task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles
@@ -134,11 +135,13 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
 desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD ORDERS ORG SMTP_SERVER TENANT USERSBL]'
 task load_all_configurations: %i[configurations:load_configs]
 
-desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types]'
+desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types, statistical codes]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_item_loan_types
                                      inventory:load_item_note_types
-                                     inventory:load_material_types]
+                                     inventory:load_material_types
+                                     inventory:load_statistical_code_types
+                                     inventory:load_statistical_codes]
 
 desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, circ rules]'
 task load_circ_settings: %i[circulation:load_fixed_due_date_sched
