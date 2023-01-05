@@ -59,8 +59,8 @@ desc 'Load all user settings [groups, waivers, refunds, fee fine owners, fee fin
 task load_user_settings: %i[users:load_user_groups
                             users:load_waivers
                             users:load_refunds
-                            users:load_fee_fine_owners
-                            users:load_fee_fine_manual_charges
+                            users:load_owners
+                            users:load_manual_charges
                             users:load_payments]
       # users:load_address_types - now loaded by default reference data
 

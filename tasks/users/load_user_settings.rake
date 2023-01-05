@@ -42,17 +42,17 @@ namespace :users do
     end
   end
 
-  desc 'load fee-fine owners into folio'
-  task :load_fee_fine_owners do
-    fee_fine_owners_json['owners'].each do |obj|
-      fee_fine_owners_post(obj)
+  desc 'load owners into folio'
+  task :load_owners do
+    owners_json['owners'].each do |obj|
+      owners_post(obj)
     end
   end
 
-  desc 'load fee-fine manual charges into folio'
-  task :load_fee_fine_manual_charges do
-    fee_fine_manual_charges_json['feefines'].each do |obj|
-      fee_fine_manual_charges_post(obj)
+  desc 'load manual charges into folio'
+  task :load_manual_charges do
+    manual_charges_json['feefines'].each do |obj|
+      manual_charges_post(obj)
     end
   end
 end
