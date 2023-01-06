@@ -9,8 +9,8 @@ describe 'user settings rake tasks' do
   let(:load_waivers_task) { Rake.application.invoke_task 'users:load_waivers' }
   let(:load_payments_task) { Rake.application.invoke_task 'users:load_payments' }
   let(:load_refunds_task) { Rake.application.invoke_task 'users:load_refunds' }
-  let(:load_fee_fine_owners_task) { Rake.application.invoke_task 'users:load_fee_fine_owners' }
-  let(:load_fee_fine_manual_charges_task) { Rake.application.invoke_task 'users:load_fee_fine_manual_charges' }
+  let(:load_owners_task) { Rake.application.invoke_task 'users:load_owners' }
+  let(:load_manual_charges_task) { Rake.application.invoke_task 'users:load_manual_charges' }
   let(:load_permission_sets_task) { Rake.application.invoke_task 'users:load_permission_sets' }
 
   before do
@@ -71,18 +71,18 @@ describe 'user settings rake tasks' do
   end
 
   context 'when creating fee_fine_owners' do
-    let(:fee_fine_owners_json) { load_fee_fine_owners_task.send(:fee_fine_owners_json) }
+    let(:owners_json) { load_owners_task.send(:owners_json) }
 
     it 'supplies valid json for posting fee-fine owners' do
-      expect(fee_fine_owners_json['owners'].sample).to match_json_schema('mod-feesfines', 'ownerdata')
+      expect(owners_json['owners'].sample).to match_json_schema('mod-feesfines', 'ownerdata')
     end
   end
 
   context 'when creating fee_fine_manual_charges' do
-    let(:fee_fine_manual_charges_json) { load_fee_fine_manual_charges_task.send(:fee_fine_manual_charges_json) }
+    let(:manual_charges_json) { load_manual_charges_task.send(:manual_charges_json) }
 
     it 'supplies valid json for posting fee-fine manual charges' do
-      expect(fee_fine_manual_charges_json['feefines'].sample).to match_json_schema('mod-feesfines', 'feefinedata')
+      expect(manual_charges_json['feefines'].sample).to match_json_schema('mod-feesfines', 'feefinedata')
     end
   end
 

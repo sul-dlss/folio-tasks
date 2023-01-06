@@ -44,7 +44,7 @@ namespace :inventory do |namespace|
 end
 
 namespace :users do |namespace|
-  include UsersTaskHelpers
+  helper = UsersTaskHelpers
 
   desc 'pull waivers from original folio instance (use STAGE=orig yaml)'
   task :pull_waivers do
@@ -84,7 +84,7 @@ namespace :users do |namespace|
 end
 
 namespace :data_import do |namespace|
-  include DataImportTaskHelpers
+  helper = DataImportTaskHelpers
 
   desc 'pull actionProfiles from original folio instance (use STAGE=orig yaml)'
   task :pull_action_profiles do
@@ -121,7 +121,7 @@ namespace :data_import do |namespace|
 end
 
 namespace :circulation do |namespace|
-  include CirculationTaskHelpers
+  helper = CirculationTaskHelpers
 
   desc 'pull circulation rules from original folio instance (use STAGE=orig yaml)'
   task :pull_circ_rules do
@@ -179,7 +179,7 @@ namespace :circulation do |namespace|
 end
 
 namespace :courses do |namespace|
-  include CoursesTaskHelpers
+  helper = CoursesTaskHelpers
 
   desc 'pull course terms from original folio instance (use STAGE=orig yaml)'
   task :pull_course_terms do

@@ -47,19 +47,19 @@ module UsersTaskHelpers
     @@folio_request.post('/refunds', hash.to_json)
   end
 
-  def fee_fine_owners_json
-    JSON.parse(File.read("#{Settings.json}/users/fee_fine_owners.json"))
+  def owners_json
+    JSON.parse(File.read("#{Settings.json}/users/owners.json"))
   end
 
-  def fee_fine_owners_post(hash)
+  def owners_post(hash)
     @@folio_request.post('/owners', hash.to_json)
   end
 
-  def fee_fine_manual_charges_json
-    JSON.parse(File.read("#{Settings.json}/users/fee_fine_manual_charges.json"))
+  def manual_charges_json
+    JSON.parse(File.read("#{Settings.json}/users/manual_charges.json"))
   end
 
-  def fee_fine_manual_charges_post(hash)
+  def manual_charges_post(hash)
     @@folio_request.post('/feefines', hash.to_json)
   end
 
