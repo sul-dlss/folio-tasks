@@ -11,6 +11,9 @@ describe 'user settings rake tasks' do
   let(:load_refunds_task) { Rake.application.invoke_task 'users:load_refunds' }
   let(:load_owners_task) { Rake.application.invoke_task 'users:load_owners' }
   let(:load_manual_charges_task) { Rake.application.invoke_task 'users:load_manual_charges' }
+  let(:load_conditions_task) { Rake.application.invoke_task 'users:load_conditions' }
+  let(:load_patron_blocks_templates_task) { Rake.application.invoke_task 'users:load_patron_blocks_templates' }
+  let(:load_limits_task) { Rake.application.invoke_task 'users:load_limits' }
   let(:load_permission_sets_task) { Rake.application.invoke_task 'users:load_permission_sets' }
 
   before do
@@ -24,6 +27,9 @@ describe 'user settings rake tasks' do
     stub_request(:post, 'http://example.com/refunds')
     stub_request(:post, 'http://example.com/owners')
     stub_request(:post, 'http://example.com/feefines')
+    stub_request(:put, %r{.*patron-block-conditions/.*})
+    stub_request(:post, 'http://example.com/manual-block-templates')
+    stub_request(:post, 'http://example.com/patron-block-limits')
     stub_request(:post, 'http://example.com/perms/permissions')
   end
 
@@ -83,6 +89,32 @@ describe 'user settings rake tasks' do
 
     it 'supplies valid json for posting fee-fine manual charges' do
       expect(manual_charges_json['feefines'].sample).to match_json_schema('mod-feesfines', 'feefinedata')
+    end
+  end
+
+  context 'when loading patron block conditions' do
+    let(:conditions_json) { load_conditions_task.send(:conditions_json) }
+
+    it 'supplies valid json for putting patron block conditions' do
+      expect(conditions_json['patronBlockConditions'].sample).to match_json_schema('mod-patron-blocks',
+                                                                                   'patron-block-condition')
+    end
+  end
+
+  context 'when loading patron block templates' do
+    let(:templates_json) { load_patron_blocks_templates_task.send(:templates_json) }
+
+    it 'supplies valid json for posting patron block templates' do
+      expect(templates_json['manualBlockTemplates'].sample).to match_json_schema('mod-feesfines',
+                                                                                 'manual-block-template')
+    end
+  end
+
+  context 'when loading patron block limits' do
+    let(:limits_json) { load_limits_task.send(:limits_json) }
+
+    it 'supplies valid json for posting patron block templates' do
+      expect(limits_json['patronBlockLimits'].sample).to match_json_schema('mod-patron-blocks', 'patron-block-limit')
     end
   end
 

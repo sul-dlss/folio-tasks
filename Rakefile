@@ -61,7 +61,10 @@ task load_user_settings: %i[users:load_user_groups
                             users:load_refunds
                             users:load_owners
                             users:load_manual_charges
-                            users:load_payments]
+                            users:load_payments
+                            users:load_conditions
+                            users:load_patron_blocks_templates
+                            users:load_limits]
       # users:load_address_types - now loaded by default reference data
 
 desc 'Loads all Configurations, User, Tenant, Acquisitions Units, Finance, and Order Settings, and Organization settings and data'
@@ -98,6 +101,9 @@ task pull_all_json_data: %i[users:pull_waivers
                             users:pull_owners
                             users:pull_manual_charges
                             users:pull_payments
+                            users:pull_conditions
+                            users:pull_patron_blocks_templates
+                            users:pull_limits
                             users:pull_permission_sets
                             data_import:pull_job_profiles
                             data_import:pull_mapping_profiles

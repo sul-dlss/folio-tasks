@@ -63,6 +63,30 @@ module UsersTaskHelpers
     @@folio_request.post('/feefines', hash.to_json)
   end
 
+  def conditions_json
+    JSON.parse(File.read("#{Settings.json}/users/conditions.json"))
+  end
+
+  def conditions_put(id, hash)
+    @@folio_request.put("/patron-block-conditions/#{id}", hash.to_json)
+  end
+
+  def templates_json
+    JSON.parse(File.read("#{Settings.json}/users/templates.json"))
+  end
+
+  def templates_post(hash)
+    @@folio_request.post('/manual-block-templates', hash.to_json)
+  end
+
+  def limits_json
+    JSON.parse(File.read("#{Settings.json}/users/limits.json"))
+  end
+
+  def limits_post(hash)
+    @@folio_request.post('/patron-block-limits', hash.to_json)
+  end
+
   def user_get(username)
     @@folio_request.get_cql('/users', "username==#{username}")
   end
@@ -155,6 +179,24 @@ module UsersTaskHelpers
   def pull_payments
     hash = @@folio_request.get('/payments')
     trim_hash(hash, 'payments')
+    hash.to_json
+  end
+
+  def pull_conditions
+    hash = @@folio_request.get('/patron-block-conditions')
+    trim_hash(hash, 'patronBlockConditions')
+    hash.to_json
+  end
+
+  def pull_templates
+    hash = @@folio_request.get('/manual-block-templates')
+    trim_hash(hash, 'manualBlockTemplates')
+    hash.to_json
+  end
+
+  def pull_limits
+    hash = @@folio_request.get('/patron-block-limits')
+    trim_hash(hash, 'patronBlockLimits')
     hash.to_json
   end
 

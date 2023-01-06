@@ -55,4 +55,25 @@ namespace :users do
       manual_charges_post(obj)
     end
   end
+
+  desc 'load conditions into folio'
+  task :load_conditions do
+    conditions_json['patronBlockConditions'].each do |obj|
+      conditions_put(obj['id'], obj)
+    end
+  end
+
+  desc 'load patron blocks templates into folio'
+  task :load_patron_blocks_templates do
+    templates_json['manualBlockTemplates'].each do |obj|
+      templates_post(obj)
+    end
+  end
+
+  desc 'load limits into folio'
+  task :load_limits do
+    limits_json['patronBlockLimits'].each do |obj|
+      limits_post(obj)
+    end
+  end
 end
