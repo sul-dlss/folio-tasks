@@ -76,6 +76,24 @@ namespace :users do |namespace|
     open_file_and_pull(namespace, name, helper)
   end
 
+  desc 'pull patron block conditions from original folio instance (use STAGE=orig yaml)'
+  task :pull_conditions do
+    name = 'conditions'
+    open_file_and_pull(namespace, name, helper)
+  end
+
+  desc 'pull patron block templates from original folio instance (use STAGE=orig yaml)'
+  task :pull_patron_blocks_templates do
+    name = 'templates'
+    open_file_and_pull(namespace, name, helper)
+  end
+
+  desc 'pull patron block limits from original folio instance (use STAGE=orig yaml)'
+  task :pull_limits do
+    name = 'limits'
+    open_file_and_pull(namespace, name, helper)
+  end
+
   desc 'pull permission sets from original folio instance (use STAGE=orig yaml)'
   task :pull_permission_sets do
     name = 'permission_sets'
