@@ -7,7 +7,7 @@ module DataImportTaskHelpers
   include FolioRequestHelper
 
   def job_profiles_json
-    JSON.parse(File.read("#{Settings.json}/data-import-profiles/jobProfiles.json"))
+    JSON.parse(File.read("#{Settings.json}/data_import/job_profiles.json"))
   end
 
   def job_profiles_post(obj)
@@ -24,7 +24,7 @@ module DataImportTaskHelpers
   end
 
   def match_profiles_json
-    JSON.parse(File.read("#{Settings.json}/data-import-profiles/matchProfiles.json"))
+    JSON.parse(File.read("#{Settings.json}/data_import/match_profiles.json"))
   end
 
   def match_profiles_post(obj)
@@ -41,7 +41,7 @@ module DataImportTaskHelpers
   end
 
   def action_profiles_json
-    JSON.parse(File.read("#{Settings.json}/data-import-profiles/actionProfiles.json"))
+    JSON.parse(File.read("#{Settings.json}/data_import/action_profiles.json"))
   end
 
   def action_profiles_post(obj)
@@ -58,7 +58,7 @@ module DataImportTaskHelpers
   end
 
   def mapping_profiles_json
-    JSON.parse(File.read("#{Settings.json}/data-import-profiles/mappingProfiles.json"))
+    JSON.parse(File.read("#{Settings.json}/data_import/mapping_profiles.json"))
   end
 
   def mapping_profiles_post(obj)
@@ -75,7 +75,7 @@ module DataImportTaskHelpers
   end
 
   def profile_associations_json
-    JSON.parse(File.read("#{Settings.json}/data-import-profiles/profileAssociations.json"))
+    JSON.parse(File.read("#{Settings.json}/data_import/profile_associations.json"))
   end
 
   def import_profile_hash(obj)
