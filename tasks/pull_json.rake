@@ -130,11 +130,8 @@ namespace :data_import do |namespace|
 
   desc 'pull_profile_associations'
   task :pull_profile_associations do
-    %i[json spec/fixtures/json].each do |dir|
-      File.open("#{dir}/data-import-profiles/profileAssociations.json", 'w') do |file|
-        file.puts pull_profile_associations
-      end
-    end
+    name = 'profile_associations'
+    open_file_and_pull(namespace, name, helper)
   end
 end
 
@@ -191,7 +188,7 @@ namespace :circulation do |namespace|
 
   desc 'pull request policies from original folio instance (use STAGE=orig yaml)'
   task :pull_request_policies do
-    name = ''
+    name = 'request_policies'
     open_file_and_pull(namespace, name, helper)
   end
 end
