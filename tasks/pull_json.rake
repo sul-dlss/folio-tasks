@@ -188,7 +188,7 @@ namespace :circulation do |namespace|
 
   desc 'pull request policies from original folio instance (use STAGE=orig yaml)'
   task :pull_request_policies do
-    name = ''
+    name = 'request_policies'
     open_file_and_pull(namespace, name, helper)
   end
 end
