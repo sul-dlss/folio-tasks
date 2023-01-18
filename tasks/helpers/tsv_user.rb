@@ -103,10 +103,10 @@ module TsvUserTaskHelpers
 
     return Settings.defaultgroup.to_s unless [policygroup, courtesygroup].any?
 
-    if !courtesygroup.empty?
-      courtesygroup
-    elsif !policygroup.empty?
+    if !policygroup.empty?
       policygroup
+    elsif !courtesygroup.empty?
+      courtesygroup
     end
   end
 
