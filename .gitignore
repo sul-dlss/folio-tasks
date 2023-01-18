@@ -1,7 +1,7 @@
 /config/settings/*.yml
 !/config/settings/test.yml
 /log/*
-/tsv
+/tsv/**/*.tsv
 /xml
 /json/**/*.json
 spec/fixtures/acquisitions/orders/json
