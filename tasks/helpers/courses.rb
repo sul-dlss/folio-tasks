@@ -7,7 +7,7 @@ module CoursesTaskHelpers
   include FolioRequestHelper
 
   def course_terms_json
-    JSON.parse(File.read("#{Settings.json}/courses/terms.json"))
+    JSON.parse(File.read("#{Settings.json}/courses/course_terms.json"))
   end
 
   def course_terms_post(hash)
@@ -15,7 +15,7 @@ module CoursesTaskHelpers
   end
 
   def course_depts_json
-    JSON.parse(File.read("#{Settings.json}/courses/departments.json"))
+    JSON.parse(File.read("#{Settings.json}/courses/course_depts.json"))
   end
 
   def course_depts_post(hash)
