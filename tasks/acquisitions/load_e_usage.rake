@@ -7,7 +7,7 @@ namespace :acquisitions do
   include EUsageTaskHelpers
 
   desc 'load e-usage data providers into folio'
-  task :load_data_providers do
+  task :load_e_usage_data_providers do
     data_providers_tsv.each do |obj|
       data_provider = data_providers_hash(obj)
       data_providers_post(data_provider)
