@@ -25,7 +25,6 @@ task load_finance_settings: %i[acquisitions:load_fund_types
                                acquisitions:load_finance_groups
                                acquisitions:load_funds
                                acquisitions:load_budgets
-                               acquisitions:update_budgets
                                acquisitions:allocate_budgets]
 
 desc 'Load all order settings: [acquisition methods]'
