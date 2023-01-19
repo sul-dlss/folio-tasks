@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'load e-usage rake tasks' do
-  let(:load_data_providers_task) { Rake.application.invoke_task 'acquisitions:load_data_providers' }
+  let(:load_data_providers_task) { Rake.application.invoke_task 'acquisitions:load_e_usage_data_providers' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
