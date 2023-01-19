@@ -93,12 +93,12 @@ describe 'finance settings rake tasks' do
 
     it 'creates the hash key and value for fiscal periodStart' do
       expect(load_fiscal_years_task.send(:fiscal_years_hash, fiscal_years_csv[0],
-                                         acq_units)['periodStart']).to eq '2019-09-01'
+                                         acq_units)['periodStart']).to eq '2019-09-01T00:00:00.000-08:00'
     end
 
     it 'creates the hash key and value for fiscal periodEnd' do
       expect(load_fiscal_years_task.send(:fiscal_years_hash, fiscal_years_csv[0],
-                                         acq_units)['periodEnd']).to eq '2020-08-31'
+                                         acq_units)['periodEnd']).to eq '2020-08-31T00:00:00.000-08:00'
     end
 
     it 'creates the hash key and array value for associated acquisitions units' do
