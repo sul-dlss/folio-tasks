@@ -7,7 +7,7 @@ module CirculationTaskHelpers
   include FolioRequestHelper
 
   def circulation_rules_json
-    JSON.parse(File.read("#{Settings.json}/circulation/circulation-rules.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/circ_rules.json"))
   end
 
   def circulation_rules_put(hash)
@@ -15,7 +15,7 @@ module CirculationTaskHelpers
   end
 
   def fixed_due_date_sched_json
-    JSON.parse(File.read("#{Settings.json}/circulation/fixed-due-date-schedules.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/fixed_due_date_sched.json"))
   end
 
   def fixed_due_date_sched_post(hash)
@@ -27,7 +27,7 @@ module CirculationTaskHelpers
   end
 
   def loan_policies_json
-    JSON.parse(File.read("#{Settings.json}/circulation/loan-policies.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/loan_policies.json"))
   end
 
   def loan_policies_post(hash)
@@ -39,7 +39,7 @@ module CirculationTaskHelpers
   end
 
   def lost_item_fees_json
-    JSON.parse(File.read("#{Settings.json}/circulation/lost-item-fees-policies.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/lost_item_fees.json"))
   end
 
   def lost_item_fees_post(hash)
@@ -51,7 +51,7 @@ module CirculationTaskHelpers
   end
 
   def overdue_fines_json
-    JSON.parse(File.read("#{Settings.json}/circulation/overdue-fines-policies.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/overdue_fines.json"))
   end
 
   def overdue_fines_post(hash)
@@ -63,7 +63,7 @@ module CirculationTaskHelpers
   end
 
   def patron_notice_policies_json
-    JSON.parse(File.read("#{Settings.json}/circulation/patron-notice-policies.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/patron_notice_policies.json"))
   end
 
   def patron_notice_policies_post(hash)
@@ -75,7 +75,7 @@ module CirculationTaskHelpers
   end
 
   def patron_notice_templates_json
-    JSON.parse(File.read("#{Settings.json}/circulation/patron-notice-templates.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/patron_notice_templates.json"))
   end
 
   def patron_notice_templates_post(hash)
@@ -87,7 +87,7 @@ module CirculationTaskHelpers
   end
 
   def request_cancellation_reasons_json
-    JSON.parse(File.read("#{Settings.json}/circulation/cancellation-reasons.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/request_cancellation_reasons.json"))
   end
 
   def request_cancellation_reasons_post(hash)
@@ -99,7 +99,7 @@ module CirculationTaskHelpers
   end
 
   def request_policies_json
-    JSON.parse(File.read("#{Settings.json}/circulation/request-policies.json"))
+    JSON.parse(File.read("#{Settings.json}/circulation/request_policies.json"))
   end
 
   def request_policies_post(hash)

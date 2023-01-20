@@ -31,12 +31,20 @@ module UsersTaskHelpers
     @@folio_request.post('/waives', hash.to_json)
   end
 
+  def waivers_delete(id)
+    @@folio_request.delete("/waives/#{id}")
+  end
+
   def payments_json
     JSON.parse(File.read("#{Settings.json}/users/payments.json"))
   end
 
   def payments_post(hash)
     @@folio_request.post('/payments', hash.to_json)
+  end
+
+  def payments_delete(id)
+    @@folio_request.delete("/payments/#{id}")
   end
 
   def refunds_json
@@ -47,6 +55,10 @@ module UsersTaskHelpers
     @@folio_request.post('/refunds', hash.to_json)
   end
 
+  def refunds_delete(id)
+    @@folio_request.delete("/refunds/#{id}")
+  end
+
   def owners_json
     JSON.parse(File.read("#{Settings.json}/users/owners.json"))
   end
@@ -55,12 +67,20 @@ module UsersTaskHelpers
     @@folio_request.post('/owners', hash.to_json)
   end
 
+  def owners_delete(id)
+    @@folio_request.delete("/owners/#{id}")
+  end
+
   def manual_charges_json
     JSON.parse(File.read("#{Settings.json}/users/manual_charges.json"))
   end
 
   def manual_charges_post(hash)
     @@folio_request.post('/feefines', hash.to_json)
+  end
+
+  def manual_charges_delete(id)
+    @@folio_request.delete("/feefines/#{id}")
   end
 
   def conditions_json
@@ -79,12 +99,20 @@ module UsersTaskHelpers
     @@folio_request.post('/manual-block-templates', hash.to_json)
   end
 
+  def templates_delete(id)
+    @@folio_request.delete("/manual-block-templates/#{id}")
+  end
+
   def limits_json
     JSON.parse(File.read("#{Settings.json}/users/limits.json"))
   end
 
   def limits_post(hash)
     @@folio_request.post('/patron-block-limits', hash.to_json)
+  end
+
+  def limits_delete(id)
+    @@folio_request.delete("/patron-block-limits/#{id}")
   end
 
   def user_get(username)
@@ -153,49 +181,49 @@ module UsersTaskHelpers
   end
 
   def pull_waivers
-    hash = @@folio_request.get('/waives')
+    hash = @@folio_request.get('/waives?limit=100')
     trim_hash(hash, 'waivers')
     hash.to_json
   end
 
   def pull_refunds
-    hash = @@folio_request.get('/refunds')
+    hash = @@folio_request.get('/refunds?limit=100')
     trim_hash(hash, 'refunds')
     hash.to_json
   end
 
   def pull_owners
-    hash = @@folio_request.get('/owners')
+    hash = @@folio_request.get('/owners?limit=50')
     trim_hash(hash, 'owners')
     hash.to_json
   end
 
   def pull_manual_charges
-    hash = @@folio_request.get_cql('/feefines', 'automatic==false')
+    hash = @@folio_request.get('/feefines?limit=100&query=automatic==false')
     trim_hash(hash, 'feefines')
     hash.to_json
   end
 
   def pull_payments
-    hash = @@folio_request.get('/payments')
+    hash = @@folio_request.get('/payments?limit=100')
     trim_hash(hash, 'payments')
     hash.to_json
   end
 
   def pull_conditions
-    hash = @@folio_request.get('/patron-block-conditions')
+    hash = @@folio_request.get('/patron-block-conditions?limit=100')
     trim_hash(hash, 'patronBlockConditions')
     hash.to_json
   end
 
   def pull_templates
-    hash = @@folio_request.get('/manual-block-templates')
+    hash = @@folio_request.get('/manual-block-templates?limit=100')
     trim_hash(hash, 'manualBlockTemplates')
     hash.to_json
   end
 
   def pull_limits
-    hash = @@folio_request.get('/patron-block-limits')
+    hash = @@folio_request.get('/patron-block-limits?limit=100')
     trim_hash(hash, 'patronBlockLimits')
     hash.to_json
   end

@@ -66,6 +66,15 @@ task load_user_settings: %i[users:load_user_groups
                             users:load_limits]
       # users:load_address_types - now loaded by default reference data
 
+desc 'Delete MOST user settings [limits, patron block templates, manual charges, refunds, payments, waivers, and owners]'
+task delete_user_settings: %i[users:delete_limits
+                              users:delete_patron_blocks_templates
+                              users:delete_manual_charges
+                              users:delete_refunds
+                              users:delete_payments
+                              users:delete_waivers
+                              users:delete_owners]
+
 desc 'Loads all Configurations, User, Tenant, Acquisitions Units, Finance, and Order Settings, and Organization settings and data'
 task load_new_data_and_settings: %i[configurations:load_configs
                                     load_user_settings

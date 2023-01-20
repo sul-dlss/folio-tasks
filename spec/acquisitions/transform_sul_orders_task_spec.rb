@@ -284,7 +284,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has a value that is a number' do
-      expect(po_line_fund_dist[0]['value']).to be_kind_of Numeric
+      expect(po_line_fund_dist[0]['value']).to be_a Numeric
     end
 
     it 'has a value that is from FUNDING_AMT_ENCUM' do
@@ -323,7 +323,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has a value that is a number' do
-      expect(po_line_fund_dist[0]['value']).to be_kind_of Numeric
+      expect(po_line_fund_dist[0]['value']).to be_a Numeric
     end
 
     it 'has a value that is from FUNDING_PERCENT' do
@@ -349,7 +349,7 @@ describe 'transform SUL orders rake tasks' do
     let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
 
     it 'has order xinfo and orderline1 xinfo notes as list of notes' do
-      expect(orders_hash['notes']).to be_kind_of Array
+      expect(orders_hash['notes']).to be_a Array
     end
 
     it 'has FOLIO order note field populated with notes' do
