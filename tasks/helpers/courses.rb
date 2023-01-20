@@ -29,7 +29,7 @@ module CoursesTaskHelpers
   end
 
   def pull_course_depts
-    hash = @@folio_request.get('/coursereserves/departments')
+    hash = @@folio_request.get('/coursereserves/departments?limit=999')
     trim_hash(hash, 'departments')
     hash.to_json
   end
