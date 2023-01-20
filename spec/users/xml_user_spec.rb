@@ -15,7 +15,7 @@ RSpec.describe XmlUser do
 
       it 'has users in an array' do
         users = JSON.parse(result.to_json)['users']
-        expect(users).to be_kind_of Array
+        expect(users).to be_a Array
       end
 
       it 'has one or more user records' do
@@ -25,7 +25,7 @@ RSpec.describe XmlUser do
 
       it 'has addresses in an array' do
         addresses = JSON.parse(result.to_json)['users'][0]['personal']['addresses']
-        expect(addresses).to be_kind_of Array
+        expect(addresses).to be_a Array
       end
 
       it 'has one or more addresses' do

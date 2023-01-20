@@ -185,7 +185,7 @@ describe 'finance settings rake tasks' do
     let(:fund) { load_funds_task.send(:funds_hash, funds_csv[0], uuid_maps)['fund'] }
 
     it 'creates the fund hash' do
-      expect(fund).to be_kind_of(Hash)
+      expect(fund).to be_a(Hash)
     end
 
     it 'creates the hash key and value for fund name' do

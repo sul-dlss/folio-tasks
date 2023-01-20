@@ -114,7 +114,7 @@ module TsvUserTaskHelpers
     return {} unless user['PATRON_CODE']
 
     user_group = Settings.usergroups.to_h[user['PATRON_CODE'].to_sym].to_s
-    { 'usergroup' => user_group } unless user_group.size.zero?
+    { 'usergroup' => user_group } unless user_group.empty?
   end
 
   def transform_user(user)
