@@ -4,7 +4,7 @@
 module XmlUserHelpers
   # TODO: check whether expiration date for old affiliations will cause a problem
   def active?
-    return false if Settings.nonactive_types.include?(current_affiliation['type']) && @group_array.size.zero?
+    return false if Settings.nonactive_types.include?(current_affiliation['type']) && @group_array.empty?
 
     not_expired?(current_affiliation['type']) && effective?
   end
