@@ -6,7 +6,6 @@ require_relative '../helpers/users'
 namespace :users do
   include UsersTaskHelpers
 
-
   desc 'delete limits from folio'
   task :delete_limits do
     limits_json['patronBlockLimits'].each do |obj|
