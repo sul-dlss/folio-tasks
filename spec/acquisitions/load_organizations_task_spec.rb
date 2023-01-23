@@ -185,6 +185,19 @@ describe 'organizations rake tasks' do
     end
   end
 
+  context 'when SUL organization should not export to accounting' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:category_map) { load_organizations_task.send(:category_map) }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[3], 'SUL', acq_unit_uuid, category_map)
+    end
+
+    it 'creates the hash key and value for exportToAccounting' do
+      expect(org_hash['exportToAccounting']).to be_falsey
+    end
+  end
+
   context 'when loading Law organization data' do
     let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
@@ -195,6 +208,19 @@ describe 'organizations rake tasks' do
 
     it 'creates the hash key and value for code with spaces' do
       expect(org_hash['code']).to eq 'YALE LAW REPORT-Law'
+    end
+  end
+
+  context 'when Law organization should not export to accounting' do
+    let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
+    let(:category_map) { load_law_organizations_task.send(:category_map) }
+    let(:org_hash) do
+      load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'Law', acq_unit_uuid, category_map)
+    end
+
+    it 'creates the hash key and value for exportToAccounting' do
+      expect(org_hash['exportToAccounting']).to be_falsey
     end
   end
 

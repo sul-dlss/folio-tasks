@@ -14,7 +14,7 @@ module OrganizationsTaskHelpers
     hash = {
       'name' => obj.at_xpath('name')&.text,
       'code' => vendor_code(obj, acq_unit),
-      'exportToAccounting' => true,
+      'exportToAccounting' => export_to_accounting?(obj.at_xpath('vendorID')&.text),
       'status' => 'Active',
       'isVendor' => true,
       'erpCode' => obj.at_xpath('customerNumber')&.text,
@@ -47,6 +47,10 @@ module OrganizationsTaskHelpers
       'isVendor' => true,
       'acqUnitIds' => [acq_unit_uuid]
     }
+  end
+
+  def export_to_accounting?(vendor_id)
+    return true unless vendor_id.end_with?('-999', '-9999')
   end
 
   def vendor_code(obj, acq_unit)

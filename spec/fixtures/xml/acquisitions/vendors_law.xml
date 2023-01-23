@@ -11,18 +11,29 @@
 <entry name="Street">Box 234567</entry>
 <entry name="City, State">New Haven, CT</entry>
 <entry name="Zip">06520-8215</entry>
-<addressIdx>0</addressIdx>
-</vendorAddress>
-<vendorAddress>
-<entry name="Customer Number">Customer Number:</entry>
+<addressCategory>Orders, Payments, Claims</addressCategory>
 <addressIdx>1</addressIdx>
 </vendorAddress>
-<vendorAddress>
-<entry name="Customer Number">Customer Number:</entry>
-<addressIdx>2</addressIdx>
-</vendorAddress>
-<ediAddress>
-</ediAddress>
+<vendorCurrency>US</vendorCurrency>
 <fiscalCycle>2022</fiscalCycle>
+</vendor>
+<vendor>
+<vendorID>LEXISNEXIS UK-9999</vendorID>
+<customerNumber>9999999999</customerNumber>
+<name>LexisNexis UK</name>
+<vendorAddress>
+<entry name="Phone">020-123456789</entry>
+<entry name="FAX">020-123456789</entry>
+<entry name="E-Address">http://www.example.com</entry>
+<entry name="E-Address">usa.contact@example.com</entry>
+<entry name="Customer Number">Customer number: 12345</entry>
+<entry name="Street">House, The House</entry>
+<entry name="City, State">Surrey</entry>
+<entry name="Zip">123456</entry>
+<entry name="Country">UK</entry>
+<addressCategory>Orders, Payments, Claims</addressCategory>
+<addressIdx>1</addressIdx>
+</vendorAddress>
+<vendorCurrency>US</vendorCurrency>
 </vendor>
 </report>
