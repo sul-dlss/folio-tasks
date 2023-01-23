@@ -154,9 +154,23 @@ From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S ord
 
 ### App user for edge_connexion
 
-Running the `rake tsv_users:load_app_users` task, get the id for the `edge_conn` user under the response `Creating user record in permissions table` then do a folio POST to:
+After running the `rake tsv_users:load_app_users` task and get the `id` for the `edge_conn` user under the response `Creating user record in permissions table`, e.g.:
 ```
-'perms/users/{id}/permissions' json/users/connexion_permission.json
+Creating user record in permissions table
+{"id"=>"6e215693-58bc-4274-aaab-62cc70a89296",
+ ...
+```
+ Alternately, get the user id by doing:
+ ```
+ result=$(ruby bin/folio_cql_json.rb 'users' 'username==edge_conn' | jq -r '.["users"][0].id')
+ ```
+ ...and then search for the user permissions id:
+ ```
+ ID=$(ruby bin/folio_cql_json.rb 'perms/users' "userId==${result}" | jq -r '.["permissionUsers"][0].id')
+ ```
+ then do a folio POST:
+```
+ruby bin/folio_post.rb "perms/users/${ID}/permissions" json/users/connexion_permission.json
 ```
 
 ## Development notes
