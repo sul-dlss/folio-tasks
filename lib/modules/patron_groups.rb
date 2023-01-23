@@ -16,7 +16,7 @@ class PatronGroups
   end
 
   def postdoctoral
-    @aff['type'].start_with?('student') && (%w[student:phd student:postdoc student:doctoral].intersect?(@priv_groups) ||
+    @aff['type'].start_with?('student') && ((%w[student:phd student:postdoc student:doctoral] & @priv_groups).any? ||
       affiliation_affdata.include?('law jsd'))
   end
 
@@ -27,7 +27,7 @@ class PatronGroups
           (
             affiliation_description.any? do |a|
               a.start_with?('graduate')
-            end || %w[student:coterminal].intersect?(@priv_groups)
+            end || (%w[student:coterminal] & @priv_groups).any?
           )
       )
   end
