@@ -18,4 +18,11 @@ namespace :courses do
       course_depts_post(obj)
     end
   end
+
+  desc 'load course processing statuses into folio'
+  task :load_course_status do
+    course_status_json['processingStatuses'].each do |obj|
+      course_status_post(obj)
+    end
+  end
 end

@@ -130,6 +130,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             configurations:pull_configs
                             courses:pull_course_terms
                             courses:pull_course_depts
+                            courses:pull_course_status
                             inventory:pull_statistical_codes_and_types
                             inventory:pull_instance_note_types]
 
@@ -182,4 +183,5 @@ task delete_circ_settings: %i[circulation:delete_request_policies
 
 desc 'Load all course reserve settings: [course terms, departments]'
 task load_course_reserve_settings: %i[courses:load_course_terms
-                                      courses:load_course_depts]
+                                      courses:load_course_depts
+                                      courses:load_course_status]
