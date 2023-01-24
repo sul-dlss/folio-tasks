@@ -20,7 +20,9 @@ module OrganizationsTaskHelpers
       'erpCode' => obj.at_xpath('customerNumber')&.text,
       'acqUnitIds' => [
         acq_unit_uuid.to_s
-      ]
+      ],
+      'vendorCurrencies' => vendor_currencies(obj),
+      'claimingInterval' => claiming_interval(obj)
     }
     hash.store('addresses', org_addresses(obj, category_uuids))
     hash.store('phoneNumbers', org_phones(obj, category_uuids))
@@ -57,6 +59,12 @@ module OrganizationsTaskHelpers
     "#{obj.at_xpath('vendorID')&.text}-#{acq_unit}"
   end
 
+  def claiming_interval(obj)
+    return nil if obj.at_xpath('vendorCycle/claimPeriod')&.text.to_i.zero?
+
+    obj.at_xpath('vendorCycle/claimPeriod')&.text.to_i
+  end
+
   def primary(obj, attr_value)
     # primary is <addressIdx>1</addressIdx> and entry where name is attr_value
     # returns nil if no primary
@@ -70,6 +78,18 @@ module OrganizationsTaskHelpers
       categories.push(category_uuids.fetch(category, nil)) unless category.nil?
     end
     categories.compact
+  end
+
+  def currency_codes
+    JSON.parse(File.read("#{Settings.json}/organizations/currency_codes.json"))
+  end
+
+  def vendor_currencies(obj)
+    # there is only one <vendorCurrency> per <vendor> record but json expects array
+    currencies = [currency_codes.fetch(obj.at_xpath('vendorCurrency')&.text, nil)].compact
+    return if currencies.empty?
+
+    currencies
   end
 
   def organizations_id(code)

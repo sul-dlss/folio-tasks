@@ -29,6 +29,9 @@
 <ediAddress>
 </ediAddress>
 <vendorCurrency>US</vendorCurrency>
+<vendorCycle>
+<claimPeriod>364</claimPeriod>
+</vendorCycle>
 </vendor>
 <vendor>
 <vendorID>FAKE (1234)</vendorID>
@@ -43,7 +46,10 @@
 </ediAddress>
 <vendorExtendedInfo>
 </vendorExtendedInfo>
-<vendorCurrency>US</vendorCurrency>
+<vendorCurrency>NONE</vendorCurrency>
+<vendorCycle>
+<claimPeriod>0</claimPeriod>
+</vendorCycle>
 </vendor>
 <vendor>
 <vendorID>BARDI/EUR</vendorID>
@@ -62,6 +68,9 @@
 <ediAddress>
 </ediAddress>
 <vendorCurrency>EURO</vendorCurrency>
+<vendorCycle>
+<claimPeriod>364</claimPeriod>
+</vendorCycle>
 </vendor>
 <vendor>
 <vendorID>SCIPOST-9999</vendorID>
@@ -90,5 +99,8 @@
 <ediAddress>
 </ediAddress>
 <vendorCurrency>US</vendorCurrency>
+<vendorCycle>
+<claimPeriod>364</claimPeriod>
+</vendorCycle>
 </vendor>
 </report>

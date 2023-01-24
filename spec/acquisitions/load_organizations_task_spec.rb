@@ -118,11 +118,6 @@ describe 'organizations rake tasks' do
       expect(org_hash['addresses'][0]['isPrimary']).to be_truthy
     end
 
-    it 'does not create an address object if no primary address selected' do
-      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
-                                          category_uuids)).not_to have_key 'addresses'
-    end
-
     it 'does not create empty address hash key value pairs' do
       expect(org_hash['addresses'][1]).not_to have_key 'country'
     end
@@ -159,11 +154,6 @@ describe 'organizations rake tasks' do
       expect(org_hash['phoneNumbers'].size).to eq 2
     end
 
-    it 'does not create a phoneNumbers object if no primary phone selected' do
-      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
-                                          category_uuids)).not_to have_key 'phoneNumbers'
-    end
-
     it 'creates an array of email hashes' do
       expect(org_hash['emails']).to be_a(Array)
     end
@@ -181,9 +171,12 @@ describe 'organizations rake tasks' do
                                                              'isPrimary' => true))
     end
 
-    it 'does not create an emails object if no primary email selected' do
-      expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
-                                          category_uuids)).not_to have_key 'emails'
+    it 'creates the hash key and value for claimingInterval' do
+      expect(org_hash['claimingInterval']).to eq 364
+    end
+
+    it 'creates the hash key and value for vendorCurrencies' do
+      expect(org_hash['vendorCurrencies']).to include 'USD'
     end
   end
 
@@ -196,6 +189,34 @@ describe 'organizations rake tasks' do
 
     it 'creates the hash key and value for exportToAccounting' do
       expect(org_hash['exportToAccounting']).to be_falsey
+    end
+  end
+
+  context 'when SUL organization is missing data' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
+    end
+
+    it 'does not create an address object if no primary address selected' do
+      expect(org_hash).not_to have_key 'addresses'
+    end
+
+    it 'does not create an emails object if no primary email selected' do
+      expect(org_hash).not_to have_key 'emails'
+    end
+
+    it 'does not create a phoneNumbers object if no primary phone selected' do
+      expect(org_hash).not_to have_key 'phoneNumbers'
+    end
+
+    it 'does not create empty claimingInterval hash key value pairs' do
+      expect(org_hash).not_to have_key 'claimingInterval'
+    end
+
+    it 'does not create empty vendorCurrencies hash key value pairs' do
+      expect(org_hash).not_to have_key 'vendorCurrencies'
     end
   end
 
@@ -256,11 +277,16 @@ describe 'organizations rake tasks' do
     let(:xml_doc) { load_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Business', nil) }
     let(:org_hash) do
-      load_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid, category_uuids)
+      load_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid,
+                                       category_uuids)
     end
 
     it 'creates the hash key and value for code with an ampersand' do
       expect(org_hash['code']).to eq 'D&B-Business'
+    end
+
+    it 'does not create empty claimingInterval hash key value pairs' do
+      expect(org_hash).not_to have_key 'claimingInterval'
     end
   end
 

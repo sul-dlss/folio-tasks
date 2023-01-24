@@ -35,5 +35,8 @@
 <addressIdx>1</addressIdx>
 </vendorAddress>
 <vendorCurrency>US</vendorCurrency>
+<vendorCycle>
+<claimPeriod>0</claimPeriod>
+</vendorCycle>
 </vendor>
 </report>
