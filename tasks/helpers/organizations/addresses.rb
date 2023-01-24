@@ -58,6 +58,6 @@ module AddressHelpers
   end
 
   def country_codes
-    JSON.parse(File.read("#{Settings.json}/country_codes.json"))
+    JSON.parse(File.read("#{Settings.json}/organizations/country_codes.json"))
   end
 end
