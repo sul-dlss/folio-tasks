@@ -6,14 +6,6 @@ require_relative '../folio_request'
 module OrgCategoryTaskHelpers
   include FolioRequestHelper
 
-  def category_map
-    {
-      '0' => category_id('Payments'),
-      '1' => category_id('Customer%20Service'),
-      '2' => category_id('Claims')
-    }
-  end
-
   def categories_csv
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/organizations-categories.tsv"), headers: true,
                                                                                       col_sep: "\t").map(&:to_h)

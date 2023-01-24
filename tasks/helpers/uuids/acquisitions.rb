@@ -114,6 +114,14 @@ module AcquisitionsUuidsHelpers
     orders_hash
   end
 
+  def organization_categories
+    org_categories_hash = {}
+    @@folio_request.get('/organizations-storage/categories?limit=100')['categories'].each do |obj|
+      org_categories_hash[obj['value']] = obj['id']
+    end
+    org_categories_hash
+  end
+
   # rubocop: disable Layout/LineLength
   def law_organizations
     organizations_hash = {}

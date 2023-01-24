@@ -2,35 +2,40 @@
 
 # Module to encapsulate org address methods used by organizations rake tasks
 module AddressHelpers
-  def org_addresses(obj, map)
+  def org_addresses(obj, category_uuids)
     primary_address = primary(obj, 'Street')
     return if primary_address.nil?
 
     list = []
     obj.xpath('vendorAddress').each do |address|
-      hash = address_object(address, primary_address, map)
+      hash = address_object(address, primary_address, category_uuids)
       list << hash unless hash.empty?
     end
     list
   end
 
-  def address_object(node, primary_address, map)
+  def address_object(node, primary_address, category_uuids)
     hash = {
-      'addressLine1' => address_line(node),
       'city' => city(node),
       'stateRegion' => state_region(node),
       'zipCode' => zip_code(node),
       'country' => country(node)
     }.compact
+    add_address_lines(hash, node)
     hash.store('isPrimary', true) if node == primary_address
-    cat = [category(node, map)]
-    hash.store('categories', cat) unless hash['addressLine1'].nil? || cat.none?
+    hash.store('categories', category(node, category_uuids)) unless category(node, category_uuids).empty?
 
     hash
   end
 
-  def address_line(node)
-    node.at_xpath('entry[@name="Street"]')&.text
+  def add_address_lines(hash, node)
+    if node.xpath('entry[@name="Street"]').length == 2
+      hash.store('addressLine2', node.xpath('entry[@name="Street"]').last.text)
+    end
+    hash.store('addressLine1', node.xpath('entry[@name="Street"]').first.text)
+    hash.compact
+
+    hash
   end
 
   def city(node)

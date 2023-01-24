@@ -6,6 +6,7 @@ require 'spec_helper'
 describe 'organizations rake tasks' do
   let(:load_categories_task) { Rake.application.invoke_task 'acquisitions:load_org_categories' }
   let(:load_migrate_err_task) { Rake.application.invoke_task 'acquisitions:load_org_migrate_err' }
+  let(:category_uuids) { AcquisitionsUuidsHelpers.organization_categories }
   let(:load_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_sul' }
   let(:load_law_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_law' }
   let(:load_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_business' }
@@ -25,7 +26,9 @@ describe 'organizations rake tasks' do
 
     stub_request(:get, 'http://example.com/organizations-storage/categories')
       .with(query: hash_including)
-      .to_return(body: '{ "categories": [{ "id": "cat-123" }] }')
+      .to_return(body: '{ "categories": [{ "id": "cat-123", "value": "Claims" },
+                                         { "id": "cat-456", "value": "Orders" },
+                                         { "id": "cat-789", "value": "Payments" }] }')
 
     stub_request(:post, 'http://example.com/organizations/organizations')
   end
@@ -55,9 +58,8 @@ describe 'organizations rake tasks' do
   context 'when loading SUL organization data' do
     let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
-    let(:category_map) { load_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'SUL', acq_unit_uuid, category_map)
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'SUL', acq_unit_uuid, category_uuids)
     end
 
     it 'creates the hash key and value for name' do
@@ -113,12 +115,12 @@ describe 'organizations rake tasks' do
     end
 
     it 'creates an address object with a primary address' do
-      expect(org_hash['addresses'][1]['isPrimary']).to be_truthy
+      expect(org_hash['addresses'][0]['isPrimary']).to be_truthy
     end
 
     it 'does not create an address object if no primary address selected' do
       expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
-                                          category_map)).not_to have_key 'addresses'
+                                          category_uuids)).not_to have_key 'addresses'
     end
 
     it 'does not create empty address hash key value pairs' do
@@ -126,12 +128,11 @@ describe 'organizations rake tasks' do
     end
 
     it 'assigns a category to the address' do
-      expect(org_hash['addresses'][0]['categories'][0]).to include 'cat-123'
+      expect(org_hash['addresses'][0]['categories']).to include 'cat-123'
     end
 
     it 'does not create empty hash key value pairs for category' do
-      # <addressIdx>9 should never ever happen from Symphony
-      expect(org_hash['addresses'][3]).not_to have_key 'categories'
+      expect(org_hash['addresses'][1]).not_to have_key 'categories'
     end
 
     it 'creates an array of phone number hashes' do
@@ -139,7 +140,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'creates a phone object with a primary phone number' do
-      expect(org_hash['phoneNumbers'][2]['isPrimary']).to be_truthy
+      expect(org_hash['phoneNumbers'][0]['isPrimary']).to be_truthy
     end
 
     it 'creates a phoneNumbers object with hash key and value for phoneNumber' do
@@ -155,12 +156,12 @@ describe 'organizations rake tasks' do
     end
 
     it 'does not add to the phoneNumbers object if no phoneNumber' do
-      expect(org_hash['phoneNumbers'].size).to eq 6
+      expect(org_hash['phoneNumbers'].size).to eq 2
     end
 
     it 'does not create a phoneNumbers object if no primary phone selected' do
       expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
-                                          category_map)).not_to have_key 'phoneNumbers'
+                                          category_uuids)).not_to have_key 'phoneNumbers'
     end
 
     it 'creates an array of email hashes' do
@@ -168,29 +169,29 @@ describe 'organizations rake tasks' do
     end
 
     it 'creates an array with 3 email addresses' do
-      expect(org_hash['emails'].size).to eq 3
+      expect(org_hash['emails'].size).to eq 2
     end
 
     it 'creates an emails object with hash key and value for value' do
-      expect(org_hash['emails'][0]['value']).to eq 'carpediem@example.com'
+      expect(org_hash['emails']).to include(a_hash_including('value' => 'carpediem@example.com'))
     end
 
-    it 'creates an email object with a primary email' do
-      expect(org_hash['emails'][1]['isPrimary']).to be_truthy
+    it 'creates an email object with hash key and value for primary email' do
+      expect(org_hash['emails']).to include(a_hash_including('value' => 'claims_carpediem@example.com',
+                                                             'isPrimary' => true))
     end
 
     it 'does not create an emails object if no primary email selected' do
       expect(load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid,
-                                          category_map)).not_to have_key 'emails'
+                                          category_uuids)).not_to have_key 'emails'
     end
   end
 
   context 'when SUL organization should not export to accounting' do
     let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
-    let(:category_map) { load_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_organizations_task.send(:organization_hash_from_xml, xml_doc[3], 'SUL', acq_unit_uuid, category_map)
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[3], 'SUL', acq_unit_uuid, category_uuids)
     end
 
     it 'creates the hash key and value for exportToAccounting' do
@@ -198,12 +199,40 @@ describe 'organizations rake tasks' do
     end
   end
 
+  context 'when organization has no po/claim email address' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[2], 'SUL', acq_unit_uuid, category_uuids)
+    end
+
+    it 'creates an email object with hash key and value for primary email' do
+      expect(org_hash['emails']).to include(a_hash_including('value' => 'info@example.com',
+                                                             'isPrimary' => true))
+    end
+  end
+
+  context 'when organization has multiple address lines' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[3], 'SUL', acq_unit_uuid, category_uuids)
+    end
+
+    it 'creates an address object with hash key and value for addressLine1' do
+      expect(org_hash['addresses'][0]['addressLine1']).to eq 'Institute of Physics, University of Amsterdam'
+    end
+
+    it 'creates an address object with hash key and value for addressLine2' do
+      expect(org_hash['addresses'][0]['addressLine2']).to eq 'Postbus 94485'
+    end
+  end
+
   context 'when loading Law organization data' do
     let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
-    let(:category_map) { load_law_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_map)
+      load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_uuids)
     end
 
     it 'creates the hash key and value for code with spaces' do
@@ -214,9 +243,8 @@ describe 'organizations rake tasks' do
   context 'when Law organization should not export to accounting' do
     let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
-    let(:category_map) { load_law_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'Law', acq_unit_uuid, category_map)
+      load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'Law', acq_unit_uuid, category_uuids)
     end
 
     it 'creates the hash key and value for exportToAccounting' do
@@ -227,9 +255,8 @@ describe 'organizations rake tasks' do
   context 'when loading Business organization data' do
     let(:xml_doc) { load_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Business', nil) }
-    let(:category_map) { load_bus_organizations_task.send(:category_map) }
     let(:org_hash) do
-      load_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid, category_map)
+      load_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid, category_uuids)
     end
 
     it 'creates the hash key and value for code with an ampersand' do

@@ -10,7 +10,7 @@ module OrganizationsTaskHelpers
     CSV.parse(File.open("#{Settings.tsv}/acquisitions/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
-  def organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, map)
+  def organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, category_uuids)
     hash = {
       'name' => obj.at_xpath('name')&.text,
       'code' => vendor_code(obj, acq_unit),
@@ -22,9 +22,9 @@ module OrganizationsTaskHelpers
         acq_unit_uuid.to_s
       ]
     }
-    hash.store('addresses', org_addresses(obj, map))
-    hash.store('phoneNumbers', org_phones(obj, map))
-    hash.store('emails', org_emails(obj, map))
+    hash.store('addresses', org_addresses(obj, category_uuids))
+    hash.store('phoneNumbers', org_phones(obj, category_uuids))
+    hash.store('emails', org_emails(obj, category_uuids))
 
     hash.compact
   end
@@ -58,21 +58,18 @@ module OrganizationsTaskHelpers
   end
 
   def primary(obj, attr_value)
-    if obj.xpath("./vendorAddress[addressIdx[text()='1'] and entry[@name='#{attr_value}']]").any?
-      obj.xpath("./vendorAddress[addressIdx[text()='1'] and entry[@name='#{attr_value}']]").first
-    elsif obj.xpath("./vendorAddress[addressIdx[text()='0'] and entry[@name='#{attr_value}']]").any?
-      obj.xpath("./vendorAddress[addressIdx[text()='0'] and entry[@name='#{attr_value}']]").first
-    elsif obj.xpath("./vendorAddress[addressIdx[text()='2'] and entry[@name='#{attr_value}']]").any?
-      obj.xpath("./vendorAddress[addressIdx[text()='2'] and entry[@name='#{attr_value}']]").first
-    end
+    # primary is <addressIdx>1</addressIdx> and entry where name is attr_value
     # returns nil if no primary
+    obj.at_xpath("./vendorAddress[addressIdx[text()='1'] and entry[@name='#{attr_value}']]")
   end
 
-  def category(node, map)
-    category = node.at_xpath('addressIdx')&.text
-    return if category.to_i > 2
-
-    map.fetch(category) unless category.nil?
+  def category(node, category_uuids)
+    # <addressCategory>Orders, Payments, Claims</addressCategory>
+    categories = []
+    node.at_xpath('addressCategory').text.split(', ').each do |category|
+      categories.push(category_uuids.fetch(category, nil)) unless category.nil?
+    end
+    categories.compact
   end
 
   def organizations_id(code)

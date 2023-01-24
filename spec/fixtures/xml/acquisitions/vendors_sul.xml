@@ -19,23 +19,31 @@
 <addressCategory>Orders, Payments, Claims</addressCategory>
 <addressIdx>1</addressIdx>
 </vendorAddress>
+<vendorAddress>
+<entry name="Street">Junipero Serra Blvd.</entry>
+<entry name="City, State">Stanford, CA</entry>
+<entry name="Zip">94305</entry>
+<addressCategory>Shipping</addressCategory>
+<addressIdx>2</addressIdx>
+</vendorAddress>
 <ediAddress>
 </ediAddress>
 <vendorCurrency>US</vendorCurrency>
-<fiscalCycle>2022</fiscalCycle>
 </vendor>
 <vendor>
 <vendorID>FAKE (1234)</vendorID>
 <customerNumber>0123456</customerNumber>
 <name>Books Vendor</name>
 <vendorAddress>
-<entry name="Customer Number">Customer Number:</entry>
-<addressIdx>0</addressIdx>
-</vendorAddress>
-<vendorAddress>
-<entry name="City, State">City</entry>
+<entry name="Line">** DO NOT MAIL **</entry>
+<addressCategory>Orders, Payments, Claims</addressCategory>
 <addressIdx>1</addressIdx>
 </vendorAddress>
+<ediAddress>
+</ediAddress>
+<vendorExtendedInfo>
+</vendorExtendedInfo>
+<vendorCurrency>US</vendorCurrency>
 </vendor>
 <vendor>
 <vendorID>BARDI/EUR</vendorID>
@@ -54,7 +62,6 @@
 <ediAddress>
 </ediAddress>
 <vendorCurrency>EURO</vendorCurrency>
-<fiscalCycle>2022</fiscalCycle>
 </vendor>
 <vendor>
 <vendorID>SCIPOST-9999</vendorID>
@@ -64,7 +71,7 @@
 <entry name="Attn">c/o Prof. X</entry>
 <entry name="Street">Institute of Physics, University of Amsterdam</entry>
 <entry name="Street">Postbus 94485</entry>
-<entry name="City, State">1234 GABAmsterdam</entry>
+<entry name="City, State">1234 AB Amsterdam</entry>
 <entry name="Country">Netherlands</entry>
 <entry name="Phone">+31 (1)23 456 7890</entry>
 <entry name="E-Address">sponsors@example.org</entry>
@@ -83,7 +90,5 @@
 <ediAddress>
 </ediAddress>
 <vendorCurrency>US</vendorCurrency>
-<vendorCycle>
-<fiscalCycle>2023</fiscalCycle>
 </vendor>
 </report>
