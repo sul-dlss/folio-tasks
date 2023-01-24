@@ -22,6 +22,14 @@ module CoursesTaskHelpers
     @@folio_request.post('/coursereserves/departments', hash.to_json)
   end
 
+  def course_status_json
+    JSON.parse(File.read("#{Settings.json}/courses/course_status.json"))
+  end
+
+  def course_status_post(hash)
+    @@folio_request.post('/coursereserves/processingstatuses', hash.to_json)
+  end
+
   def pull_course_terms
     hash = @@folio_request.get('/coursereserves/terms')
     trim_hash(hash, 'terms')
@@ -31,6 +39,12 @@ module CoursesTaskHelpers
   def pull_course_depts
     hash = @@folio_request.get('/coursereserves/departments?limit=999')
     trim_hash(hash, 'departments')
+    hash.to_json
+  end
+
+  def pull_course_status
+    hash = @@folio_request.get('/coursereserves/processingstatuses?limit=999')
+    trim_hash(hash, 'processingStatuses')
     hash.to_json
   end
 end

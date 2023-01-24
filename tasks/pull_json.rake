@@ -207,6 +207,12 @@ namespace :courses do |namespace|
     name = 'course_depts'
     open_file_and_pull(namespace, name, helper)
   end
+
+  desc 'pull processing statuses from original folio instance (use STAGE=orig yaml)'
+  task :pull_course_status do
+    name = 'course_status'
+    open_file_and_pull(namespace, name, helper)
+  end
 end
 
 namespace :configurations do
