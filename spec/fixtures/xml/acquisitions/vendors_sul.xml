@@ -8,6 +8,8 @@
 <customerNumber>123456FEEDER</customerNumber>
 <name>Carpe Diem Fine Books</name>
 <vendorAddress>
+</vendorAddress>
+<vendorAddress>
 <entry name="Street">1234 Pearl Street</entry>
 <entry name="City, State">Monterey, CA</entry>
 <entry name="Zip">93940</entry>

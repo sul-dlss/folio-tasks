@@ -7,7 +7,7 @@ module AddressHelpers
     return if primary_address.nil?
 
     list = []
-    obj.xpath('vendorAddress').each do |address|
+    vendor_addresses(obj).each do |address|
       hash = address_object(address, primary_address, category_uuids)
       list << hash unless hash.empty?
     end
@@ -30,9 +30,9 @@ module AddressHelpers
 
   def add_address_lines(hash, node)
     if node.xpath('entry[@name="Street"]').length == 2
-      hash.store('addressLine2', node.xpath('entry[@name="Street"]').last.text)
+      hash.store('addressLine2', node.xpath('entry[@name="Street"]').last&.text)
     end
-    hash.store('addressLine1', node.xpath('entry[@name="Street"]').first.text)
+    hash.store('addressLine1', node.xpath('entry[@name="Street"]').first&.text)
     hash.compact
 
     hash

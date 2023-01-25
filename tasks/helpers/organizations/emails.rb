@@ -8,7 +8,7 @@ module EmailHelpers
     return if primary_email.nil?
 
     list = []
-    obj.xpath('vendorAddress').each do |address|
+    vendor_addresses(obj).each do |address|
       category = category(address, category_uuids)
       claims_hash = claims_object(address, primary_email, category)
       list << claims_hash if claims_hash&.any?

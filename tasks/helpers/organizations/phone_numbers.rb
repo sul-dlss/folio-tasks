@@ -7,7 +7,7 @@ module PhoneNumberHelpers
     return if primary_phone.nil?
 
     list = []
-    obj.xpath('vendorAddress').each do |address|
+    vendor_addresses(obj).each do |address|
       category = category(address, category_uuids)
       phone_hash = phone_object(address, primary_phone, category)
       fax_hash = fax_object(address, category)

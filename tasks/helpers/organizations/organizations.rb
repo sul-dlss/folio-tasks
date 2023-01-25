@@ -59,6 +59,16 @@ module OrganizationsTaskHelpers
     "#{obj.at_xpath('vendorID')&.text}-#{acq_unit}"
   end
 
+  def vendor_addresses(obj)
+    addresses = []
+    obj.xpath('vendorAddress').each do |address|
+      next if address.elements.empty?
+
+      addresses.push(address)
+    end
+    addresses
+  end
+
   def claiming_interval(obj)
     return nil if obj.at_xpath('vendorCycle/claimPeriod')&.text.to_i.zero?
 
