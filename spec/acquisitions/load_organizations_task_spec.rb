@@ -37,6 +37,10 @@ describe 'organizations rake tasks' do
     it 'creates the hash key and value for category' do
       expect(load_categories_task.send(:categories_csv)[0]['value']).to eq 'Claims'
     end
+
+    it 'creates the hash key and value for id' do
+      expect(load_categories_task.send(:categories_csv)[0]['id']).to eq 'abc-123'
+    end
   end
 
   context 'when loading migration error organizations' do
