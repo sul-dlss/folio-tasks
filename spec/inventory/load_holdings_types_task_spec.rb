@@ -21,7 +21,7 @@ describe 'holdings type tasks' do
     end
 
     it 'creates the hash key and value for the holdings type source' do
-      expect(load_holdings_types_task.send(:holdings_types_csv)[0]['source']).to eq 'migration'
+      expect(load_holdings_types_task.send(:holdings_types_csv)[0]['source']).to eq 'local'
     end
 
     it 'creates the hash key and value for the holdings type id' do
