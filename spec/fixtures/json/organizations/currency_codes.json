@@ -1,0 +1,19 @@
+{
+  "US": "USD",
+  "GTBRITAIN": "GBP", 
+  "EURO": "EUR",
+  "NEWZEALAND": "NZD",
+  "SWITZERLND": "CHF",
+  "FRANCE": "EUR",
+  "DENMARK": "DKK",
+  "CANADA": "CAD",
+  "SWEDEN": "SEK",
+  "IRELAND": "EUR",
+  "JAPAN": "JPY",
+  "HONGKONG": "HKD",
+  "ITALY": "EUR",
+  "GERMANY": "EUR",
+  "NORWAY": "NOK",
+  "SPAIN": "EUR",
+  "BELGIUM": "EUR"
+}

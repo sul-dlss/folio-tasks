@@ -8,6 +8,8 @@
 <customerNumber>123456FEEDER</customerNumber>
 <name>Carpe Diem Fine Books</name>
 <vendorAddress>
+</vendorAddress>
+<vendorAddress>
 <entry name="Street">1234 Pearl Street</entry>
 <entry name="City, State">Monterey, CA</entry>
 <entry name="Zip">93940</entry>
@@ -15,50 +17,41 @@
 <entry name="Phone">tel: 831-555-5555  cel: 831-555-5555</entry>
 <entry name="FAX">831-555-5555</entry>
 <entry name="E-Address">carpediem@example.com</entry>
-<addressIdx>0</addressIdx>
-</vendorAddress>
-<vendorAddress>
-<entry name="Street">123 Pierce Street</entry>
-<entry name="City, State">Monterey, CA</entry>
-<entry name="Zip">93940</entry>
-<entry name="Phone">831-555-5555</entry>
-<entry name="FAX">831-555-5555 (fax for RUSH orders)</entry>
 <entry name="Email for po/claim">claims_carpediem@example.com</entry>
+<addressCategory>Orders, Payments, Claims</addressCategory>
 <addressIdx>1</addressIdx>
 </vendorAddress>
 <vendorAddress>
-<entry name="Street">123 Pierce Street</entry>
-<entry name="City, State">Monterey, CA</entry>
-<entry name="Zip">93940</entry>
-<entry name="Phone">831-555-5555</entry>
-<entry name="FAX">831-555-5555</entry>
-<entry name="Email for po/claim">carpediem@example.com</entry>
+<entry name="Street">Junipero Serra Blvd.</entry>
+<entry name="City, State">Stanford, CA</entry>
+<entry name="Zip">94305</entry>
+<addressCategory>Shipping</addressCategory>
 <addressIdx>2</addressIdx>
-</vendorAddress>
-<vendorAddress>
-<entry name="Street">Fake Street</entry>
-<entry name="Zip">93940</entry>
-<addressIdx>9</addressIdx>
-</vendorAddress>
-<vendorAddress>
-<entry name="Zip">93940</entry>
 </vendorAddress>
 <ediAddress>
 </ediAddress>
-<fiscalCycle>2022</fiscalCycle>
+<vendorCurrency>US</vendorCurrency>
+<vendorCycle>
+<claimPeriod>364</claimPeriod>
+</vendorCycle>
 </vendor>
 <vendor>
 <vendorID>FAKE (1234)</vendorID>
 <customerNumber>0123456</customerNumber>
 <name>Books Vendor</name>
 <vendorAddress>
-<entry name="Customer Number">Customer Number:</entry>
-<addressIdx>0</addressIdx>
-</vendorAddress>
-<vendorAddress>
-<entry name="City, State">City</entry>
+<entry name="Line">** DO NOT MAIL **</entry>
+<addressCategory>Orders, Payments, Claims</addressCategory>
 <addressIdx>1</addressIdx>
 </vendorAddress>
+<ediAddress>
+</ediAddress>
+<vendorExtendedInfo>
+</vendorExtendedInfo>
+<vendorCurrency>NONE</vendorCurrency>
+<vendorCycle>
+<claimPeriod>0</claimPeriod>
+</vendorCycle>
 </vendor>
 <vendor>
 <vendorID>BARDI/EUR</vendorID>
@@ -71,18 +64,45 @@
 <entry name="Phone">0039-55-5555555</entry>
 <entry name="FAX">0039-55-5555555</entry>
 <entry name="E-Address">info@example.com</entry>
-<addressIdx>0</addressIdx>
+<addressCategory>Orders, Payments, Claims</addressCategory>
+<addressIdx>1</addressIdx>
 </vendorAddress>
+<ediAddress>
+</ediAddress>
+<vendorCurrency>EURO</vendorCurrency>
+<vendorCycle>
+<claimPeriod>364</claimPeriod>
+</vendorCycle>
+</vendor>
+<vendor>
+<vendorID>SCIPOST-9999</vendorID>
+<customerNumber>9999999999</customerNumber>
+<name>SciPost Foundation</name>
 <vendorAddress>
-<entry name="Customer Number">Customer Number:</entry>
+<entry name="Attn">c/o Prof. X</entry>
+<entry name="Street">Institute of Physics, University of Amsterdam</entry>
+<entry name="Street">Postbus 94485</entry>
+<entry name="City, State">1234 AB Amsterdam</entry>
+<entry name="Country">Netherlands</entry>
+<entry name="Phone">+31 (1)23 456 7890</entry>
+<entry name="E-Address">sponsors@example.org</entry>
+<entry name="Email for po/claim">admin@example.org</entry>
+<addressCategory>Orders</addressCategory>
 <addressIdx>1</addressIdx>
 </vendorAddress>
 <vendorAddress>
-<entry name="Customer Number">Customer Number:</entry>
+<entry name="Street">Science Park 123</entry>
+<entry name="City, State">Amsterdam</entry>
+<entry name="Zip">1234 AB</entry>
+<entry name="Country">Netherlands</entry>
+<addressCategory>Payments, Claims</addressCategory>
 <addressIdx>2</addressIdx>
 </vendorAddress>
 <ediAddress>
 </ediAddress>
-<fiscalCycle>2022</fiscalCycle>
+<vendorCurrency>US</vendorCurrency>
+<vendorCycle>
+<claimPeriod>364</claimPeriod>
+</vendorCycle>
 </vendor>
 </report>

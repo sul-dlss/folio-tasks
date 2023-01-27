@@ -2,13 +2,13 @@
 
 # Module to encapsulate phone number methods used by organizations rake tasks
 module PhoneNumberHelpers
-  def org_phones(obj, map)
+  def org_phones(obj, category_uuids)
     primary_phone = primary(obj, 'Phone')
     return if primary_phone.nil?
 
     list = []
-    obj.xpath('vendorAddress').each do |address|
-      category = [category(address, map)]
+    vendor_addresses(obj).each do |address|
+      category = category(address, category_uuids)
       phone_hash = phone_object(address, primary_phone, category)
       fax_hash = fax_object(address, category)
       list << phone_hash unless phone_hash.nil?
@@ -25,7 +25,7 @@ module PhoneNumberHelpers
       'type' => 'Office'
     }.compact
     hash.store('isPrimary', true) if node == primary_phone
-    hash.store('categories', category) unless hash['phoneNumber'].nil? || category.none?
+    hash.store('categories', category) unless hash['phoneNumber'].nil? || category.empty?
 
     hash
   end
@@ -41,7 +41,7 @@ module PhoneNumberHelpers
       'phoneNumber' => fax(node),
       'type' => 'Fax'
     }.compact
-    hash.store('categories', category) unless hash['phoneNumber'].nil? || category.none?
+    hash.store('categories', category) unless hash['phoneNumber'].nil? || category.empty?
 
     hash
   end

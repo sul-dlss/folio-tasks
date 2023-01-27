@@ -3,13 +3,13 @@
 # Module to encapsulate email methods used by organizations rake tasks
 module EmailHelpers
   # rubocop: disable Metrics/CyclomaticComplexity
-  def org_emails(obj, map)
+  def org_emails(obj, category_uuids)
     primary_email = primary(obj, 'Email for po/claim') || primary(obj, 'E-Address')
     return if primary_email.nil?
 
     list = []
-    obj.xpath('vendorAddress').each do |address|
-      category = [category(address, map)]
+    vendor_addresses(obj).each do |address|
+      category = category(address, category_uuids)
       claims_hash = claims_object(address, primary_email, category)
       list << claims_hash if claims_hash&.any?
       email_hash = email_object(address, primary_email, category, list)

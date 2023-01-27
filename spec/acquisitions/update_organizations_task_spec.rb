@@ -4,6 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'update organizations rake tasks' do
+  let(:category_uuids) { AcquisitionsUuidsHelpers.organization_categories }
   let(:update_sul_organizations_task) { Rake.application.invoke_task 'acquisitions:update_org_vendors_sul' }
   let(:update_law_organizations_task) { Rake.application.invoke_task 'acquisitions:update_org_vendors_law' }
   let(:update_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:update_org_vendors_business' }
@@ -30,9 +31,8 @@ describe 'update organizations rake tasks' do
   context 'when updating SUL organizations' do
     let(:xml_doc) { update_sul_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('SUL', nil) }
-    let(:category_map) { update_sul_organizations_task.send(:category_map) }
     let(:org_hash) do
-      update_sul_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_map)
+      update_sul_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
     end
 
     it 'escapes the parentheses in the vendor ID' do
@@ -42,7 +42,7 @@ describe 'update organizations rake tasks' do
 
     it 'escapes the forward slash in the vendor ID' do
       org_hash = update_sul_organizations_task.send(:organization_hash_from_xml, xml_doc[2], 'SUL', acq_unit_uuid,
-                                                    category_map)
+                                                    category_uuids)
       update_sul_organizations_task.send(:organizations_id, org_hash['code'])
       expect(WebMock).to have_requested(:get, 'http://example.com/organizations/organizations?query=code==%22BARDI/EUR-SUL%22').at_least_once
     end
@@ -51,9 +51,8 @@ describe 'update organizations rake tasks' do
   context 'when updating Law organizations' do
     let(:xml_doc) { update_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('Law', nil) }
-    let(:category_map) { update_law_organizations_task.send(:category_map) }
     let(:org_hash) do
-      update_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_map)
+      update_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_uuids)
     end
 
     it 'escapes the spaces in the vendor ID' do
@@ -65,10 +64,9 @@ describe 'update organizations rake tasks' do
   context 'when updating Business organizations' do
     let(:xml_doc) { update_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('Business', nil) }
-    let(:category_map) { update_bus_organizations_task.send(:category_map) }
     let(:org_hash) do
       update_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid,
-                                         category_map)
+                                         category_uuids)
     end
 
     it 'escapes the ampersand in the vendor ID' do
