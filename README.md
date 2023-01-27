@@ -152,7 +152,7 @@ The `prepare_orders` and `load_orders[1]` rake tasks should be run from the Symp
 #### Using screen session
 From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake acquisitions:load_orders[1]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
 
-### App user for edge_connexion
+### App user for edge_connexion, edge_sip2
 
 After running the `rake tsv_users:load_app_users` task and get the `id` for the `edge_conn` user under the response `Creating user record in permissions table`, e.g.:
 ```
@@ -160,7 +160,7 @@ Creating user record in permissions table
 {"id"=>"6e215693-58bc-4274-aaab-62cc70a89296",
  ...
 ```
- Alternately, get the user id by doing:
+ Alternately, get the user id by doing (e.g.):
  ```
  result=$(ruby bin/folio_cql_json.rb 'users' 'username==edge_conn' | jq -r '.["users"][0].id')
  ```
@@ -172,6 +172,10 @@ Creating user record in permissions table
 ```
 ruby bin/folio_post.rb "perms/users/${ID}/permissions" json/users/connexion_permission.json
 ```
+ or
+ ```
+ ruby bin/folio_post_array.rb "perms/users/${ID}/permissions" json/users/sip2_permission.json
+ ```
 
 ## Development notes
 When a new task is created add the task definition to the `Rakefile` and also to the `load_new_data_and_settings` array
