@@ -18,8 +18,16 @@ module InventoryTaskHelpers
     CSV.parse(File.open("#{Settings.tsv}/inventory/alt-title-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
+  def holdings_types_csv
+    CSV.parse(File.open("#{Settings.tsv}/inventory/holdings-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
   def alt_title_types_post(obj)
     @@folio_request.post('/alternative-title-types', obj.to_json)
+  end
+
+  def holdings_types_post(obj)
+    @@folio_request.post('/holdings-types', obj.to_json)
   end
 
   def item_note_types_csv

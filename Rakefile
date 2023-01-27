@@ -151,14 +151,15 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
 desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD INVOICE ORDERS ORG SMTP_SERVER TENANT USERSBL]'
 task load_all_configurations: %i[configurations:load_configs]
 
-desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types, statistical codes, instance note types]'
+desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types, statistical codes, instance note types, holdings types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_item_loan_types
                                      inventory:load_item_note_types
                                      inventory:load_material_types
                                      inventory:load_statistical_code_types
                                      inventory:load_statistical_codes
-                                     inventory:load_instance_note_types]
+                                     inventory:load_instance_note_types
+                                     inventory:load_holdings_types]
 
 desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, circ rules]'
 task load_circ_settings: %i[circulation:load_fixed_due_date_sched
