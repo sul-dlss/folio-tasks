@@ -35,5 +35,8 @@ RSpec/DescribeClass:
 RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
+Style/ClassVars:
+  Enabled: false
+
 Style/SlicingWithRange:
   Enabled: false
