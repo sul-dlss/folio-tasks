@@ -165,21 +165,4 @@ module CirculationTaskHelpers
     trim_hash(hash, 'requestPolicies')
     hash.to_json
   end
-
-  def sip2_service_points
-    JSON.parse(File.read("#{Settings.json}/circulation/sip2_service_points.json"))
-  end
-
-  def sip2_service_point_ids(servicepoint)
-    @@folio_request.get_cql('/service-points', "code=#{servicepoint}")['servicepoints'][0]['id']
-  end
-
-  def sip2_config_json(servicepoint)
-    config = File.read("#{Settings.json}/circulation/self_checkout_config.json")
-    config.gsub('SERVICE_POINT_ID', servicepoint)
-  end
-
-  def sip2_config_post(servicepoint)
-    @@folio_request.post('/configurations/entries', servicepoint)
-  end
 end

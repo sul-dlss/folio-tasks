@@ -9,7 +9,7 @@ AllCops:
     - 'Gemfile'
     - 'Rakefile'
     - 'spec/spec_helper.rb'
-    - 'spec/circulation/load_sip2_settings_task_spec.rb'
+    - 'spec/load_sip2_settings_task_spec.rb'
   NewCops: enable
 
 Metrics/AbcSize:

@@ -3,8 +3,8 @@
 require 'rake'
 require 'spec_helper'
 
-describe 'circ settings rake tasks' do
-  let(:load_sip2_configs) { Rake.application.invoke_task 'circulation:load_sip2_configs' }
+describe 'sip2 settings rake tasks' do
+  let(:load_sip2_configs) { Rake.application.invoke_task 'configurations:load_sip2_configs' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
