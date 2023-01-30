@@ -14,8 +14,10 @@ namespace :configurations do
     end
   end
 
-  desc 'load self-check service points'
-  task :load_self_check_service_points do
-    self_check_config
+  desc 'load sip2 configurations info folio'
+  task :load_sip2_configs do
+    sip2_service_points.each do |obj|
+      sip2_config_post(sip2_config_json(sip2_service_point_ids(obj)))
+    end
   end
 end

@@ -9,6 +9,7 @@ AllCops:
     - 'Gemfile'
     - 'Rakefile'
     - 'spec/spec_helper.rb'
+    - 'spec/load_sip2_settings_task_spec.rb'
   NewCops: enable
 
 Metrics/AbcSize:
@@ -35,8 +36,7 @@ RSpec/MultipleMemoizedHelpers:
   Enabled: false
 
 Style/ClassVars:
-  Exclude:
-  - 'tasks/helpers/folio_request.rb'
+  Enabled: false
 
 Style/SlicingWithRange:
   Enabled: false

@@ -1,0 +1,6 @@
+{
+  "module": "edge-sip2",
+  "configName": "selfCheckoutConfig.SERVICE_POINT_ID",
+  "enabled": true,
+  "value": "{\"timeoutPeriod\": 5,\"retriesAllowed\": 3,\"checkinOk\": true,\"checkoutOk\": true,\"acsRenewalPolicy\": false,\"libraryName\": \"Stanford University Libraries\",\"terminalLocation\": \"SERVICE_POINT_ID\"}"
+}
