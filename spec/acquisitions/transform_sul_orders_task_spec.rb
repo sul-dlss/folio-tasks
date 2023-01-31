@@ -171,6 +171,14 @@ describe 'transform SUL orders rake tasks' do
     it 'has a title in titleOrPackage' do
       expect(orders_hash['compositePoLines'].sample['titleOrPackage']).to eq 'A title'
     end
+
+    it 'has account number in vendorAccount' do
+      expect(orders_hash['compositePoLines'].sample['vendorDetail']['vendorAccount']).to eq '400958'
+    end
+
+    it 'has blank string in instructions' do
+      expect(orders_hash['compositePoLines'].sample['vendorDetail']['instructions']).to eq ''
+    end
   end
 
   context 'when orders are ongoing subscriptions' do
