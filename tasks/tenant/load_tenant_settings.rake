@@ -48,4 +48,11 @@ namespace :tenant do
       locations_post(hash)
     end
   end
+
+  desc 'load calendars into folio'
+  task :load_calendars do
+    calendars_json['calendars'].each do |obj|
+      calendars_post(obj)
+    end
+  end
 end
