@@ -16,6 +16,7 @@
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '0'
       HOLDNG_CODE: LAW-H
+      CALLNUM: KF9010 .F57 2021
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -23,8 +24,8 @@
         FUND_ID: 111111111111AA
         FUND_NAME: BLAWFUND
   notes:
-  - 'INSTRUCT: standing order for understanding series handle by "Continuations
-    Dept", beginnig with 4th ed; order is for 2 copies only.'
+  - 'INSTRUCT: standing order for understanding series handle by "Continuations Dept",
+    beginnig with 4th ed; order is for 2 copies only.'
   - 'COMMENT: Priority: Eyles Aisle'
   - 'BIGDEAL: Prv ed KF9010 .F57 2014'
   - 'COMMENT: ls: ss; lo: lc'

@@ -16,6 +16,7 @@
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '0'
       HOLDNG_CODE: ART-H
+      CALLNUM: WDRNALM0075
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -35,6 +36,7 @@
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '20211008'
       HOLDNG_CODE: ART-H
+      CALLNUM: Z286 .A77 K588 2021
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -54,6 +56,7 @@
       PARTS_IN_SET: v.2016 (published 2021)
       DIST_DATE_RCVD: '20211012'
       HOLDNG_CODE: ART-H
+      CALLNUM: AB123 .C45 D678
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'

@@ -16,6 +16,7 @@
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '0'
       HOLDNG_CODE: MUSC-REF-H
+      CALLNUM: AB123 .C45 D678
       fundDistribution:
       - FUNDING_TYPE: '2'
         FUNDING_PERCENT: '25'
@@ -45,6 +46,7 @@
       PARTS_IN_SET: 1/1/22-12/31/22, PMT
       DIST_DATE_RCVD: '20220415'
       HOLDNG_CODE: MUSC-REF-H
+      CALLNUM: AB123 .C45 D678
       fundDistribution:
       - FUNDING_TYPE: '2'
         FUNDING_PERCENT: '25'
