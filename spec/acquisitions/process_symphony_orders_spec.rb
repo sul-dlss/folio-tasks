@@ -102,4 +102,12 @@ describe 'prepare order yaml files' do
     test_output = YAML.load_file("#{sul_data_dir}/888888F07.yaml")
     expect(test_output).to eq(fixture_file)
   end
+
+  context 'when LAW order has BIGDEAL order xinfo notes' do
+    it 'creates a yaml file with BIGDEAL mapped to notes' do
+      fixture_file = YAML.load_file("#{fixture_data}/34567L22.yaml")
+      test_output = YAML.load_file("#{law_data_dir}/34567L22.yaml")
+      expect(test_output).to eq(fixture_file)
+    end
+  end
 end

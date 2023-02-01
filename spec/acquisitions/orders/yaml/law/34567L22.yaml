@@ -1,0 +1,30 @@
+---
+34567L22:
+  ORDER_TYPE: STANDING
+  ORD_DATE_CREATED: '20211110'
+  LIBRARY: LAW
+  VENDOR_ID: STANFORD
+  compositePoLines:
+    '5780988':
+      ORD_KEY: '4781469'
+      ORDLINE_NUM: '1'
+      CKEY: '14026520'
+      TITLE: A title
+      ORDLINE_UNIT_LIST_PRICE: "$0.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: '0'
+      HOLDNG_CODE: LAW-H
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$0.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: BLAWFUND
+  notes:
+  - 'INSTRUCT: standing order for understanding series handle by "Continuations Dept",
+    beginnig with 4th ed; order is for 2 copies only.'
+  - 'COMMENT: Priority: Eyles Aisle'
+  - 'BIGDEAL: Prv ed KF9010 .F57 2014'
+  - 'COMMENT: ls: ss; lo: lc'
