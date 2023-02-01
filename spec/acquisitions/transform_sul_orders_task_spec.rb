@@ -145,6 +145,10 @@ describe 'transform SUL orders rake tasks' do
     it 'has an instanceId' do
       expect(orders_hash['compositePoLines'][0]['instanceId']).to eq 'd8532cc3-fe98-5c70-b06f-bc3458b1a744'
     end
+
+    it 'has a call number in the edition field' do
+      expect(orders_hash['compositePoLines'][0]['edition']).to eq 'AB123 .C45 D678'
+    end
   end
 
   context 'when one-time orders have not been received' do
@@ -600,6 +604,20 @@ describe 'transform SUL orders rake tasks' do
 
     it 'has an eresource material type of book' do
       expect(orders_hash['compositePoLines'].sample['eresource']['materialType']).to eq 'mat-123'
+    end
+  end
+
+  context 'when orderline should not link to an instance holdings record' do
+    let(:order_id) do
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).shift
+    end
+    let(:sym_order) do
+      transform_sul_orders_task.send(:get_id_data, YAML.load_file("#{sul_order_yaml_dir}/666666F07.yaml")).pop
+    end
+    let(:orders_hash) { transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
+
+    it 'does not have a call number in the edition field' do
+      expect(orders_hash['compositePoLines'][0]).not_to have_key 'edition'
     end
   end
 

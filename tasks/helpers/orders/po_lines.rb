@@ -10,6 +10,7 @@ module PoLinesHelpers
     po_lines
   end
 
+  # rubocop: disable Metrics/AbcSize
   def po_line_hash(po_line_data, order_type, order_type_map, hldg_code_loc_map, funds)
     hash = {
       'orderFormat' => order_format(order_type, order_type_map),
@@ -22,6 +23,7 @@ module PoLinesHelpers
       'vendorDetail' => add_vendor_detail(po_line_data['ACCOUNT']),
       'instanceId' => determine_instance_uuid(po_line_data['CKEY'], Settings.okapi.url.to_s),
       'titleOrPackage' => po_line_data['TITLE'],
+      'edition' => add_edition(po_line_data['CALLNUM']),
       'acquisitionMethod' => acquisition_method(order_type, order_type_map),
       'source' => 'API',
       'cost' => add_cost(po_line_data['ORDLINE_UNIT_LIST_PRICE'], order_format(order_type, order_type_map)),
@@ -33,6 +35,7 @@ module PoLinesHelpers
     add_receiving_note(hash, po_line_data['PARTS_IN_SET'])
     hash.compact
   end
+  # rubocop: enable Metrics/AbcSize
 
   def add_fund_xinfo_field(data)
     return if data.nil?
@@ -51,6 +54,12 @@ module PoLinesHelpers
 
   def determine_instance_uuid(legacy_identifier, okapi_url)
     FolioUuid.new.generate(okapi_url, 'instances', legacy_identifier.prepend('a'))
+  end
+
+  def add_edition(data)
+    return if data.start_with?('XX(')
+
+    data
   end
 
   def add_cost(list_price, format)
