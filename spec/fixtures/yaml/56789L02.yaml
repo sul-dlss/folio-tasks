@@ -16,6 +16,7 @@
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '0'
       HOLDNG_CODE: LAW-H
+      CALLNUM: VROOMAN COLLECTION F
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -25,5 +26,8 @@
       ACCOUNT: 'Req slip: 3823I'
   notes:
   - 'INSTRUCT: Fund is 123AFUND3'
+  - 'BIGDEAL: 1/20/21: Vol 2016-2019 comes as part of January 2021 ABA silver list;
+    lp:jlk'
   - 'COMMENT: ls:ld; lo:amc; lr:amc'
   - 'NOTIFY: Prof Simon'
+  - 'NOTE: VR'

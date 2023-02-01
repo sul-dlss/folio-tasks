@@ -103,6 +103,10 @@ describe 'transform LAW orders rake tasks' do
     it 'has an instanceId' do
       expect(orders_hash['compositePoLines'][0]['instanceId']).to eq 'b13bcc4c-aa4f-5801-8a8a-22cf7b85dcc0'
     end
+
+    it 'has a call number in the edition field' do
+      expect(orders_hash['compositePoLines'][0]['edition']).to eq 'VROOMAN COLLECTION F'
+    end
   end
 
   context 'when XINFO fields should not become tags' do

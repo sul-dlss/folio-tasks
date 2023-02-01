@@ -27,14 +27,18 @@ module OrderYamlTaskHelpers
 
   def add_order_xinfo(tsv_hash, yaml_hash)
     note_fields = %w[INSTRUCT NOTE COMMENT MULTIYEAR STREAMING OPENACCESS]
+    law_note_fields = %w[INSTRUCT NOTE COMMENT MULTIYEAR STREAMING OPENACCESS BIGDEAL]
     tag_fields = %w[BIGDEAL DATA]
-    return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
-    return map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD']) &&
-                                               tsv_hash['LIB'].eql?('SUL')
+    if tsv_hash['LIB'].eql?('SUL')
+      return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
+      return map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD'])
+    elsif tsv_hash['LIB'].eql?('LAW') && law_note_fields.include?(tsv_hash['XINFO_FIELD'])
+      map_to_notes(tsv_hash, yaml_hash)
+    end
   end
 
   def add_orderlin1_xinfo(tsv_hash, yaml_hash)
-    note_fields = %w[DESC COMMENT CONTACT NOTIFY]
+    note_fields = %w[DESC COMMENT CONTACT NOTE NOTIFY]
     return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
   end
 
@@ -119,6 +123,7 @@ module OrderYamlTaskHelpers
         'PARTS_IN_SET' => (obj['PARTS_IN_SET']).to_s,
         'DIST_DATE_RCVD' => (obj['DIST_DATE_RCVD']).to_s,
         'HOLDNG_CODE' => (obj['HOLDNG_CODE']).to_s,
+        'CALLNUM' => (obj['CALLNUM']).to_s,
         'fundDistribution' => [fund(obj)]
       }
     }

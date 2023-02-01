@@ -16,6 +16,7 @@
       PARTS_IN_SET: for online only
       DIST_DATE_RCVD: '0'
       HOLDNG_CODE: LAW-H
+      CALLNUM: KF245 .B58
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -33,6 +34,7 @@
       PARTS_IN_SET: for online only (seenote)
       DIST_DATE_RCVD: '20210910'
       HOLDNG_CODE: LAW-H
+      CALLNUM: KF245 .B58
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -50,6 +52,7 @@
       PARTS_IN_SET: for online only (seenote)
       DIST_DATE_RCVD: '20210910'
       HOLDNG_CODE: LAW-H
+      CALLNUM: KF245 .B58
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -67,6 +70,7 @@
       PARTS_IN_SET: for online only (seenote)
       DIST_DATE_RCVD: '20211014'
       HOLDNG_CODE: LAW-H
+      CALLNUM: KF245 .B58
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -84,6 +88,7 @@
       PARTS_IN_SET: online only (seenote)
       DIST_DATE_RCVD: '20220105'
       HOLDNG_CODE: LAW-H
+      CALLNUM: KF245 .B58
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'
@@ -101,6 +106,7 @@
       PARTS_IN_SET: online only (seenote)
       DIST_DATE_RCVD: '20220105'
       HOLDNG_CODE: LAW-H
+      CALLNUM: KF245 .B58
       fundDistribution:
       - FUNDING_TYPE: '0'
         FUNDING_PERCENT: '100'

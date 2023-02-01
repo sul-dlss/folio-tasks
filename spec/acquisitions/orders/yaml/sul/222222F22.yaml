@@ -16,6 +16,7 @@
       PARTS_IN_SET: 9 photos
       DIST_DATE_RCVD: '20220413'
       HOLDNG_CODE: SPEC-MSS-H
+      CALLNUM: AB123 .C45 D678
       fundDistribution:
       - FUNDING_TYPE: '2'
         FUNDING_PERCENT: '50'
