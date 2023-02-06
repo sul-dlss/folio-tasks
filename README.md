@@ -123,6 +123,13 @@ Then copy the tsv_users.tsv file to the `tsv` folder and run the `load_tsv-users
 ```
 ruby bin/folio_get_json.rb '/perms/permissions?length=10000&query=(mutable==true)' } | jq 'del(.totalRecords) | del(.permissions[] .childOf, .permissions[] .grantedTo, .permissions[] .dummy, .permissions[] .deprecated, .permissions[] .metadata)' > json/users/permission_sets.orig.json
 ```
+- To sort the permission sets pulled from an orig version (because there are nested permission dependencies):
+```
+cat json/users/permission_sets.json | jq '[.["permissions"][] | {permissionName: .permissionName, displayName: .displayName, id: .id, tags: .tags, subPermissions: .subPermissions, mutable: .mutable, visible: .visible}] | sort_by(.displayName)' | sed '1s;^;{"permissions": ;' | sed '$s;$;};' > json/users/permission_sets_sorted.json
+
+mv json/users/permission_sets_sorted.json json/users/permission_sets.json
+```
+
 ### Loading New Finance Settings
 When there is a new fiscal year, some finance data needs to be re-loaded or updated. There might be new funds, new associations with funds and groups, new organizations, new budgets, etc. Here are the steps to take:
 - rake acquisitions:update_expense_classes
