@@ -30,6 +30,21 @@ module InventoryTaskHelpers
     @@folio_request.post('/holdings-types', obj.to_json)
   end
 
+  def holdings_get_from_poline_with_callnum(obj)
+    instance_id = obj['instanceId']
+    location_id = obj['locations'][0]['locationId']
+    call_num = obj['edition']
+    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id} and callNumber==\"#{call_num}\""
+    @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+  end
+
+  def holdings_get_from_poline(obj)
+    instance_id = obj['instanceId']
+    location_id = obj['locations'][0]['locationId']
+    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id}"
+    @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+  end
+
   def item_note_types_csv
     CSV.parse(File.open("#{Settings.tsv}/inventory/item-note-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end

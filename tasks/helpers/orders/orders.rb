@@ -28,6 +28,39 @@ module OrdersTaskHelpers
     end
   end
 
+  # rubocop: disable Metrics/AbcSize, Metrics/MethodLength
+  def report_holding_id(data_dir, report_dir)
+    Dir.each_child(report_dir) { |i| File.delete("#{report_dir}/#{i}") }
+    Dir.each_child(data_dir) do |file|
+      JSON.parse(File.read("#{data_dir}/#{file}"))['compositePoLines'].each_with_index do |po_line, ix|
+        File.open("#{report_dir}/#{file}", 'a') do |f|
+          next if po_line['locations'][0]['locationId'].nil?
+
+          holdings_with_callnum = holdings_get_from_poline_with_callnum(po_line)
+          holdings = holdings_get_from_poline(po_line)
+          if holdings_with_callnum['totalRecords'] == 1
+            f.puts "Orderline #{ix + 1}: Exactly 1 match with callnum"
+            f.puts holdings_with_callnum.to_json
+          elsif holdings_with_callnum['totalRecords'] > 1
+            f.puts "Orderline #{ix + 1}: Multiple matches with callnum"
+            f.puts holdings_with_callnum.to_json
+          elsif holdings['totalRecords'] == 1
+            f.puts "Orderline #{ix + 1}: Exactly 1 match without callnum"
+            f.puts holdings.to_json
+          elsif holdings['totalRecords'] > 1
+            f.puts "Orderline #{ix + 1}: Multiple matches without callnum"
+            f.puts holdings.to_json
+          else
+            f.puts "Orderline #{ix + 1}: Zero matches either way"
+            f.puts holdings_with_callnum
+            f.puts holdings
+          end
+        end
+      end
+    end
+  end
+  # rubocop: enable Metrics/AbcSize, Metrics/MethodLength
+
   def acq_unit_uuid(lib)
     acq_units.fetch(lib, nil)
   end
