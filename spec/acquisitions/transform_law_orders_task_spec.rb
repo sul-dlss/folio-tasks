@@ -88,8 +88,8 @@ describe 'transform LAW orders rake tasks' do
       expect(orders_hash['compositePoLines'][0]['receiptDate']).to be_nil
     end
 
-    it 'has manually add pieces for receiving box not checked' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
+    it 'has receiving workflow box set to synchronized' do
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
     end
 
     it 'has a billTo address' do

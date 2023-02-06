@@ -138,8 +138,8 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['compositePoLines'][0]['receiptDate']).to eq '2022-04-13T00:00:00.000-08:00'
     end
 
-    it 'has manually add pieces for receiving box not checked' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
+    it 'has receiving workflow box set to synchronized' do
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
     end
 
     it 'has an instanceId' do
@@ -168,8 +168,8 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['compositePoLines'][0]['receiptDate']).to be_nil
     end
 
-    it 'has manually add pieces for receiving box not checked' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
+    it 'has receiving workflow box set to synchronized' do
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
     end
 
     it 'has a title in titleOrPackage' do
@@ -214,8 +214,8 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['compositePoLines'][0]['receiptStatus']).to eq 'Ongoing'
     end
 
-    it 'has manually add pieces for receiving box checked' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
+    it 'has receiving workflow box set to independent' do
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
     end
 
     it 'has a title in titleOrPackage' do
@@ -260,8 +260,8 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['compositePoLines'][1]['receiptDate']).to eq '2022-04-15T00:00:00.000-08:00'
     end
 
-    it 'has manually add pieces for receiving box checked' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
+    it 'has receiving workflow box set to independent' do
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
     end
 
     it 'po line 1 does not have a details object with receivingNote' do
@@ -311,8 +311,8 @@ describe 'transform SUL orders rake tasks' do
       expect(po_line_fund_dist[0]['fundId']).to eq 'fund-123'
     end
 
-    it 'has manually add pieces for receiving box checked' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
+    it 'has receiving workflow box set to independent' do
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
     end
 
     it 'does not have a poLineDescription field' do
