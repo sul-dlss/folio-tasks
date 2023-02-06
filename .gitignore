@@ -5,3 +5,4 @@
 /xml
 /json/**/*.json
 spec/fixtures/acquisitions/orders/json
+/**/.DS_Store
