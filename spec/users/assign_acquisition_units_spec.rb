@@ -5,9 +5,11 @@ require 'spec_helper'
 
 describe 'assign acquisition units rake tasks' do
   let(:assign_acquisition_units_task) { Rake.application.invoke_task 'tsv_users:assign_acquisition_units' }
+  let(:assign_admin_acquisition_units_task) { Rake.application.invoke_task 'tsv_users:assign_admin_acquisition_units' }
   let(:acq_unit_hash) { AcquisitionsUuidsHelpers.acq_units }
   let(:membership_hash) { AcquisitionsUuidsHelpers.acq_unit_membership }
   let(:assign_acq_units) { assign_acquisition_units_task.send(:acq_units_assign, acq_unit_hash, membership_hash) }
+  let(:assign_admin_acq_units) { assign_admin_acquisition_units_task.send(acq_unit_hash) }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -57,6 +59,16 @@ describe 'assign acquisition units rake tasks' do
     it 'has Acq Unit assignment of acquisitionsUnitName' do
       expect(assign_acq_units.send(:user_acq_units_and_permission_sets_tsv)[0]['Acq Unit'])
         .to eq 'acquisitionsUnitName'
+    end
+  end
+
+  context 'when assigning the admin user to existing acquisitions units' do
+    it 'has the admin user name' do
+      puts "HERE:#{assign_admin_acq_units}"
+    end
+
+    xit 'has Acq Unit assignment of acquisitionsUnitName' do
+      expect(assign_admin_acq_units).to eq 'acquisitionsUnitName'
     end
   end
 
