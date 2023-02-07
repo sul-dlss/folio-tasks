@@ -7,6 +7,11 @@ namespace :tsv_users do
 
   desc 'assign permission sets to a user'
   task :assign_permission_sets do
-    perms_assign
+    perms_assign(user_acq_units_and_permission_sets_tsv)
+  end
+
+  desc 'assign permission sets to the app users'
+  task :assign_app_user_psets do
+    perms_assign(app_users_permission_sets_tsv)
   end
 end

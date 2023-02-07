@@ -11,6 +11,10 @@ module TsvUserTaskHelpers
               headers: true, col_sep: "\t").map(&:to_h)
   end
 
+  def app_users_permission_sets_tsv
+    CSV.parse(File.open("#{Settings.tsv}/users/app_users_psets.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
   def users_tsv(file)
     CSV.parse(File.open("#{Settings.tsv}/users/#{file}"), liberal_parsing: true, headers: true, col_sep: "\t")
        .map(&:to_h)
@@ -218,8 +222,8 @@ module TsvUserTaskHelpers
     }
   end
 
-  def psets_from_cols
-    psets = user_acq_units_and_permission_sets_tsv[0].keys
+  def psets_from_cols(psets_tsv)
+    psets = psets_tsv[0].keys
     psets.delete('SUNetID')
     psets.delete('Acq Unit')
     psets.delete('Service Point')
@@ -227,26 +231,27 @@ module TsvUserTaskHelpers
     psets
   end
 
-  def perms_assign
+  def perms_assign(psets_tsv)
     pset_hash = {}
     @@folio_request.get('/perms/permissions?length=10000&query=(mutable==true)')['permissions'].each do |permission|
       pset_hash[permission['displayName']] = permission['id']
     end
-    reset_user_perms(pset_hash)
+    reset_user_perms(pset_hash, psets_tsv)
   end
 
   # rubocop:disable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
-  def reset_user_perms(pset_hash)
-    user_acq_units_and_permission_sets_tsv.each do |line|
+  def reset_user_perms(pset_hash, psets_tsv)
+    pset_names = psets_from_cols(psets_tsv)
+    psets_tsv.each do |line|
       username = user_get(line['SUNetID'])
       username && username['users'].each do |user|
         user_permissions_get(user['id'])['permissionNames'].each do |permission|
-          if permission['mutable'] && (psets_from_cols.include? permission['displayName'])
+          if permission['mutable'] && (pset_names.include? permission['displayName'])
             @@folio_request
               .delete("/perms/users/#{user['id']}/permissions/#{permission['permissionName']}?indexField=userId")
           end
         end
-        psets_from_cols.each do |pset|
+        pset_names.each do |pset|
           if line[pset] && pset_hash[pset]
             pset_obj = { 'permissionName' => pset_hash[pset] }
             @@folio_request.post("/perms/users/#{user['id']}/permissions?indexField=userId", pset_obj.to_json)
@@ -257,9 +262,9 @@ module TsvUserTaskHelpers
   end
   # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
-  def service_points_assign
+  def service_points_assign(service_points_tsv)
     service_point_hash = Uuids.service_points
-    user_acq_units_and_permission_sets_tsv.each do |obj|
+    service_points_tsv.each do |obj|
       service_point = obj['Service Point']
       service_point_id = service_point_hash[service_point]
       users = user_get(obj['SUNetID'])
