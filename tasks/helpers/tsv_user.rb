@@ -262,9 +262,9 @@ module TsvUserTaskHelpers
   end
   # rubocop:enable Metrics/CyclomaticComplexity, Metrics/PerceivedComplexity
 
-  def service_points_assign
+  def service_points_assign(service_points_tsv)
     service_point_hash = Uuids.service_points
-    user_acq_units_and_permission_sets_tsv.each do |obj|
+    service_points_tsv.each do |obj|
       service_point = obj['Service Point']
       service_point_id = service_point_hash[service_point]
       users = user_get(obj['SUNetID'])
