@@ -5,7 +5,8 @@ require 'spec_helper'
 
 describe 'assign permission sets rake task' do
   let(:assign_permission_sets_task) { Rake.application.invoke_task 'tsv_users:assign_permission_sets' }
-  let(:psets_from_cols) { TsvUserTaskHelpers.psets_from_cols }
+  let(:users_psets_tsv) { TsvUserTaskHelpers.user_acq_units_and_permission_sets_tsv }
+  let(:psets_from_cols) { TsvUserTaskHelpers.psets_from_cols(users_psets_tsv) }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
