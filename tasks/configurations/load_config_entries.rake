@@ -25,7 +25,7 @@ namespace :configurations do
     update_module_configs(args[:module])
   end
 
-  desc 'load module configurations'
+  desc 'load all configurations in configurations json directory'
   task :load_json_configurations do
     Dir.each_child("#{Settings.json}/configurations") do |file|
       config_entry_json(file)['configs'].each do |obj|
