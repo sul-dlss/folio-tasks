@@ -5,6 +5,7 @@ require 'spec_helper'
 
 describe 'courses settings rake tasks' do
   let(:load_course_terms) { Rake.application.invoke_task 'courses:load_course_terms' }
+  let(:load_course_types) { Rake.application.invoke_task 'courses:load_course_types' }
   let(:load_course_depts) { Rake.application.invoke_task 'courses:load_course_depts' }
   let(:load_course_status) { Rake.application.invoke_task 'courses:load_course_status' }
 
@@ -13,6 +14,7 @@ describe 'courses settings rake tasks' do
       .with(body: Settings.okapi.login_params.to_h)
 
     stub_request(:post, 'http://example.com/coursereserves/terms')
+    stub_request(:post, 'http://example.com/coursereserves/coursetypes')
     stub_request(:post, 'http://example.com/coursereserves/departments')
     stub_request(:post, 'http://example.com/coursereserves/processingstatuses')
   end
@@ -22,6 +24,14 @@ describe 'courses settings rake tasks' do
 
     it 'supplies valid json for posting course terms' do
       expect(course_terms_json['terms'].sample).to match_json_schema('mod-courses', 'term')
+    end
+  end
+
+  context 'when creating course types' do
+    let(:course_types_json) { load_course_types.send(:course_types_json) }
+
+    it 'supplies valid json for posting course types' do
+      expect(course_types_json['courseTypes'].sample).to match_json_schema('mod-courses', 'coursetype')
     end
   end
 
