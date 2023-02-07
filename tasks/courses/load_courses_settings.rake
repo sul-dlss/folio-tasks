@@ -12,6 +12,13 @@ namespace :courses do
     end
   end
 
+  desc 'load course types into folio'
+  task :load_course_types do
+    course_types_json['courseTypes'].each do |obj|
+      course_types_post(obj)
+    end
+  end
+
   desc 'load course departments into folio'
   task :load_course_depts do
     course_depts_json['departments'].each do |obj|

@@ -202,6 +202,12 @@ namespace :courses do |namespace|
     open_file_and_pull(namespace, name, helper)
   end
 
+  desc 'pull course types from original folio instance (use STAGE=orig yaml)'
+  task :pull_course_types do
+    name = 'course_types'
+    open_file_and_pull(namespace, name, helper)
+  end
+
   desc 'pull request policies from original folio instance (use STAGE=orig yaml)'
   task :pull_course_depts do
     name = 'course_depts'

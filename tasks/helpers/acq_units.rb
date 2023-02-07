@@ -42,4 +42,12 @@ module AcquisitionsUnitsTaskHelpers
       end
     end
   end
+
+  def admin_acq_units_assign(acq_unit_hash)
+    admin_user = user_get('sul_admin')['users'][0]
+    acq_unit_hash.each_value do |acq_unit_id|
+      acq_membership_obj = { 'userId' => admin_user['id'], 'acquisitionsUnitId' => acq_unit_id }
+      @@folio_request.post('/acquisitions-units/memberships', acq_membership_obj.to_json)
+    end
+  end
 end

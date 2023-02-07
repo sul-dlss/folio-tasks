@@ -10,8 +10,16 @@ module CoursesTaskHelpers
     JSON.parse(File.read("#{Settings.json}/courses/course_terms.json"))
   end
 
+  def course_types_json
+    JSON.parse(File.read("#{Settings.json}/courses/course_types.json"))
+  end
+
   def course_terms_post(hash)
     @@folio_request.post('/coursereserves/terms', hash.to_json)
+  end
+
+  def course_types_post(hash)
+    @@folio_request.post('/coursereserves/coursetypes', hash.to_json)
   end
 
   def course_depts_json
@@ -33,6 +41,12 @@ module CoursesTaskHelpers
   def pull_course_terms
     hash = @@folio_request.get('/coursereserves/terms')
     trim_hash(hash, 'terms')
+    hash.to_json
+  end
+
+  def pull_course_types
+    hash = @@folio_request.get('/coursereserves/coursetypes')
+    trim_hash(hash, 'courseTypes')
     hash.to_json
   end
 
