@@ -13,4 +13,12 @@ namespace :configurations do
       config_entry_delete(id)
     end
   end
+
+  desc 'delete tenant addresses from folio'
+  task :delete_tenant_addresses do
+    ids = Uuids.tenant_addresses.values
+    ids.each do |id|
+      config_entry_delete(id)
+    end
+  end
 end
