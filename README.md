@@ -43,7 +43,7 @@ json: json
 After deploying `folio-tasks` to the server, pull in the configuration from vault:
 - Log in using OIDC:
 ```
-vault login -method oidc mount=oidc-dev
+vault login -method oidc
 ```
 - Get the settings from vault:
 ```
