@@ -96,6 +96,14 @@ module Uuids
     addresses_hash
   end
 
+  def config_entries
+    hash = {}
+    @@folio_request.get('/configurations/entries?limit=99')['configs'].each do |obj|
+      hash[obj['code']] = obj['id']
+    end
+    hash
+  end
+
   def profile_associations_ids
     uuids = []
     associations = JSON.parse(pull_profile_associations)
