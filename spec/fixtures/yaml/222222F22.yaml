@@ -29,8 +29,8 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUNDB
       SELECTOR: BLS
-      FUND: '50%: ASULFUNDA; 50%: ASULFUNDB'
   notes:
   - 'NOTE: FS'
   - 'CONTACT: Name; Ordering Specialist; name@example.com; Tel: 555-555-5555 Fax:
     555-555-5555'
+  - 'FUND: 50%: ASULFUNDA; 50%: ASULFUNDB'

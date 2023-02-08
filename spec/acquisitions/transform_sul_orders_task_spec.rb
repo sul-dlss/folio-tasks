@@ -268,8 +268,8 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['compositePoLines'][0]).not_to have_key 'details'
     end
 
-    it 'po line with parts in set has a details object with receivingNote' do
-      expect(orders_hash['compositePoLines'][1]['details']['receivingNote']).to eq '1/1/22-12/31/22, PMT'
+    it 'po line with parts in set poLineDescription field' do
+      expect(orders_hash['compositePoLines'][1]['poLineDescription']).to eq '1/1/22-12/31/22, PMT'
     end
 
     it 'has a material type of book' do
@@ -387,11 +387,11 @@ describe 'transform SUL orders rake tasks' do
       expect(order['notes']).not_to include 'COMMENT: '
     end
 
-    it 'has FUND in the poLineDescription field' do
+    it 'has FUND in the purchase order note field' do
       order_id, sym_order = transform_sul_orders_task.send(:get_id_data,
                                                            YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml"))
       order = transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes)
-      expect(order['compositePoLines'][0]['poLineDescription']).to eq 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'
+      expect(order['notes']).to include 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'
     end
   end
 

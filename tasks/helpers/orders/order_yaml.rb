@@ -38,7 +38,7 @@ module OrderYamlTaskHelpers
   end
 
   def add_orderlin1_xinfo(tsv_hash, yaml_hash)
-    note_fields = %w[DESC COMMENT CONTACT NOTE NOTIFY]
+    note_fields = %w[DESC COMMENT CONTACT FUND NOTE NOTIFY]
     return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
   end
 
@@ -71,7 +71,7 @@ module OrderYamlTaskHelpers
   end
 
   def add_orderline_xinfo(tsv_hash, yaml_hash)
-    fields = %w[ACCOUNT FUND SELECTOR]
+    fields = %w[ACCOUNT SELECTOR]
     return modify_orderline(tsv_hash, yaml_hash) if fields.include?(tsv_hash['XINFO_FIELD'])
   end
 

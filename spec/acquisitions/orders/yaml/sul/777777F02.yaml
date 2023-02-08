@@ -24,7 +24,6 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: JMC
-      FUND: ASULFUNDA
   notes:
   - 'COMMENT: AJA'
   - 'COMMENT: Print incl. online per publisher email. 20180503 jhh'
@@ -39,6 +38,7 @@
   - 'COMMENT: v. 7 (2002) rcv''d in Ser. 9/11/2003 aea'
   - 'CONTACT: Name; Ordering Specialist; name@example.com; Tel: 555-555-5555 Fax:
     555-555-5555'
+  - 'FUND: ASULFUNDA'
   tags:
     tagList:
     - SULDATA:Hosted_by_vendor

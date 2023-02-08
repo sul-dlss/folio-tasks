@@ -25,7 +25,6 @@
         FUND_NAME: ASULFUND
       SELECTOR: sbs
       ACCOUNT: CAX040S
-      FUND: romance
   notes:
   - 'INSTRUCT: Please begin a subscription with nos. 1-5 (2002-2006) to continue until
     cancelled. Please advise us if you cannot supply. Thank you very much. jrv  18
@@ -37,3 +36,4 @@
   - 'NOTE: ORDER ESTABLISHED. (dlb 1/3/07)'
   - 'CONTACT: Jane; e-mail = name@example.com; fax = +1-555-555-5555; telephone =
     +1-555-555-5555'
+  - 'FUND: romance'
