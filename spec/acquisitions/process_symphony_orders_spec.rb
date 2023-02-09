@@ -110,4 +110,12 @@ describe 'prepare order yaml files' do
       expect(test_output).to eq(fixture_file)
     end
   end
+
+  context 'when LAW order has duplicate orderline xinfo notes' do
+    it 'creates a yaml file with duplicate notes removed' do
+      fixture_file = YAML.load_file("#{fixture_data}/7890L09.yaml")
+      test_output = YAML.load_file("#{law_data_dir}/7890L09.yaml")
+      expect(test_output).to eq(fixture_file)
+    end
+  end
 end

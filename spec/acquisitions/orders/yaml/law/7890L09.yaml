@@ -1,0 +1,67 @@
+---
+7890L09:
+  ORDER_TYPE: FIRM
+  ORD_DATE_CREATED: '20080605'
+  LIBRARY: LAW
+  VENDOR_ID: STANFORD
+  compositePoLines:
+    '5776594':
+      ORD_KEY: '4777125'
+      ORDLINE_NUM: '2'
+      CKEY: '7613147'
+      TITLE: A title
+      ORDLINE_UNIT_LIST_PRICE: "$44.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: ''
+      HOLDNG_CODE: LAW-H
+      CALLNUM: KJE1640 .E974 2008
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$44.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: BLAWFUND
+      SELECTOR: Hahn
+    '5776595':
+      ORD_KEY: '4777125'
+      ORDLINE_NUM: '3'
+      CKEY: '7613147'
+      TITLE: A title
+      ORDLINE_UNIT_LIST_PRICE: "$44.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: ''
+      HOLDNG_CODE: LAW-H
+      CALLNUM: KJE1640 .E974 2008
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$44.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: BLAWFUND
+      SELECTOR: Hahn
+    '5776596':
+      ORD_KEY: '4777125'
+      ORDLINE_NUM: '4'
+      CKEY: '7613147'
+      TITLE: A title
+      ORDLINE_UNIT_LIST_PRICE: "$44.00"
+      COPIES_RCVD: '0'
+      BIB_ENTRY: ACQ
+      PARTS_IN_SET: ''
+      DIST_DATE_RCVD: ''
+      HOLDNG_CODE: LAW-H
+      CALLNUM: KJE1640 .E974 2008
+      fundDistribution:
+      - FUNDING_TYPE: '0'
+        FUNDING_PERCENT: '100'
+        FUNDING_AMT_ENCUM: "$44.00"
+        FUND_ID: 111111111111AA
+        FUND_NAME: BLAWFUND
+      SELECTOR: Hahn
+  notes:
+  - 'NOTE: Fund is LAWFUND'
+  - 'COMMENT: ls:pl; lo:amj; lr:lc'

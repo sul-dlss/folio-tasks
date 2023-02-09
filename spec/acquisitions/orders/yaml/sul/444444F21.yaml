@@ -25,7 +25,7 @@
         FUND_NAME: ASULFUND
       SELECTOR: hel
       ACCOUNT: '400958'
-      FUND: fund
   notes:
   - 'NOTE: mmd'
   - 'CONTACT: Name, name@example.com, 555-555-5555 / fax 1 555-555-5555'
+  - 'FUND: fund'

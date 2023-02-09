@@ -24,7 +24,6 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: DVK
-      FUND: fund
     '5675888':
       ORD_KEY: '4671721'
       ORDLINE_NUM: '2'
@@ -44,7 +43,6 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: DVK
-      FUND: fund
     '5676990':
       ORD_KEY: '4671721'
       ORDLINE_NUM: '3'
@@ -64,7 +62,6 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: DVK
-      FUND: fund
   notes:
   - 'NOTE: FS'
   - 'COMMENT: GLFIX  94454'
@@ -83,3 +80,4 @@
   - 'COMMENT: BN    XPM: c'
   - 'COMMENT: OPERATOR ID: pah   ACTION INT: 540'
   - 'COMMENT: SI: adr   LOC: STACKS   ITYPE: STKS-MONO'
+  - 'FUND: fund'

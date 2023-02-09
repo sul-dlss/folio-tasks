@@ -10,7 +10,6 @@ module PoLinesHelpers
     po_lines
   end
 
-  # rubocop: disable Metrics/AbcSize
   def po_line_hash(po_line_data, order_type, order_type_map, hldg_code_loc_map, funds)
     hash = {
       'orderFormat' => order_format(order_type, order_type_map),
@@ -19,7 +18,7 @@ module PoLinesHelpers
       'paymentStatus' => payment_status(order_type, order_type_map),
       'receiptStatus' => receipt_status(po_line_data['DIST_DATE_RCVD'], order_type, order_type_map),
       'selector' => po_line_data['SELECTOR'],
-      'poLineDescription' => add_fund_xinfo_field(po_line_data['FUND']),
+      'poLineDescription' => add_parts_in_set_xinfo_field(po_line_data['PARTS_IN_SET']),
       'vendorDetail' => add_vendor_detail(po_line_data['ACCOUNT']),
       'instanceId' => determine_instance_uuid(po_line_data['CKEY'], Settings.okapi.url.to_s),
       'titleOrPackage' => po_line_data['TITLE'],
@@ -32,15 +31,13 @@ module PoLinesHelpers
     add_locations(hash, po_line_data['HOLDNG_CODE'], hldg_code_loc_map)
     add_physical(hash, material_type(order_type, order_type_map))
     add_eresource(hash, material_type(order_type, order_type_map))
-    add_receiving_note(hash, po_line_data['PARTS_IN_SET'])
     hash.compact
   end
-  # rubocop: enable Metrics/AbcSize
 
-  def add_fund_xinfo_field(data)
-    return if data.nil?
+  def add_parts_in_set_xinfo_field(data)
+    return if data.nil? || data.eql?('')
 
-    "FUND: #{data}"
+    data.to_s
   end
 
   def add_vendor_detail(data)
@@ -163,19 +160,6 @@ module PoLinesHelpers
     {
       'createInventory' => 'None',
       'materialType' => material_type
-    }
-  end
-
-  def add_receiving_note(po_line_hash, part_in_set)
-    return po_line_hash if part_in_set.empty?
-
-    po_line_hash.store('details', receiving_note(part_in_set))
-    po_line_hash
-  end
-
-  def receiving_note(part_in_set)
-    {
-      'receivingNote' => part_in_set
     }
   end
 end

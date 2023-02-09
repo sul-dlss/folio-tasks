@@ -34,7 +34,6 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: jmc
-      FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%
     '5738377':
       ORD_KEY: '4683174'
       ORDLINE_NUM: '3'
@@ -64,7 +63,6 @@
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUND
       SELECTOR: jmc
-      FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%
   notes:
   - 'COMMENT: 2022 ed purchased in PDF with pcard  /fs/4/12/2022'
   - 'COMMENT: Send all future PDF issues to email@example.com zb 20220415'
@@ -92,3 +90,4 @@
   - 'COMMENT: OLD Funding (2018 and forward)'
   - 'COMMENT: See fund allocation in the FUND field below. Fund amounts converted
     to percentage due to the order type (recurring). zb 20220412'
+  - 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'
