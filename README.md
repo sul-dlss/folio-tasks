@@ -157,7 +157,7 @@ The `prepare_orders` and `load_orders[1]` rake tasks should be run from the Symp
 1. Optionally, there are tasks for updating purchase orders and po lines. These might be helpful to correct any orders that didn't load completely. E.g. `rake update_orders[1,sul]`.
 
 #### Using screen session
-From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake acquisitions:load_orders[1]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
+From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake load_orders[1]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
 
 ### App user for edge_connexion, edge_sip2
 
