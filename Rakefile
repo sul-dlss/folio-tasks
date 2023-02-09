@@ -186,3 +186,9 @@ desc 'Load all course reserve settings: [course terms, departments]'
 task load_course_reserve_settings: %i[courses:load_course_terms
                                       courses:load_course_depts
                                       courses:load_course_status]
+
+desc 'Load app users and permission sets'
+task setup_app_users: %i[tsv_users:load_app_users
+                        users:load_permission_sets
+                        tsv_users:assign_app_user_psets
+                        tsv_users:assign_app_user_service_points]
