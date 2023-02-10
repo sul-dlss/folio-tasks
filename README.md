@@ -130,6 +130,30 @@ cat json/users/permission_sets.json | jq '[.["permissions"][] | {permissionName:
 mv json/users/permission_sets_sorted.json json/users/permission_sets.json
 ```
 
+### Manually adding permissions for a user
+Get the user's id by doing:
+  ```
+  result=$(ruby bin/folio_cql_json.rb 'users' 'username==edge_conn' | jq -r '.["users"][0].id')
+  ```
+  ...and then search for the user permissions id:
+  ```
+  ID=$(ruby bin/folio_cql_json.rb 'perms/users' "userId==${result}" | jq -r '.["permissionUsers"][0].id')
+  ```
+  then do a folio POST with json containing one or more permissions, e.g.:
+  ```
+  ruby bin/folio_post.rb "perms/users/${ID}/permissions" json/users/one_permission.json
+  ```
+  with
+  ```
+  {
+    "permissionName": "someperms.get"
+  }
+  ```
+  or
+  ```
+  ruby bin/folio_post_array.rb "perms/users/${ID}/permissions" json/users/array_of_permissions.json
+  ```
+
 ### Loading New Finance Settings
 When there is a new fiscal year, some finance data needs to be re-loaded or updated. There might be new funds, new associations with funds and groups, new organizations, new budgets, etc. Here are the steps to take:
 - rake acquisitions:update_expense_classes
