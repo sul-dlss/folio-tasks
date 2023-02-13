@@ -120,7 +120,7 @@ module UsersTaskHelpers
   end
 
   def deterministic_user_id(username)
-    FolioUuid.new.generate(Settings.okapi.url.to_s, 'users', username)
+    FolioUuid.new.generate('deterministic_user_id', 'users', username)
   end
 
   def user_login(credentials)

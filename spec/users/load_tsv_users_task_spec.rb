@@ -90,7 +90,7 @@ describe 'loading tsv users who do not have registry ids' do
     let(:credentials) { load_app_users_task.send(:app_user_credentials, app_user_data.first) }
 
     it 'creates a deterministic user id' do
-      expect(credentials['userId']).to eq '5ca62fbe-9528-5cc8-8abc-7f5bffc00a72'
+      expect(credentials['userId']).to eq '948d87e6-96ff-5d6e-a1c6-e5af3805796f'
     end
 
     it 'creates a hash without password' do
