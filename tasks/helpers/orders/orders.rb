@@ -219,7 +219,7 @@ module OrdersTaskHelpers
     @@folio_request.put("/orders/composite-orders/#{id}", obj.to_json)
   end
 
-  def orders_storage_put(id, obj)
+  def orders_storage_put_po(id, obj)
     @@folio_request.put("/orders-storage/purchase-orders/#{id}", obj.to_json)
   end
 
