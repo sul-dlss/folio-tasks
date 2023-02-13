@@ -233,4 +233,19 @@ module UsersTaskHelpers
     trim_hash(hash, 'permissions')
     hash.to_json
   end
+
+  def user_ids(username)
+    user_id = @@folio_request.get("/users?query=username==#{username}")['users'].dig(0, 'id')
+    perms_user_id = @@folio_request.get("/perms/users?query=userId==#{user_id}")['permissionUsers'].dig(0, 'id')
+    service_point_user_id = @@folio_request
+                            .get("/service-points-users?query=userId==#{user_id}")['servicePointsUsers'].dig(0, 'id')
+    [user_id, perms_user_id, service_point_user_id]
+  end
+
+  def delete_user(username)
+    user_ids = user_ids(username)
+    @@folio_request.delete("/users/#{user_ids[0]}") if user_ids[0]
+    @@folio_request.delete("/perms/users/#{user_ids[1]}") if user_ids[1]
+    @@folio_request.delete("/service-points-users/#{user_ids[2]}") if user_ids[2]
+  end
 end
