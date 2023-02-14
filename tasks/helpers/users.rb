@@ -120,7 +120,7 @@ module UsersTaskHelpers
   end
 
   def deterministic_user_id(username)
-    FolioUuid.new.generate(Settings.okapi.url.to_s, 'users', username)
+    FolioUuid.new.generate('deterministic_user_id', 'users', username)
   end
 
   def user_login(credentials)
@@ -232,5 +232,12 @@ module UsersTaskHelpers
     hash = @@folio_request.get('/perms/permissions?limit=9999&length=9999&query=mutable==true')
     trim_hash(hash, 'permissions')
     hash.to_json
+  end
+
+  def delete_user(username)
+    user_ids = user_ids(username)
+    @@folio_request.delete("/users/#{user_ids[0]}") if user_ids[0]
+    @@folio_request.delete("/perms/users/#{user_ids[1]}") if user_ids[1]
+    @@folio_request.delete("/service-points-users/#{user_ids[2]}") if user_ids[2]
   end
 end

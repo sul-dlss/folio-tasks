@@ -114,6 +114,14 @@ module Uuids
     uuids
   end
 
+  def user_ids(username)
+    user_id = @@folio_request.get("/users?query=username==#{username}")['users'].dig(0, 'id')
+    perms_user_id = @@folio_request.get("/perms/users?query=userId==#{user_id}")['permissionUsers'].dig(0, 'id')
+    service_point_user_id = @@folio_request
+                            .get("/service-points-users?query=userId==#{user_id}")['servicePointsUsers'].dig(0, 'id')
+    [user_id, perms_user_id, service_point_user_id]
+  end
+
   def uuid_maps
     [institutions, campuses, libraries, service_points]
   end
