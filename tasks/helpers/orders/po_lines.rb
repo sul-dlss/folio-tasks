@@ -162,4 +162,62 @@ module PoLinesHelpers
       'materialType' => material_type
     }
   end
+
+  def write_po_lines(filedir)
+    Dir.each_child("#{Settings.json_orders}/#{filedir}") do |file|
+      orders_get_polines_po_num(JSON.parse(File.read(file))['poNumber'])['poLines'].each do |obj|
+        next if obj['poLineNumber'].nil?
+
+        File.open("#{Settings.json_orders}/#{filedir}_polines/#{obj['poLineNumber']}.json", 'w') do |f|
+          f.puts obj.to_json
+        end
+      end
+    end
+  end
+
+  def link_po_lines_to_inventory(filedir)
+    Dir.each_child("#{Settings.json_orders}/#{filedir}_polines") do |file|
+      po_line = JSON.parse(File.read(file))
+      holding_id = lookup_holdings(po_line)
+      updated_po_line = update_po_line_create_inventory(po_line, holding_id)
+      orders_storage_put_polines(updated_po_line['id'], updated_po_line.to_json)
+    end
+  end
+
+  def lookup_holdings(obj)
+    return nil if obj['locations'][0]['locationId'].nil?
+
+    instance_id = obj['instanceId']
+    location_id = obj['locations'][0]['locationId']
+    call_num = obj['edition']
+    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id} and callNumber==\"#{call_num}\""
+    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+    return results['holdingsRecords'][0]['id'] if results['totalRecords'] == 1
+
+    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id}"
+    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+    return results['holdingsRecords'][0]['id'] if results['totalRecords'] != 0
+
+    nil
+  end
+
+  def update_po_line_create_inventory(po_line_hash, holding_id)
+    po_line_hash.delete('edition') # callnum was temporarily stored in the edition field
+    po_line_hash['eresource']['createInventory'] = 'Instance, Holding, Item' if po_line_hash['eresource']
+    po_line_hash['physical']['createInventory'] = 'Instance, Holding, Item' if po_line_hash['physical']
+    return po_line_hash if holding_id.nil? # no holdings to link to, keep locationId in locations field
+
+    po_line_hash['locations'][0].delete('locationId')
+    po_line_hash['locations'][0].store('holdingId', holding_id)
+
+    po_line_hash
+  end
+
+  def orders_get_polines_po_num(po_number)
+    @@folio_request.get("/orders/order-lines?query=poLineNumber==#{po_number}*")
+  end
+
+  def orders_storage_put_polines(id, obj)
+    @@folio_request.put("/orders-storage/po-lines/#{id}", obj.to_json)
+  end
 end
