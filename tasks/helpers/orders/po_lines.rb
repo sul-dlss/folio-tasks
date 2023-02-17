@@ -2,6 +2,8 @@
 
 # Module to encapsulate methods used by orders rake tasks to create po lines
 module PoLinesHelpers
+  include FolioRequestHelper
+
   def add_po_line(orderlines, order_type, order_type_map, hldg_code_loc_map, funds)
     po_lines = []
     orderlines.each_value do |po_line|
@@ -164,11 +166,12 @@ module PoLinesHelpers
   end
 
   def write_po_lines(filedir)
-    Dir.each_child("#{Settings.json_orders}/#{filedir}") do |file|
-      orders_get_polines_po_num(JSON.parse(File.read(file))['poNumber'])['poLines'].each do |obj|
+    dirpath = "#{Settings.json_orders}/#{filedir}"
+    Dir.each_child(dirpath) do |file|
+      orders_get_polines_po_num(JSON.parse(File.read("#{dirpath}/#{file}"))['poNumber'])['poLines'].each do |obj|
         next if obj['poLineNumber'].nil?
 
-        File.open("#{Settings.json_orders}/#{filedir}_polines/#{obj['poLineNumber']}.json", 'w') do |f|
+        File.open("#{dirpath}_polines/#{obj['poLineNumber']}.json", 'w') do |f|
           f.puts obj.to_json
         end
       end
@@ -176,8 +179,9 @@ module PoLinesHelpers
   end
 
   def link_po_lines_to_inventory(filedir)
-    Dir.each_child("#{Settings.json_orders}/#{filedir}_polines") do |file|
-      po_line = JSON.parse(File.read(file))
+    dirpath = "#{Settings.json_orders}/#{filedir}_polines"
+    Dir.each_child(dirpath) do |file|
+      po_line = JSON.parse(File.read("#{dirpath}/#{file}"))
       holding_id = lookup_holdings(po_line)
       updated_po_line = update_po_line_create_inventory(po_line, holding_id)
       orders_storage_put_polines(updated_po_line['id'], updated_po_line.to_json)
@@ -185,7 +189,7 @@ module PoLinesHelpers
   end
 
   def lookup_holdings(obj)
-    return nil if obj['locations'][0]['locationId'].nil?
+    return nil if obj['locations'].nil?
 
     instance_id = obj['instanceId']
     location_id = obj['locations'][0]['locationId']
