@@ -20,7 +20,6 @@ namespace :acquisitions do
 
   desc 'link purchase orderlines to inventory with filedir=sul or filedir=law'
   task :link_po_lines_to_inventory, [:filedir] do |_, args|
-    write_po_lines(args[:filedir])
     link_po_lines_to_inventory(args[:filedir])
   end
 end

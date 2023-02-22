@@ -5,7 +5,8 @@ require 'spec_helper'
 
 describe 'update orders' do
   let(:link_po_lines_to_inventory) { Rake.application.invoke_task('acquisitions:link_po_lines_to_inventory[sul]') }
-  let(:po_line) { JSON.parse(File.read("#{Settings.json_orders}/sul_polines/TEST-1.json")) }
+  let(:po_lines) { link_po_lines_to_inventory.send(:orders_get_polines_po_num, '') }
+  let(:po_line) { po_lines['poLines'][0] }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

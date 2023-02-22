@@ -165,26 +165,18 @@ module PoLinesHelpers
     }
   end
 
-  def write_po_lines(filedir)
-    dirpath = "#{Settings.json_orders}/#{filedir}"
-    Dir.each_child(dirpath) do |file|
-      orders_get_polines_po_num(JSON.parse(File.read("#{dirpath}/#{file}"))['poNumber'])['poLines'].each do |obj|
-        next if obj['poLineNumber'].nil?
-
-        File.open("#{dirpath}_polines/#{obj['poLineNumber']}.json", 'w') do |f|
-          f.puts obj.to_json
-        end
-      end
-    end
-  end
-
   def link_po_lines_to_inventory(filedir)
-    dirpath = "#{Settings.json_orders}/#{filedir}_polines"
+    dirpath = "#{Settings.json_orders}/#{filedir}"
+    new_dirpath = "#{Settings.json_orders}/#{filedir}_polines_linked"
     Dir.each_child(dirpath) do |file|
-      po_line = JSON.parse(File.read("#{dirpath}/#{file}"))
-      holding_id = lookup_holdings(po_line)
-      updated_po_line = update_po_line_create_inventory(po_line, holding_id)
-      orders_storage_put_polines(updated_po_line['id'], updated_po_line.to_json)
+      po_number = JSON.parse(File.read("#{dirpath}/#{file}"))['poNumber']
+      po_lines = orders_get_polines_po_num(po_number)['poLines']
+      po_lines.each do |po_line|
+        holding_id = lookup_holdings(po_line)
+        updated_po_line = update_po_line_create_inventory(po_line, holding_id)
+        orders_storage_put_polines(updated_po_line['id'], updated_po_line.to_json)
+      end
+      File.rename("#{dirpath}/#{file}", "#{new_dirpath}/#{file}") unless ENV['STAGE'].eql?('test')
     end
   end
 
