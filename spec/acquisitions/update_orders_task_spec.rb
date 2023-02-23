@@ -52,8 +52,8 @@ describe 'update orders' do
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
     let(:updated_po_line) { link_po_lines_to_inventory.send(:update_po_line_create_inventory, po_line, holding_id) }
 
-    it 'queries holdings-storage using data from po line' do
-      expect(holding_id).to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123%20and%20callNumber==%22%22').at_least_once
+    it 'does not query holdings-storage using nil call number' do
+      expect(holding_id).not_to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123%20and%20callNumber==%22%22')
     end
 
     it 'removes the locationId' do
@@ -79,7 +79,7 @@ describe 'update orders' do
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
     let(:updated_po_line) { link_po_lines_to_inventory.send(:update_po_line_create_inventory, po_line, holding_id) }
 
-    it 'shoud not query holdings-storage using data from po line' do
+    it 'does not query holdings-storage' do
       expect(holding_id).not_to have_requested(:get, 'http://example.com/holdings-storage/holdings')
     end
 
@@ -134,6 +134,14 @@ describe 'update orders' do
 
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
     let(:updated_po_line) { link_po_lines_to_inventory.send(:update_po_line_create_inventory, po_line, holding_id) }
+
+    it 'queries holdings-storage using instanceId, locationId, and call number from po line' do
+      expect(holding_id).to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123%20and%20callNumber==%22AB123%20.C45%20D678%22').at_least_once
+    end
+
+    it 'queries holdings-storage using instanceId and locationId from po line' do
+      expect(holding_id).to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123').at_least_once
+    end
 
     it 'removes the edition field' do
       expect(updated_po_line).not_to have_key 'edition'

@@ -186,15 +186,23 @@ module PoLinesHelpers
     instance_id = obj['instanceId']
     location_id = obj['locations'][0]['locationId']
     call_num = obj['edition']
-    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id} and callNumber==\"#{call_num}\""
-    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
-    return results['holdingsRecords'][0]['id'] if results['totalRecords'] == 1
+    if call_num.nil? || holding_with_callnum(instance_id, location_id, call_num).nil?
+      holding_no_callnum(instance_id, location_id)
+    else
+      holding_with_callnum(instance_id, location_id, call_num)
+    end
+  end
 
+  def holding_no_callnum(instance_id, location_id)
     query = "instanceId==#{instance_id} and permanentLocationId==#{location_id}"
     results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
-    return results['holdingsRecords'][0]['id'] if results['totalRecords'] != 0
+    results['holdingsRecords'][0]['id'] if results['totalRecords'] != 0
+  end
 
-    nil
+  def holding_with_callnum(instance_id, location_id, call_num)
+    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id} and callNumber==\"#{call_num}\""
+    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+    results['holdingsRecords'][0]['id'] if results['totalRecords'] == 1
   end
 
   def update_po_line_create_inventory(po_line_hash, holding_id)
