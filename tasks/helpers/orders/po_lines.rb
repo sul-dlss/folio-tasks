@@ -186,10 +186,11 @@ module PoLinesHelpers
     instance_id = obj['instanceId']
     location_id = obj['locations'][0]['locationId']
     call_num = obj['edition']
-    if call_num.nil? || holding_with_callnum(instance_id, location_id, call_num).nil?
+    if call_num.nil?
       holding_no_callnum(instance_id, location_id)
     else
-      holding_with_callnum(instance_id, location_id, call_num)
+      hold_with_callnum = holding_with_callnum(instance_id, location_id, call_num)
+      hold_with_callnum || holding_no_callnum(instance_id, location_id)
     end
   end
 

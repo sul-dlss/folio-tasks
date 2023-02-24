@@ -92,8 +92,8 @@ describe 'update orders' do
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
     let(:updated_po_line) { link_po_lines_to_inventory.send(:update_po_line_create_inventory, po_line, holding_id) }
 
-    it 'queries holdings-storage using data from po line' do
-      expect(holding_id).to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123%20and%20callNumber==%22AB123%20.C45%20D678%22').at_least_once
+    it 'queries holdings-storage using instanceId, locationId, and call number from po line' do
+      expect(holding_id).to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123%20and%20callNumber==%22AB123%20.C45%20D678%22').once
     end
 
     it 'removes the edition field' do
@@ -136,7 +136,7 @@ describe 'update orders' do
     let(:updated_po_line) { link_po_lines_to_inventory.send(:update_po_line_create_inventory, po_line, holding_id) }
 
     it 'queries holdings-storage using instanceId, locationId, and call number from po line' do
-      expect(holding_id).to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123%20and%20callNumber==%22AB123%20.C45%20D678%22').at_least_once
+      expect(holding_id).to have_requested(:get, 'http://example.com/holdings-storage/holdings?query=instanceId==ins-123%20and%20permanentLocationId==loc-123%20and%20callNumber==%22AB123%20.C45%20D678%22').once
     end
 
     it 'queries holdings-storage using instanceId and locationId from po line' do
