@@ -139,7 +139,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has receiving workflow box set to synchronized' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
     end
 
     it 'has an instanceId' do
@@ -169,7 +169,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has receiving workflow box set to synchronized' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
     end
 
     it 'has a title in titleOrPackage' do
@@ -215,7 +215,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has receiving workflow box set to independent' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
     end
 
     it 'has a title in titleOrPackage' do
@@ -261,7 +261,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has receiving workflow box set to independent' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
     end
 
     it 'po line 1 does not have a details object with receivingNote' do
@@ -312,7 +312,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has receiving workflow box set to independent' do
-      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_falsey
+      expect(orders_hash['compositePoLines'].sample['checkinItems']).to be_truthy
     end
 
     it 'does not have a poLineDescription field' do

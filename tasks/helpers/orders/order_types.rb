@@ -65,6 +65,9 @@ module OrderTypeHelpers
   end
 
   def check_in_items?(field, map)
+    # Receiving workflow: Based on value of poline.checkinItems
+    # Synchronized = false
+    # Independent = true
     map.dig(field, 'checkinItems').eql?('true')
   end
 end
