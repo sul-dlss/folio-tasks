@@ -3,8 +3,18 @@
 require 'date'
 require 'csv'
 require_relative '../lib/folio_request'
-require_relative '../tasks/helpers/orders/po_lines'
-require_relative '../tasks/helpers/folio_request'
+
+def holding_no_callnum(instance_id, location_id)
+  query = "instanceId==#{instance_id} and permanentLocationId==#{location_id}"
+  results = FolioRequest.new.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+  results['holdingsRecords'][0]['id'] if results['totalRecords'] != 0
+end
+
+def holding_with_callnum(instance_id, location_id, call_num)
+  query = "instanceId==#{instance_id} and permanentLocationId==#{location_id} and callNumber==\"#{call_num}\""
+  results = FolioRequest.new.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+  results['holdingsRecords'][0]['id'] if results['totalRecords'] == 1
+end
 
 sul_json_orders_dir = "#{Settings.json_orders}/sul"
 sul_report_dir = "#{Settings.json_orders}/holdings_report/sul"
@@ -26,7 +36,7 @@ CSV.open(file_name, 'w', col_sep: "\t",
       instance_id = po_line['instanceId']
       location_id = po_line['locations'][0]['locationId']
       call_num = po_line['edition']
-      csv_row.push(po_number, ix)
+      csv_row.push(po_number, ix + 1)
       results_no_callnum = holding_no_callnum(instance_id, location_id) # nil if response = 0
       # nil if response != 1
       results_with_callnum = holding_with_callnum(instance_id, location_id, call_num) unless call_num.nil?
@@ -62,7 +72,7 @@ CSV.open(file_name, 'w', col_sep: "\t",
       instance_id = po_line['instanceId']
       location_id = po_line['locations'][0]['locationId']
       call_num = po_line['edition']
-      csv_row.push(po_number, ix)
+      csv_row.push(po_number, ix + 1)
       results_no_callnum = holding_no_callnum(instance_id, location_id) # nil if response = 0
       # nil if response != 1
       results_with_callnum = holding_with_callnum(instance_id, location_id, call_num) unless call_num.nil?
