@@ -2,6 +2,8 @@
 
 # Module to encapsulate methods used by orders rake tasks to create po lines
 module PoLinesHelpers
+  include FolioRequestHelper
+
   def add_po_line(orderlines, order_type, order_type_map, hldg_code_loc_map, funds)
     po_lines = []
     orderlines.each_value do |po_line|
@@ -161,5 +163,66 @@ module PoLinesHelpers
       'createInventory' => 'None',
       'materialType' => material_type
     }
+  end
+
+  def link_po_lines_to_inventory(filedir)
+    dirpath = "#{Settings.json_orders}/#{filedir}"
+    new_dirpath = "#{Settings.json_orders}/#{filedir}_polines_linked"
+    Dir.each_child(dirpath) do |file|
+      po_number = JSON.parse(File.read("#{dirpath}/#{file}"))['poNumber']
+      po_lines = orders_get_polines_po_num(po_number)['poLines']
+      po_lines.each do |po_line|
+        holding_id = lookup_holdings(po_line)
+        updated_po_line = update_po_line_create_inventory(po_line, holding_id)
+        orders_storage_put_polines(updated_po_line['id'], updated_po_line.to_json)
+      end
+      File.rename("#{dirpath}/#{file}", "#{new_dirpath}/#{file}") unless ENV['STAGE'].eql?('test')
+    end
+  end
+
+  def lookup_holdings(obj)
+    return nil if obj['locations'].nil?
+
+    instance_id = obj['instanceId']
+    location_id = obj['locations'][0]['locationId']
+    call_num = obj['edition']
+    if call_num.nil?
+      holding_no_callnum(instance_id, location_id)
+    else
+      hold_with_callnum = holding_with_callnum(instance_id, location_id, call_num)
+      hold_with_callnum || holding_no_callnum(instance_id, location_id)
+    end
+  end
+
+  def holding_no_callnum(instance_id, location_id)
+    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id}"
+    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+    results['holdingsRecords'][0]['id'] if results['totalRecords'] != 0
+  end
+
+  def holding_with_callnum(instance_id, location_id, call_num)
+    query = "instanceId==#{instance_id} and permanentLocationId==#{location_id} and callNumber==\"#{call_num}\""
+    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+    results['holdingsRecords'][0]['id'] if results['totalRecords'] == 1
+  end
+
+  def update_po_line_create_inventory(po_line_hash, holding_id)
+    po_line_hash.delete('edition') # callnum was temporarily stored in the edition field
+    po_line_hash['eresource']['createInventory'] = 'Instance, Holding, Item' if po_line_hash['eresource']
+    po_line_hash['physical']['createInventory'] = 'Instance, Holding, Item' if po_line_hash['physical']
+    return po_line_hash if holding_id.nil? # no holdings to link to, keep locationId in locations field
+
+    po_line_hash['locations'][0].delete('locationId')
+    po_line_hash['locations'][0].store('holdingId', holding_id)
+
+    po_line_hash
+  end
+
+  def orders_get_polines_po_num(po_number)
+    @@folio_request.get("/orders/order-lines?query=poLineNumber==#{po_number}*")
+  end
+
+  def orders_storage_put_polines(id, obj)
+    @@folio_request.put("/orders-storage/po-lines/#{id}", obj.to_json)
   end
 end

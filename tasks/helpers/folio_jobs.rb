@@ -9,10 +9,10 @@ module FolioJobs
     do_work(pool_size, jobs, command)
   end
 
-  def batch_put_orders(file_dir, pool_size)
+  def batch_put_orders_storage_po(file_dir, pool_size)
     jobs = Queue.new
     Dir.each_child(file_dir) { |file| jobs.push("#{file_dir}/#{file}") }
-    command = 'orders_storage_put(JSON.parse(File.read(entity))["id"],
+    command = 'orders_storage_put_po(JSON.parse(File.read(entity))["id"],
                JSON.parse(File.read(entity)).reject!{|k,v| k=="compositePoLines"})'
     do_work(pool_size, jobs, command)
   end
