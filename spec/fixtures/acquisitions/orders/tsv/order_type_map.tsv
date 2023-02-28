@@ -1,9 +1,9 @@
 Symph_order_type	orderType	acquisitionMethod	orderFormat	materialType	isSubscription	checkinItems
-ELEC2	Ongoing	Subscription	Electronic Resource	periodical	true	false
-FIRM	One-Time	Purchase	Physical Resource	book	false	true
-MEMBERSHIP	Ongoing	Membership	Physical Resource	periodical	true	false
-SHIPPING	Ongoing	Shipping	Other	unspecified	false	false
-SO-COMBO	Ongoing	Standing order	P/E Mix	book	false	false
-STANDING	Ongoing	Standing order	Physical Resource	book	false	false
-SUBSCRIPT	Ongoing	Subscription	Physical Resource	periodical	true	false
-TERMSET	Ongoing	Purchase	Physical Resource	book	false	false
+ELEC2	Ongoing	Subscription	Electronic Resource	periodical	true	true
+FIRM	One-Time	Purchase	Physical Resource	book	false	false
+MEMBERSHIP	Ongoing	Membership	Physical Resource	periodical	true	true
+SHIPPING	Ongoing	Shipping	Other	unspecified	false	true
+SO-COMBO	Ongoing	Standing order	P/E Mix	book	false	true
+STANDING	Ongoing	Standing order	Physical Resource	book	false	true
+SUBSCRIPT	Ongoing	Subscription	Physical Resource	periodical	true	true
+TERMSET	Ongoing	Purchase	Physical Resource	book	false	true
