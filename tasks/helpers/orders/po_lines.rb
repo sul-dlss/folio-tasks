@@ -177,7 +177,7 @@ module PoLinesHelpers
         updated_po_line = update_po_line_create_inventory(po_line, holding_id)
         response = orders_storage_put_polines(updated_po_line['id'], updated_po_line)
       end
-      File.rename("#{dirpath}/#{file}", "#{new_dirpath}/#{file}") unless ENV['STAGE'].eql?('test') || response != 204
+      File.rename("#{dirpath}/#{file}", "#{new_dirpath}/#{file}") unless ENV['STAGE'].eql?('test') || !response.nil?
     end
   end
 
