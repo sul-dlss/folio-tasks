@@ -119,6 +119,8 @@ task pull_all_json_data: %i[users:pull_waivers
                             data_import:pull_match_profiles
                             data_import:pull_action_profiles
                             data_import:pull_profile_associations
+                            data_import:pull_marc_bib_mappings
+                            data_import:pull_marc_hold_mappings
                             circulation:pull_circ_rules
                             circulation:pull_fixed_due_date_sched
                             circulation:pull_loan_policies

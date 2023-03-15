@@ -138,6 +138,18 @@ namespace :data_import do |namespace|
     name = 'profile_associations'
     open_file_and_pull(namespace, name, helper)
   end
+
+  desc 'pull marc bib mappings'
+  task :pull_marc_bib_mappings do
+    name = 'marc_bib_mappings'
+    open_file_and_pull(namespace, name, helper)
+  end
+
+  desc 'pull marc holdings mappings'
+  task :pull_marc_hold_mappings do
+    name = 'marc_hold_mappings'
+    open_file_and_pull(namespace, name, helper)
+  end
 end
 
 namespace :circulation do |namespace|
