@@ -135,6 +135,6 @@ module TenantTaskHelpers
   end
 
   def calendars_post(obj)
-    @@folio_request.post('/calendar/calendars', obj)
+    @@folio_request.post('/calendar/calendars', obj.to_json)
   end
 end
