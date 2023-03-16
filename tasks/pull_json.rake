@@ -1,17 +1,22 @@
 # frozen_string_literal: true
 
-require_relative 'helpers/inventory'
-require_relative 'helpers/users'
-require_relative 'helpers/data_import'
+require 'fileutils'
+
 require_relative 'helpers/circulation'
-require_relative 'helpers/courses'
 require_relative 'helpers/configurations'
+require_relative 'helpers/courses'
+require_relative 'helpers/data_import'
+require_relative 'helpers/inventory'
+require_relative 'helpers/tenant'
+require_relative 'helpers/users'
 
 def open_file_and_pull(namespace, name, helper)
   scope = namespace.scope.path
 
   %i[json spec/fixtures/json].each do |dir|
-    File.open("#{dir}/#{scope}/#{name}.json", 'w') { |file| file.puts helper.send("pull_#{name}") }
+    dirname = "#{dir}/#{scope}"
+    FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
+    File.open("#{dirname}/#{name}.json", 'w') { |file| file.puts helper.send("pull_#{name}") }
   end
 end
 
@@ -217,6 +222,16 @@ namespace :courses do |namespace|
   desc 'pull processing statuses from original folio instance (use STAGE=orig yaml)'
   task :pull_course_status do
     name = 'course_status'
+    open_file_and_pull(namespace, name, helper)
+  end
+end
+
+namespace :tenant do |namespace|
+  helper = TenantTaskHelpers
+
+  desc 'pull calendars'
+  task :pull_calendars do
+    name = 'calendars'
     open_file_and_pull(namespace, name, helper)
   end
 end

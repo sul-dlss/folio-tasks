@@ -10,6 +10,7 @@ describe 'tenant settings rake tasks' do
   let(:load_service_points_task) { Rake.application.invoke_task 'tenant:load_service_points' }
   let(:load_locations_task) { Rake.application.invoke_task 'tenant:load_locations' }
   let(:load_addresses_task) { Rake.application.invoke_task 'tenant:load_tenant_addresses' }
+  let(:load_calendars) { Rake.application.invoke_task 'tenant:load_calendars' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -43,6 +44,8 @@ describe 'tenant settings rake tasks' do
     stub_request(:get, 'http://example.com/locations')
       .with(query: hash_including)
       .to_return(body: '{ "locations": [{ "id": "abc-123", "name": "Green Stacks", "code": "GREEN" }] }')
+
+    stub_request(:post, 'http://example.com/calendars/calendar')
   end
 
   context 'when loading institutions' do
@@ -229,6 +232,15 @@ describe 'tenant settings rake tasks' do
 
     it 'removes the hash key for primaryServicePointCode' do
       expect(location_hash).not_to have_key 'primaryServicePointCode'
+    end
+  end
+
+  context 'when creating calendars' do
+    let(:calendars_json) { load_course_status.send(:calendars_json) }
+
+    # new json schemas not available for mod-calendar
+    xit 'supplies valid json for posting calendars' do
+      expect(calendars_json['calendars'].sample).to match_json_schema('mod-calendar', 'calendars')
     end
   end
 end

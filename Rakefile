@@ -15,7 +15,8 @@ task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_campuses
                               tenant:load_libraries
                               tenant:load_service_points
-                              tenant:load_locations]
+                              tenant:load_locations
+                              tenant:load_calendars]
 
 desc 'Loads all finance settings: [fund_types, expense classes, fiscal_years, ledgers, finance_groups, funds, budgets, allocations]'
 task load_finance_settings: %i[acquisitions:load_fund_types
@@ -132,7 +133,8 @@ task pull_all_json_data: %i[users:pull_waivers
                             courses:pull_course_depts
                             courses:pull_course_status
                             inventory:pull_statistical_codes_and_types
-                            inventory:pull_instance_note_types]
+                            inventory:pull_instance_note_types
+                            tenant:pull_calendars]
 
 desc 'Pull all data import profile json data (use STAGE=orig)'
 task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles

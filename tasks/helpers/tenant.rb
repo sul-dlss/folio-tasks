@@ -123,4 +123,18 @@ module TenantTaskHelpers
   def locations_post(obj)
     @@folio_request.post('/locations', obj.to_json)
   end
+
+  def pull_calendars
+    hash = @@folio_request.get('/calendar/calendars')
+    trim_hash(hash, 'calendars')
+    hash.to_json
+  end
+
+  def calendars_json
+    JSON.parse(File.read("#{Settings.json}/tenant/calendars.json"))
+  end
+
+  def calendars_post(obj)
+    @@folio_request.post('/calendar/calendars', obj.to_json)
+  end
 end
