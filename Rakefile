@@ -15,7 +15,8 @@ task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_campuses
                               tenant:load_libraries
                               tenant:load_service_points
-                              tenant:load_locations]
+                              tenant:load_locations
+                              tenant:load_calendars]
 
 desc 'Loads all finance settings: [fund_types, expense classes, fiscal_years, ledgers, finance_groups, funds, budgets, allocations]'
 task load_finance_settings: %i[acquisitions:load_fund_types
