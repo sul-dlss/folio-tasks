@@ -174,7 +174,7 @@ module DataImportTaskHelpers
   end
 
   def marc_hold_mapping_json
-    JSON.parse(File.read("#{Settings.json}/data_import/marc_bib_mappings.json"))
+    JSON.parse(File.read("#{Settings.json}/data_import/marc_hold_mappings.json"))
   end
 
   def marc_hold_mapping_put(obj)
