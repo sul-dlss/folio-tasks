@@ -86,4 +86,18 @@ module ConfigurationsTaskHelpers
   def sip2_config_post(servicepoint)
     @@folio_request.post('/configurations/entries', servicepoint)
   end
+
+  def email_configuration
+    JSON.parse(File.read("#{Settings.json}/configurations/email_config.json"))
+  end
+
+  def email_config_post(hash)
+    @@folio_request.post('/smtp-configuration', hash.to_json)
+  end
+
+  def pull_email_config
+    hash = @@folio_request.get('/smtp-configuration')
+    trim_hash(hash, 'smtpConfigurations')
+    hash.to_json
+  end
 end

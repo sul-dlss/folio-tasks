@@ -19,10 +19,10 @@ describe 'sip2 settings rake tasks' do
   context 'when loading sip2 configurations' do
     let(:json) do
       {
-        "module": "edge-sip2",
-        "configName": "selfCheckoutConfig.b0aed71d",
-        "enabled": true,
-        "value": "{\"timeoutPeriod\": 5,\"retriesAllowed\": 3,\"checkinOk\": true,\"checkoutOk\": true,\"acsRenewalPolicy\": false,\"libraryName\": \"Stanford University Libraries\",\"terminalLocation\": \"b0aed71d\"}"
+        module: 'edge-sip2',
+        configName: 'selfCheckoutConfig.b0aed71d',
+        enabled: true,
+        value: '{"timeoutPeriod": 5,"retriesAllowed": 3,"checkinOk": true,"checkoutOk": true,"acsRenewalPolicy": false,"libraryName": "Stanford University Libraries","terminalLocation": "b0aed71d"}'
       }
     end
 

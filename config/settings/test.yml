@@ -17,7 +17,7 @@ yaml:
 
 namespace: test
 configurations:
-  - SMTP_SERVER
+  - CHECKOUT
 
 # we test against real data we GET from FOLIO before migrating
 json: spec/fixtures/json

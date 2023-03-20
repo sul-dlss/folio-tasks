@@ -1,0 +1,1 @@
+{"smtpConfigurations":[{"id":"7a3114e1-2fe2-4ade-8d25-e960fed712fb","host":"mail.folio-test.svc.cluster.local","port":587,"username":"folio@example.org","password":"napassword","from":"foliotesting@lists.stanford.edu","emailHeaders":[]}]}

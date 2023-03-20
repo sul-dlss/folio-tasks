@@ -153,7 +153,8 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_profile_associations]
 
 desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD INVOICE ORDERS ORG SMTP_SERVER TENANT USERSBL]'
-task load_all_configurations: %i[configurations:load_configs]
+task load_all_configurations: %i[configurations:load_configs
+                                 configurations:load_email_config]
 
 desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types, statistical codes, instance note types, holdings types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types

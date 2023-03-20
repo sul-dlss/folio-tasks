@@ -5,7 +5,7 @@ require 'spec_helper'
 
 describe 'load config entries rake tasks' do
   let(:load_configurations_task) do
-    Rake.application.invoke_task 'configurations:load_module_configs[SMTP_SERVER]'
+    Rake.application.invoke_task 'configurations:load_module_configs[CHECKOUT]'
   end
 
   before do
@@ -16,14 +16,14 @@ describe 'load config entries rake tasks' do
   end
 
   context 'when loading configurations' do
-    let(:config_json) { load_configurations_task.send(:load_module_configs, 'SMTP_SERVER') }
+    let(:config_json) { load_configurations_task.send(:load_module_configs, 'CHECKOUT') }
 
     it 'creates a json object' do
       expect(config_json.sample).to match_json_schema('mod-configuration', 'kv_configuration')
     end
 
     it 'overwrites host with correct namespace value' do
-      expect(config_json[0]['value'].to_s).to eq 'mail.test.svc.cluster.local'
+      expect(config_json[0]['value'].to_s).to eq '{"audioAlertsEnabled":false,"audioTheme":"classic","checkoutTimeout":true,"checkoutTimeoutDuration":3,"prefPatronIdentifier":"username,barcode,externalSystemId,customFields.mobileid,customFields.proximitychipid","useCustomFieldsAsIdentifiers":true,"wildcardLookupEnabled":false}'
     end
   end
 end
