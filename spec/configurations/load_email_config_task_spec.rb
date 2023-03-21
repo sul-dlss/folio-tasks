@@ -13,6 +13,7 @@ describe 'load email config rake task' do
       .with(body: Settings.okapi.login_params.to_h)
 
     stub_request(:post, 'http://example.com/smtp-configuration')
+      .with(query: hash_including)
   end
 
   context 'when loading email configuration' do
@@ -23,7 +24,7 @@ describe 'load email config rake task' do
     end
 
     it 'overwrites host with correct namespace value' do
-      expect(email_config_json['host'].to_s).to eq 'mail.folio-test.svc.cluster.local'
+      expect(email_config_json['host'].to_s).to eq 'mail.folio-foo.svc.cluster.local'
     end
   end
 end

@@ -74,11 +74,12 @@ module ConfigurationsTaskHelpers
   end
 
   def email_configuration
-    JSON.parse(File.read("#{Settings.json}/configurations/email_config.json"))
+    hash = JSON.parse(File.read("#{Settings.json}/configurations/email_config.json"))
+    hash['smtpConfigurations'].each { |obj| obj['host'] = "mail.folio-#{Settings.namespace}.svc.cluster.local" }
+    hash
   end
 
   def email_config_post(hash)
-    hash['value'] = "mail.#{Settings.namespace}.svc.cluster.local"
     @@folio_request.post('/smtp-configuration', hash.to_json)
   end
 
