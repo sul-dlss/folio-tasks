@@ -15,7 +15,7 @@ yaml:
   law_orders: spec/acquisitions/orders/yaml/law
   fixtures: spec/fixtures/yaml
 
-namespace: test
+namespace: folio-test
 configurations:
   - CHECKOUT
 

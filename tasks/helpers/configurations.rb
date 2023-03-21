@@ -75,7 +75,7 @@ module ConfigurationsTaskHelpers
 
   def email_configuration
     hash = JSON.parse(File.read("#{Settings.json}/configurations/email_config.json"))
-    hash['smtpConfigurations'].each { |obj| obj['host'] = "mail.folio-#{Settings.namespace}.svc.cluster.local" }
+    hash['smtpConfigurations'].each { |obj| obj['host'] = "mail.#{Settings.namespace}.svc.cluster.local" }
     hash
   end
 
