@@ -87,4 +87,17 @@ module InventoryTaskHelpers
   def instance_note_types_post(obj)
     @@folio_request.post('/instance-note-types', obj.to_json)
   end
+
+  def pull_copycat_profiles
+    hash = @@folio_request.get('/copycat/profiles')
+    hash.to_json
+  end
+
+  def copycat_profiles_json
+    JSON.parse(File.read("#{Settings.json}/inventory/copycat_profiles.json"))
+  end
+
+  def copycat_profiles_post(obj)
+    @@folio_request.post('/copycat/profiles', obj.to_json)
+  end
 end

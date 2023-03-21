@@ -136,6 +136,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             courses:pull_course_status
                             inventory:pull_statistical_codes_and_types
                             inventory:pull_instance_note_types
+                            inventory:pull_copycat_profiles
                             tenant:pull_calendars]
 
 desc 'Pull all data import profile json data (use STAGE=orig)'
@@ -164,7 +165,8 @@ task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_statistical_code_types
                                      inventory:load_statistical_codes
                                      inventory:load_instance_note_types
-                                     inventory:load_holdings_types]
+                                     inventory:load_holdings_types
+                                     inventory:load_copycat_profiles]
 
 desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, circ rules]'
 task load_circ_settings: %i[circulation:load_fixed_due_date_sched

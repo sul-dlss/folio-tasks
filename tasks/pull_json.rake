@@ -46,6 +46,12 @@ namespace :inventory do |namespace|
     name = 'instance_note_types'
     open_file_and_pull(namespace, name, helper)
   end
+
+  desc 'pull copy cataloging profiles'
+  task :pull_copycat_profiles do
+    name = 'copycat_profiles'
+    open_file_and_pull(namespace, name, helper)
+  end
 end
 
 namespace :users do |namespace|
