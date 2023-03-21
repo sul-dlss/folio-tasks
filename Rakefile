@@ -153,7 +153,7 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_mapping_profiles
                                        data_import:load_profile_associations]
 
-desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD INVOICE ORDERS ORG SMTP_SERVER TENANT USERSBL]'
+desc 'Load all configurations [edge-sip2 BULKEDIT CHECKOUT FAST_ADD LOAN_HISTORY CHECKOUT FAST_ADD INVOICE ORDERS ORG SETTINGS TENANT USERSBL] and smtp_config'
 task load_all_configurations: %i[configurations:load_configs
                                  configurations:load_email_config]
 
