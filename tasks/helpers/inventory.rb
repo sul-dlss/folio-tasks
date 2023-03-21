@@ -90,6 +90,7 @@ module InventoryTaskHelpers
 
   def pull_copycat_profiles
     hash = @@folio_request.get('/copycat/profiles')
+    trim_hash(hash, 'profiles')
     hash.to_json
   end
 

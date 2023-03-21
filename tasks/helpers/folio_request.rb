@@ -13,6 +13,7 @@ module FolioRequestHelper
       obj.delete('grantedTo')
       obj.delete('dummy')
       obj.delete('deprecated')
+      obj.delete('authentication')
     end
     hash.delete('totalRecords')
     hash.delete('resultInfo')
