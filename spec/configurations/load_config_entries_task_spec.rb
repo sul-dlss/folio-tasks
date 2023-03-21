@@ -21,9 +21,5 @@ describe 'load config entries rake tasks' do
     it 'creates a json object' do
       expect(config_json.sample).to match_json_schema('mod-configuration', 'kv_configuration')
     end
-
-    it 'overwrites host with correct namespace value' do
-      expect(config_json[0]['value'].to_s).to eq '{"audioAlertsEnabled":false,"audioTheme":"classic","checkoutTimeout":true,"checkoutTimeoutDuration":3,"prefPatronIdentifier":"username,barcode,externalSystemId,customFields.mobileid,customFields.proximitychipid","useCustomFieldsAsIdentifiers":true,"wildcardLookupEnabled":false}'
-    end
   end
 end

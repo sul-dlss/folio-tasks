@@ -21,5 +21,9 @@ describe 'load email config rake task' do
     it 'creates a json object' do
       expect(email_config_json.to_json).to match_json_schema('mod-email', 'smtp-configuration')
     end
+
+    it 'overwrites host with correct namespace value' do
+      expect(email_config_json['host'].to_s).to eq 'mail.folio-test.svc.cluster.local'
+    end
   end
 end
