@@ -15,6 +15,10 @@ module TsvUserTaskHelpers
     CSV.parse(File.open("#{Settings.tsv}/users/app_users_psets.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
+  def app_users_acq_units_tsv
+    CSV.parse(File.open("#{Settings.tsv}/users/app_users_acq_units.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
   def users_tsv(file)
     CSV.parse(File.open("#{Settings.tsv}/users/#{file}"), liberal_parsing: true, headers: true, col_sep: "\t")
        .map(&:to_h)

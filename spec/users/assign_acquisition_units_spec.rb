@@ -4,10 +4,11 @@ require 'rake'
 require 'spec_helper'
 
 describe 'assign acquisition units rake tasks' do
-  let(:assign_acquisition_units_task) { Rake.application.invoke_task 'tsv_users:assign_acquisition_units' }
+  let(:assign_acq_units_task) { Rake.application.invoke_task 'tsv_users:assign_acquisition_units' }
   let(:acq_unit_hash) { AcquisitionsUuidsHelpers.acq_units }
   let(:membership_hash) { AcquisitionsUuidsHelpers.acq_unit_membership }
-  let(:assign_acq_units) { assign_acquisition_units_task.send(:acq_units_assign, acq_unit_hash, membership_hash) }
+  let(:tsv_file) { TsvUserTaskHelpers.user_acq_units_and_permission_sets_tsv }
+  let(:assign_acq_units) { assign_acq_units_task.send(:acq_units_assign, acq_unit_hash, membership_hash, tsv_file) }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
