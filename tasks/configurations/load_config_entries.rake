@@ -40,4 +40,9 @@ namespace :configurations do
       sip2_config_post(sip2_config_json(sip2_service_point_ids(obj)))
     end
   end
+
+  desc 'load email configuration'
+  task :load_email_config do
+    email_configuration['smtpConfigurations'].each { |config| email_config_post(config) }
+  end
 end

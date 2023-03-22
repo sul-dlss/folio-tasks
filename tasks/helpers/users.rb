@@ -240,4 +240,13 @@ module UsersTaskHelpers
     @@folio_request.delete("/perms/users/#{user_ids[1]}") if user_ids[1]
     @@folio_request.delete("/service-points-users/#{user_ids[2]}") if user_ids[2]
   end
+
+  def display_name_sort(records, *attrs)
+    records.sort_by do |h|
+      h.values_at(*attrs).map do |v|
+        idx = v.index(/[0-9]/)
+        idx.nil? ? [2] : [1, v[idx]]
+      end
+    end
+  end
 end

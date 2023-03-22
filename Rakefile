@@ -119,6 +119,8 @@ task pull_all_json_data: %i[users:pull_waivers
                             data_import:pull_match_profiles
                             data_import:pull_action_profiles
                             data_import:pull_profile_associations
+                            data_import:pull_marc_bib_mappings
+                            data_import:pull_marc_hold_mappings
                             circulation:pull_circ_rules
                             circulation:pull_fixed_due_date_sched
                             circulation:pull_loan_policies
@@ -134,6 +136,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             courses:pull_course_status
                             inventory:pull_statistical_codes_and_types
                             inventory:pull_instance_note_types
+                            inventory:pull_copycat_profiles
                             tenant:pull_calendars]
 
 desc 'Pull all data import profile json data (use STAGE=orig)'
@@ -150,8 +153,9 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_mapping_profiles
                                        data_import:load_profile_associations]
 
-desc 'Load all configurations [BULKEDIT CHECKOUT FAST_ADD INVOICE ORDERS ORG SMTP_SERVER TENANT USERSBL]'
-task load_all_configurations: %i[configurations:load_configs]
+desc 'Load all configurations [edge-sip2 BULKEDIT CHECKOUT FAST_ADD LOAN_HISTORY CHECKOUT FAST_ADD INVOICE ORDERS ORG SETTINGS TENANT USERSBL] and smtp_config'
+task load_all_configurations: %i[configurations:load_configs
+                                 configurations:load_email_config]
 
 desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types, statistical codes, instance note types, holdings types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
@@ -161,7 +165,8 @@ task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_statistical_code_types
                                      inventory:load_statistical_codes
                                      inventory:load_instance_note_types
-                                     inventory:load_holdings_types]
+                                     inventory:load_holdings_types
+                                     inventory:load_copycat_profiles]
 
 desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, circ rules]'
 task load_circ_settings: %i[circulation:load_fixed_due_date_sched

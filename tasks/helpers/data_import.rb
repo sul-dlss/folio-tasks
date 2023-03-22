@@ -155,6 +155,32 @@ module DataImportTaskHelpers
     hash.to_json
   end
 
+  def pull_marc_bib_mappings
+    hash = @@folio_request.get('/mapping-rules/marc-bib')
+    hash.to_json
+  end
+
+  def pull_marc_hold_mappings
+    hash = @@folio_request.get('/mapping-rules/marc-holdings')
+    hash.to_json
+  end
+
+  def marc_bib_mapping_json
+    JSON.parse(File.read("#{Settings.json}/data_import/marc_bib_mappings.json"))
+  end
+
+  def marc_bib_mapping_put(obj)
+    @@folio_request.put('/mapping-rules/marc-bib', obj.to_json)
+  end
+
+  def marc_hold_mapping_json
+    JSON.parse(File.read("#{Settings.json}/data_import/marc_hold_mappings.json"))
+  end
+
+  def marc_hold_mapping_put(obj)
+    @@folio_request.put('/mapping-rules/marc-holdings', obj.to_json)
+  end
+
   def profile_associations_load(payload, master, detail)
     uuids = profile_associations_ids
 

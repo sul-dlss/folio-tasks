@@ -125,5 +125,11 @@ describe 'user settings rake tasks' do
     it 'supplies valid json for poasting permission sets' do
       expect(permission_sets_json['permissions'].sample).to match_json_schema('mod-permissions', 'permissionUpload')
     end
+
+    it 'sorts the permission sets according to level' do
+      UsersTaskHelpers.display_name_sort(permission_sets_json['permissions'], 'displayName').first(3).each do |obj|
+        expect(obj['displayName'].index(/1/)).to be_truthy
+      end
+    end
   end
 end

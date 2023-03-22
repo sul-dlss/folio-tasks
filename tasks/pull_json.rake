@@ -46,6 +46,12 @@ namespace :inventory do |namespace|
     name = 'instance_note_types'
     open_file_and_pull(namespace, name, helper)
   end
+
+  desc 'pull copy cataloging profiles'
+  task :pull_copycat_profiles do
+    name = 'copycat_profiles'
+    open_file_and_pull(namespace, name, helper)
+  end
 end
 
 namespace :users do |namespace|
@@ -136,6 +142,18 @@ namespace :data_import do |namespace|
   desc 'pull_profile_associations'
   task :pull_profile_associations do
     name = 'profile_associations'
+    open_file_and_pull(namespace, name, helper)
+  end
+
+  desc 'pull marc bib mappings'
+  task :pull_marc_bib_mappings do
+    name = 'marc_bib_mappings'
+    open_file_and_pull(namespace, name, helper)
+  end
+
+  desc 'pull marc holdings mappings'
+  task :pull_marc_hold_mappings do
+    name = 'marc_hold_mappings'
     open_file_and_pull(namespace, name, helper)
   end
 end
@@ -236,7 +254,7 @@ namespace :tenant do |namespace|
   end
 end
 
-namespace :configurations do
+namespace :configurations do |namespace|
   include ConfigurationsTaskHelpers
 
   desc 'pull module configurations'
@@ -253,5 +271,13 @@ namespace :configurations do
     File.open("#{Settings.json}/configurations/#{args[:module]}.json", 'w') do |file|
       file.puts pull_configurations(args[:module])
     end
+  end
+
+  helper = ConfigurationsTaskHelpers
+
+  desc 'pull smtp configuration'
+  task :pull_email_config do
+    name = 'email_config'
+    open_file_and_pull(namespace, name, helper)
   end
 end

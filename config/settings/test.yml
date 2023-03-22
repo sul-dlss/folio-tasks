@@ -15,9 +15,9 @@ yaml:
   law_orders: spec/acquisitions/orders/yaml/law
   fixtures: spec/fixtures/yaml
 
-namespace: test
+namespace: folio-test
 configurations:
-  - SMTP_SERVER
+  - CHECKOUT
 
 # we test against real data we GET from FOLIO before migrating
 json: spec/fixtures/json
