@@ -75,7 +75,7 @@ namespace :data_import do
     end
   end
 
-  desc 'load profile associations into folio'
+  desc 'load profile associations into folio. To avoid duplicate associations, only run this task ONCE!'
   task :load_profile_associations do
     profile_associations_json.each_value do |v|
       v.each do |obj|
