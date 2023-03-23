@@ -69,6 +69,12 @@ namespace :users do |namespace|
     open_file_and_pull(namespace, name, helper)
   end
 
+  desc 'pull comment required settings from original folio instance (use STAGE=orig yaml)'
+  task :pull_comments do
+    name = 'comments'
+    open_file_and_pull(namespace, name, helper)
+  end
+
   desc 'pull fee-fine owners from original folio instance (use STAGE=orig yaml)'
   task :pull_owners do
     name = 'owners'
