@@ -148,11 +148,22 @@ module DataImportTaskHelpers
           "/data-import-profiles/profileAssociations?master=#{profile_m}_PROFILE&detail=#{profile_d}_PROFILE"
         )
         profile_associations['profileAssociations'].each do |obj|
-          hash['profileAssociations'].append(obj)
+          hash['profileAssociations'].append(obj) unless duplicate_association(hash, obj)
         end
       end
     end
     hash.to_json
+  end
+
+  def duplicate_association(hash, obj)
+    duplicate_association = false
+    hash['profileAssociations'].each do |assoc|
+      (assoc.key(obj['masterProfileId']) &&
+      assoc.key(obj['detailProfileId']) &&
+      assoc.key(obj['masterProfileType']) &&
+      assoc.key(obj['detailProfileType'])) && duplicate_association = true
+    end
+    duplicate_association
   end
 
   def pull_marc_bib_mappings
