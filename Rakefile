@@ -55,10 +55,11 @@ task delete_tenant_settings: %i[tenant:delete_locations
                                 tenant:delete_campuses
                                 tenant:delete_institutions]
 
-desc 'Load all user settings [groups, waivers, refunds, owners, manual charges, payments, patron block conditions, templates, and limits]'
+desc 'Load all user settings [groups, waivers, refunds, comments, owners, manual charges, payments, patron block conditions, templates, and limits]'
 task load_user_settings: %i[users:load_user_groups
                             users:load_waivers
                             users:load_refunds
+                            users:load_comments
                             users:load_owners
                             users:load_manual_charges
                             users:load_payments
@@ -67,11 +68,12 @@ task load_user_settings: %i[users:load_user_groups
                             users:load_limits]
       # users:load_address_types - now loaded by default reference data
 
-desc 'Delete MOST user settings [limits, patron block templates, manual charges, refunds, payments, waivers, and owners]'
+desc 'Delete MOST user settings [limits, patron block templates, manual charges, refunds, comments, payments, waivers, and owners]'
 task delete_user_settings: %i[users:delete_limits
                               users:delete_patron_blocks_templates
                               users:delete_manual_charges
                               users:delete_refunds
+                              users:delete_comments
                               users:delete_payments
                               users:delete_waivers
                               users:delete_owners]
@@ -107,6 +109,7 @@ end
 desc 'Pull all json data (use STAGE=orig)'
 task pull_all_json_data: %i[users:pull_waivers
                             users:pull_refunds
+                            users:pull_comments
                             users:pull_owners
                             users:pull_manual_charges
                             users:pull_payments

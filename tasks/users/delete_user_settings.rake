@@ -38,6 +38,14 @@ namespace :users do
     end
   end
 
+  desc 'delete comment required settings from folio'
+  task :delete_comments do
+    comments_json['comments'].each do |obj|
+      puts "deleting #{obj['id']}"
+      comments_delete(obj['id'])
+    end
+  end
+
   desc 'delete payment methods from folio'
   task :delete_payments do
     payments_json['payments'].each do |obj|

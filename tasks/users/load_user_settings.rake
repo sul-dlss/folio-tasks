@@ -42,6 +42,13 @@ namespace :users do
     end
   end
 
+  desc 'load comment required settings into folio'
+  task :load_comments do
+    comments_json['comments'].each do |obj|
+      comments_post(obj)
+    end
+  end
+
   desc 'load owners into folio'
   task :load_owners do
     owners_json['owners'].each do |obj|

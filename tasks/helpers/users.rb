@@ -59,6 +59,18 @@ module UsersTaskHelpers
     @@folio_request.delete("/refunds/#{id}")
   end
 
+  def comments_json
+    JSON.parse(File.read("#{Settings.json}/users/comments.json"))
+  end
+
+  def comments_post(hash)
+    @@folio_request.post('/comments', hash.to_json)
+  end
+
+  def comments_delete(id)
+    @@folio_request.delete("/comments/#{id}")
+  end
+
   def owners_json
     JSON.parse(File.read("#{Settings.json}/users/owners.json"))
   end
@@ -189,6 +201,12 @@ module UsersTaskHelpers
   def pull_refunds
     hash = @@folio_request.get('/refunds?limit=100')
     trim_hash(hash, 'refunds')
+    hash.to_json
+  end
+
+  def pull_comments
+    hash = @@folio_request.get('/comments?limit=100')
+    trim_hash(hash, 'comments')
     hash.to_json
   end
 

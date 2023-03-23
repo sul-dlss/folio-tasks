@@ -9,6 +9,7 @@ describe 'user settings rake tasks' do
   let(:load_waivers_task) { Rake.application.invoke_task 'users:load_waivers' }
   let(:load_payments_task) { Rake.application.invoke_task 'users:load_payments' }
   let(:load_refunds_task) { Rake.application.invoke_task 'users:load_refunds' }
+  let(:load_comments_task) { Rake.application.invoke_task 'users:load_comments' }
   let(:load_owners_task) { Rake.application.invoke_task 'users:load_owners' }
   let(:load_manual_charges_task) { Rake.application.invoke_task 'users:load_manual_charges' }
   let(:load_conditions_task) { Rake.application.invoke_task 'users:load_conditions' }
@@ -25,6 +26,7 @@ describe 'user settings rake tasks' do
     stub_request(:post, 'http://example.com/waives')
     stub_request(:post, 'http://example.com/payments')
     stub_request(:post, 'http://example.com/refunds')
+    stub_request(:post, 'http://example.com/comments')
     stub_request(:post, 'http://example.com/owners')
     stub_request(:post, 'http://example.com/feefines')
     stub_request(:put, %r{.*patron-block-conditions/.*})
@@ -73,6 +75,14 @@ describe 'user settings rake tasks' do
 
     it 'supplies valid json for posting refunds' do
       expect(refunds_json['refunds'].sample).to match_json_schema('mod-feesfines', 'refunddata')
+    end
+  end
+
+  context 'when creating comment required settings' do
+    let(:comments_json) { load_comments_task.send(:comments_json) }
+
+    it 'supplies valid json for posting comment required settings' do
+      expect(comments_json['comments'].sample).to match_json_schema('mod-feesfines', 'commentdata')
     end
   end
 
