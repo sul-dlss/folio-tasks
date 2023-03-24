@@ -456,6 +456,22 @@
             {
               "conditions": [
                 {
+                  "type": "remove_ending_punc, trim"
+                }
+              ]
+            }
+          ],
+          "target": "holdingsStatements.note",
+          "subfield": [
+            "z"
+          ],
+          "description": "Public note"
+        },
+        {
+          "rules": [
+            {
+              "conditions": [
+                {
                   "type": "set_call_number_type_id"
                 }
               ]
@@ -477,11 +493,9 @@
           ],
           "target": "permanentLocationId",
           "subfield": [
-            "b",
-            "c"
+            "b"
           ],
-          "description": "The permanent shelving location",
-          "applyRulesOnConcatenatedData": true
+          "description": "The permanent shelving location"
         },
         {
           "target": "callNumber",
@@ -637,7 +651,9 @@
           ],
           "target": "holdingsStatements.statement",
           "subfield": [
-            "a"
+            "a",
+            "v",
+            "y"
           ],
           "description": "Textual description of the holdings"
         },
