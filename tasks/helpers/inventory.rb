@@ -42,8 +42,16 @@ module InventoryTaskHelpers
     CSV.parse(File.open("#{Settings.tsv}/inventory/material-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
+  def identifier_types_csv
+    CSV.parse(File.open("#{Settings.tsv}/inventory/identifier-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+  end
+
   def material_types_post(obj)
     @@folio_request.post('/material-types', obj.to_json)
+  end
+
+  def identifier_types_post(obj)
+    @@folio_request.post('/identifier-types', obj.to_json)
   end
 
   def pull_statistical_code_types

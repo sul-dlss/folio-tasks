@@ -160,10 +160,11 @@ desc 'Load all configurations [edge-sip2 BULKEDIT CHECKOUT FAST_ADD LOAN_HISTORY
 task load_all_configurations: %i[configurations:load_configs
                                  configurations:load_email_config]
 
-desc 'Load all inventory settings: [alt title types, item loan types, item note types, material types, statistical codes, instance note types, holdings types]'
+desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_item_loan_types
                                      inventory:load_item_note_types
+                                     inventory:load_identifier_types
                                      inventory:load_material_types
                                      inventory:load_statistical_code_types
                                      inventory:load_statistical_codes
