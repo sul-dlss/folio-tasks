@@ -103,6 +103,13 @@ module TsvUserTaskHelpers
     user_group['usergroups'][0]['id']
   end
 
+  def load_tsv_user(user)
+    user_login(app_user_credentials(user))
+      user_post(app_user(user))
+      puts 'Creating user record in permissions table'
+      user_perms(app_user_id_hash(user))
+  end
+
   def tsv_patron_group(user)
     return Settings.defaultgroup.to_s unless user['PATRON_CODE']
 

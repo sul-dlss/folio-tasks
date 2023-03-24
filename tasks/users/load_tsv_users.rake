@@ -29,11 +29,14 @@ namespace :tsv_users do
   desc 'load app users from tsv file'
   task :load_app_users do
     users_tsv('app_users.tsv').each do |user|
-      user_login(app_user_credentials(user))
-      user_post(app_user(user))
-      puts 'Creating user record in permissions table'
-      user_perms(app_user_id_hash(user))
+      load_tsv_user(user)
     end
+  end
+
+  desc 'load single app user from tsv file'
+  task :load_single_app_user, [:username] do |_, args|
+    user = users_tsv('app_users.tsv').find { |u| u['username'] == args[:username] }
+    load_tsv_user(user)
   end
 
   desc 'load user note types'
