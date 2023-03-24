@@ -125,7 +125,7 @@ module TenantTaskHelpers
   end
 
   def pull_calendars
-    hash = @@folio_request.get('/calendar/calendars')
+    hash = @@folio_request.get('/calendar/calendars?limit=100')
     trim_hash(hash, 'calendars')
     hash.to_json
   end
