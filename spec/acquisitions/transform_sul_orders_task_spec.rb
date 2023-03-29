@@ -393,6 +393,13 @@ describe 'transform SUL orders rake tasks' do
       order = transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes)
       expect(order['notes']).to include 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'
     end
+
+    it 'has INSTRUCT in the purchase order note field' do
+      order_id, sym_order = transform_sul_orders_task.send(:get_id_data,
+                                                           YAML.load_file("#{sul_order_yaml_dir}/444444F21.yaml"))
+      order = transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes)
+      expect(order['notes']).to include 'INSTRUCT: an instruction note'
+    end
   end
 
   context 'when order format is physical resource' do
