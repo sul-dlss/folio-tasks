@@ -202,8 +202,8 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['ongoing']['interval']).to eq 365
     end
 
-    it 'has renewalDate of Jan 1, 2023' do
-      expect(orders_hash['ongoing']['renewalDate']).to eq '2023-01-01'
+    it 'has renewalDate of Jan 1, 2024' do
+      expect(orders_hash['ongoing']['renewalDate']).to eq '2024-01-01T00:00:00.000-08:00'
     end
 
     it 'has payment status of Ongoing' do

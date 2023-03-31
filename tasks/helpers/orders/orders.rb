@@ -152,7 +152,7 @@ module OrdersTaskHelpers
       {
         'interval' => 365,
         'isSubscription' => true,
-        'renewalDate' => '2023-01-01'
+        'renewalDate' => '2024-01-01T00:00:00.000-08:00'
       }
     else
       {
