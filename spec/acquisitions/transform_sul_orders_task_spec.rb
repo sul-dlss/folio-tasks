@@ -102,6 +102,10 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['dateOrdered']).to eq '2022-04-04T00:00:00.000-08:00'
     end
 
+    it 'puts symphony date ordered in po note field' do
+      expect(orders_hash['notes']).to include 'DATE CREATED: 20220404'
+    end
+
     it 'has an alphanumeric poNumber up to 22 characters' do
       expect(orders_hash['poNumber']).to match(/^[a-zA-Z0-9]{1,22}$/)
     end
@@ -183,6 +187,10 @@ describe 'transform SUL orders rake tasks' do
     it 'has blank string in instructions' do
       expect(orders_hash['compositePoLines'].sample['vendorDetail']['instructions']).to eq ''
     end
+
+    it 'puts symphony date ordered in po note field' do
+      expect(orders_hash['notes']).to include 'DATE CREATED: 20200928'
+    end
   end
 
   context 'when orders are ongoing subscriptions' do
@@ -228,6 +236,10 @@ describe 'transform SUL orders rake tasks' do
 
     it 'has a material type of periodical' do
       expect(orders_hash['compositePoLines'].sample['physical']['materialType']).to eq 'mat-456'
+    end
+
+    it 'puts symphony date ordered in po note field' do
+      expect(orders_hash['notes']).to include 'DATE CREATED: 20061018'
     end
   end
 
