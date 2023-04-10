@@ -150,9 +150,7 @@ module OrdersTaskHelpers
   def ongoing_hash(sym_order_type, order_type_map)
     if subscription?(sym_order_type, order_type_map)
       {
-        'interval' => 365,
-        'isSubscription' => true,
-        'renewalDate' => '2024-01-01T00:00:00.000-08:00'
+        'isSubscription' => true
       }
     else
       {
