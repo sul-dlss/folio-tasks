@@ -11,8 +11,8 @@ namespace :inventory do
     FolioRequest.new.post_no_body('/search/index/inventory/reindex')
   end
 
-  desc 'monitor a search job with given id'
-  task :search_indexing_job, [:job_id] do |_, args|
+  desc 'monitor a search reindex job with given id'
+  task :search_index_job_status, [:job_id] do |_, args|
     FolioRequest.new.get("/instance-storage/reindex/#{args[:job_id]}")
   end
 end
