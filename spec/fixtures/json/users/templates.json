@@ -1,1 +1,1 @@
-{"manualBlockTemplates":[]}
+{"manualBlockTemplates":[{"name":"Permanent block","desc":"Permanent block for banned patrons","blockTemplate":{"desc":"Patron has been banned from the Stanford campus; all library privileges suspended.","borrowing":true,"renewals":true,"requests":true},"id":"bfd1a779-57cc-4fe7-8123-3a62ce2e9cd2"}]}
