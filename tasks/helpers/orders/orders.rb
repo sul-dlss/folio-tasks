@@ -150,9 +150,7 @@ module OrdersTaskHelpers
   def ongoing_hash(sym_order_type, order_type_map)
     if subscription?(sym_order_type, order_type_map)
       {
-        'interval' => 365,
-        'isSubscription' => true,
-        'renewalDate' => '2023-01-01'
+        'isSubscription' => true
       }
     else
       {
@@ -162,7 +160,9 @@ module OrdersTaskHelpers
   end
 
   def add_notes(composite_orders, sym_order)
-    composite_orders.store('notes', cleanup_empty(sym_order['notes']))
+    notes = cleanup_empty(sym_order['notes']) || []
+    notes.push("DATE CREATED: #{sym_order['ORD_DATE_CREATED']}")
+    composite_orders.store('notes', notes)
   end
 
   def add_tags(composite_orders, sym_order)

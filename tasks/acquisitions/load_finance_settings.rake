@@ -7,8 +7,9 @@ require_relative '../helpers/uuids/acquisitions'
 require_rel '../helpers/finance'
 
 namespace :acquisitions do
-  include BudgetHelpers, FundHelpers, FinanceGroupHelpers, LedgerHelpers, FiscalYearHelpers,
-          ExpenseClassHelpers, FundTypeHelpers, AcquisitionsUnitsTaskHelpers, AcquisitionsUuidsHelpers
+  include AcquisitionsUnitsTaskHelpers, AcquisitionsUuidsHelpers, BudgetHelpers, ExpenseClassHelpers,
+          FinanceGroupHelpers, FiscalYearHelpers, FundHelpers, FundTypeHelpers, LedgerHelpers,
+          TransactionHelpers
 
   desc 'load fund types into folio'
   task :load_fund_types do
@@ -70,6 +71,16 @@ namespace :acquisitions do
     budgets_csv.each do |obj|
       hash = budgets_hash(obj, uuid_maps)
       budgets_post(hash)
+    end
+  end
+
+  desc 'allocate budgets'
+  task :allocate_budgets do
+    uuid_maps = [AcquisitionsUuidsHelpers.bus_funds, AcquisitionsUuidsHelpers.law_funds,
+                 AcquisitionsUuidsHelpers.sul_funds, AcquisitionsUuidsHelpers.fiscal_years]
+    allocations_tsv.each do |obj|
+      hash = budget_allocations_hash(obj, uuid_maps)
+      allocations_post(hash)
     end
   end
 end

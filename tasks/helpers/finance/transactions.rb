@@ -16,6 +16,7 @@ module TransactionHelpers
 
     obj['fiscalYearId'] = fiscal_years.fetch(obj['fiscalYearCode'], nil)
     obj['toFundId'] = fund_id(obj['fundCode'], bus_funds, law_funds, sul_funds, obj['acqUnit_name'])
+    obj['amount'] = obj['amount'].to_i
     obj.delete('acqUnit_name')
     obj.delete('fundCode')
     obj.delete('fiscalYearCode')

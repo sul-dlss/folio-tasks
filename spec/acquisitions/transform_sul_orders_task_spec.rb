@@ -102,6 +102,10 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['dateOrdered']).to eq '2022-04-04T00:00:00.000-08:00'
     end
 
+    it 'puts symphony date ordered in po note field' do
+      expect(orders_hash['notes']).to include 'DATE CREATED: 20220404'
+    end
+
     it 'has an alphanumeric poNumber up to 22 characters' do
       expect(orders_hash['poNumber']).to match(/^[a-zA-Z0-9]{1,22}$/)
     end
@@ -183,6 +187,10 @@ describe 'transform SUL orders rake tasks' do
     it 'has blank string in instructions' do
       expect(orders_hash['compositePoLines'].sample['vendorDetail']['instructions']).to eq ''
     end
+
+    it 'puts symphony date ordered in po note field' do
+      expect(orders_hash['notes']).to include 'DATE CREATED: 20200928'
+    end
   end
 
   context 'when orders are ongoing subscriptions' do
@@ -196,14 +204,6 @@ describe 'transform SUL orders rake tasks' do
 
     it 'has isSubscription is true' do
       expect(orders_hash['ongoing']['isSubscription']).to be_truthy
-    end
-
-    it 'has renewal interval of 365 days' do
-      expect(orders_hash['ongoing']['interval']).to eq 365
-    end
-
-    it 'has renewalDate of Jan 1, 2023' do
-      expect(orders_hash['ongoing']['renewalDate']).to eq '2023-01-01'
     end
 
     it 'has payment status of Ongoing' do
@@ -228,6 +228,10 @@ describe 'transform SUL orders rake tasks' do
 
     it 'has a material type of periodical' do
       expect(orders_hash['compositePoLines'].sample['physical']['materialType']).to eq 'mat-456'
+    end
+
+    it 'puts symphony date ordered in po note field' do
+      expect(orders_hash['notes']).to include 'DATE CREATED: 20061018'
     end
   end
 
@@ -392,6 +396,13 @@ describe 'transform SUL orders rake tasks' do
                                                            YAML.load_file("#{sul_order_yaml_dir}/555555F12.yaml"))
       order = transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes)
       expect(order['notes']).to include 'FUND: ASULFUND 25%; ASULFUND 12%; ASULFUND 63%'
+    end
+
+    it 'has INSTRUCT in the purchase order note field' do
+      order_id, sym_order = transform_sul_orders_task.send(:get_id_data,
+                                                           YAML.load_file("#{sul_order_yaml_dir}/444444F21.yaml"))
+      order = transform_sul_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes)
+      expect(order['notes']).to include 'INSTRUCT: an instruction note'
     end
   end
 

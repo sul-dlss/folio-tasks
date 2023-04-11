@@ -1,2 +1,3 @@
-fundName	fundCode	fiscalYearCode	allocated	expenseClass_code	acqUnit_name
-FUND_NAME	FUND_NAME-SUL	FYCODE	1000	12345, 67890	SUL
+fundName	fundCode	fiscalYearCode	allocated	expenseClass_code	acqUnit_name	allowableExpenditure
+FUND_NAME	FUND_NAME-SUL	FYCODE	1000	12345, 67890	SUL	100
+FUND_NAME	FUND_NAME-SUL	FYCODE	0	12345, 67890	SUL	

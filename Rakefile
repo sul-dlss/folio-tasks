@@ -106,6 +106,12 @@ task :load_orders, [:size] do |task, args|
   Rake::Task['acquisitions:load_law_orders'].invoke args[:size]
 end
 
+desc 'Update purchase orders to overwrite date opened and date approved'
+task :update_purchase_orders do |task|
+  Rake::Task['acquisitions:update_orders'].invoke('5', 'sul')
+  Rake::Task['acquisitions:update_orders'].invoke('5', 'law')
+end
+
 desc 'Pull all json data (use STAGE=orig)'
 task pull_all_json_data: %i[users:pull_waivers
                             users:pull_refunds

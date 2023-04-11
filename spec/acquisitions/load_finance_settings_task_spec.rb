@@ -11,6 +11,7 @@ describe 'finance settings rake tasks' do
   let(:load_finance_groups_task) { Rake.application.invoke_task 'acquisitions:load_finance_groups' }
   let(:load_funds_task) { Rake.application.invoke_task 'acquisitions:load_funds' }
   let(:load_budgets_task) { Rake.application.invoke_task 'acquisitions:load_budgets' }
+  let(:allocate_budgets_task) { Rake.application.invoke_task 'acquisitions:allocate_budgets' }
   let(:load_acq_units_task) { Rake.application.invoke_task 'acquisitions:load_acq_units' }
   let(:acq_units) { AcquisitionsUuidsHelpers.acq_units }
   let(:fiscal_years) { AcquisitionsUuidsHelpers.fiscal_years }
@@ -60,6 +61,8 @@ describe 'finance settings rake tasks' do
       .to_return(body: '{ "funds": [{ "id": "abc-123", "code": "FUND_NAME-SUL" }] }')
 
     stub_request(:post, 'http://example.com/finance/budgets')
+
+    stub_request(:post, 'http://example.com/finance/allocations')
   end
 
   context 'when loading fund types' do
@@ -229,6 +232,10 @@ describe 'finance settings rake tasks' do
        AcquisitionsUuidsHelpers.expense_classes]
     end
 
+    it 'creates a budget id deterministically' do
+      expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['id']).to eq '80c8f11d-f375-56fc-a5d2-c90e29dc9623'
+    end
+
     it 'creates the hash key and value for budget name' do
       expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['name']).to eq 'FUND_NAME-SUL-FYCODE'
     end
@@ -238,7 +245,7 @@ describe 'finance settings rake tasks' do
     end
 
     it 'creates the hash key and value for budget allocated' do
-      expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['allocated']).to eq '1000'
+      expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['allocated']).to eq 1000
     end
 
     it 'creates the hash key and value for fundId' do
@@ -253,10 +260,53 @@ describe 'finance settings rake tasks' do
       expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['acqUnitIds']).to include 'acq-123'
     end
 
+    it 'creates hash key and value for allowableExpenditure' do
+      expect(load_budgets_task.send(:budgets_hash, budgets_csv[0], uuid_maps)['allowableExpenditure']).to eq 100
+    end
+
+    it 'does not create hash key and value for allowableExpenditure if field is nil' do
+      expect(load_budgets_task.send(:budgets_hash, budgets_csv[1], uuid_maps)['allowableExpenditure']).to be_nil
+    end
+
     it 'creates the hash key and value for statusExpenseClasses' do
       expect(load_budgets_task.send(:budgets_hash,
                                     budgets_csv[0], uuid_maps)['statusExpenseClasses'])
         .to include(a_hash_including('expenseClassId' => 'exp-123'))
+    end
+  end
+
+  context 'when allocating budgets' do
+    let(:allocations_tsv) { allocate_budgets_task.send(:allocations_tsv) }
+    let(:uuid_maps) { [Uuids.bus_funds, Uuids.law_funds, Uuids.sul_funds, Uuids.fiscal_years] }
+
+    it 'creates hash key and value for amount' do
+      expect(allocate_budgets_task.send(:budget_allocations_hash, allocations_tsv[0],
+                                        uuid_maps)['amount']).to eq 10_000
+    end
+
+    it 'creates hash key and value for fiscalYearId' do
+      expect(allocate_budgets_task.send(:budget_allocations_hash, allocations_tsv[0],
+                                        uuid_maps)['fiscalYearId']).to eq 'abc-123'
+    end
+
+    it 'creates hash key and value for toFundId' do
+      expect(allocate_budgets_task.send(:budget_allocations_hash, allocations_tsv[0],
+                                        uuid_maps)['toFundId']).to eq 'abc-123'
+    end
+
+    it 'does not have an acqUnit_name key' do
+      expect(allocate_budgets_task.send(:budget_allocations_hash, allocations_tsv[0],
+                                        uuid_maps)).not_to have_key 'acqUnit_name'
+    end
+
+    it 'does not have a fundCode key' do
+      expect(allocate_budgets_task.send(:budget_allocations_hash, allocations_tsv[0],
+                                        uuid_maps)).not_to have_key 'fundCode'
+    end
+
+    it 'does not have a fiscalYearCode key' do
+      expect(allocate_budgets_task.send(:budget_allocations_hash, allocations_tsv[0],
+                                        uuid_maps)).not_to have_key 'fiscalYearCode'
     end
   end
 end
