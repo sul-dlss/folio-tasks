@@ -12,7 +12,7 @@ namespace :inventory do
   end
 
   desc 'monitor a search job with given id'
-  task :reindex_search_job, [:job_id] do |_, args|
+  task :search_indexing_job, [:job_id] do |_, args|
     FolioRequest.new.get("/instance-storage/reindex/#{args[:job_id]}")
   end
 end
