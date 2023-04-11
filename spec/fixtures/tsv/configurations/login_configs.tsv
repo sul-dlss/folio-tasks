@@ -1,0 +1,2 @@
+module	code	configName	enabled	value
+LOGIN	login.fail.attempts	login.fail.attempts	true	10
