@@ -15,6 +15,14 @@ module UsersTaskHelpers
     @@folio_request.post('/groups', obj.to_json)
   end
 
+  def custom_fields_json
+    JSON.parse(File.read("#{Settings.json}/users/custom_fields.json"))
+  end
+
+  def custom_fields_put(obj)
+    @@folio_request.put('/custom-fields', obj.to_json)
+  end
+
   def address_types_json
     JSON.parse(File.read("#{Settings.json}/users/addresstypes.json"))
   end

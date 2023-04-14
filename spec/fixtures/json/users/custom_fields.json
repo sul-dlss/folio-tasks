@@ -1,0 +1,78 @@
+{
+  "customFields": [
+    {
+      "entityType": "user",
+      "helpText": "",
+      "id": null,
+      "name": "Affiliation",
+      "required": false,
+      "type": "TEXTBOX_SHORT",
+      "visible": true
+    },
+    {
+      "entityType": "user",
+      "helpText": "",
+      "id": null,
+      "name": "SecondAffiliation",
+      "required": false,
+      "type": "TEXTBOX_SHORT",
+      "visible": true
+    },
+    {
+      "entityType": "user",
+      "helpText": "",
+      "id": null,
+      "name": "Usergroup",
+      "required": false,
+      "selectField": {
+        "multiSelect": false,
+        "options": {
+          "values": [
+            {
+              "default": false,
+              "id": "opt_1",
+              "value": "Acting Instructor"
+            },
+            {
+              "id": "opt_2",
+              "value": "Clinical Instructor"
+            },
+            {
+              "id": "opt_3",
+              "value": "Consulting Instructor"
+            },
+            {
+              "default": false,
+              "id": "opt_0",
+              "value": "Instructor"
+            },
+            {
+              "id": "opt_4",
+              "value": "Lecturer"
+            }
+          ]
+        }
+      },
+      "type": "SINGLE_SELECT_DROPDOWN",
+      "visible": true
+    },
+    {
+      "entityType": "user",
+      "helpText": "",
+      "id": null,
+      "name": "MobileId",
+      "required": false,
+      "type": "TEXTBOX_SHORT",
+      "visible": true
+    },
+    {
+      "entityType": "user",
+      "helpText": "",
+      "id": null,
+      "name": "ProximityChipId",
+      "required": false,
+      "type": "TEXTBOX_SHORT",
+      "visible": true
+    }
+  ]
+}

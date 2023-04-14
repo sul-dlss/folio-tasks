@@ -57,6 +57,7 @@ task delete_tenant_settings: %i[tenant:delete_locations
 
 desc 'Load all user settings [groups, waivers, refunds, comments, owners, manual charges, payments, patron block conditions, templates, and limits]'
 task load_user_settings: %i[users:load_user_groups
+                            users:load_user_custom_fields
                             users:load_waivers
                             users:load_refunds
                             users:load_comments

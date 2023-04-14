@@ -5,6 +5,7 @@ require 'spec_helper'
 
 describe 'user settings rake tasks' do
   let(:load_user_groups_task) { Rake.application.invoke_task 'users:load_user_groups' }
+  let(:load_user_custom_fields_task) { Rake.application.invoke_task 'users:load_user_custom_fields' }
   # let(:load_address_types_task) { Rake.application.invoke_task 'users:load_address_types' }
   let(:load_waivers_task) { Rake.application.invoke_task 'users:load_waivers' }
   let(:load_payments_task) { Rake.application.invoke_task 'users:load_payments' }
@@ -22,6 +23,7 @@ describe 'user settings rake tasks' do
       .with(body: Settings.okapi.login_params.to_h)
 
     stub_request(:post, 'http://example.com/groups')
+    stub_request(:put, 'http://example.com/custom-fields')
     stub_request(:post, 'http://example.com/addresstypes')
     stub_request(:post, 'http://example.com/waives')
     stub_request(:post, 'http://example.com/payments')
@@ -53,6 +55,14 @@ describe 'user settings rake tasks' do
   #     expect(address_types_json['addressTypes'].sample).to match_json_schema('mod-users', 'addresstype')
   #   end
   # end
+
+  context 'when creating user custom fields' do
+    let(:custom_fields_json) { UsersTaskHelpers.custom_fields_json }
+
+    it 'has 5 custom fields' do
+      expect(custom_fields_json['customFields'].length).to eq 5
+    end
+  end
 
   context 'when creating waivers' do
     let(:waivers_json) { load_waivers_task.send(:waivers_json) }

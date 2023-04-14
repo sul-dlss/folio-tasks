@@ -13,6 +13,11 @@ namespace :users do
     end
   end
 
+  desc 'load user custom fields into folio'
+  task :load_user_custom_fields do
+    custom_fields_put(custom_fields_json)
+  end
+
   # Using instead the default reference data address types
   # desc 'load address types into folio'
   # task :load_address_types do
