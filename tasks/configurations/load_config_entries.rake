@@ -45,4 +45,11 @@ namespace :configurations do
   task :load_email_config do
     email_configuration['smtpConfigurations'].each { |config| email_config_post(config) }
   end
+
+  desc 'load login configurations'
+  task :load_login_configs do
+    login_configs_tsv.each do |obj|
+      config_entry_post(obj)
+    end
+  end
 end
