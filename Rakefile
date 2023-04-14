@@ -66,7 +66,7 @@ task load_user_settings: %i[users:load_user_groups
                             users:load_conditions
                             users:load_patron_blocks_templates
                             users:load_limits]
-      # users:load_address_types - now loaded by default reference data
+# users:load_address_types - now loaded by default reference data
 
 desc 'Delete MOST user settings [limits, patron block templates, manual charges, refunds, comments, payments, waivers, and owners]'
 task delete_user_settings: %i[users:delete_limits
@@ -100,14 +100,14 @@ task prepare_orders: %i[acquisitions:create_sul_orders_yaml
                         acquisitions:transform_law_orders]
 
 desc 'Multi-thread load SUL and LAW order data with pool size and load SUL order tags'
-task :load_orders, [:size] do |task, args|
+task :load_orders, [:size] do |_task, args|
   Rake::Task['acquisitions:load_tags_orders_sul'].invoke
   Rake::Task['acquisitions:load_sul_orders'].invoke args[:size]
   Rake::Task['acquisitions:load_law_orders'].invoke args[:size]
 end
 
 desc 'Update purchase orders to overwrite date opened and date approved'
-task :update_purchase_orders do |task|
+task :update_purchase_orders do |_task|
   Rake::Task['acquisitions:update_orders'].invoke('5', 'sul')
   Rake::Task['acquisitions:update_orders'].invoke('5', 'law')
 end
@@ -162,9 +162,10 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_mapping_profiles
                                        data_import:load_profile_associations]
 
-desc 'Load all configurations [edge-sip2 BULKEDIT CHECKOUT FAST_ADD LOAN_HISTORY CHECKOUT FAST_ADD INVOICE ORDERS ORG SETTINGS TENANT USERSBL] and smtp_config'
+desc 'Load all configurations [edge-sip2 BULKEDIT CHECKOUT FAST_ADD LOAN_HISTORY CHECKOUT FAST_ADD INVOICE ORDERS ORG SETTINGS TENANT USERSBL] smtp_config and login'
 task load_all_configurations: %i[configurations:load_configs
-                                 configurations:load_email_config]
+                                 configurations:load_email_config
+                                 configurations:load_login_configs]
 
 desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
@@ -206,7 +207,7 @@ task load_course_reserve_settings: %i[courses:load_course_terms
 
 desc 'Load app users and permission sets'
 task setup_app_users: %i[tsv_users:load_app_users
-                        users:load_permission_sets
-                        tsv_users:assign_app_user_acq_units
-                        tsv_users:assign_app_user_psets
-                        tsv_users:assign_app_user_service_points]
+                         users:load_permission_sets
+                         tsv_users:assign_app_user_acq_units
+                         tsv_users:assign_app_user_psets
+                         tsv_users:assign_app_user_service_points]
