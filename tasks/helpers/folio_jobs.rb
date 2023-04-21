@@ -48,6 +48,11 @@ module FolioJobs
           end
         rescue ThreadError => e
           puts e unless jobs.empty?
+
+          next unless (attempts += 1) <= 5
+
+          puts 'retrying'
+          retry
         end
       end
     )
