@@ -68,6 +68,7 @@ class FolioRequest
 
   def request(path, headers: {}, method: :get, **other)
     HTTP
+      .timeout(150)
       .headers(default_headers.merge(headers))
       .request(method, base_url + path, **other)
   end
