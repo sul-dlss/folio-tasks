@@ -33,8 +33,8 @@ class FolioRequest
     parse(authenticated_request(path, method: :post))
   end
 
-  def post(path, json)
-    parse(authenticated_request(path, method: :post, body: json))
+  def post(path, json, **other)
+    parse(authenticated_request(path, method: :post, body: json), **other)
   end
 
   def put(path, json)
@@ -45,8 +45,12 @@ class FolioRequest
     parse(authenticated_request(path, method: :delete))
   end
 
-  def parse(response)
-    pp JSON.parse(response)
+  def parse(response, **other)
+    if other[:response_code]
+      puts response.code
+    else
+      pp JSON.parse(response)
+    end
   rescue JSON::ParserError
     puts response
   end
