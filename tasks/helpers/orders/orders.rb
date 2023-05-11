@@ -28,6 +28,46 @@ module OrdersTaskHelpers
     end
   end
 
+  def post_and_update_orders(filedir)
+    files_to_load, new_dirpath, load_error_filepath, update_error_filepath = order_load_files(filedir)
+    load_error_file = File.open(load_error_filepath, 'w')
+    update_error_file = File.open(update_error_filepath, 'w')
+    files_to_load.each do |file|
+      composite_order = purchase_order_and_po_lines(file)
+      po = purchase_order(composite_order)
+      response = orders_post(composite_order)
+      if response == 201
+        file_basename = File.basename(file)
+        puts "#{file_basename} composite order successfully loaded"
+        File.rename(file, "#{new_dirpath}/#{file_basename}")
+        update_response = orders_storage_put_po(po['id'], po) # to update approvalDate field folio overwrites
+        if update_response == 204
+          puts "#{file_basename} po successfully updated"
+        else
+          update_error_file.puts(file_basename)
+        end
+      else
+        puts "#{file} did not load successfully"
+        load_error_file.puts(po['id'].to_s)
+      end
+    end
+    load_error_file.close
+    update_error_file.close
+  end
+
+  def order_load_files(filedir)
+    dirpath = "#{Settings.json_orders}/#{filedir}"
+    [Dir[File.join(dirpath, '*.json')], "#{dirpath}_orders_loaded", "#{dirpath}_load_errors", "#{dirpath}_po_update_errors"]
+  end
+
+  def purchase_order_and_po_lines(json_file)
+    JSON.parse(File.read(json_file))
+  end
+
+  def purchase_order(po_hash)
+    po_hash.reject! { |k, _v| k == 'compositePoLines' }
+  end
+
   def acq_unit_uuid(lib)
     acq_units.fetch(lib, nil)
   end
@@ -212,7 +252,7 @@ module OrdersTaskHelpers
   end
 
   def orders_post(obj)
-    @@folio_request.post('/orders/composite-orders', obj.to_json)
+    @@folio_request.post('/orders/composite-orders', obj.to_json, response_code: true)
   end
 
   def orders_put(id, obj)
@@ -220,7 +260,7 @@ module OrdersTaskHelpers
   end
 
   def orders_storage_put_po(id, obj)
-    @@folio_request.put("/orders-storage/purchase-orders/#{id}", obj.to_json)
+    @@folio_request.put("/orders-storage/purchase-orders/#{id}", obj.to_json, response_code: true)
   end
 
   def orders_delete(id)

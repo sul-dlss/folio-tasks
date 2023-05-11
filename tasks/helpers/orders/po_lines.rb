@@ -166,19 +166,32 @@ module PoLinesHelpers
   end
 
   def link_po_lines_to_inventory(filedir)
-    dirpath = "#{Settings.json_orders}/#{filedir}"
-    new_dirpath = "#{Settings.json_orders}/#{filedir}_polines_linked"
-    Dir.each_child(dirpath) do |file|
-      po_number = JSON.parse(File.read("#{dirpath}/#{file}"))['poNumber']
+    files_to_process, new_dirpath, update_error_filepath = link_po_lines_files(filedir)
+    update_error_file = File.open(update_error_filepath, 'w')
+    bad_responses = [400, 404, 409, 500]
+    files_to_process.each do |file|
+      po_number = JSON.parse(File.read(file))['poNumber']
       po_lines = orders_get_polines_po_num(po_number)['poLines']
-      response = ''
+      file_basename = File.basename(file)
+      responses = []
       po_lines.each do |po_line|
         holding_id = lookup_holdings(po_line)
         updated_po_line = update_po_line_create_inventory(po_line, holding_id)
+        updated_po_line_num = updated_po_line['poLineNumber']
         response = orders_storage_put_polines(updated_po_line['id'], updated_po_line)
+        responses.push(response)
+        puts "#{updated_po_line_num} po line successfully updated" if response == 204
+
+        update_error_file.puts(updated_po_line_num.to_s)
       end
-      File.rename("#{dirpath}/#{file}", "#{new_dirpath}/#{file}") unless ENV['STAGE'].eql?('test') || !response.nil?
+      File.rename(file, "#{new_dirpath}/#{file_basename}") if responses.intersection(bad_responses).empty?
     end
+    update_error_file.close
+  end
+
+  def link_po_lines_files(filedir)
+    dirpath = "#{Settings.json_orders}/#{filedir}"
+    [Dir[File.join("#{dirpath}_orders_loaded", '*.json')], "#{dirpath}_polines_linked", "#{dirpath}_link_polines_errors"]
   end
 
   def lookup_holdings(obj)
@@ -225,6 +238,6 @@ module PoLinesHelpers
   end
 
   def orders_storage_put_polines(id, obj)
-    @@folio_request.put("/orders-storage/po-lines/#{id}", obj.to_json)
+    @@folio_request.put("/orders-storage/po-lines/#{id}", obj.to_json, response_code: true)
   end
 end
