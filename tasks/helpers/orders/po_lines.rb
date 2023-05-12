@@ -168,7 +168,6 @@ module PoLinesHelpers
   def link_po_lines_to_inventory(filedir)
     files_to_process, new_dirpath, update_error_filepath = link_po_lines_files(filedir)
     update_error_file = File.open(update_error_filepath, 'w')
-    bad_responses = [400, 404, 409, 500]
     files_to_process.each do |file|
       po_number = JSON.parse(File.read(file))['poNumber']
       po_lines = orders_get_polines_po_num(po_number)['poLines']
@@ -184,7 +183,7 @@ module PoLinesHelpers
 
         update_error_file.puts(updated_po_line_num.to_s)
       end
-      File.rename(file, "#{new_dirpath}/#{file_basename}") if responses.intersection(bad_responses).empty?
+      File.rename(file, "#{new_dirpath}/#{file_basename}") if responses.reject { |r| /^2\d{2}/ =~ r.to_s }.empty?
     end
     update_error_file.close
   end
