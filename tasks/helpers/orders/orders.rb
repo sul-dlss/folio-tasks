@@ -32,15 +32,16 @@ module OrdersTaskHelpers
     files_to_load, new_dirpath, load_error_filepath = order_load_files(filedir)
     load_error_file = File.open(load_error_filepath, 'w')
     files_to_load.each do |file|
+      file_basename = File.basename(file)
       composite_order = purchase_order_and_po_lines(file)
+      po_id = composite_order['id']
       response = orders_post(composite_order)
       if response == 201
-        file_basename = File.basename(file)
         puts "#{file_basename} composite order successfully loaded"
         File.rename(file, "#{new_dirpath}/#{file_basename}")
       else
-        puts "#{file} did not load successfully"
-        load_error_file.puts(composite_order['id'].to_s)
+        puts "#{file_basename} did not load"
+        load_error_file.puts(po_id.to_s)
       end
     end
     load_error_file.close
