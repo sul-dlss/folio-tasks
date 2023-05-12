@@ -40,7 +40,7 @@ module OrdersTaskHelpers
         File.rename(file, "#{new_dirpath}/#{file_basename}")
       else
         puts "#{file} did not load successfully"
-        load_error_file.puts(purchase_order_and_po_lines['id'].to_s)
+        load_error_file.puts(composite_order['id'].to_s)
       end
     end
     load_error_file.close
