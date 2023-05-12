@@ -60,9 +60,11 @@ describe 'load orders' do
       .to_return(status: 201)
   end
 
+  # rubocop: disable RSpec/BeforeAfterAll
   after(:all) do
     move_files("#{Settings.json_orders}/sul_polines_linked", "#{Settings.json_orders}/sul")
   end
+  # rubocop: enable RSpec/BeforeAfterAll
 
   context 'when order successfully loads' do
     after do
@@ -208,7 +210,7 @@ describe 'load orders' do
     it 'adds the holdingId' do
       expect(updated_po_line['locations'][0]['holdingId']).to eq 'abc-123'
     end
- 
+
     it 'updates createInventory for physical' do
       expect(updated_po_line['physical']['createInventory']).to eq 'Instance, Holding, Item'
     end

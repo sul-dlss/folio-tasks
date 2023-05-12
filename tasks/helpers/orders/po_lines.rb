@@ -191,7 +191,8 @@ module PoLinesHelpers
 
   def link_po_lines_files(filedir)
     dirpath = "#{Settings.json_orders}/#{filedir}"
-    [Dir[File.join("#{dirpath}_orders_loaded", '*.json')], "#{dirpath}_polines_linked", "#{dirpath}_link_polines_errors"]
+    [Dir[File.join("#{dirpath}_orders_loaded", '*.json')], "#{dirpath}_polines_linked",
+     "#{dirpath}_link_polines_errors"]
   end
 
   def lookup_holdings(obj)

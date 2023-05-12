@@ -57,7 +57,8 @@ module OrdersTaskHelpers
 
   def order_load_files(filedir)
     dirpath = "#{Settings.json_orders}/#{filedir}"
-    [Dir[File.join(dirpath, '*.json')], "#{dirpath}_orders_loaded", "#{dirpath}_load_errors", "#{dirpath}_po_update_errors"]
+    [Dir[File.join(dirpath, '*.json')], "#{dirpath}_orders_loaded", "#{dirpath}_load_errors",
+     "#{dirpath}_po_update_errors"]
   end
 
   def purchase_order_and_po_lines(json_file)
