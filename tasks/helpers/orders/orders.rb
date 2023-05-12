@@ -28,41 +28,53 @@ module OrdersTaskHelpers
     end
   end
 
-  def post_and_update_orders(filedir)
-    files_to_load, new_dirpath, load_error_filepath, update_error_filepath = order_load_files(filedir)
+  def post_composite_orders(filedir)
+    files_to_load, new_dirpath, load_error_filepath = order_load_files(filedir)
     load_error_file = File.open(load_error_filepath, 'w')
-    update_error_file = File.open(update_error_filepath, 'w')
     files_to_load.each do |file|
       composite_order = purchase_order_and_po_lines(file)
-      po = purchase_order(composite_order)
       response = orders_post(composite_order)
       if response == 201
         file_basename = File.basename(file)
         puts "#{file_basename} composite order successfully loaded"
         File.rename(file, "#{new_dirpath}/#{file_basename}")
-        update_response = orders_storage_put_po(po['id'], po) # to update approvalDate field folio overwrites
-        if update_response == 204
-          puts "#{file_basename} po successfully updated"
-        else
-          update_error_file.puts(file_basename)
-        end
       else
         puts "#{file} did not load successfully"
-        load_error_file.puts(po['id'].to_s)
+        load_error_file.puts(purchase_order_and_po_lines['id'].to_s)
       end
     end
     load_error_file.close
-    update_error_file.close
   end
 
   def order_load_files(filedir)
     dirpath = "#{Settings.json_orders}/#{filedir}"
-    [Dir[File.join(dirpath, '*.json')], "#{dirpath}_orders_loaded", "#{dirpath}_load_errors",
-     "#{dirpath}_po_update_errors"]
+    [Dir[File.join(dirpath, '*.json')], "#{dirpath}_orders_loaded", "#{dirpath}_load_errors"]
   end
 
   def purchase_order_and_po_lines(json_file)
     JSON.parse(File.read(json_file))
+  end
+
+  def update_purchase_orders(filedir)
+    files_to_load, update_error_filepath = po_update_files(filedir)
+    update_error_file = File.open(update_error_filepath, 'w')
+    files_to_load.each do |file|
+      file_basename = File.basename(file)
+      composite_order = purchase_order_and_po_lines(file)
+      po = purchase_order(composite_order)
+      update_response = orders_storage_put_po(po['id'], po) # to update approvalDate field folio overwrites
+      if update_response == 204
+        puts "#{file_basename} po successfully updated"
+      else
+        update_error_file.puts(file_basename)
+      end
+    end
+    update_error_file.close
+  end
+
+  def po_update_files(filedir)
+    dirpath = "#{Settings.json_orders}/#{filedir}_orders_loaded"
+    [Dir[File.join(dirpath, '*.json')], "#{filedir}_po_update_errors"]
   end
 
   def purchase_order(po_hash)

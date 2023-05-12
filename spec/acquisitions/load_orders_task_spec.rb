@@ -6,6 +6,7 @@ require 'spec_helper'
 describe 'load orders' do
   let(:load_orders_task) { Rake.application.invoke_task('acquisitions:load_orders[sul]') }
   let(:load_orders_files) { load_orders_task.send(:order_load_files, 'sul') }
+  let(:update_orders_files) { load_orders_task.send(:po_update_files, 'sul') }
   let(:fixture_data) { load_orders_task.send(:purchase_order_and_po_lines, "#{Settings.json}/orders/1ABC0000.json") }
   let(:orders_post) { load_orders_task.send(:orders_post, fixture_data) }
   let(:po) { load_orders_task.send(:purchase_order, fixture_data) }
@@ -68,7 +69,7 @@ describe 'load orders' do
 
   context 'when order successfully loads' do
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     it 'moves the files to the loaded directory' do
@@ -84,7 +85,7 @@ describe 'load orders' do
 
   context 'when order loads but update is unsuccessful' do
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     let(:put_status) do
@@ -94,14 +95,14 @@ describe 'load orders' do
     end
 
     it 'writes to update error file if po fails to update', skip: 'passes when run in context' do
-      update_error_file = File.open(load_orders_files[3])
+      update_error_file = File.open(update_orders_files[1])
       expect(File.size(update_error_file)).to be > 0
     end
   end
 
   context 'when order does not succesfully load' do
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     let(:post_status) do
@@ -124,7 +125,7 @@ describe 'load orders' do
 
   context 'when po line successfully updates' do
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     it 'moves the file to the po lines linked directory' do
@@ -141,7 +142,7 @@ describe 'load orders' do
     end
 
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
@@ -172,7 +173,7 @@ describe 'load orders' do
     end
 
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
@@ -189,7 +190,7 @@ describe 'load orders' do
 
   context 'when po line is orderFormat P/E Mix' do
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
@@ -236,7 +237,7 @@ describe 'load orders' do
     end
 
     after do
-      reset_files(load_orders_files, link_po_lines_files)
+      reset_files(load_orders_files, update_orders_files, link_po_lines_files)
     end
 
     let(:holding_id) { link_po_lines_to_inventory.send(:lookup_holdings, po_line) }
@@ -280,11 +281,12 @@ describe 'load orders' do
   end
 end
 
-def reset_files(load_orders_files, link_po_lines_files)
+def reset_files(load_orders_files, update_orders_files, link_po_lines_files)
   # load_orders_files = [[list of json files in json_orders/sul], json_orders/sul_orders_loaded,
-  #                       file handle json_orders/sul_load_errors, file handle json_orders/sul_po_update_errors]
+  #                       file path json_orders/sul_load_errors]
+  # update_orders_files = [[list of json files in json_orders/sul_orders_loaded], file path json_orders/sul_po_update_errors]
   # link_po_lines_files = [[list of json files in json_orders/sul_orders_loaded], json_orders/sul_po_lines_linked,
-  #                         file handle json_orders/sul_link_polines_errors]
+  #                         file path json_orders/sul_link_polines_errors]
   orig_dirpath = "#{Settings.json_orders}/sul"
   loaded_dirpath = "#{Settings.json_orders}/sul_orders_loaded"
   endprocess_dirpath = "#{Settings.json_orders}/sul_po_lines_linked"
@@ -294,7 +296,7 @@ def reset_files(load_orders_files, link_po_lines_files)
   if load_orders_files[0].empty?
     move_files(loaded_dirpath, orig_dirpath)
   # after 'order does not succesfully load' load_orders_files[0] is NOT empty (but link_po_lines_files[0] is empty)
-  elsif link_po_lines_files[0].empty?
+  elsif link_po_lines_files[0].empty? || update_orders_files[0].empty?
     move_files(orig_dirpath, loaded_dirpath)
   # after 'po line successfully updates' load_orders_files[0] and link_po_lines_files[0] is empty
   else
@@ -302,7 +304,7 @@ def reset_files(load_orders_files, link_po_lines_files)
   end
 
   # empty error files
-  File.truncate(load_orders_files[3], 0)
+  # File.truncate(update_orders_files[1], 0)
   File.truncate(load_orders_files[2], 0)
   File.truncate(link_po_lines_files[2], 0)
 end

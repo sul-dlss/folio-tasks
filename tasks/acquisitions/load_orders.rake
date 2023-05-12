@@ -10,7 +10,8 @@ namespace :acquisitions do
 
   desc 'load orders given a library: sul or law'
   task :load_orders, [:filedir] do |_, args|
-    post_and_update_orders(args[:filedir])
+    post_composite_orders(args[:filedir])
+    update_purchase_orders(args[:filedir])
   end
 
   desc 'link purchase orderlines to inventory given directory name'
