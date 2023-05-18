@@ -99,17 +99,11 @@ task prepare_orders: %i[acquisitions:create_sul_orders_yaml
                         acquisitions:add_law_orderline_xinfo
                         acquisitions:transform_law_orders]
 
-desc 'Multi-thread load SUL and LAW order data with pool size and load SUL order tags'
-task :load_orders, [:size] do |_task, args|
-  Rake::Task['acquisitions:load_tags_orders_sul'].invoke
-  Rake::Task['acquisitions:load_sul_orders'].invoke args[:size]
-  Rake::Task['acquisitions:load_law_orders'].invoke args[:size]
-end
-
-desc 'Update purchase orders to overwrite date opened and date approved'
-task :update_purchase_orders do |_task|
-  Rake::Task['acquisitions:update_orders'].invoke('5', 'sul')
-  Rake::Task['acquisitions:update_orders'].invoke('5', 'law')
+desc 'Load SUL order tags and load SUL and Law orders'
+task :load_orders_and_tags do |_task|
+  Rake::Task['acquisitions:load_order_tags_sul'].invoke
+  Rake::Task['acquisitions:load_orders'].invoke('sul')
+  Rake::Task['acquisitions:load_orders'].invoke('law')
 end
 
 desc 'Pull all json data (use STAGE=orig)'

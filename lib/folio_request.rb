@@ -33,20 +33,24 @@ class FolioRequest
     parse(authenticated_request(path, method: :post))
   end
 
-  def post(path, json)
-    parse(authenticated_request(path, method: :post, body: json))
+  def post(path, json, **other)
+    parse(authenticated_request(path, method: :post, body: json), **other)
   end
 
-  def put(path, json)
-    parse(authenticated_request(path, method: :put, body: json))
+  def put(path, json, **other)
+    parse(authenticated_request(path, method: :put, body: json), **other)
   end
 
   def delete(path)
     parse(authenticated_request(path, method: :delete))
   end
 
-  def parse(response)
-    pp JSON.parse(response)
+  def parse(response, **other)
+    if other[:response_code]
+      response.code
+    else
+      pp JSON.parse(response)
+    end
   rescue JSON::ParserError
     puts response
   end
@@ -64,6 +68,7 @@ class FolioRequest
 
   def request(path, headers: {}, method: :get, **other)
     HTTP
+      .timeout(150)
       .headers(default_headers.merge(headers))
       .request(method, base_url + path, **other)
   end

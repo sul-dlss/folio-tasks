@@ -17,13 +17,6 @@ module FolioJobs
     do_work(pool_size, jobs, command)
   end
 
-  def batch_put_orders_polines(file_dir, pool_size)
-    jobs = Queue.new
-    Dir.each_child(file_dir) { |file| jobs.push("#{file_dir}/#{file}") }
-    command = 'orders_put(JSON.parse(File.read(entity))["id"], JSON.parse(File.read(entity)))'
-    do_work(pool_size, jobs, command)
-  end
-
   def batch_delete_orders_from_file(file_dir, pool_size)
     jobs = Queue.new
     Dir.each_child(file_dir) { |file| jobs.push(JSON.parse(File.read("#{file_dir}/#{file}"))['id']) }
