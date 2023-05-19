@@ -22,7 +22,8 @@ module OrganizationsTaskHelpers
         acq_unit_uuid.to_s
       ],
       'vendorCurrencies' => vendor_currencies(obj),
-      'claimingInterval' => claiming_interval(obj)
+      'claimingInterval' => claiming_interval(obj),
+      'liableForVat' => tax_paid_to_vendor?(obj)
     }
     hash.store('addresses', org_addresses(obj, category_uuids))
     hash.store('phoneNumbers', org_phones(obj, category_uuids))
@@ -53,6 +54,12 @@ module OrganizationsTaskHelpers
 
   def export_to_accounting?(vendor_id)
     return true unless vendor_id.end_with?('-999', '-9999')
+  end
+
+  def tax_paid_to_vendor?(obj)
+    return true if obj.at_xpath('taxPaidToVendor')&.text.eql?('true')
+
+    false
   end
 
   def vendor_code(obj, acq_unit)

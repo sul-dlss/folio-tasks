@@ -182,6 +182,22 @@ describe 'organizations rake tasks' do
     it 'creates the hash key and value for vendorCurrencies' do
       expect(org_hash['vendorCurrencies']).to include 'USD'
     end
+
+    it 'creates the hash key and value for liableForVat' do
+      expect(org_hash['liableForVat']).to eq true
+    end
+  end
+
+  context 'when tax is not paid to the vendor' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
+    end
+
+    it 'creates the hash key and value for liableForVat' do
+      expect(org_hash['liableForVat']).to eq false
+    end
   end
 
   context 'when SUL organization should not export to accounting' do

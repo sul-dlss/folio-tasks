@@ -31,6 +31,7 @@
 <ediAddress>
 </ediAddress>
 <vendorCurrency>US</vendorCurrency>
+<taxPaidToVendor>true</taxPaidToVendor>
 <vendorCycle>
 <claimPeriod>364</claimPeriod>
 </vendorCycle>
@@ -70,6 +71,7 @@
 <ediAddress>
 </ediAddress>
 <vendorCurrency>EURO</vendorCurrency>
+<taxPaidToVendor>false</taxPaidToVendor>
 <vendorCycle>
 <claimPeriod>364</claimPeriod>
 </vendorCycle>
