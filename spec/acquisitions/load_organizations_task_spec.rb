@@ -269,6 +269,57 @@ describe 'organizations rake tasks' do
     end
   end
 
+  context 'when customer number ends in 9000' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:customer_number) { xml_doc[1].at_css('customerNumber') }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
+    end
+
+    before do
+      customer_number.content = '01234569000'
+    end
+
+    it 'replaces end of customer number with FEEDER' do
+      expect(org_hash['erpCode']).to eq '0123456FEEDER'
+    end
+  end
+
+  context 'when customer number ends in 9001' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:customer_number) { xml_doc[1].at_css('customerNumber') }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
+    end
+
+    before do
+      customer_number.content = '01234569001'
+    end
+
+    it 'replaces end of customer number with FEEDER1' do
+      expect(org_hash['erpCode']).to eq '0123456FEEDER1'
+    end
+  end
+
+  context 'when customer number ends in FEEDERACH' do
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
+    let(:customer_number) { xml_doc[1].at_css('customerNumber') }
+    let(:org_hash) do
+      load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
+    end
+
+    before do
+      customer_number.content = '9000FEEDERACH'
+    end
+
+    it 'replaces end of customer number with FEEDER' do
+      expect(org_hash['erpCode']).to eq '9000FEEDER'
+    end
+  end
+
   context 'when loading Law organization data' do
     let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
@@ -278,6 +329,10 @@ describe 'organizations rake tasks' do
 
     it 'creates the hash key and value for code with spaces' do
       expect(org_hash['code']).to eq 'YALE LAW REPORT-Law'
+    end
+
+    it 'creates the hash key and value for erpCode' do
+      expect(org_hash['erpCode']).to be_falsey
     end
   end
 
