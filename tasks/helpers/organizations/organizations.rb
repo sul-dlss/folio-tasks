@@ -17,12 +17,13 @@ module OrganizationsTaskHelpers
       'exportToAccounting' => export_to_accounting?(obj.at_xpath('vendorID')&.text),
       'status' => 'Active',
       'isVendor' => true,
-      'erpCode' => obj.at_xpath('customerNumber')&.text,
+      'erpCode' => update_customer_number(obj.at_xpath('customerNumber')&.text),
       'acqUnitIds' => [
         acq_unit_uuid.to_s
       ],
       'vendorCurrencies' => vendor_currencies(obj),
-      'claimingInterval' => claiming_interval(obj)
+      'claimingInterval' => claiming_interval(obj),
+      'liableForVat' => tax_paid_to_vendor?(obj)
     }
     hash.store('addresses', org_addresses(obj, category_uuids))
     hash.store('phoneNumbers', org_phones(obj, category_uuids))
@@ -53,6 +54,24 @@ module OrganizationsTaskHelpers
 
   def export_to_accounting?(vendor_id)
     return true unless vendor_id.end_with?('-999', '-9999')
+  end
+
+  def tax_paid_to_vendor?(obj)
+    return true if obj.at_xpath('taxPaidToVendor')&.text.eql?('true')
+
+    false
+  end
+
+  def update_customer_number(customer_number)
+    return if customer_number.nil?
+
+    return customer_number.gsub(/9000$/, 'FEEDER') if customer_number.end_with?('9000')
+
+    return customer_number.gsub(/9001$/, 'FEEDER1') if customer_number.end_with?('9001')
+
+    return customer_number.gsub(/FEEDERACH$/, 'FEEDER') if customer_number.end_with?('FEEDERACH')
+
+    customer_number
   end
 
   def vendor_code(obj, acq_unit)
