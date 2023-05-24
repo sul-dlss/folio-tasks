@@ -8,8 +8,7 @@ module AcquisitionsUnitsTaskHelpers
 
   # acquisitions units
   def acq_units_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/acquisitions-units.tsv"), headers: true,
-                                                                                col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/acquisitions-units.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def acq_unit_id_list(names, acq_units_uuids)

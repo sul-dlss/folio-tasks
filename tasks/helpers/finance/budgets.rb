@@ -7,7 +7,7 @@ module BudgetHelpers
   include FolioRequestHelper
 
   def budgets_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/budgets.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/finance/budgets.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def budgets_hash(obj, uuid_maps)

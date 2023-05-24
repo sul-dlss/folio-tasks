@@ -6,7 +6,7 @@ require_relative '../folio_request'
 module FiscalYearHelpers
   include FolioRequestHelper
   def fiscal_years_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/fiscal-years.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/finance/fiscal-years.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def fiscal_years_hash(obj, acq_units_uuids)

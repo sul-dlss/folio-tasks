@@ -7,7 +7,7 @@ module FundTypeHelpers
   include FolioRequestHelper
 
   def fund_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/fund-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/finance/fund-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def fund_types_delete(id)

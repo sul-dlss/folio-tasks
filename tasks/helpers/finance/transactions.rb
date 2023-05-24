@@ -7,8 +7,8 @@ module TransactionHelpers
   include FolioRequestHelper
 
   def allocations_tsv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/budget_allocations.tsv"), headers: true,
-                                                                                col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/finance/budget_allocations.tsv"), headers: true,
+                                                                           col_sep: "\t").map(&:to_h)
   end
 
   def budget_allocations_hash(obj, uuid_maps)

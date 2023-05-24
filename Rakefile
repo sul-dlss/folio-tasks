@@ -19,34 +19,36 @@ task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_calendars]
 
 desc 'Loads all finance settings: [fund_types, expense classes, fiscal_years, ledgers, finance_groups, funds, budgets, allocations]'
-task load_finance_settings: %i[acquisitions:load_fund_types
-                               acquisitions:load_expense_classes
-                               acquisitions:load_fiscal_years
-                               acquisitions:load_ledgers
-                               acquisitions:load_finance_groups
-                               acquisitions:load_funds
-                               acquisitions:load_budgets
-                               acquisitions:allocate_budgets]
+task load_finance_settings: %i[finance:load_fund_types
+                               finance:load_expense_classes
+                               finance:load_fiscal_years
+                               finance:load_ledgers
+                               finance:load_finance_groups
+                               finance:load_funds
+                               finance:load_budgets
+                               finance:allocate_budgets]
 
 desc 'Load all order settings: [acquisition methods]'
 task load_order_settings: %i[acquisitions:load_acq_methods]
 
 desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
-task load_organizations_all: %i[acquisitions:load_org_categories
-                                acquisitions:load_org_migrate_err
-                                acquisitions:load_org_vendors_sul
-                                acquisitions:load_org_vendors_business
-                                acquisitions:load_org_vendors_law
-                                acquisitions:load_org_coral]
+task load_organizations_all: %i[organizations:load_categories
+                                organizations:load_interfaces
+                                organizations:load_credentials
+                                organizations:load_vendors_migrate_err
+                                organizations:load_vendors_sul
+                                organizations:load_vendors_business
+                                organizations:load_vendors_law
+                                organizations:load_coral]
 
 desc 'Delete all finance settings: [budgets, funds, finance_groups, ledgers, fiscal_years, fund_types, expense classes]'
-task delete_finance_settings: %i[acquisitions:delete_budgets
-                                 acquisitions:delete_funds
-                                 acquisitions:delete_finance_groups
-                                 acquisitions:delete_ledgers
-                                 acquisitions:delete_fiscal_years
-                                 acquisitions:delete_expense_classes
-                                 acquisitions:delete_fund_types]
+task delete_finance_settings: %i[finance:delete_budgets
+                                 finance:delete_funds
+                                 finance:delete_finance_groups
+                                 finance:delete_ledgers
+                                 finance:delete_fiscal_years
+                                 finance:delete_expense_classes
+                                 finance:delete_fund_types]
 
 desc 'Delete all tenant settings: [addresses, locations, service_points, libraries, campuses, institutions]'
 task delete_tenant_settings: %i[tenant:delete_locations
@@ -82,28 +84,28 @@ desc 'Loads all Configurations, User, Tenant, Acquisitions Units, Finance, and O
 task load_new_data_and_settings: %i[configurations:load_configs
                                     load_user_settings
                                     load_tenant_settings
-                                    acquisitions:load_acq_units
+                                    load_acq_units
                                     load_finance_settings
                                     load_order_settings
                                     load_organizations_all]
 
 desc 'Process Symphony order data for SUL and LAW: [create yaml files, add xinfo fields to yaml, transform to folio orders]'
-task prepare_orders: %i[acquisitions:create_sul_orders_yaml
-                        acquisitions:add_sul_order_xinfo
-                        acquisitions:add_sul_orderlin1_xinfo
-                        acquisitions:add_sul_orderline_xinfo
-                        acquisitions:transform_sul_orders
-                        acquisitions:create_law_orders_yaml
-                        acquisitions:add_law_order_xinfo
-                        acquisitions:add_law_orderlin1_xinfo
-                        acquisitions:add_law_orderline_xinfo
-                        acquisitions:transform_law_orders]
+task prepare_orders: %i[orders:create_sul_orders_yaml
+                        orders:add_sul_order_xinfo
+                        orders:add_sul_orderlin1_xinfo
+                        orders:add_sul_orderline_xinfo
+                        orders:transform_sul_orders
+                        orders:create_law_orders_yaml
+                        orders:add_law_order_xinfo
+                        orders:add_law_orderlin1_xinfo
+                        orders:add_law_orderline_xinfo
+                        orders:transform_law_orders]
 
 desc 'Load SUL order tags and load SUL and Law orders'
 task :load_orders_and_tags do |_task|
-  Rake::Task['acquisitions:load_order_tags_sul'].invoke
-  Rake::Task['acquisitions:load_orders'].invoke('sul')
-  Rake::Task['acquisitions:load_orders'].invoke('law')
+  Rake::Task['orders:load_order_tags_sul'].invoke
+  Rake::Task['orders:load_orders'].invoke('sul')
+  Rake::Task['orders:load_orders'].invoke('law')
 end
 
 desc 'Pull all json data (use STAGE=orig)'
@@ -140,6 +142,8 @@ task pull_all_json_data: %i[users:pull_waivers
                             inventory:pull_statistical_codes_and_types
                             inventory:pull_instance_note_types
                             inventory:pull_copycat_profiles
+                            organizations:pull_interfaces
+                            organizations:pull_credentials
                             tenant:pull_calendars]
 
 desc 'Pull all data import profile json data (use STAGE=orig)'

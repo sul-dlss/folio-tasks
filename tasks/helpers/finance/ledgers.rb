@@ -7,7 +7,7 @@ module LedgerHelpers
   include FolioRequestHelper
 
   def ledgers_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/ledgers.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/finance/ledgers.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def ledgers_hash(obj, fiscal_years, acq_units_uuids)

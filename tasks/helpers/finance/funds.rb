@@ -7,7 +7,7 @@ module FundHelpers
   include FolioRequestHelper
 
   def funds_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/funds.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/finance/funds.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def funds_hash(obj, uuid_maps)

@@ -7,8 +7,8 @@ module OrgCategoryTaskHelpers
   include FolioRequestHelper
 
   def categories_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/organizations-categories.tsv"), headers: true,
-                                                                                      col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/organizations/organizations-categories.tsv"), headers: true,
+                                                                                       col_sep: "\t").map(&:to_h)
   end
 
   def category_id(value)
