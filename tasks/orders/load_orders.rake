@@ -3,10 +3,9 @@
 require 'csv'
 require_relative '../helpers/orders/orders'
 require_relative '../helpers/orders/po_lines'
-require_relative '../helpers/folio_jobs'
 
-namespace :acquisitions do
-  include FolioJobs, OrdersTaskHelpers, PoLinesHelpers
+namespace :orders do
+  include OrdersTaskHelpers, PoLinesHelpers
 
   desc 'load orders given a library: sul or law'
   task :load_orders, [:filedir] do |_, args|

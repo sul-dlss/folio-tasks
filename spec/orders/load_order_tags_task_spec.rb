@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'load order tags rake tasks' do
-  let(:load_order_tags_task) { Rake.application.invoke_task 'acquisitions:load_order_tags_sul' }
+  let(:load_order_tags_task) { Rake.application.invoke_task 'orders:load_order_tags_sul' }
   let(:sul_order_tags) { load_order_tags_task.send(:order_tags, 'order_xinfo_sul.tsv') }
 
   before do

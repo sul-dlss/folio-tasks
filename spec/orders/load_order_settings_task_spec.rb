@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'load order settings rake tasks' do
-  let(:load_acq_methods_task) { Rake.application.invoke_task 'acquisitions:load_acq_methods' }
+  let(:load_acq_methods_task) { Rake.application.invoke_task 'orders:load_acq_methods' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

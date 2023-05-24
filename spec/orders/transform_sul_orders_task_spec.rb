@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'transform SUL orders rake tasks' do
-  let(:transform_sul_orders_task) { Rake.application.invoke_task 'acquisitions:transform_sul_orders' }
+  let(:transform_sul_orders_task) { Rake.application.invoke_task 'orders:transform_sul_orders' }
   let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
   let(:order_type_map) do
     transform_sul_orders_task.send(:order_type_mapping, 'order_type_map.tsv', Uuids.material_types,

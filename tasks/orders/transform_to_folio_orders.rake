@@ -6,7 +6,7 @@ require_rel '../helpers/orders'
 require_rel '../helpers/uuids'
 require_relative '../../lib/folio_uuid'
 
-namespace :acquisitions do
+namespace :orders do
   include AcquisitionsUuidsHelpers, FolioRequestHelper, HoldingCodeHelpers, OrdersTaskHelpers, OrderTypeHelpers,
           PoLinesHelpers, Uuids
 

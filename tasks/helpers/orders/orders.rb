@@ -75,7 +75,7 @@ module OrdersTaskHelpers
 
   def po_update_files(filedir)
     dirpath = "#{Settings.json_orders}/#{filedir}_orders_loaded"
-    [Dir[File.join(dirpath, '*.json')], "#{filedir}_po_update_errors"]
+    [Dir[File.join(dirpath, '*.json')], "#{Settings.json_orders}/#{filedir}_po_update_errors"]
   end
 
   def purchase_order(po_hash)

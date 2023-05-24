@@ -90,22 +90,22 @@ task load_new_data_and_settings: %i[configurations:load_configs
                                     load_organizations_all]
 
 desc 'Process Symphony order data for SUL and LAW: [create yaml files, add xinfo fields to yaml, transform to folio orders]'
-task prepare_orders: %i[acquisitions:create_sul_orders_yaml
-                        acquisitions:add_sul_order_xinfo
-                        acquisitions:add_sul_orderlin1_xinfo
-                        acquisitions:add_sul_orderline_xinfo
-                        acquisitions:transform_sul_orders
-                        acquisitions:create_law_orders_yaml
-                        acquisitions:add_law_order_xinfo
-                        acquisitions:add_law_orderlin1_xinfo
-                        acquisitions:add_law_orderline_xinfo
-                        acquisitions:transform_law_orders]
+task prepare_orders: %i[orders:create_sul_orders_yaml
+                        orders:add_sul_order_xinfo
+                        orders:add_sul_orderlin1_xinfo
+                        orders:add_sul_orderline_xinfo
+                        orders:transform_sul_orders
+                        orders:create_law_orders_yaml
+                        orders:add_law_order_xinfo
+                        orders:add_law_orderlin1_xinfo
+                        orders:add_law_orderline_xinfo
+                        orders:transform_law_orders]
 
 desc 'Load SUL order tags and load SUL and Law orders'
 task :load_orders_and_tags do |_task|
-  Rake::Task['acquisitions:load_order_tags_sul'].invoke
-  Rake::Task['acquisitions:load_orders'].invoke('sul')
-  Rake::Task['acquisitions:load_orders'].invoke('law')
+  Rake::Task['orders:load_order_tags_sul'].invoke
+  Rake::Task['orders:load_orders'].invoke('sul')
+  Rake::Task['orders:load_orders'].invoke('law')
 end
 
 desc 'Pull all json data (use STAGE=orig)'

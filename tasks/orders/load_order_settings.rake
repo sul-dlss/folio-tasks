@@ -4,7 +4,7 @@ require 'csv'
 require_relative '../helpers/orders/order_settings'
 require_relative '../../lib/folio_uuid'
 
-namespace :acquisitions do
+namespace :orders do
   include OrderSettingsHelpers
 
   desc 'load acquisition methods for orders'

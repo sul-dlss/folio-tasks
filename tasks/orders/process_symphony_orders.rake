@@ -3,7 +3,7 @@
 require 'require_all'
 require_rel '../helpers/orders'
 
-namespace :acquisitions do
+namespace :orders do
   include OrderYamlTaskHelpers
 
   desc 'process Symphony orders for SUL'

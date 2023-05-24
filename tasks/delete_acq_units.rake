@@ -10,4 +10,3 @@ task :delete_acq_units do
     acq_units_delete(obj['id'])
   end
 end
-

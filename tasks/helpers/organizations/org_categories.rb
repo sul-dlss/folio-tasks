@@ -8,7 +8,7 @@ module OrgCategoryTaskHelpers
 
   def categories_csv
     CSV.parse(File.open("#{Settings.tsv}/organizations/organizations-categories.tsv"), headers: true,
-                                                                                      col_sep: "\t").map(&:to_h)
+                                                                                       col_sep: "\t").map(&:to_h)
   end
 
   def category_id(value)

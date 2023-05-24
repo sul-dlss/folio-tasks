@@ -5,7 +5,7 @@ require_rel '../helpers/orders'
 require_relative '../helpers/uuids/acquisitions'
 require_relative '../helpers/folio_jobs'
 
-namespace :acquisitions do
+namespace :orders do
   include AcquisitionsUuidsHelpers, FolioJobs, OrdersTaskHelpers
 
   desc 'multi-thread delete SUL orders from folio with pool size from json files'

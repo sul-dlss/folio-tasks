@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'load orders' do
-  let(:load_orders_task) { Rake.application.invoke_task('acquisitions:load_orders[sul]') }
+  let(:load_orders_task) { Rake.application.invoke_task('orders:load_orders[sul]') }
   let(:load_orders_files) { load_orders_task.send(:order_load_files, 'sul') }
   let(:update_orders_files) { load_orders_task.send(:po_update_files, 'sul') }
   let(:fixture_data) { load_orders_task.send(:purchase_order_and_po_lines, "#{Settings.json}/orders/1ABC0000.json") }
@@ -14,7 +14,7 @@ describe 'load orders' do
   let(:post_status) { { status: 201 } }
   let(:put_status) { { status: 204 } }
 
-  let(:link_po_lines_to_inventory) { Rake.application.invoke_task('acquisitions:link_po_lines_to_inventory[sul]') }
+  let(:link_po_lines_to_inventory) { Rake.application.invoke_task('orders:link_po_lines_to_inventory[sul]') }
   let(:link_po_lines_files) { link_po_lines_to_inventory.send(:link_po_lines_files, 'sul') }
   let(:po_lines) { link_po_lines_to_inventory.send(:orders_get_polines_po_num, '') }
   let(:po_line) { po_lines['poLines'][0] }
