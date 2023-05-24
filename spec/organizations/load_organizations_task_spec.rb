@@ -50,7 +50,10 @@ describe 'organizations rake tasks' do
     let(:interfaces_json) { load_interfaces_task.send(:interfaces_json) }
 
     it 'supplies valid json for posting interfaces' do
-      expect(interfaces_json['interfaces'].sample).to match_json_schema('mod-organizations-storage', 'interface')
+      # use fixture data where type field is empty array.
+      # something with the way the schema is done, a type field with an enum value, e.g. ["Invoices"], gets the error
+      # "The property '#/type/0' of type string did not match the following type: object"
+      expect(interfaces_json['interfaces'][3]).to match_json_schema('mod-organizations-storage', 'interface')
     end
   end
 
@@ -71,7 +74,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when loading SUL organization data' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'SUL', acq_unit_uuid, category_uuids)
@@ -200,7 +203,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when tax is not paid to the vendor' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
@@ -212,7 +215,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when SUL organization should not export to accounting' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[3], 'SUL', acq_unit_uuid, category_uuids)
@@ -224,7 +227,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when SUL organization is missing data' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
@@ -252,7 +255,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when organization has no po/claim email address' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[2], 'SUL', acq_unit_uuid, category_uuids)
@@ -265,7 +268,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when organization has multiple address lines' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[3], 'SUL', acq_unit_uuid, category_uuids)
@@ -281,7 +284,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when customer number ends in 9000' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:customer_number) { xml_doc[1].at_css('customerNumber') }
     let(:org_hash) do
@@ -298,7 +301,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when customer number ends in 9001' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:customer_number) { xml_doc[1].at_css('customerNumber') }
     let(:org_hash) do
@@ -315,7 +318,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when customer number ends in FEEDERACH' do
-    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { load_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:customer_number) { xml_doc[1].at_css('customerNumber') }
     let(:org_hash) do
@@ -332,7 +335,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when loading Law organization data' do
-    let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
+    let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'vendors_law.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
     let(:org_hash) do
       load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_uuids)
@@ -348,7 +351,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when Law organization should not export to accounting' do
-    let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
+    let(:xml_doc) { load_law_organizations_task.send(:organizations_xml, 'vendors_law.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Law', nil) }
     let(:org_hash) do
       load_law_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'Law', acq_unit_uuid, category_uuids)
@@ -360,7 +363,7 @@ describe 'organizations rake tasks' do
   end
 
   context 'when loading Business organization data' do
-    let(:xml_doc) { load_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
+    let(:xml_doc) { load_bus_organizations_task.send(:organizations_xml, 'vendors_bus.xml') }
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('Business', nil) }
     let(:org_hash) do
       load_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid,

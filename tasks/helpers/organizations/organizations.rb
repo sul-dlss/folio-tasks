@@ -3,11 +3,11 @@
 # Module to encapsulate methods used by organizations rake tasks
 module OrganizationsTaskHelpers
   def organizations_xml(file)
-    Nokogiri::XML(File.open("#{Settings.xml}/#{file}")).xpath('//vendor')
+    Nokogiri::XML(File.open("#{Settings.xml}/organizations/#{file}")).xpath('//vendor')
   end
 
   def organizations_tsv(file)
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/organizations/#{file}"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, category_uuids)

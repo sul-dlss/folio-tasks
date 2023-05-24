@@ -29,7 +29,7 @@ describe 'update organizations rake tasks' do
   end
 
   context 'when updating SUL organizations' do
-    let(:xml_doc) { update_sul_organizations_task.send(:organizations_xml, 'acquisitions/vendors_sul.xml') }
+    let(:xml_doc) { update_sul_organizations_task.send(:organizations_xml, 'vendors_sul.xml') }
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       update_sul_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
@@ -49,7 +49,7 @@ describe 'update organizations rake tasks' do
   end
 
   context 'when updating Law organizations' do
-    let(:xml_doc) { update_law_organizations_task.send(:organizations_xml, 'acquisitions/vendors_law.xml') }
+    let(:xml_doc) { update_law_organizations_task.send(:organizations_xml, 'vendors_law.xml') }
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('Law', nil) }
     let(:org_hash) do
       update_law_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Law', acq_unit_uuid, category_uuids)
@@ -62,7 +62,7 @@ describe 'update organizations rake tasks' do
   end
 
   context 'when updating Business organizations' do
-    let(:xml_doc) { update_bus_organizations_task.send(:organizations_xml, 'acquisitions/vendors_bus.xml') }
+    let(:xml_doc) { update_bus_organizations_task.send(:organizations_xml, 'vendors_bus.xml') }
     let(:acq_unit_uuid) { Uuids.acq_units.fetch('Business', nil) }
     let(:org_hash) do
       update_bus_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'Business', acq_unit_uuid,

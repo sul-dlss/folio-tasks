@@ -15,7 +15,7 @@ namespace :organizations do
     acq_unit = 'SUL'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     category_uuids = AcquisitionsUuidsHelpers.organization_categories
-    organizations_xml('acquisitions/vendors_sul.xml').each do |obj|
+    organizations_xml('vendors_sul.xml').each do |obj|
       hash = organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, category_uuids)
       id = organizations_id(hash['code'])
       organizations_put(id, hash) unless id.nil?
@@ -27,7 +27,7 @@ namespace :organizations do
     acq_unit = 'Business'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     category_uuids = AcquisitionsUuidsHelpers.organization_categories
-    organizations_xml('acquisitions/vendors_bus.xml').each do |obj|
+    organizations_xml('vendors_bus.xml').each do |obj|
       hash = organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, category_uuids)
       id = organizations_id(hash['code'])
       organizations_put(id, hash) unless id.nil?
@@ -39,7 +39,7 @@ namespace :organizations do
     acq_unit = 'Law'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     category_uuids = AcquisitionsUuidsHelpers.organization_categories
-    organizations_xml('acquisitions/vendors_law.xml').each do |obj|
+    organizations_xml('vendors_law.xml').each do |obj|
       hash = organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, category_uuids)
       id = organizations_id(hash['code'])
       organizations_put(id, hash) unless id.nil?
