@@ -3,12 +3,11 @@
 require_relative '../helpers/folio_request'
 
 # Module to encapsulate methods used by e-usage rake tasks
-module EUsageTaskHelpers
+module ErmTaskHelpers
   include FolioRequestHelper
 
   def data_providers_tsv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/e-usage-data-providers.tsv"), headers: true,
-                                                                                    col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/erm/e-usage-data-providers.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def data_providers_hash(obj)
