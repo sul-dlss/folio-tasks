@@ -84,7 +84,7 @@ desc 'Loads all Configurations, User, Tenant, Acquisitions Units, Finance, and O
 task load_new_data_and_settings: %i[configurations:load_configs
                                     load_user_settings
                                     load_tenant_settings
-                                    acquisitions:load_acq_units
+                                    load_acq_units
                                     load_finance_settings
                                     load_order_settings
                                     load_organizations_all]

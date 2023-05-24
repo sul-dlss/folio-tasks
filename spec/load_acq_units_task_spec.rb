@@ -4,7 +4,7 @@ require 'rake'
 require 'spec_helper'
 
 describe 'acquisitions units rake tasks' do
-  let(:load_acq_units_task) { Rake.application.invoke_task 'acquisitions:load_acq_units' }
+  let(:load_acq_units_task) { Rake.application.invoke_task 'load_acq_units' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -23,6 +23,10 @@ describe 'acquisitions units rake tasks' do
 
     it 'creates downcase boolean value for acq unit isDeleted field' do
       expect(load_acq_units_task.send(:acq_units_csv)[0]['isDeleted']).to eq 'false'
+    end
+
+    it 'creates the hash key and vlaue for id' do
+      expect(load_acq_units_task.send(:acq_units_csv)[0]['id']).to eq 'abc-123'
     end
   end
 end
