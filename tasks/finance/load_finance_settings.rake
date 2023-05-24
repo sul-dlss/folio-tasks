@@ -2,12 +2,11 @@
 
 require 'csv'
 require 'require_all'
-require_relative '../helpers/acq_units'
 require_relative '../helpers/uuids/acquisitions'
 require_rel '../helpers/finance'
 
-namespace :acquisitions do
-  include AcquisitionsUnitsTaskHelpers, AcquisitionsUuidsHelpers, BudgetHelpers, ExpenseClassHelpers,
+namespace :finance do
+  include AcquisitionsUuidsHelpers, BudgetHelpers, ExpenseClassHelpers,
           FinanceGroupHelpers, FiscalYearHelpers, FundHelpers, FundTypeHelpers, LedgerHelpers,
           TransactionHelpers
 

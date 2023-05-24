@@ -4,15 +4,14 @@ require 'rake'
 require 'spec_helper'
 
 describe 'finance settings rake tasks' do
-  let(:load_fund_types_task) { Rake.application.invoke_task 'acquisitions:load_fund_types' }
-  let(:load_expense_classes_task) { Rake.application.invoke_task 'acquisitions:load_expense_classes' }
-  let(:load_fiscal_years_task) { Rake.application.invoke_task 'acquisitions:load_fiscal_years' }
-  let(:load_ledgers_task) { Rake.application.invoke_task 'acquisitions:load_ledgers' }
-  let(:load_finance_groups_task) { Rake.application.invoke_task 'acquisitions:load_finance_groups' }
-  let(:load_funds_task) { Rake.application.invoke_task 'acquisitions:load_funds' }
-  let(:load_budgets_task) { Rake.application.invoke_task 'acquisitions:load_budgets' }
-  let(:allocate_budgets_task) { Rake.application.invoke_task 'acquisitions:allocate_budgets' }
-  let(:load_acq_units_task) { Rake.application.invoke_task 'acquisitions:load_acq_units' }
+  let(:load_fund_types_task) { Rake.application.invoke_task 'finance:load_fund_types' }
+  let(:load_expense_classes_task) { Rake.application.invoke_task 'finance:load_expense_classes' }
+  let(:load_fiscal_years_task) { Rake.application.invoke_task 'finance:load_fiscal_years' }
+  let(:load_ledgers_task) { Rake.application.invoke_task 'finance:load_ledgers' }
+  let(:load_finance_groups_task) { Rake.application.invoke_task 'finance:load_finance_groups' }
+  let(:load_funds_task) { Rake.application.invoke_task 'finance:load_funds' }
+  let(:load_budgets_task) { Rake.application.invoke_task 'finance:load_budgets' }
+  let(:allocate_budgets_task) { Rake.application.invoke_task 'finance:allocate_budgets' }
   let(:acq_units) { AcquisitionsUuidsHelpers.acq_units }
   let(:fiscal_years) { AcquisitionsUuidsHelpers.fiscal_years }
 

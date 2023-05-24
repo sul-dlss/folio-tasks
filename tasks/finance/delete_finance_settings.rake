@@ -5,7 +5,7 @@ require 'require_all'
 require_rel '../helpers/finance'
 require_relative '../helpers/uuids/acquisitions'
 
-namespace :acquisitions do
+namespace :finance do
   include BudgetHelpers, FundHelpers, FinanceGroupHelpers, LedgerHelpers, FiscalYearHelpers,
           ExpenseClassHelpers, FundTypeHelpers, AcquisitionsUuidsHelpers
 

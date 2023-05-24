@@ -1,6 +1,4 @@
 # frozen_string_literal: true
-# require 'require_all'
-# require_rel 'tasks/helpers'
 
 begin
   require 'rubocop/rake_task'
@@ -8,8 +6,6 @@ begin
 rescue LoadError
   puts 'Unable to load RuboCop.'
 end
-
-# include all the modules....
 
 # Import external rake tasks
 Dir.glob('tasks/**/*.rake').each { |r| import r }
@@ -23,14 +19,14 @@ task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_calendars]
 
 desc 'Loads all finance settings: [fund_types, expense classes, fiscal_years, ledgers, finance_groups, funds, budgets, allocations]'
-task load_finance_settings: %i[acquisitions:load_fund_types
-                               acquisitions:load_expense_classes
-                               acquisitions:load_fiscal_years
-                               acquisitions:load_ledgers
-                               acquisitions:load_finance_groups
-                               acquisitions:load_funds
-                               acquisitions:load_budgets
-                               acquisitions:allocate_budgets]
+task load_finance_settings: %i[finance:load_fund_types
+                               finance:load_expense_classes
+                               finance:load_fiscal_years
+                               finance:load_ledgers
+                               finance:load_finance_groups
+                               finance:load_funds
+                               finance:load_budgets
+                               finance:allocate_budgets]
 
 desc 'Load all order settings: [acquisition methods]'
 task load_order_settings: %i[acquisitions:load_acq_methods]
@@ -46,13 +42,13 @@ task load_organizations_all: %i[organizations:load_categories
                                 organizations:load_coral]
 
 desc 'Delete all finance settings: [budgets, funds, finance_groups, ledgers, fiscal_years, fund_types, expense classes]'
-task delete_finance_settings: %i[acquisitions:delete_budgets
-                                 acquisitions:delete_funds
-                                 acquisitions:delete_finance_groups
-                                 acquisitions:delete_ledgers
-                                 acquisitions:delete_fiscal_years
-                                 acquisitions:delete_expense_classes
-                                 acquisitions:delete_fund_types]
+task delete_finance_settings: %i[finance:delete_budgets
+                                 finance:delete_funds
+                                 finance:delete_finance_groups
+                                 finance:delete_ledgers
+                                 finance:delete_fiscal_years
+                                 finance:delete_expense_classes
+                                 finance:delete_fund_types]
 
 desc 'Delete all tenant settings: [addresses, locations, service_points, libraries, campuses, institutions]'
 task delete_tenant_settings: %i[tenant:delete_locations

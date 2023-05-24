@@ -7,7 +7,7 @@ module FinanceGroupHelpers
   include FolioRequestHelper
 
   def finance_groups_csv
-    CSV.parse(File.open("#{Settings.tsv}/acquisitions/finance-groups.tsv"), headers: true, col_sep: "\t").map(&:to_h)
+    CSV.parse(File.open("#{Settings.tsv}/finance/finance-groups.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def finance_groups_hash(obj, acq_units_uuids)
