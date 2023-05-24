@@ -1,4 +1,6 @@
 # frozen_string_literal: true
+# require 'require_all'
+# require_rel 'tasks/helpers'
 
 begin
   require 'rubocop/rake_task'
@@ -6,6 +8,8 @@ begin
 rescue LoadError
   puts 'Unable to load RuboCop.'
 end
+
+# include all the modules....
 
 # Import external rake tasks
 Dir.glob('tasks/**/*.rake').each { |r| import r }
@@ -32,12 +36,14 @@ desc 'Load all order settings: [acquisition methods]'
 task load_order_settings: %i[acquisitions:load_acq_methods]
 
 desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
-task load_organizations_all: %i[acquisitions:load_org_categories
-                                acquisitions:load_org_migrate_err
-                                acquisitions:load_org_vendors_sul
-                                acquisitions:load_org_vendors_business
-                                acquisitions:load_org_vendors_law
-                                acquisitions:load_org_coral]
+task load_organizations_all: %i[organizations:load_categories
+                                organizations:load_interfaces
+                                organizations:load_credentials
+                                organizations:load_vendors_migrate_err
+                                organizations:load_vendors_sul
+                                organizations:load_vendors_business
+                                organizations:load_vendors_law
+                                organizations:load_coral]
 
 desc 'Delete all finance settings: [budgets, funds, finance_groups, ledgers, fiscal_years, fund_types, expense classes]'
 task delete_finance_settings: %i[acquisitions:delete_budgets
@@ -140,6 +146,8 @@ task pull_all_json_data: %i[users:pull_waivers
                             inventory:pull_statistical_codes_and_types
                             inventory:pull_instance_note_types
                             inventory:pull_copycat_profiles
+                            organizations:pull_interfaces
+                            organizations:pull_credentials
                             tenant:pull_calendars]
 
 desc 'Pull all data import profile json data (use STAGE=orig)'

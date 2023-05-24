@@ -5,9 +5,9 @@ require 'spec_helper'
 
 describe 'update organizations rake tasks' do
   let(:category_uuids) { AcquisitionsUuidsHelpers.organization_categories }
-  let(:update_sul_organizations_task) { Rake.application.invoke_task 'acquisitions:update_org_vendors_sul' }
-  let(:update_law_organizations_task) { Rake.application.invoke_task 'acquisitions:update_org_vendors_law' }
-  let(:update_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:update_org_vendors_business' }
+  let(:update_sul_organizations_task) { Rake.application.invoke_task 'organizations:update_vendors_sul' }
+  let(:update_law_organizations_task) { Rake.application.invoke_task 'organizations:update_vendors_law' }
+  let(:update_bus_organizations_task) { Rake.application.invoke_task 'organizations:update_vendors_business' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')

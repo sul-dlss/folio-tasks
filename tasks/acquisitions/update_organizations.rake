@@ -6,12 +6,12 @@ require_relative '../helpers/acq_units'
 require_rel '../helpers/organizations'
 require_relative '../helpers/uuids/acquisitions'
 
-namespace :acquisitions do
+namespace :organizations do
   include OrganizationsTaskHelpers, OrgCategoryTaskHelpers, AddressHelpers, AcquisitionsUnitsTaskHelpers,
           AcquisitionsUuidsHelpers
 
   desc 'update SUL organizations in folio'
-  task :update_org_vendors_sul do
+  task :update_vendors_sul do
     acq_unit = 'SUL'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     category_uuids = AcquisitionsUuidsHelpers.organization_categories
@@ -23,7 +23,7 @@ namespace :acquisitions do
   end
 
   desc 'update Business organizations in folio'
-  task :update_org_vendors_business do
+  task :update_vendors_business do
     acq_unit = 'Business'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     category_uuids = AcquisitionsUuidsHelpers.organization_categories
@@ -35,7 +35,7 @@ namespace :acquisitions do
   end
 
   desc 'update Law organizations in folio'
-  task :update_org_vendors_law do
+  task :update_vendors_law do
     acq_unit = 'Law'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     category_uuids = AcquisitionsUuidsHelpers.organization_categories

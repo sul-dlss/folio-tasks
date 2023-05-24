@@ -4,19 +4,22 @@ require 'rake'
 require 'spec_helper'
 
 describe 'organizations rake tasks' do
-  let(:load_categories_task) { Rake.application.invoke_task 'acquisitions:load_org_categories' }
-  let(:load_migrate_err_task) { Rake.application.invoke_task 'acquisitions:load_org_migrate_err' }
+  let(:load_categories_task) { Rake.application.invoke_task 'organizations:load_categories' }
+  let(:load_interfaces_task) { Rake.application.invoke_task 'organizations:load_interfaces' }
+  let(:load_migrate_err_task) { Rake.application.invoke_task 'organizations:load_vendors_migrate_err' }
   let(:category_uuids) { AcquisitionsUuidsHelpers.organization_categories }
-  let(:load_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_sul' }
-  let(:load_law_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_law' }
-  let(:load_bus_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_vendors_business' }
-  let(:load_coral_organizations_task) { Rake.application.invoke_task 'acquisitions:load_org_coral' }
+  let(:load_organizations_task) { Rake.application.invoke_task 'organizations:load_vendors_sul' }
+  let(:load_law_organizations_task) { Rake.application.invoke_task 'organizations:load_vendors_law' }
+  let(:load_bus_organizations_task) { Rake.application.invoke_task 'organizations:load_vendors_business' }
+  let(:load_coral_organizations_task) { Rake.application.invoke_task 'organizations:load_coral' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)
 
     stub_request(:post, 'http://example.com/organizations-storage/categories')
+
+    stub_request(:post, 'http://example.com/organizations-storage/interfaces')
 
     stub_request(:get, 'http://example.com/acquisitions-units/units')
       .with(query: hash_including)
@@ -40,6 +43,14 @@ describe 'organizations rake tasks' do
 
     it 'creates the hash key and value for id' do
       expect(load_categories_task.send(:categories_csv)[0]['id']).to eq 'abc-123'
+    end
+  end
+
+  context 'when loading interfaces' do
+    let(:interfaces_json) { load_interfaces_task.send(:interfaces_json) }
+
+    it 'supplies valid json for posting interfaces' do
+      expect(interfaces_json['interfaces'].sample).to match_json_schema('mod-organizations-storage', 'interface')
     end
   end
 

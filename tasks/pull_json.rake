@@ -7,16 +7,39 @@ require_relative 'helpers/configurations'
 require_relative 'helpers/courses'
 require_relative 'helpers/data_import'
 require_relative 'helpers/inventory'
+require_relative 'helpers/organizations/interfaces'
 require_relative 'helpers/tenant'
 require_relative 'helpers/users'
 
-def open_file_and_pull(namespace, name, helper)
+def open_file_and_pull(namespace, name, helper, **other)
   scope = namespace.scope.path
 
-  %i[json spec/fixtures/json].each do |dir|
+  directories = if other[:no_spec]
+                  %i[json]
+                else
+                  %i[json spec/fixtures/json]
+                end
+
+  directories.each do |dir|
     dirname = "#{dir}/#{scope}"
     FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
     File.open("#{dirname}/#{name}.json", 'w') { |file| file.puts helper.send("pull_#{name}") }
+  end
+end
+
+namespace :organizations do |namespace|
+  helper = InterfacesHelpers
+
+  desc 'pull organization interfaces from original folio instance (use STAGE=orig yaml)'
+  task :pull_interfaces do
+    name = 'interfaces'
+    open_file_and_pull(namespace, name, helper)
+  end
+
+  desc 'pull organization interface credentials from original folio instance (use STAGE=orig yaml)'
+  task :pull_credentials do
+    name = 'credentials'
+    open_file_and_pull(namespace, name, helper, no_spec: true)
   end
 end
 

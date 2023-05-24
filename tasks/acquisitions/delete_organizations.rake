@@ -6,11 +6,11 @@ require_relative '../helpers/acq_units'
 require_rel '../helpers/organizations'
 require_relative '../helpers/uuids/acquisitions'
 
-namespace :acquisitions do
+namespace :organizations do
   include OrganizationsTaskHelpers, OrgCategoryTaskHelpers, AcquisitionsUnitsTaskHelpers, AcquisitionsUuidsHelpers
 
   desc 'delete SUL organizations from folio'
-  task :delete_org_vendors_sul do
+  task :delete_vendors_sul do
     acq_unit = 'SUL'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     map = category_map
@@ -22,7 +22,7 @@ namespace :acquisitions do
   end
 
   desc 'delete Business organizations from folio'
-  task :delete_org_vendors_business do
+  task :delete_vendors_business do
     acq_unit = 'Business'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     map = category_map
@@ -34,7 +34,7 @@ namespace :acquisitions do
   end
 
   desc 'delete Law organizations from folio'
-  task :delete_org_vendors_law do
+  task :delete_vendors_law do
     acq_unit = 'Law'
     acq_unit_uuid = AcquisitionsUuidsHelpers.acq_units.fetch(acq_unit, nil)
     map = category_map
