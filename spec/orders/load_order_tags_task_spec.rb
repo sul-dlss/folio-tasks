@@ -16,11 +16,11 @@ describe 'load order tags rake tasks' do
 
   it 'has correctly formatted label' do
     tags = load_order_tags_task.send(:tag_hash, sul_order_tags[0])
-    expect(tags).to include('label' => 'SULBIGDEAL:Elsevier')
+    expect(tags).to include('label' => 'sulbigdeal:elsevier')
   end
 
   it 'has spaces replaced by underscores' do
     tags = load_order_tags_task.send(:tag_hash, sul_order_tags[1])
-    expect(tags).to include('label' => 'SULDATA:Hosted_by_vendor')
+    expect(tags).to include('label' => 'suldata:hosted_by_vendor')
   end
 end
