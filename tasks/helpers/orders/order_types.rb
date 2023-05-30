@@ -44,10 +44,23 @@ module OrderTypeHelpers
     material_type_map.fetch(name, nil)
   end
 
-  def payment_status(field, map)
-    return 'Awaiting Payment' if order_type(field, map).eql?('One-Time')
+  def payment_status(field, map, po_line_data)
+    case po_line_data['HOLDNG_CODE']
+    when /^LAW/
+      if field.eql?('GIFTSER') || field.eql?('GIFTMONO')
+        'Payment Not Required'
+      elsif order_type(field, map).eql?('Ongoing')
+        'Ongoing'
+      elsif po_line_data['DIST_DATE_LOAD'].match?(/\d{8}/)
+        'Fully Paid'
+      else
+        'Awaiting Payment'
+      end
+    else
+      return 'Awaiting Payment' if order_type(field, map).eql?('One-Time')
 
-    'Ongoing'
+      'Ongoing'
+    end
   end
 
   def receipt_status(receipt_date, field, map)

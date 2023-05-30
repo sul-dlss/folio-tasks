@@ -7,3 +7,4 @@ SO-COMBO	Ongoing	Standing order	P/E Mix	book	false	true
 STANDING	Ongoing	Standing order	Physical Resource	book	false	true
 SUBSCRIPT	Ongoing	Subscription	Physical Resource	periodical	true	true
 TERMSET	Ongoing	Purchase	Physical Resource	book	false	true
+GIFTSER	Ongoing	Gift	Physical Resource	periodical	false	true

@@ -17,7 +17,7 @@ module PoLinesHelpers
       'orderFormat' => order_format(order_type, order_type_map),
       'checkinItems' => check_in_items?(order_type, order_type_map),
       'receiptDate' => date_format(po_line_data['DIST_DATE_RCVD']),
-      'paymentStatus' => payment_status(order_type, order_type_map),
+      'paymentStatus' => payment_status(order_type, order_type_map, po_line_data),
       'receiptStatus' => receipt_status(po_line_data['DIST_DATE_RCVD'], order_type, order_type_map),
       'selector' => po_line_data['SELECTOR'],
       'poLineDescription' => add_parts_in_set_xinfo_field(po_line_data['PARTS_IN_SET']),

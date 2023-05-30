@@ -15,6 +15,7 @@
       BIB_ENTRY: ACQ
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '0'
+      DIST_DATE_LOAD: '20210304'
       HOLDNG_CODE: LAW-H
       CALLNUM: VROOMAN COLLECTION F
       fundDistribution:

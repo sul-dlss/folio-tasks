@@ -15,6 +15,7 @@
       BIB_ENTRY: ACQ
       PARTS_IN_SET: 9 photos
       DIST_DATE_RCVD: '20220413'
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: SPEC-MSS-H
       CALLNUM: AB123 .C45 D678
       fundDistribution:
