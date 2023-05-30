@@ -14,7 +14,7 @@ module OrderTagHelpers
   def order_tags(file)
     tag_list = []
     order_tags_tsv(file).each do |row|
-      tag_list.push(combine(row['XINFO_FIELD'], row['DATA'])) if row['XINFO_FIELD'].match?(/DATA|BIGDEAL/)
+      tag_list.push(combine(row['XINFO_FIELD'], row['DATA']).downcase) if row['XINFO_FIELD'].match?(/DATA|BIGDEAL/)
     end
     tag_list.uniq
   end
