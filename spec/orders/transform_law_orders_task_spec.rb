@@ -60,6 +60,7 @@ describe 'transform LAW orders rake tasks' do
     stub_request(:get, 'http://example.com/orders/acquisition-methods')
       .with(query: hash_including)
       .to_return(body: '{ "acquisitionMethods": [{ "id": "acq-123", "value": "Other" },
+                                                 { "id": "acq-123", "value": "Gift" },
                                                  { "id": "acq-456", "value": "Purchase" }]
                         }')
 
@@ -134,6 +135,26 @@ describe 'transform LAW orders rake tasks' do
   context 'when acquisition method exists in Folio' do
     it 'has the correct acquisitions method UUID' do
       expect(orders_hash['compositePoLines'].sample['acquisitionMethod']).to eq 'acq-456'
+    end
+  end
+
+  context 'when one-time orders have been paid' do
+    it 'has a payment status of Fully Paid' do
+      expect(orders_hash['compositePoLines'][0]['paymentStatus']).to eq 'Fully Paid'
+    end
+  end
+
+  context 'when order is a gift' do
+    let(:order_id) do
+      transform_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/4321L04.yaml")).shift
+    end
+    let(:sym_order) do
+      transform_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/4321L04.yaml")).pop
+    end
+    let(:orders_hash) { transform_law_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
+
+    it 'has payment status Payment Not Required' do
+      expect(orders_hash['compositePoLines'][0]['paymentStatus']).to eq 'Payment Not Required'
     end
   end
 end

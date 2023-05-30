@@ -15,6 +15,7 @@
       BIB_ENTRY: SER
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '0'
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: ART-H
       CALLNUM: WDRNALM0075
       fundDistribution:
@@ -34,6 +35,7 @@
       BIB_ENTRY: SER
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '20211008'
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: ART-H
       CALLNUM: Z286 .A77 K588 2021
       fundDistribution:
@@ -53,6 +55,7 @@
       BIB_ENTRY: SER
       PARTS_IN_SET: v.2016 (published 2021)
       DIST_DATE_RCVD: '20211012'
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: ART-H
       CALLNUM: AB123 .C45 D678
       fundDistribution:

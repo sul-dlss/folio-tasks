@@ -15,6 +15,7 @@
       BIB_ENTRY: SER
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: '0'
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: MUSC-NON-H
       CALLNUM: AB123 .C45 D678
       fundDistribution:

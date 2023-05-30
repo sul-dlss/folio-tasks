@@ -15,6 +15,7 @@
       BIB_ENTRY: ACQ
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: ''
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: LAW-H
       CALLNUM: KJE1640 .E974 2008
       fundDistribution:
@@ -34,6 +35,7 @@
       BIB_ENTRY: ACQ
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: ''
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: LAW-H
       CALLNUM: KJE1640 .E974 2008
       fundDistribution:
@@ -53,6 +55,7 @@
       BIB_ENTRY: ACQ
       PARTS_IN_SET: ''
       DIST_DATE_RCVD: ''
+      DIST_DATE_LOAD: '0'
       HOLDNG_CODE: LAW-H
       CALLNUM: KJE1640 .E974 2008
       fundDistribution:

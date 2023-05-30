@@ -122,6 +122,7 @@ module OrderYamlTaskHelpers
         'BIB_ENTRY' => (obj['BIB_ENTRY']).to_s,
         'PARTS_IN_SET' => (obj['PARTS_IN_SET']).to_s,
         'DIST_DATE_RCVD' => (obj['DIST_DATE_RCVD']).to_s,
+        'DIST_DATE_LOAD' => (obj['DIST_DATE_LOAD']).to_s,
         'HOLDNG_CODE' => (obj['HOLDNG_CODE']).to_s,
         'CALLNUM' => (obj['CALLNUM']).to_s,
         'fundDistribution' => [fund(obj)]
