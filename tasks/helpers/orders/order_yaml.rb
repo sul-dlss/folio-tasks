@@ -26,8 +26,8 @@ module OrderYamlTaskHelpers
   end
 
   def add_order_xinfo(tsv_hash, yaml_hash)
-    note_fields = %w[INSTRUCT NOTE COMMENT MULTIYEAR STREAMING OPENACCESS]
-    law_note_fields = %w[INSTRUCT NOTE COMMENT MULTIYEAR STREAMING OPENACCESS BIGDEAL]
+    note_fields = %w[COMMENT INSTRUCT MULTIYEAR NOTE OPENACCESS STREAMING TREATMENT]
+    law_note_fields = %w[BIGDEAL COMMENT INSTRUCT MULTIYEAR NOTE OPENACCESS STREAMING]
     tag_fields = %w[BIGDEAL DATA]
     if tsv_hash['LIB'].eql?('SUL')
       return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
@@ -38,7 +38,7 @@ module OrderYamlTaskHelpers
   end
 
   def add_orderlin1_xinfo(tsv_hash, yaml_hash)
-    note_fields = %w[DESC COMMENT CONTACT FUND INSTRUCT NOTE NOTIFY]
+    note_fields = %w[COMMENT CONTACT DESC FUND INSTRUCT NOTE NOTIFY]
     return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
   end
 
