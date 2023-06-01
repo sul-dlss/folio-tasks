@@ -105,6 +105,7 @@ desc 'Load SUL order tags and load SUL and Law orders'
 task :load_orders_and_tags do |_task|
   Rake::Task['orders:load_order_tags_sul'].invoke
   Rake::Task['orders:load_orders'].invoke('sul')
+  Rake::Task['orders:load_orders'].reenable
   Rake::Task['orders:load_orders'].invoke('law')
 end
 
