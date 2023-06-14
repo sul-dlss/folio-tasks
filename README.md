@@ -161,7 +161,7 @@ The `prepare_orders` and `load_orders_and_tags` rake tasks should be run from th
 1. After inventory is loaded, we need to link the po lines to inventory by using the `STAGE=prod rake orders:link_po_lines_to_inventory[sul]` and `STAGE=prod rake orders:link_po_lines_to_inventory[law]`.
 
 #### Using screen session
-From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake load_orders_and_tags; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
+From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake load_orders[1]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`. To remove the screen session use `screen -S {session.name} -p 0 -X quit`
 
 ### App user for edge_connexion, edge_sip2
 
