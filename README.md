@@ -151,34 +151,17 @@ Get the user's id by doing:
   ruby bin/folio_post_array.rb "perms/users/${ID}/permissions" json/users/array_of_permissions.json
   ```
 
-### Loading New Finance Settings
-When there is a new fiscal year, some finance data needs to be re-loaded or updated. There might be new funds, new associations with funds and groups, new organizations, new budgets, etc. Here are the steps to take:
-- rake acquisitions:update_expense_classes
-- rake acquisitions:load_fiscal_years
-- rake acquisitions:load_ledgers
-- rake acquisitions:load_funds
-- rake acquisitions:update_funds
-- rake acquisitions:load_budgets
-- rake acquisitions:update_budgets
-- rake acquisitions:allocate_budgets
-- rake acquisitions:load_org_vendors_sul
-- rake acquisitions:load_org_vendors_business
-- rake acquisitions:load_org_vendors_law
-
-If any of the organizations changed, one could also run `rake acquisitions:update_org_vendors_*`.
-
-
 ### Loading Orders
-The `prepare_orders` and `load_orders[1]` rake tasks should be run from the Symphony server since the tasks need tsv, yaml, and json files that are generated there.
+The `prepare_orders` and `load_orders_and_tags` rake tasks should be run from the Symphony server since the tasks need tsv, yaml, and json files that are generated there.
 1. Run `/s/SUL/Bin/folio_symphony_extract/acquisitions/orders/run_reports.ksh` to get current order data for migration from Symphony.
 1. Copy the `order_type_map.tsv` and `sym_hldg_code_location_map.tsv` files from the [FOLIO Ops shared drive](https://drive.google.com/drive/folders/1-FWsDUcc3DRa3sw6jzh4Puvbn-LRcQ-4?usp=sharing) to the `Settings.tsv_orders` directory.
-1. Optionally, delete the yaml and json files in the `Settings.yaml.*` and `Settings.json_orders.*` directories, using the tasks `acquisitions:delete_*_order_yaml` and `acquisitions:delete_*_order_json`.
+1. Delete the yaml and json files in the `Settings.yaml.*` and `Settings.json_orders.*` directories, using the tasks `orders:delete_*_order_yaml` and `orders:delete_*_order_json`.
 1. Process the Symphony order tsv data and transform to FOLIO order json by running `STAGE=prod rake prepare_orders`. Use the appropriate `STAGE` for whichever environment the orders will be loaded to so the UUIDs are created for the correct environment.
-1. Load orders to FOLIO using `STAGE=prod rake load_orders[1]`. The argument passed is the number of threads to use to load orders. In testing, we found that anything more than 1 loads the orders incorrectly and the related encumbrance transactions do not load. This is a long-running task, so it is best to run it in a `screen` session on the Symphony server.
-1. Optionally, there are tasks for updating purchase orders and po lines. These might be helpful to correct any orders that didn't load completely. E.g. `rake update_orders[1,sul]`.
+1. Load orders to FOLIO using `STAGE=prod rake load_orders_and_tags`. This is a long-running task, so it is best to run it in a `screen` session on the Symphony server.
+1. After inventory is loaded, we need to link the po lines to inventory by using the `STAGE=prod rake orders:link_po_lines_to_inventory[sul]` and `STAGE=prod rake orders:link_po_lines_to_inventory[law]`.
 
 #### Using screen session
-From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake load_orders[1]; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
+From `/s/SUL/Bin/folio-tasks/current` start a screen session with `screen -S order-load`. In the screen session, run `rake -T orders` to see the available tasks related to orders. Run the load_orders task with pool size as argument, e.g. `{ date; STAGE=prod rake load_orders_and_tags; date; } > ~/load_orders.log 2>&1`. To detach from screen: `ctrl + a, d`. To re-attach to screen, `screen -r ${screen session name}`. To list screens, `screen -ls`.
 
 ### App user for edge_connexion, edge_sip2
 
