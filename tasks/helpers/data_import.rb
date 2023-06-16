@@ -111,28 +111,28 @@ module DataImportTaskHelpers
   end
 
   def pull_action_profiles
-    hash = @@folio_request.get('/data-import-profiles/actionProfiles?withRelations=true&limit=999')
+    hash = @@folio_request.get('/data-import-profiles/actionProfiles?withRelations=true&limit=99&query=userInfo.userName<>System')
     trim_hash(hash, 'actionProfiles')
     remove_values(hash, 'userInfo')
     hash.to_json
   end
 
   def pull_job_profiles
-    hash = @@folio_request.get('/data-import-profiles/jobProfiles?limit=999')
+    hash = @@folio_request.get('/data-import-profiles/jobProfiles?limit=99&query=userInfo.userName<>System')
     trim_hash(hash, 'jobProfiles')
     remove_values(hash, 'userInfo')
     hash.to_json
   end
 
   def pull_mapping_profiles
-    hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true&limit=999')
+    hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true&limit=99&query=userInfo.userName<>System')
     trim_hash(hash, 'mappingProfiles')
     remove_values(hash, 'userInfo')
     hash.to_json
   end
 
   def pull_match_profiles
-    hash = @@folio_request.get('/data-import-profiles/matchProfiles?withRelations=true&limit=999')
+    hash = @@folio_request.get('/data-import-profiles/matchProfiles?withRelations=true&limit=99&query=userInfo.userName<>System')
     trim_hash(hash, 'matchProfiles')
     remove_values(hash, 'userInfo')
     hash.to_json
