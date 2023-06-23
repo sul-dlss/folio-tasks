@@ -253,7 +253,7 @@ module OrdersTaskHelpers
   end
 
   def date_format(date)
-    return "#{date[0..3]}-#{date[4..5]}-#{date[6..7]}T00:00:00.000-08:00" unless date.eql?('0')
+    return "#{date[0..3]}-#{date[4..5]}-#{date[6..7]}T00:00:00.000-07:00" unless date.eql?('0')
   end
 
   def dollars_to_float(dollars)

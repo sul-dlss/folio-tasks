@@ -95,11 +95,11 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has an approvalDate of date-time formatted string' do
-      expect(orders_hash['approvalDate']).to eq '2022-04-04T00:00:00.000-08:00'
+      expect(orders_hash['approvalDate']).to eq '2022-04-04T00:00:00.000-07:00'
     end
 
     it 'has a dateOrdered of date-time formatted string' do
-      expect(orders_hash['dateOrdered']).to eq '2022-04-04T00:00:00.000-08:00'
+      expect(orders_hash['dateOrdered']).to eq '2022-04-04T00:00:00.000-07:00'
     end
 
     it 'puts symphony date ordered in po note field' do
@@ -139,7 +139,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'has a receipt date of date-time formatted string' do
-      expect(orders_hash['compositePoLines'][0]['receiptDate']).to eq '2022-04-13T00:00:00.000-08:00'
+      expect(orders_hash['compositePoLines'][0]['receiptDate']).to eq '2022-04-13T00:00:00.000-07:00'
     end
 
     it 'has receiving workflow box set to synchronized' do
@@ -261,7 +261,7 @@ describe 'transform SUL orders rake tasks' do
     end
 
     it 'po line with received item has a receipt date' do
-      expect(orders_hash['compositePoLines'][1]['receiptDate']).to eq '2022-04-15T00:00:00.000-08:00'
+      expect(orders_hash['compositePoLines'][1]['receiptDate']).to eq '2022-04-15T00:00:00.000-07:00'
     end
 
     it 'has receiving workflow box set to independent' do
