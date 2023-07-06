@@ -18,15 +18,16 @@ task load_tenant_settings: %i[tenant:load_institutions
                               tenant:load_locations
                               tenant:load_calendars]
 
-desc 'Loads all finance settings: [fund_types, expense classes, fiscal_years, ledgers, finance_groups, funds, budgets, allocations]'
+desc 'Loads all finance settings that can be preloaded: [fund_types, expense classes, fiscal_years, ledgers, finance_groups]'
 task load_finance_settings: %i[finance:load_fund_types
                                finance:load_expense_classes
                                finance:load_fiscal_years
                                finance:load_ledgers
-                               finance:load_finance_groups
-                               finance:load_funds
-                               finance:load_budgets
-                               finance:allocate_budgets]
+                               finance:load_finance_groups]
+
+desc 'Loads finance data: [funds and budgets]'
+task load_finance_data: %i[finance:load_funds
+                           finance:load_budgets]
 
 desc 'Load all order settings: [acquisition methods]'
 task load_order_settings: %i[acquisitions:load_acq_methods]
@@ -204,9 +205,9 @@ task load_course_reserve_settings: %i[courses:load_course_terms
                                       courses:load_course_depts
                                       courses:load_course_status]
 
-desc 'Load app users and permission sets'
-task setup_app_users: %i[tsv_users:load_app_users
-                         users:load_permission_sets
-                         tsv_users:assign_app_user_acq_units
-                         tsv_users:assign_app_user_psets
-                         tsv_users:assign_app_user_service_points]
+desc 'Load app users and all permission sets'
+task setup_app_users_and_psets: %i[tsv_users:load_app_users
+                                   users:load_permission_sets
+                                   tsv_users:assign_app_user_acq_units
+                                   tsv_users:assign_app_user_psets
+                                   tsv_users:assign_app_user_service_points]
