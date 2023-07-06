@@ -73,6 +73,12 @@ class FolioRequest
       .request(method, base_url + path, **other)
   end
 
+  def unauthenticated_request(path, headers: {}, method: :get, **other)
+    HTTP
+      .headers(DEFAULT_HEADERS.merge(headers))
+      .request(method, base_url + path, **other)
+  end
+
   def base_url
     Settings.okapi.url
   end
