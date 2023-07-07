@@ -166,7 +166,7 @@ task load_all_configurations: %i[configurations:load_configs
                                  configurations:load_email_config
                                  configurations:load_login_configs]
 
-desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types]'
+desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types, holding note types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_item_loan_types
                                      inventory:load_item_note_types
@@ -176,6 +176,7 @@ task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_statistical_codes
                                      inventory:load_instance_note_types
                                      inventory:load_holdings_types
+                                     inventory:load_holdings_note_types
                                      inventory:load_copycat_profiles]
 
 desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, circ rules]'
