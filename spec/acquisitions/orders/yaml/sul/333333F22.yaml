@@ -21,12 +21,12 @@
       fundDistribution:
       - FUNDING_TYPE: '3'
         FUNDING_PERCENT: '100'
-        FUNDING_AMT_ENCUM: "$0.00"
+        FUNDING_AMT_ENCUM: "$60.00"
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUNDA
       - FUNDING_TYPE: '4'
         FUNDING_PERCENT: '100'
-        FUNDING_AMT_ENCUM: "$0.00"
+        FUNDING_AMT_ENCUM: "$40.00"
         FUND_ID: 11111-22-ABCD
         FUND_NAME: ASULFUNDB
       SELECTOR: RHW

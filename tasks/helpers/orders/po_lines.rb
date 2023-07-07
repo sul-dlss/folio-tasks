@@ -13,6 +13,7 @@ module PoLinesHelpers
   end
 
   def po_line_hash(po_line_data, order_type, order_type_map, hldg_code_loc_map, funds)
+    hldg_code = po_line_data['HOLDNG_CODE']
     hash = {
       'orderFormat' => order_format(order_type, order_type_map),
       'checkinItems' => check_in_items?(order_type, order_type_map),
@@ -27,10 +28,11 @@ module PoLinesHelpers
       'edition' => add_edition(po_line_data['CALLNUM']),
       'acquisitionMethod' => acquisition_method(order_type, order_type_map),
       'source' => 'API',
-      'cost' => add_cost(po_line_data['ORDLINE_UNIT_LIST_PRICE'], order_format(order_type, order_type_map)),
-      'fundDistribution' => add_fund_data(po_line_data['fundDistribution'], po_line_data['HOLDNG_CODE'], funds)
+      'cost' => add_cost(po_line_data['ORDLINE_UNIT_LIST_PRICE'], order_format(order_type, order_type_map), hldg_code),
+      'fundDistribution' => add_fund_data(po_line_data['fundDistribution'], hldg_code, funds)
     }
-    add_locations(hash, po_line_data['HOLDNG_CODE'], hldg_code_loc_map)
+    add_description(hash, po_line_data['ORDLINE_UNIT_LIST_PRICE'], hldg_code)
+    add_locations(hash, hldg_code, hldg_code_loc_map)
     add_physical(hash, material_type(order_type, order_type_map))
     add_eresource(hash, material_type(order_type, order_type_map))
     hash.compact
@@ -61,7 +63,13 @@ module PoLinesHelpers
     data
   end
 
-  def add_cost(list_price, format)
+  def add_description(po_line_hash, list_price, hldg_code)
+    po_line_hash.store('description', dollars_to_float(list_price)) unless hldg_code.match?(/^LAW/)
+    po_line_hash
+  end
+
+  def add_cost(list_price, format, hldg_code)
+    list_price = '$0' unless hldg_code.match?(/^LAW/) # only 0 out if SUL orderline
     cost = {
       'currency' => 'USD'
     }
@@ -103,14 +111,14 @@ module PoLinesHelpers
         'code' => "#{distribution['FUND_NAME']}-Law",
         'fundId' => funds.fetch("#{distribution['FUND_NAME']}-Law", nil),
         'distributionType' => distribution_type(distribution['FUNDING_TYPE']),
-        'value' => distribution_value(distribution)
+        'value' => distribution_value(distribution, hldg_code)
       }
     else
       {
         'code' => "#{distribution['FUND_NAME']}-SUL",
         'fundId' => funds.fetch("#{distribution['FUND_NAME']}-SUL", nil),
         'distributionType' => distribution_type(distribution['FUNDING_TYPE']),
-        'value' => distribution_value(distribution)
+        'value' => distribution_value(distribution, hldg_code)
       }
     end
   end
@@ -120,10 +128,14 @@ module PoLinesHelpers
     return 'amount' if funding_type.match?(/3|4/) # Symphony funding type 3 and 4
   end
 
-  def distribution_value(distribution)
+  def distribution_value(distribution, hldg_code)
     return distribution['FUNDING_PERCENT'].to_i if distribution_type(distribution['FUNDING_TYPE']).eql?('percentage')
-    return dollars_to_float(distribution['FUNDING_AMT_ENCUM']) if distribution_type(distribution['FUNDING_TYPE'])
-                                                                  .eql?('amount')
+
+    if distribution_type(distribution['FUNDING_TYPE']).eql?('amount') && hldg_code.match?(/^LAW/)
+      dollars_to_float(distribution['FUNDING_AMT_ENCUM'])
+    else
+      dollars_to_float('$0')
+    end
   end
 
   def add_locations(po_line_hash, hldg_code, hldg_code_loc_map)
