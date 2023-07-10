@@ -49,7 +49,9 @@ describe 'transform LAW orders rake tasks' do
 
     stub_request(:get, 'http://example.com/finance/funds')
       .with(query: hash_including)
-      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "BLAWFUND-Law" }] }')
+      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "ALAWFUND-Law" },
+                                    { "id": "fund-123", "code": "BLAWFUND-Law" },
+                                    { "id": "fund-123", "code": "LAWNOFUND-Law" }] }')
 
     stub_request(:get, 'http://example.com/material-types')
       .with(query: hash_including)
@@ -107,6 +109,14 @@ describe 'transform LAW orders rake tasks' do
 
     it 'has a call number in the edition field' do
       expect(orders_hash['compositePoLines'][0]['edition']).to eq 'VROOMAN COLLECTION F'
+    end
+
+    it 'has a cost object with listUnitPrice' do
+      expect(orders_hash['compositePoLines'][0]['cost']['listUnitPrice']).to eq 35.00
+    end
+
+    it 'does not have the Symphony orderline unit list price in po line description' do
+      expect(orders_hash['compositePoLines'][0]).not_to have_key 'description'
     end
   end
 

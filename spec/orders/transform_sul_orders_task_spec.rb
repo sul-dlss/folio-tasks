@@ -45,7 +45,8 @@ describe 'transform SUL orders rake tasks' do
 
     stub_request(:get, 'http://example.com/finance/funds')
       .with(query: hash_including)
-      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "ASULFUNDA-SUL" },
+      .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "ASULFUND-SUL" },
+                                    { "id": "fund-123", "code": "ASULFUNDA-SUL" },
                                     { "id": "fund-123", "code": "ASULFUNDB-SUL" }] }')
 
     stub_request(:get, 'http://example.com/material-types')
@@ -427,8 +428,12 @@ describe 'transform SUL orders rake tasks' do
       expect(orders_hash['compositePoLines'][0]['locations'][0]['locationId']).to eq 'loc-123'
     end
 
+    it 'has a description with Symphony orderline unit list price' do
+      expect(orders_hash['compositePoLines'][0]['description']).to eq 1000
+    end
+
     it 'has a cost object with listUnitPrice' do
-      expect(orders_hash['compositePoLines'][0]['cost']['listUnitPrice']).to eq 1000
+      expect(orders_hash['compositePoLines'][0]['cost']['listUnitPrice']).to eq 0
     end
 
     it 'does not have a cost object with listUnitPriceElectronic' do

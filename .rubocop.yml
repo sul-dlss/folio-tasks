@@ -16,7 +16,7 @@ Layout/LineLength:
     - 'spec/**/*'
 
 Metrics/AbcSize:
-  Max: 35
+  Max: 36
 
 Metrics/BlockLength:
   Exclude:
