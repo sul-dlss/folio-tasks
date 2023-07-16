@@ -164,8 +164,7 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
 
 desc 'Load all configurations [edge-sip2 BULKEDIT CHECKOUT FAST_ADD LOAN_HISTORY CHECKOUT FAST_ADD INVOICE ORDERS ORG SETTINGS TENANT USERSBL] smtp_config and login'
 task load_all_configurations: %i[configurations:load_configs
-                                 configurations:load_email_config
-                                 configurations:load_login_configs]
+                                 configurations:load_email_config]
 
 desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types, holding note types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types

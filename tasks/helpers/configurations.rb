@@ -88,9 +88,4 @@ module ConfigurationsTaskHelpers
     trim_hash(hash, 'smtpConfigurations')
     hash.to_json
   end
-
-  def login_configs_tsv
-    CSV.parse(File.open("#{Settings.tsv}/configurations/login_configs.tsv"), headers: true, col_sep: "\t",
-                                                                             converters: :integer).map(&:to_h)
-  end
 end
