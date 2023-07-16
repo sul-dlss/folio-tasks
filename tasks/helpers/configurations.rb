@@ -83,8 +83,16 @@ module ConfigurationsTaskHelpers
     @@folio_request.post('/smtp-configuration', hash.to_json)
   end
 
+  def email_config_get
+    @@folio_request.get('/smtp-configuration')
+  end
+
+  def email_config_delete(id)
+    @@folio_request.delete("/smtp-configuration/#{id}")
+  end
+
   def pull_email_config
-    hash = @@folio_request.get('/smtp-configuration')
+    hash = email_config_get
     trim_hash(hash, 'smtpConfigurations')
     hash.to_json
   end
