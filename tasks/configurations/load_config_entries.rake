@@ -25,15 +25,6 @@ namespace :configurations do
     update_module_configs(args[:module])
   end
 
-  desc 'load all configurations in configurations json directory'
-  task :load_json_configurations do
-    Dir.each_child("#{Settings.json}/configurations") do |file|
-      config_entry_json(file)['configs'].each do |obj|
-        config_entry_post(obj)
-      end
-    end
-  end
-
   desc 'load sip2 configurations info folio'
   task :load_sip2_configs do
     sip2_service_points.each do |obj|
@@ -44,12 +35,5 @@ namespace :configurations do
   desc 'load email configuration'
   task :load_email_config do
     email_configuration['smtpConfigurations'].each { |config| email_config_post(config) }
-  end
-
-  desc 'load login configurations'
-  task :load_login_configs do
-    login_configs_tsv.each do |obj|
-      config_entry_post(obj)
-    end
   end
 end

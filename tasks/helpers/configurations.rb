@@ -83,14 +83,17 @@ module ConfigurationsTaskHelpers
     @@folio_request.post('/smtp-configuration', hash.to_json)
   end
 
-  def pull_email_config
-    hash = @@folio_request.get('/smtp-configuration')
-    trim_hash(hash, 'smtpConfigurations')
-    hash.to_json
+  def email_config_get
+    @@folio_request.get('/smtp-configuration')
   end
 
-  def login_configs_tsv
-    CSV.parse(File.open("#{Settings.tsv}/configurations/login_configs.tsv"), headers: true, col_sep: "\t",
-                                                                             converters: :integer).map(&:to_h)
+  def email_config_delete(id)
+    @@folio_request.delete("/smtp-configuration/#{id}")
+  end
+
+  def pull_email_config
+    hash = email_config_get
+    trim_hash(hash, 'smtpConfigurations')
+    hash.to_json
   end
 end

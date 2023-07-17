@@ -6,8 +6,8 @@ require_relative '../helpers/uuids/uuids'
 namespace :configurations do
   include ConfigurationsTaskHelpers, Uuids
 
-  desc 'delete configurations entries from folio'
-  task :delete_config_entries do
+  desc 'delete all okapi config entries from folio'
+  task :delete_all_config_entries do
     ids = Uuids.config_entries
     ids.each do |id|
       config_entry_delete(id)
@@ -19,6 +19,13 @@ namespace :configurations do
     ids = Uuids.tenant_addresses.values
     ids.each do |id|
       config_entry_delete(id)
+    end
+  end
+
+  desc 'delete email config'
+  task :delete_email_config do
+    email_config_get['smtpConfigurations'].each do |config|
+      email_config_delete(config['id'])
     end
   end
 end
