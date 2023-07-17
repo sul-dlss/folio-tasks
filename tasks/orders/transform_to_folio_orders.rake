@@ -22,13 +22,19 @@ namespace :orders do
 
   desc 'delete sul folio order json files'
   task :delete_sul_order_json do
-    data_dir = "#{Settings.json_orders}/sul"
-    Dir.each_child(data_dir) { |i| File.delete("#{data_dir}/#{i}") }
+    data_dirs = ["#{Settings.json_orders}/sul", "#{Settings.json_orders}/sul_orders_loaded",
+                 "#{Settings.json_orders}/sul_polines_linked"]
+    data_dirs.each do |directory|
+      Dir.each_child(directory) { |i| File.delete("#{directory}/#{i}") }
+    end
   end
 
   desc 'delete law folio order json files'
   task :delete_law_order_json do
-    data_dir = "#{Settings.json_orders}/law"
-    Dir.each_child(data_dir) { |i| File.delete("#{data_dir}/#{i}") }
+    data_dirs = ["#{Settings.json_orders}/law", "#{Settings.json_orders}/law_orders_loaded",
+                 "#{Settings.json_orders}/law_polines_linked"]
+    data_dirs.each do |directory|
+      Dir.each_child(directory) { |i| File.delete("#{directory}/#{i}") }
+    end
   end
 end
