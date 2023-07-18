@@ -30,7 +30,7 @@ task load_finance_data: %i[finance:load_funds
                            finance:load_budgets]
 
 desc 'Load all order settings: [acquisition methods]'
-task load_order_settings: %i[acquisitions:load_acq_methods]
+task load_order_settings: %i[orders:load_acq_methods]
 
 desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
 task load_organizations_all: %i[organizations:load_categories
@@ -203,6 +203,7 @@ task delete_circ_settings: %i[circulation:delete_request_policies
 
 desc 'Load all course reserve settings: [course terms, departments]'
 task load_course_reserve_settings: %i[courses:load_course_terms
+                                      courses:load_course_types
                                       courses:load_course_depts
                                       courses:load_course_status]
 

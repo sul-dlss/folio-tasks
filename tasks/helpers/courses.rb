@@ -39,13 +39,13 @@ module CoursesTaskHelpers
   end
 
   def pull_course_terms
-    hash = @@folio_request.get('/coursereserves/terms')
+    hash = @@folio_request.get('/coursereserves/terms?limit=999')
     trim_hash(hash, 'terms')
     hash.to_json
   end
 
   def pull_course_types
-    hash = @@folio_request.get('/coursereserves/coursetypes')
+    hash = @@folio_request.get('/coursereserves/coursetypes?limit=999')
     trim_hash(hash, 'courseTypes')
     hash.to_json
   end
