@@ -95,19 +95,20 @@ nonactive_types:
   - faculty:nonactive
 
 courtesygroups:
-  MXFEE-BUS: BUS-guest
-  MXALUM-LAW: law-alumni
-  MXALUM-LAW: law-guest
-  MXFEE: SUL-fee
-  MXFEE-NO25: SUL-fee
-  MXAS-25LMT: SUL-guest
   ASSO-BDRCT: SUL-institution
-  DOC-RSP: SUL-institution
-  FAC-RSP: SUL-institution
-  FAC-RLCPT: SUL-institution
-  DOC-RLCPT: SUL-institution
-  FAC-RLCPB: SUL-institution
   DOC-RLCPB: SUL-institution
+  DOC-RLCPT: SUL-institution
+  DOC-RSP: SUL-institution
+  FAC-RLCPB: SUL-institution
+  FAC-RLCPT: SUL-institution
+  FAC-RSP: SUL-institution
+  MXALUM-LAW: law-guest
+  MXAS-25LMT: SUL-guest
+  MXD-RLCP: graduate
+  MXFEE: SUL-fee
+  MXFEE-BUS: BUS-guest
+  MXFEE-NO25: SUL-fee
+  PSEUDO: pseudopatron
 
 policygroups:
   CNS: staff
