@@ -85,7 +85,7 @@ describe 'loading tsv users who do not have registry ids' do
     end
 
     it 'does not includes the active flag for expired users' do
-      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][2]['active']).not_to have_key('active')
+      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][3]['active']).to be_falsey
     end
   end
 
