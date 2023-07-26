@@ -198,9 +198,9 @@ module TsvUserTaskHelpers
     priv_expired = user['PRIV_EXPIRED']
 
     expiry = expiration(priv_expired)
-    return false if expiry.nil?
+    return false if priv_expired.nil? && expiry.nil?
 
-    expiry > Date.today || priv_expired.to_i.zero? || false
+    priv_expired.to_i.zero? || expiry > Date.today || false
   end
 
   def expiration(str)
