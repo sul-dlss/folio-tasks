@@ -28,7 +28,7 @@ describe 'loading tsv users who do not have registry ids' do
   end
 
   context 'when creating the new user hash' do
-    it 'creates a hash with a username' do
+    it 'creates a hash with a username set to the tsv user BARCODE' do
       expect(load_tsv_users_task.send(:tsv_user, grp)['users'][0]['username']).to eq '9999999999'
     end
 
@@ -74,6 +74,18 @@ describe 'loading tsv users who do not have registry ids' do
 
     it 'does not include a usergroup if mapping is not in settings config' do
       expect(load_tsv_users_task.send(:tsv_user, grp)['users'][3]['customFields']['usergroup']).to be_nil
+    end
+
+    it 'includes the active flag for users with PRIV_EXPIRED date' do
+      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][0]['active']).to be_truthy
+    end
+
+    it 'includes the active flag for users with 0 in PRIV_EXPIRED field' do
+      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][1]['active']).to be_truthy
+    end
+
+    it 'does not includes the active flag for expired users' do
+      expect(load_tsv_users_task.send(:tsv_user, grp)['users'][3]['active']).to be_falsey
     end
   end
 
@@ -123,10 +135,6 @@ describe 'loading tsv users who do not have registry ids' do
 
     it 'includes a username' do
       expect(TsvUserTaskHelpers.app_user(app_user_data[1])['username']).to eq('access1')
-    end
-
-    it 'includes the active flag' do
-      expect(TsvUserTaskHelpers.app_user(app_user_data[1])['active']).to be_truthy
     end
 
     it 'includes a first name' do
