@@ -48,7 +48,6 @@ module ConfigurationsTaskHelpers
   end
 
   def config_entry_post(hash)
-    puts hash.to_json
     @@folio_request.post('/configurations/entries', hash.to_json)
   end
 
