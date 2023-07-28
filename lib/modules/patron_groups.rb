@@ -36,11 +36,6 @@ class PatronGroups
     @aff['type'].start_with?('student') && affiliation_description.include?('undergraduate')
   end
 
-  def affiliate_sponsored_eresources
-    @priv_groups.include?('stanford:affiliate-sponsored') &&
-      @priv_groups.include?('stanford:library-eresources-eligible')
-  end
-
   def affiliation_affdata
     data = []
     @aff.children.each do |child|

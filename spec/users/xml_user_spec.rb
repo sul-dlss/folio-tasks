@@ -112,16 +112,6 @@ RSpec.describe XmlUser do
       end
     end
 
-    context 'when a person is a sponsored affiliate for e-resources' do
-      before do
-        result.process_xml_lines('spec/fixtures/xml/users/affiliate_sponsored.xml.txt')
-      end
-
-      it 'has the correct patron group' do
-        expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'affiliate-sponsored-eresources'
-      end
-    end
-
     context 'when there is no custom field value' do
       before do
         result.process_xml_lines('spec/fixtures/xml/users/no_custom_fields.xml.txt')
