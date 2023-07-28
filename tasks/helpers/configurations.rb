@@ -41,10 +41,14 @@ module ConfigurationsTaskHelpers
   end
 
   def config_entry_json(file)
-    JSON.parse(File.read(file))
+    entry = JSON.parse(File.read(file))
+
+    entry['configs'][0]['module'] == 'USERSBL' && entry['configs'][0]['value'] = Settings.hostname
+    entry
   end
 
   def config_entry_post(hash)
+    puts hash.to_json
     @@folio_request.post('/configurations/entries', hash.to_json)
   end
 

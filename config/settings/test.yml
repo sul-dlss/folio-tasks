@@ -15,6 +15,7 @@ yaml:
   law_orders: spec/acquisitions/orders/yaml/law
   fixtures: spec/fixtures/yaml
 
+hostname: folio-test.stanford.edu
 namespace: folio-test
 configurations:
   - CHECKOUT
