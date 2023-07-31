@@ -8,6 +8,7 @@ describe 'organizations rake tasks' do
   let(:load_interfaces_task) { Rake.application.invoke_task 'organizations:load_interfaces' }
   let(:load_migrate_err_task) { Rake.application.invoke_task 'organizations:load_vendors_migrate_err' }
   let(:category_uuids) { AcquisitionsUuidsHelpers.organization_categories }
+  let(:note_type_uuid) { OrgNoteTaskHelpers.org_note_type_id }
   let(:load_organizations_task) { Rake.application.invoke_task 'organizations:load_vendors_sul' }
   let(:load_law_organizations_task) { Rake.application.invoke_task 'organizations:load_vendors_law' }
   let(:load_bus_organizations_task) { Rake.application.invoke_task 'organizations:load_vendors_business' }
@@ -33,7 +34,13 @@ describe 'organizations rake tasks' do
                                          { "id": "cat-456", "value": "Orders" },
                                          { "id": "cat-789", "value": "Payments" }] }')
 
+    stub_request(:get, 'http://example.com/note-types')
+      .with(query: 'query=name==Organization')
+      .to_return(body: '{ "noteTypes": [{ "id": "note-123", "name": "Organization" }] }')
+
     stub_request(:post, 'http://example.com/organizations/organizations')
+
+    stub_request(:post, 'http://example.com/notes')
   end
 
   context 'when loading organizations categories' do
@@ -78,6 +85,13 @@ describe 'organizations rake tasks' do
     let(:acq_unit_uuid) { AcquisitionsUuidsHelpers.acq_units.fetch('SUL', nil) }
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[0], 'SUL', acq_unit_uuid, category_uuids)
+    end
+    let(:org_notes) do
+      load_organizations_task.send(:org_notes_from_xml, xml_doc[0], org_hash['id'], note_type_uuid)
+    end
+
+    it 'creates a deterministic UUID for organization id' do
+      expect(org_hash['id']).to eq '0cdaad73-e043-5c1f-b4d5-a0f9093bd2f2'
     end
 
     it 'creates the hash key and value for name' do
@@ -200,6 +214,18 @@ describe 'organizations rake tasks' do
     it 'creates the hash key and value for liableForVat' do
       expect(org_hash['liableForVat']).to eq true
     end
+
+    it 'creates a notes hash with typeId for Organization note type' do
+      expect(org_notes[0]['typeId']).to eq 'note-123'
+    end
+
+    it 'creates a notes hash with a link to the correct organization UUID' do
+      expect(org_notes[0]['links'][0]['id']).to eq '0cdaad73-e043-5c1f-b4d5-a0f9093bd2f2'
+    end
+
+    it 'creates a notes hash with content for note' do
+      expect(org_notes[0]['content']).to eq 'A note'
+    end
   end
 
   context 'when tax is not paid to the vendor' do
@@ -232,6 +258,9 @@ describe 'organizations rake tasks' do
     let(:org_hash) do
       load_organizations_task.send(:organization_hash_from_xml, xml_doc[1], 'SUL', acq_unit_uuid, category_uuids)
     end
+    let(:org_notes) do
+      load_organizations_task.send(:org_notes_from_xml, xml_doc[1], org_hash['id'], note_type_uuid)
+    end
 
     it 'does not create an address object if no primary address selected' do
       expect(org_hash).not_to have_key 'addresses'
@@ -251,6 +280,15 @@ describe 'organizations rake tasks' do
 
     it 'does not create empty vendorCurrencies hash key value pairs' do
       expect(org_hash).not_to have_key 'vendorCurrencies'
+    end
+
+    it 'does not create a notes hash with content for note' do
+      expect(org_notes.count).to eq 0
+    end
+
+    it 'does not do a post to create a note' do
+      add_notes = load_organizations_task.send(:add_org_notes, xml_doc[1], org_hash['id'], note_type_uuid)
+      expect(add_notes).not_to have_requested(:post, 'http://example.com/notes').with(body: nil)
     end
   end
 
