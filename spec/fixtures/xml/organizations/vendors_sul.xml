@@ -30,6 +30,11 @@
 </vendorAddress>
 <ediAddress>
 </ediAddress>
+<vendorExtendedInfo>
+<entry name="Note">A note</entry>
+<entry name="Note">Payment method= Wire; DC 4/22/2020</entry>
+<entry name="Comment">vendor# BLAAAH12345; DC 4/22/2020</entry>
+</vendorExtendedInfo>
 <vendorCurrency>US</vendorCurrency>
 <taxPaidToVendor>true</taxPaidToVendor>
 <vendorCycle>
@@ -70,6 +75,12 @@
 </vendorAddress>
 <ediAddress>
 </ediAddress>
+<vendorExtendedInfo>
+<entry name="Alt Vendor #">aka Office federal de la statistique</entry>
+<entry name="Payment Terms">they want to be paid &quot;by means of a check in Swiss francs drawn on a Swiss bank&quot;</entry>
+<entry name="Note">invoices have a variety of other addresses, but pay to Hallwyisstrasse address in APT.</entry>
+<entry name="Comment">Comments</entry>
+</vendorExtendedInfo>
 <vendorCurrency>EURO</vendorCurrency>
 <taxPaidToVendor>false</taxPaidToVendor>
 <vendorCycle>

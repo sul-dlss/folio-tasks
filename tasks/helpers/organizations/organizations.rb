@@ -12,6 +12,7 @@ module OrganizationsTaskHelpers
 
   def organization_hash_from_xml(obj, acq_unit, acq_unit_uuid, category_uuids)
     hash = {
+      'id' => determine_org_uuid(vendor_code(obj, acq_unit), Settings.okapi.url.to_s),
       'name' => obj.at_xpath('name')&.text,
       'code' => vendor_code(obj, acq_unit),
       'exportToAccounting' => export_to_accounting?(obj.at_xpath('vendorID')&.text),
@@ -119,6 +120,10 @@ module OrganizationsTaskHelpers
     return if currencies.empty?
 
     currencies
+  end
+
+  def determine_org_uuid(legacy_identifier, okapi_url)
+    FolioUuid.new.generate(okapi_url, 'organizations', legacy_identifier)
   end
 
   def organizations_id(code)
