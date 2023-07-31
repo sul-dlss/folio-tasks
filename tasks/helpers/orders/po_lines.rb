@@ -207,7 +207,7 @@ module PoLinesHelpers
   end
 
   def lookup_holdings(obj)
-    # locations could be nil or locationId could be when reprocessing files that had locationId updated to holdingId
+    # locations could be nil or locationId could be nil when reprocessing files that had locationId updated to holdingId
     return nil if obj['locations'].nil? || obj['locations'][0]['locationId'].nil?
 
     instance_id = obj['instanceId']
