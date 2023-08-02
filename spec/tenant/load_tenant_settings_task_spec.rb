@@ -8,6 +8,7 @@ describe 'tenant settings rake tasks' do
   let(:load_campuses_task) { Rake.application.invoke_task 'tenant:load_campuses' }
   let(:load_libraries_task) { Rake.application.invoke_task 'tenant:load_libraries' }
   let(:load_service_points_task) { Rake.application.invoke_task 'tenant:load_service_points' }
+  let(:load_locations_tsv_task) { Rake.application.invoke_task 'tenant:load_locations_from_tsv' }
   let(:load_locations_task) { Rake.application.invoke_task 'tenant:load_locations' }
   let(:load_addresses_task) { Rake.application.invoke_task 'tenant:load_tenant_addresses' }
   let(:load_calendars) { Rake.application.invoke_task 'tenant:load_calendars' }
@@ -173,10 +174,10 @@ describe 'tenant settings rake tasks' do
     end
   end
 
-  context 'when loading locations' do
-    let(:location_csv) { load_locations_task.send(:locations_csv) }
-    let(:uuid_maps) { load_locations_task.send(:uuid_maps) }
-    let(:location_hash) { load_locations_task.send(:locations_hash, location_csv[0], Uuids.uuid_maps) }
+  context 'when loading locations from tsv' do
+    let(:location_csv) { load_locations_tsv_task.send(:locations_csv) }
+    let(:uuid_maps) { load_locations_tsv_task.send(:uuid_maps) }
+    let(:location_hash) { load_locations_tsv_task.send(:locations_hash, location_csv[0], Uuids.uuid_maps) }
 
     it 'creates the hash keys and values for the code' do
       expect(location_hash['code']).to eq 'CODE'
@@ -232,6 +233,14 @@ describe 'tenant settings rake tasks' do
 
     it 'removes the hash key for primaryServicePointCode' do
       expect(location_hash).not_to have_key 'primaryServicePointCode'
+    end
+  end
+
+  context 'when loading locations from folio env (STAGE=orig)' do
+    let(:locations_json) { load_locations_task.send(:locations_json) }
+
+    it 'supplies valid json for loading locations' do
+      expect(locations_json['locations'].sample).to match_json_schema('mod-inventory-storage', 'location')
     end
   end
 

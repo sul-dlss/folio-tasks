@@ -40,8 +40,15 @@ namespace :tenant do
     end
   end
 
-  desc 'load location settings into folio'
+  desc 'load locations into folio'
   task :load_locations do
+    locations_json['locations'].each do |obj|
+      locations_post(obj)
+    end
+  end
+
+  desc 'load location settings using tsv into folio'
+  task :load_locations_from_tsv do
     tenant_uuid_maps = Uuids.uuid_maps
     locations_csv.each do |obj|
       hash = locations_hash(obj, tenant_uuid_maps)

@@ -102,6 +102,10 @@ module TenantTaskHelpers
                                                                  quote_char: nil).map(&:to_h)
   end
 
+  def locations_json
+    JSON.parse(File.read("#{Settings.json}/tenant/locations.json"))
+  end
+
   def locations_hash(obj, uuid_maps)
     inst_uuid_map, campus_uuid_map, library_uuid_map, svc_pnt_uuid_map = uuid_maps
     service_point = svc_pnt_uuid_map.fetch(obj['primaryServicePointCode'])
@@ -122,6 +126,12 @@ module TenantTaskHelpers
 
   def locations_post(obj)
     @@folio_request.post('/locations', obj.to_json)
+  end
+
+  def pull_locations
+    hash = @@folio_request.get('/locations?limit=1000')
+    trim_hash(hash, 'locations')
+    hash.to_json
   end
 
   def pull_calendars

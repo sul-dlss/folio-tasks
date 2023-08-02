@@ -281,6 +281,12 @@ namespace :tenant do |namespace|
     name = 'calendars'
     open_file_and_pull(namespace, name, helper)
   end
+
+  desc 'pull locations'
+  task :pull_locations do
+    name = 'locations'
+    open_file_and_pull(namespace, name, helper)
+  end
 end
 
 namespace :configurations do |namespace|
