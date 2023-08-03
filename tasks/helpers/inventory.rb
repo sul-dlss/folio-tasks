@@ -117,4 +117,26 @@ module InventoryTaskHelpers
   def copycat_profiles_post(obj)
     @@folio_request.post('/copycat/profiles', obj.to_json)
   end
+
+  def reindex_instance_records(query)
+    total_recs = @@folio_request.get("/instance-storage/instances?limit=0&query=#{query}")['totalRecords']
+    batch_size = total_recs.to_i / 100
+    (0..batch_size).each do |c|
+      offset = c*100
+      index_record(@@folio_request.get("/instance-storage/instances?query=#{query}&offset=#{offset}&limit=100"))
+    end
+  end
+
+  def index_record(instance_batch)
+    instance_batch['instances'].each do |instance|
+      body = {
+        "resourceName" => "instance",
+        "type" => "CREATE",
+        "tenant" => "sul",
+        "new" => instance
+      }
+
+      @@folio_request.post('/search/index/records', body.to_json)
+    end
+  end
 end
