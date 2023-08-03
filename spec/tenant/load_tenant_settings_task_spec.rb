@@ -8,6 +8,7 @@ describe 'tenant settings rake tasks' do
   let(:load_campuses_task) { Rake.application.invoke_task 'tenant:load_campuses' }
   let(:load_libraries_task) { Rake.application.invoke_task 'tenant:load_libraries' }
   let(:load_service_points_task) { Rake.application.invoke_task 'tenant:load_service_points' }
+  let(:load_locations_tsv_task) { Rake.application.invoke_task 'tenant:load_locations_from_tsv' }
   let(:load_locations_task) { Rake.application.invoke_task 'tenant:load_locations' }
   let(:load_addresses_task) { Rake.application.invoke_task 'tenant:load_tenant_addresses' }
   let(:load_calendars) { Rake.application.invoke_task 'tenant:load_calendars' }
@@ -45,7 +46,7 @@ describe 'tenant settings rake tasks' do
       .with(query: hash_including)
       .to_return(body: '{ "locations": [{ "id": "abc-123", "name": "Green Stacks", "code": "GREEN" }] }')
 
-    stub_request(:post, 'http://example.com/calendars/calendar')
+    stub_request(:post, 'http://example.com/calendar/calendars')
   end
 
   context 'when loading institutions' do
@@ -173,10 +174,10 @@ describe 'tenant settings rake tasks' do
     end
   end
 
-  context 'when loading locations' do
-    let(:location_csv) { load_locations_task.send(:locations_csv) }
-    let(:uuid_maps) { load_locations_task.send(:uuid_maps) }
-    let(:location_hash) { load_locations_task.send(:locations_hash, location_csv[0], Uuids.uuid_maps) }
+  context 'when loading locations from tsv' do
+    let(:location_csv) { load_locations_tsv_task.send(:locations_csv) }
+    let(:uuid_maps) { load_locations_tsv_task.send(:uuid_maps) }
+    let(:location_hash) { load_locations_tsv_task.send(:locations_hash, location_csv[0], Uuids.uuid_maps) }
 
     it 'creates the hash keys and values for the code' do
       expect(location_hash['code']).to eq 'CODE'
@@ -235,12 +236,25 @@ describe 'tenant settings rake tasks' do
     end
   end
 
+  context 'when loading locations from folio env (STAGE=orig)' do
+    let(:locations_json) { load_locations_task.send(:locations_json) }
+
+    it 'supplies valid json for loading locations' do
+      expect(locations_json['locations'].sample).to match_json_schema('mod-inventory-storage', 'location')
+    end
+  end
+
   context 'when creating calendars' do
-    let(:calendars_json) { load_course_status.send(:calendars_json) }
+    let(:calendars_json) { load_calendars.send(:calendars_json) }
 
     # new json schemas not available for mod-calendar
     xit 'supplies valid json for posting calendars' do
       expect(calendars_json['calendars'].sample).to match_json_schema('mod-calendar', 'calendars')
+    end
+
+    it 'posts calendar json data' do
+      expect(load_calendars).to have_requested(:post, 'http://example.com/calendar/calendars')
+        .with(body: '{"id":"22b40887-20a4-4927-a2da-5886a6c6ea43","name":"Law Book Cabinet - Course Reserves","startDate":"1992-01-01","endDate":"2040-12-31","assignments":["0939d005-3e55-46d4-ab36-6f9099675876"],"normalHours":[{"startDay":"SUNDAY","startTime":"00:00:00","endDay":"SATURDAY","endTime":"23:59:00"}],"exceptions":[]}')
     end
   end
 end
