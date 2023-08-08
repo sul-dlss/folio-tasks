@@ -153,15 +153,13 @@ desc 'Pull all data import profile json data (use STAGE=orig)'
 task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles
                                             data_import:pull_mapping_profiles
                                             data_import:pull_match_profiles
-                                            data_import:pull_action_profiles
-                                            data_import:pull_profile_associations]
+                                            data_import:pull_action_profiles]
 
 desc 'Load all data import profiles [job, match, action, mapping, and associations]. To avoid duplicate associations, only run this task ONCE!'
 task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_match_profiles
                                        data_import:load_action_profiles
-                                       data_import:load_mapping_profiles
-                                       data_import:load_profile_associations]
+                                       data_import:load_mapping_profiles]
 
 desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types, holding note types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
