@@ -149,13 +149,13 @@ task pull_all_json_data: %i[users:pull_waivers
                             tenant:pull_calendars
                             tenant:pull_locations]
 
-desc 'Pull all data import profile json data (use STAGE=orig)'
+desc 'Pull all data import profile json data (associations are excluded) (use STAGE=orig)'
 task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles
                                             data_import:pull_mapping_profiles
                                             data_import:pull_match_profiles
                                             data_import:pull_action_profiles]
 
-desc 'Load all data import profiles [job, match, action, mapping, and associations]. To avoid duplicate associations, only run this task ONCE!'
+desc 'Load all data import profiles [job, match, action, and mapping].'
 task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_match_profiles
                                        data_import:load_action_profiles
