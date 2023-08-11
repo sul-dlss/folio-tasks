@@ -48,7 +48,7 @@ class XmlUser
       proximity(Nokogiri::XML(xmlline).xpath('//Person/identifier[@type="proximity"]'))
       mobile_id(Nokogiri::XML(xmlline).xpath('//Person/identifier[@type="mobileid"]'))
       name(Nokogiri::XML(xmlline).xpath('//Person/name[@type="display"]'))
-      email(Nokogiri::XML(xmlline).xpath('//Person/email'))
+      email(Nokogiri::XML(xmlline).xpath('//Person/email[@type="primary"]'))
       mobile_phone(Nokogiri::XML(xmlline).xpath('//Person/telephone[@type="mobile"]'))
       home_phone(Nokogiri::XML(xmlline).xpath('//Person/telephone[@type="permanent"]'))
       address(Nokogiri::XML(xmlline).xpath('//Person/place'))
@@ -106,7 +106,7 @@ class XmlUser
 
   def email(nodes)
     nodes.each do |email|
-      @person_hash['personal']['email'] = Settings.user_email_override || email.content || ''
+      @person_hash['personal']['email'] = Settings.user_email_override || email.children[0].text.strip || ''
     end
     @person_hash['personal']['preferredContactTypeId'] = 'email'
   end
