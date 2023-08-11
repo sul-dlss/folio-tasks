@@ -47,7 +47,7 @@ module TsvUserTaskHelpers
       type: type[0],
       title: "#{type[0]} note".upcase,
       domain: 'users',
-      content: note.transform_keys(&:downcase)[type[0]],
+      content: note[type[0]],
       popUpOnCheckOut: false,
       popUpOnUser: false,
       links: [{
