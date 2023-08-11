@@ -149,7 +149,7 @@ module CirculationTaskHelpers
     # unclear what other templates this endpoint will return (not just patron notice templates)
     # currently only patron notice templates are created in test instance
     # might need to move to own, generic pull_templates method
-    hash = @@folio_request.get_cql('/templates', 'active==true&limit=100')
+    hash = @@folio_request.get('/templates?limit=100')
     trim_hash(hash, 'templates')
     hash.to_json
   end
