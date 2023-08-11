@@ -58,8 +58,7 @@ module TsvUserTaskHelpers
   end
 
   def user_notes_post(json)
-    puts "WOULD POST"
-    # @@folio_request.post('/notes', json)
+    @@folio_request.post('/notes', json)
   end
 
   def tsv_user(group)
