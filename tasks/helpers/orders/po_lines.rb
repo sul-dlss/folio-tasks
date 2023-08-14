@@ -108,18 +108,27 @@ module PoLinesHelpers
   def distribution_hash(distribution, hldg_code, funds)
     if hldg_code.match?(/^LAW/)
       {
+        # the code doesn't have to match the "code" of the actual fund object but the fundId needs to be in folio
         'code' => "#{distribution['FUND_NAME']}-Law",
-        'fundId' => funds.fetch("#{distribution['FUND_NAME']}-Law", nil),
+        'fundId' => funds.fetch("#{distribution['FUND_NAME']}-Law", migrate_error_fund_id(hldg_code, funds)),
         'distributionType' => distribution_type(distribution['FUNDING_TYPE']),
         'value' => distribution_value(distribution, hldg_code)
       }
     else
       {
         'code' => "#{distribution['FUND_NAME']}-SUL",
-        'fundId' => funds.fetch("#{distribution['FUND_NAME']}-SUL", nil),
+        'fundId' => funds.fetch("#{distribution['FUND_NAME']}-SUL", migrate_error_fund_id(hldg_code, funds)),
         'distributionType' => distribution_type(distribution['FUNDING_TYPE']),
         'value' => distribution_value(distribution, hldg_code)
       }
+    end
+  end
+
+  def migrate_error_fund_id(hldg_code, funds)
+    if hldg_code.match?(/^LAW/)
+      funds.fetch('MIGRATE-ERR-Law', nil)
+    else
+      funds.fetch('MIGRATE-ERR-SUL', nil)
     end
   end
 

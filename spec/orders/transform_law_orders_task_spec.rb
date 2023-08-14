@@ -51,7 +51,7 @@ describe 'transform LAW orders rake tasks' do
       .with(query: hash_including)
       .to_return(body: '{ "funds": [{ "id": "fund-123", "code": "ALAWFUND-Law" },
                                     { "id": "fund-123", "code": "BLAWFUND-Law" },
-                                    { "id": "fund-123", "code": "LAWNOFUND-Law" }] }')
+                                    { "id": "fund_err-123", "code": "MIGRATE-ERR-Law" }] }')
 
     stub_request(:get, 'http://example.com/material-types')
       .with(query: hash_including)
@@ -165,6 +165,24 @@ describe 'transform LAW orders rake tasks' do
 
     it 'has payment status Payment Not Required' do
       expect(orders_hash['compositePoLines'][0]['paymentStatus']).to eq 'Payment Not Required'
+    end
+  end
+
+  context 'when fund does not exist in Folio' do
+    let(:order_id) do
+      transform_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/4321L04.yaml")).shift
+    end
+    let(:sym_order) do
+      transform_law_orders_task.send(:get_id_data, YAML.load_file("#{law_order_yaml_dir}/4321L04.yaml")).pop
+    end
+    let(:orders_hash) { transform_law_orders_task.send(:orders_hash, order_id, sym_order, uuid_hashes) }
+
+    it 'has the correct fund name in the field code' do
+      expect(orders_hash['compositePoLines'][0]['fundDistribution'][0]['code']).to eq 'LAWNOFUND-Law'
+    end
+
+    it 'has the error fund UUID in the field fundId' do
+      expect(orders_hash['compositePoLines'][0]['fundDistribution'][0]['fundId']).to eq 'fund_err-123'
     end
   end
 end
