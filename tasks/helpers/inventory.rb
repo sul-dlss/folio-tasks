@@ -118,25 +118,32 @@ module InventoryTaskHelpers
     @@folio_request.post('/copycat/profiles', obj.to_json)
   end
 
+  def reindex_record_count(query)
+    @@folio_request.get("/instance-storage/instances?limit=0&query=#{query}")['totalRecords']
+  end
+
   def reindex_instance_records(query)
-    total_recs = @@folio_request.get("/instance-storage/instances?limit=0&query=#{query}")['totalRecords']
-    batch_size = total_recs.to_i / 100
+    batch_size = reindex_record_count(query).to_i / 100
     (0..batch_size).each do |c|
       offset = c*100
-      index_record(@@folio_request.get("/instance-storage/instances?query=#{query}&offset=#{offset}&limit=100"))
+      response = @@folio_request.get("/instance-storage/instances?query=#{query}&offset=#{offset}&limit=100")
+      puts "HERE: #{response}"
+      index_record(responce)
     end
+  end
+
+  def index_payload(instance)
+    {
+      "resourceName" => "instance",
+      "type" => "CREATE",
+      "tenant" => "sul",
+      "new" => instance
+    }.to_json
   end
 
   def index_record(instance_batch)
     instance_batch['instances'].each do |instance|
-      body = {
-        "resourceName" => "instance",
-        "type" => "CREATE",
-        "tenant" => "sul",
-        "new" => instance
-      }
-
-      @@folio_request.post('/search/index/records', body.to_json)
+      @@folio_request.post('/search/index/records', index_payload(instance))
     end
   end
 end
