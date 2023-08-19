@@ -32,8 +32,9 @@ task load_finance_data: %i[finance:load_funds
 desc 'Load all order settings: [acquisition methods]'
 task load_order_settings: %i[orders:load_acq_methods]
 
-desc 'Loads all organization settings and data: [organization categories, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
+desc 'Loads all organization settings and data: [organization categories, interfaces, credentials, note types, SUL and Law migration error organizations, organizations for SUL, Business, and Law, and CORAL]'
 task load_organizations_all: %i[organizations:load_categories
+                                organizations:load_note_types
                                 organizations:load_interfaces
                                 organizations:load_credentials
                                 organizations:load_vendors_migrate_err
