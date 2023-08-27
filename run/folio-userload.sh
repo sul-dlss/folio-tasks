@@ -1,19 +1,6 @@
 #!/bin/bash
 
-DATE=`date +%Y%m%d%H%M`
-HOME=/s/SUL/Bin/folio-tasks/current
-LOG=$HOME/log
-OUT=$HOME/out
-
-if [[ -z $STAGE ]]; then
-  STAGE=prod
-fi
-
-[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-
-if [[ -z $HARVEST ]]; then
-  HARVEST=$OUT/harvest.xml.out
-fi
+source harvest.env
 
 batch=0
 # Split $HARVEST (harvest.xml.out) file into batches of 100 and run through folio_user script >
@@ -21,7 +8,7 @@ while mapfile -t -n 100 array && ((${#array[@]}))
 do
     let batch=batch+1
     printf '%s\n' "${array[@]}" > $OUT/tmp.xml
-    STAGE="${STAGE}" ruby $HOME/bin/folio_user.rb $OUT/tmp.xml $batch >> $LOG/folio-user.log 2>> $LOG/folio-err.log
+    STAGE="${STAGE}" ruby $HARVEST_HOME/bin/folio_user.rb $OUT/tmp.xml $batch >> $LOG/folio-user.log 2>> $LOG/folio-err.log
     rm $OUT/tmp.xml
 done < $HARVEST
 

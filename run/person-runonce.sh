@@ -1,19 +1,16 @@
 #!/bin/sh
 
-APP_NAME=harvester
-APP_HOME=/s/SUL/Bin/folio-tasks/current
-CONF_HOME=$APP_HOME/config/resources
-JAVA_HOME=/usr
+source harvest.env
+JAVA_HARVEST_HOME=/usr
 
-cd $APP_HOME/run
+cd $RUN
 
-HARNESS_LOG=$APP_HOME/log/harness.log
+HARNESS_LOG=$HARVEST_HOME/log/harness.log
 
 if [ ! -f $HARNESS_LOG ]
 then
     touch $HARNESS_LOG
 fi
-
 
 dfmt='+%m/%d/%Y %H:%M'
 t_stamp=`date "$dfmt"`
@@ -25,28 +22,28 @@ printf "\n\n$t_stamp $APP_NAME $0 harness starts\n" >> $HARNESS_LOG
 #
 # Support jar files
 echo "$t_stamp harness building classpath" >> $HARNESS_LOG
-for file in `ls $APP_HOME/jar/` ; do
+for file in `ls $HARVEST_HOME/jar/` ; do
  case "$file" in
   old.*.jar) echo skipping $file >>$HARNESS_LOG;;
   *.jar|*.zip) echo ADDING $file >> $HARNESS_LOG
         if [ "$CLASSPATH" != "" ]; then
-           CLASSPATH=${CLASSPATH}:$APP_HOME/jar/$file
+           CLASSPATH=${CLASSPATH}:$HARVEST_HOME/jar/$file
         else
-           CLASSPATH=$APP_HOME/jar/$file
+           CLASSPATH=$HARVEST_HOME/jar/$file
         fi
         ;;
  esac
 done
 #
 # Weblogic jar file
-for file in `ls $APP_HOME/WebLogic_lib/` ; do
+for file in `ls $HARVEST_HOME/WebLogic_lib/` ; do
  case "$file" in
   old.*.jar) echo skipping $file >>$HARNESS_LOG;;
   *.jar|*.zip) echo ADDING $file >> $HARNESS_LOG
         if [ "$CLASSPATH" != "" ]; then
-           CLASSPATH=${CLASSPATH}:$APP_HOME/WebLogic_lib/$file
+           CLASSPATH=${CLASSPATH}:$HARVEST_HOME/WebLogic_lib/$file
         else
-           CLASSPATH=$APP_HOME/WebLogic_lib/$file
+           CLASSPATH=$HARVEST_HOME/WebLogic_lib/$file
         fi
         ;;
  esac
@@ -56,11 +53,11 @@ done
 # well as the name of its property file be specified as a command-line argument
 # -Dlog4j.configuration=<property file>
 #
-CLASSPATH=${CLASSPATH}:$CONF_HOME
+CLASSPATH=${CLASSPATH}:$CONF_HARVEST_HOME
 
 # This block will allow the harvester to run continuously as a service
 #
-# PIDFILE=$APP_HOME/run/harness.pid
+# PIDFILE=$HARVEST_HOME/run/harness.pid
 #
 # ls $PIDFILE > /dev/null 2>&1
 # if [ $? -eq 0 ] ; then
@@ -77,7 +74,7 @@ CLASSPATH=${CLASSPATH}:$CONF_HOME
 # echo $$ > $PIDFILE
 # echo "$t_stamp $APP_NAME harness pid $$" >> $HARNESS_LOG
 
-$JAVA_HOME/bin/java -Dweblogic.StdoutSeverityLevel=16 -Dweblogic.security.SSL.ignoreHostnameVerification=true -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HOME/harvester.properties $CONF_HOME/processor.properties >> $HARNESS_LOG 2>&1
+$JAVA_HARVEST_HOME/bin/java -Dweblogic.StdoutSeverityLevel=16 -Dweblogic.security.SSL.ignoreHostnameVerification=true -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HARVEST_HOME/harvester.properties $CONF_HARVEST_HOME/processor.properties >> $HARNESS_LOG 2>&1
 EXIT_CODE=$?
 
 t_stamp=`date "$dfmt"`
