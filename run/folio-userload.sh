@@ -20,16 +20,6 @@ cat $LOG/user-import-response.log | egrep 'batch|Loading|message|createdRecords|
 
 cat $LOG/folio-inactive.log | egrep 'message|createdRecords|updatedRecords|failedRecords|failedUsers|errorMessage|totalRecords' | mailx -s "Folio Userload: Deactivated Users Summary for folio-inactive.log.$DATE" sul-unicorn-devs@lists.stanford.edu
 
-# Save and reset log files
-mv $LOG/folio-user.log $LOG/folio-user.log.$DATE
-mv $LOG/folio-err.log $LOG/folio-err.log.$DATE
-mv $LOG/folio-inactive.log $LOG/folio-inactive.log.$DATE
-mv $LOG/user-import-response.log $LOG/user-import-response.log.$DATE
-
-touch $LOG/folio-user.log
-touch $LOG/folio-err.log
-touch $LOG/folio-inactive.log
-
 usage(){
     echo "Usage: $0 [ no argument | full path to xml.out file ]"
     exit 1
