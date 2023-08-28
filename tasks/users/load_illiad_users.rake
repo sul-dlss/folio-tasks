@@ -9,7 +9,7 @@ namespace :illiad do
   desc 'fetch and load illiad users from folio'
   task :fetch_and_load_users do
     folio_json_users.each do |user|
-      IlliadRequest.new.post('ILLiadWebPlatform/Users', illiad_user(JSON.parse(user)))
+      illiad_response(IlliadRequest.new.post('ILLiadWebPlatform/Users', illiad_user(JSON.parse(user)), response_code: true), user)
     end
   end
 end

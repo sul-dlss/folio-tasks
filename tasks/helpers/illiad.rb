@@ -32,4 +32,8 @@ module IlliadTaskHelpers
       LastChangedDate: DateTime.now.strftime('%Y-%m-%d %H:%M:%S')
     }.to_json
   end
+
+  def illiad_response(response, user)
+    puts "Got response code #{response} for #{user}" unless response == 200
+  end
 end
