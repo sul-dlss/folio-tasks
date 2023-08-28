@@ -14,7 +14,7 @@ set :log_level, :info
 # Default deploy_to directory is /var/www/my_app_name
 set :deploy_to, "/s/SUL/Bin/#{fetch(:application)}"
 
-set :linked_dirs, %w[config/settings jar etc certs log out harvest_lib WebLogic_lib]
+set :linked_dirs, %w[config/settings jar etc certs log out WebLogic_lib]
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
