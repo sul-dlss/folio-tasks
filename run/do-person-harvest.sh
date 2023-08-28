@@ -1,0 +1,51 @@
+#!/bin/bash
+
+source harvest.env
+
+KEYS=$2
+DATE=$3
+
+# Run the registry harvest
+if [[ $1 == 'file' ]]; then
+  $HARVEST_HOME/run/person-file-load.sh $KEYS
+else
+  $HARVEST_HOME/run/person-runonce.sh
+fi
+
+# Remove carriage returns from the log
+sed -i '/\r/d' $LOG/harvest.log
+
+# Run harvest.xml.out through folio_api_client ruby script to load users into FOLIO
+$HARVEST_HOME/run/folio-userload.sh
+
+# Run folio-user.log through illiad web plartform api to load users into ILLiad
+$HARVEST_HOME/run/illiad-userload.sh
+
+# Email and move/reset work files
+cat $LOG/harvest.log | mailx -s 'Harvest Log' sul-unicorn-devs@lists.stanford.edu
+
+# Save output files
+mv $OUT/harvest.xml.out $OUT/harvest.xml.out.$DATE
+
+# Save and reset log files
+mv $LOG/harvest.log $LOG/harvest.log.$DATE
+mv $LOG/illiad-userload.log $LOG/illiad-userload.log.$DATE
+
+# Save and reset log files
+mv $LOG/folio-user.log $LOG/folio-user.log.$DATE
+mv $LOG/folio-err.log $LOG/folio-err.log.$DATE
+mv $LOG/folio-inactive.log $LOG/folio-inactive.log.$DATE
+mv $LOG/user-import-response.log $LOG/user-import-response.log.$DATE
+
+touch $LOG/folio-user.log
+touch $LOG/folio-err.log
+touch $LOG/folio-inactive.log
+touch $LOG/harvest.log
+touch $LOG/illiad-userload.log
+
+usage(){
+    echo "Usage: $0 [ no argument | 'file' ] [ file of user keys (if arg0 == file) ] [ DATE (optional: to append to log and out files) ]"
+    exit 1
+}
+
+[[ $0 =~ "help" ]] && usage

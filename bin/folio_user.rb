@@ -9,8 +9,14 @@ xml_user_result = XmlUser.new
 
 xml_user_result.process_xml_lines(ARGV[0])
 
-pp JSON.parse(xml_user_result.to_json)
+puts xml_user_result.to_json
 
-puts "Users without affiliations: #{xml_user_result.non_affiliated_users}"
+folio_response = folio.post('/user-import', user_json)
 
-folio.post('/user-import', xml_user_result.to_json)
+non_affiliated_users = "Users without affiliations: #{xml_user_result.non_affiliated_users}"
+
+File.open('log/user-import-response.log', 'w') do |f|
+  f.write "----------batch: #{ARGV[1]} ----------"
+  f.write folio_response
+  f.write non_affiliated_users
+end
