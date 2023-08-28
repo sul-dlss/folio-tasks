@@ -29,7 +29,7 @@ mv $OUT/harvest.xml.out $OUT/harvest.xml.out.$DATE
 
 # Save and reset log files
 mv $LOG/harvest.log $LOG/harvest.log.$DATE
-mv $LOG/illiad.log $LOG/illiad.log.$illiad_date.$DATE
+mv $LOG/illiad-userload.log $LOG/illiad-userload.log.$DATE
 
 # Save and reset log files
 mv $LOG/folio-user.log $LOG/folio-user.log.$DATE
@@ -41,7 +41,7 @@ touch $LOG/folio-user.log
 touch $LOG/folio-err.log
 touch $LOG/folio-inactive.log
 touch $LOG/harvest.log
-touch $LOG/illiad.log
+touch $LOG/illiad-userload.log
 
 usage(){
     echo "Usage: $0 [ no argument | 'file' ] [ file of user keys (if arg0 == file) ] [ DATE (optional: to append to log and out files) ]"
