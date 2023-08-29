@@ -1,7 +1,7 @@
 #!/bin/sh
 #$Id: fileLoad.sh,v 1.2 2008/07/22 19:43:28 dtayl Exp $
 
-source harvest.env
+source $(dirname $0)/harvest.env
 JAVA_HARVEST_HOME=/usr
 LOAD_FILE=$1
 

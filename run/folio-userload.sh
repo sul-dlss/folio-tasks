@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source harvest.env
+source $(dirname $0)/harvest.env
+
+[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 batch=0
 # Split $HARVEST (harvest.xml.out) file into batches of 100 and run through folio_user script >
@@ -10,13 +12,13 @@ do
     printf '%s\n' "${array[@]}" > $OUT/tmp.xml
     STAGE="${STAGE}" ruby $HARVEST_HOME/bin/folio_user.rb $OUT/tmp.xml $batch >> $LOG/folio-user.log 2>> $LOG/folio-err.log
     rm $OUT/tmp.xml
-done < $HARVEST
+done < $OUT/$HARVEST
 
 STAGE="${STAGE}" rake users:deactivate_users > $LOG/folio-inactive.log 2>&1
 
-cat $LOG/folio-err.log | mailx -s 'Folio Userload: Inactive Users' sul-unicorn-devs@lists.stanford.edu
+cat $LOG/folio-err.log | mailx -s 'Folio Userload Errors' sul-unicorn-devs@lists.stanford.edu
 
-cat $LOG/user-import-response.log | egrep 'batch|Loading|message|createdRecords|updatedRecords|failedRecords|failedUsers|errorMessage|totalRecords' | mailx -s "Folio Userload: Summary for folio.log.$DATE" sul-unicorn-devs@lists.stanford.edu
+cat $LOG/user-import-response.log | mailx -s "Folio Userload: Summary for $DATE" sul-unicorn-devs@lists.stanford.edu
 
 cat $LOG/folio-inactive.log | egrep 'message|createdRecords|updatedRecords|failedRecords|failedUsers|errorMessage|totalRecords' | mailx -s "Folio Userload: Deactivated Users Summary for folio-inactive.log.$DATE" sul-unicorn-devs@lists.stanford.edu
 

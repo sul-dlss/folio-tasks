@@ -1,6 +1,8 @@
 #!/bin/bash
 
-source harvest.env
+source $(dirname $0)/harvest.env
+
+[[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
 cd $HARVEST_HOME
 STAGE=$STAGE bundle exec rake illiad:fetch_and_load_users > $LOG/illiad-userload.log 2>&1

@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source harvest.env
+source $(dirname $0)/harvest.env
 JAVA_HARVEST_HOME=/usr
 
 cd $RUN
@@ -74,7 +74,7 @@ CLASSPATH=${CLASSPATH}:$CONF_HARVEST_HOME
 # echo $$ > $PIDFILE
 # echo "$t_stamp $APP_NAME harness pid $$" >> $HARNESS_LOG
 
-$JAVA_HARVEST_HOME/bin/java -Dweblogic.StdoutSeverityLevel=16 -Dweblogic.security.SSL.ignoreHostnameVerification=true -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HARVEST_HOME/harvester.properties $CONF_HARVEST_HOME/processor.properties >> $HARNESS_LOG 2>&1
+$JAVA_HOME/bin/java -Dweblogic.StdoutSeverityLevel=16 -Dweblogic.security.SSL.ignoreHostnameVerification=true -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HARVEST_HOME/harvester.properties $CONF_HARVEST_HOME/processor.properties >> $HARNESS_LOG 2>&1
 EXIT_CODE=$?
 
 t_stamp=`date "$dfmt"`
