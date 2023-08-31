@@ -2,8 +2,13 @@
 
 source $(dirname $0)/harvest.env
 
-KEYS=$2
-DATE=$3
+if [[ -n $2 ]]; then
+  KEYS=$2
+fi
+
+if [[ -n $3 ]]; then
+  DATE=$3
+fi
 
 # Run the registry harvest
 if [[ $1 == 'file' ]]; then
