@@ -12,7 +12,7 @@ do
     printf '%s\n' "${array[@]}" > $OUT/tmp.xml
     STAGE="${STAGE}" ruby $HARVEST_HOME/bin/folio_user.rb $OUT/tmp.xml $batch >> $LOG/folio-user.log 2>> $LOG/folio-err.log
     rm $OUT/tmp.xml
-done < $OUT/$HARVEST
+done < $HARVEST
 
 cat $LOG/folio-err.log | mailx -s 'Folio Userload Errors' sul-unicorn-devs@lists.stanford.edu
 cat $LOG/user-import-response.log | mailx -s "Folio Userload: Summary for $DATE" sul-unicorn-devs@lists.stanford.edu
