@@ -14,11 +14,10 @@ do
     rm $OUT/tmp.xml
 done < $OUT/$HARVEST
 
-STAGE="${STAGE}" rake users:deactivate_users > $LOG/folio-inactive.log 2>&1
-
 cat $LOG/folio-err.log | mailx -s 'Folio Userload Errors' sul-unicorn-devs@lists.stanford.edu
-
 cat $LOG/user-import-response.log | mailx -s "Folio Userload: Summary for $DATE" sul-unicorn-devs@lists.stanford.edu
+
+STAGE="${STAGE}" rake users:deactivate_users > $LOG/folio-inactive.log 2>&1
 
 cat $LOG/folio-inactive.log | egrep 'message|createdRecords|updatedRecords|failedRecords|failedUsers|errorMessage|totalRecords' | mailx -s "Folio Userload: Deactivated Users Summary for folio-inactive.log.$DATE" sul-unicorn-devs@lists.stanford.edu
 
