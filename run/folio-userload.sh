@@ -4,6 +4,7 @@ source $(dirname $0)/harvest.env
 
 [[ -s "/usr/local/rvm/scripts/rvm" ]] && source "/usr/local/rvm/scripts/rvm" # Load RVM into a shell session *as a function*
 
+cd $HARVEST_HOME
 batch=0
 # Split $HARVEST (harvest.xml.out) file into batches of 100 and run through folio_user script >
 while mapfile -t -n 100 array && ((${#array[@]}))
