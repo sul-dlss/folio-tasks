@@ -1,9 +1,14 @@
 #!/bin/bash
 
-source harvest.env
+source $(dirname $0)/harvest.env
 
-KEYS=$2
-DATE=$3
+if [[ -n $2 ]]; then
+  KEYS=$2
+fi
+
+if [[ -n $3 ]]; then
+  DATE=$3
+fi
 
 # Run the registry harvest
 if [[ $1 == 'file' ]]; then
@@ -27,21 +32,7 @@ cat $LOG/harvest.log | mailx -s 'Harvest Log' sul-unicorn-devs@lists.stanford.ed
 # Save output files
 mv $OUT/harvest.xml.out $OUT/harvest.xml.out.$DATE
 
-# Save and reset log files
-mv $LOG/harvest.log $LOG/harvest.log.$DATE
-mv $LOG/illiad-userload.log $LOG/illiad-userload.log.$DATE
-
-# Save and reset log files
-mv $LOG/folio-user.log $LOG/folio-user.log.$DATE
-mv $LOG/folio-err.log $LOG/folio-err.log.$DATE
-mv $LOG/folio-inactive.log $LOG/folio-inactive.log.$DATE
-mv $LOG/user-import-response.log $LOG/user-import-response.log.$DATE
-
-touch $LOG/folio-user.log
-touch $LOG/folio-err.log
-touch $LOG/folio-inactive.log
-touch $LOG/harvest.log
-touch $LOG/illiad-userload.log
+$HARVEST_HOME/run/reset-logs.sh
 
 usage(){
     echo "Usage: $0 [ no argument | 'file' ] [ file of user keys (if arg0 == file) ] [ DATE (optional: to append to log and out files) ]"
