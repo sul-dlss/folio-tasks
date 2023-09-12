@@ -48,6 +48,8 @@ class FolioRequest
   def parse(response, **other)
     if other[:response_code]
       response.code
+    elsif other[:no_response]
+      ''
     else
       pp JSON.parse(response)
     end
