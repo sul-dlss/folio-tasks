@@ -12,8 +12,7 @@ module IlliadTaskHelpers
     File.open(file)
   end
 
-  def illiad_user(folio_user)
-    user = folio_user['users'][0]
+  def illiad_user(user)
     {
       Username: user['username'],
       LastName: user['personal']['lastName'],
@@ -36,6 +35,6 @@ module IlliadTaskHelpers
   end
 
   def illiad_response(response, user)
-    puts "Got response code #{response} for #{user}" unless response == 200
+    puts "Got response #{response} for #{user}"
   end
 end
