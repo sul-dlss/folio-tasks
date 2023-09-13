@@ -23,7 +23,7 @@ module IlliadTaskHelpers
       Phone: user['personal']['phone'],
       ExpirationDate: user['expirationDate'],
       UserInfo1: user['externalSystemId'],
-      NVTGC: 'ST2',
+      NVTGC: 'STF',
       NotificationMethod: 'Electronic',
       DeliveryMethod: 'Hold for Pickup',
       AuthorizedUsers: 'SUL',
