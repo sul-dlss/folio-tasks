@@ -20,7 +20,7 @@ class IlliadRequest
     if other[:response_code]
       response.code
     else
-      pp JSON.parse(response)
+      response
     end
   rescue JSON::ParserError
     puts response

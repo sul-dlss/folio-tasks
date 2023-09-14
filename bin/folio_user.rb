@@ -11,7 +11,7 @@ xml_user_result.process_xml_lines(ARGV[0])
 
 user_json = xml_user_result.to_json
 
-folio_response = folio.post('/user-import', user_json)
+folio_response = folio.post('/user-import', user_json, no_response: true)
 
 puts user_json
 

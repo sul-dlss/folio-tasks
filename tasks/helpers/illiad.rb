@@ -6,12 +6,13 @@ require 'date'
 module IlliadTaskHelpers
   include FolioRequestHelper
 
-  def folio_json_users
-    File.open('log/folio-user.log')
+  def folio_json_users(date = nil)
+    filename = 'log/folio-user.log'
+    file = date.nil? ? filename : "#{filename}.#{date}"
+    File.open(file)
   end
 
-  def illiad_user(folio_user)
-    user = folio_user['users'][0]
+  def illiad_user(user)
     {
       Username: user['username'],
       LastName: user['personal']['lastName'],
@@ -22,7 +23,7 @@ module IlliadTaskHelpers
       Phone: user['personal']['phone'],
       ExpirationDate: user['expirationDate'],
       UserInfo1: user['externalSystemId'],
-      NVTGC: 'ST2',
+      NVTGC: 'STF',
       NotificationMethod: 'Electronic',
       DeliveryMethod: 'Hold for Pickup',
       AuthorizedUsers: 'SUL',
@@ -34,6 +35,6 @@ module IlliadTaskHelpers
   end
 
   def illiad_response(response, user)
-    puts "Got response code #{response} for #{user}" unless response == 200
+    puts "Got response #{response} for #{user}"
   end
 end
