@@ -6,9 +6,9 @@ require 'date'
 module IlliadTaskHelpers
   include FolioRequestHelper
 
-  def folio_json_users(date=nil)
+  def folio_json_users(date = nil)
     filename = 'log/folio-user.log'
-    date.nil? ? file = filename : file = "#{filename}.#{date}"
+    file = date.nil? ? filename : "#{filename}.#{date}"
     File.open(file)
   end
 
