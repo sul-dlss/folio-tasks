@@ -13,7 +13,7 @@ user_json = xml_user_result.to_json
 
 folio_response = folio.post('/user-import', user_json, no_response: true)
 
-STDOUT.write user_json
+puts user_json
 
 File.open('log/user-import-response.log', 'a') do |f|
   log_json = {
