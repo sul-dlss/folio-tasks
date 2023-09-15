@@ -39,8 +39,4 @@ module IlliadTaskHelpers
 
     'STF'
   end
-
-  def illiad_response(response, user)
-    puts "Got response #{response} for #{user}"
-  end
 end

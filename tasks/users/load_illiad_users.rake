@@ -11,9 +11,7 @@ namespace :illiad do
     folio_json_users(args[:date]).each do |user|
       JSON.parse(user)['users'].each do |folio_user|
         ill_user = illiad_user(folio_user)
-        illiad_response(
-          IlliadRequest.new.post('ILLiadWebPlatform/Users', ill_user), ill_user
-        )
+        puts IlliadRequest.new.post('ILLiadWebPlatform/Users', ill_user), ill_user
       end
     end
   end
