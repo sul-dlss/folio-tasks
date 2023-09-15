@@ -134,6 +134,15 @@ module XmlUserHelpers
   #   @priv_groups.select { |p| p.include?('folio:') && @person_hash['customFields']['workgroup'] = p }
   # end
 
+  def add_departments
+    @person_hash['departments'] = []
+    # Add the department UUID for SUL by default
+    @person_hash['departments'] << 'e88216c6-b39e-477e-a094-de10b941837d'
+    @priv_groups.select do |p|
+      p.include?('organization:gsb') && @person_hash['departments'] << '90a61554-e4e5-476d-bd64-141822c4221f'
+    end
+  end
+
   def to_json(*)
     @hash.to_json
   end
