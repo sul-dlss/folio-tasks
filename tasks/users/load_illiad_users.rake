@@ -10,9 +10,9 @@ namespace :illiad do
   task :fetch_and_load_users, [:date] do |_, args|
     folio_json_users(args[:date]).each do |user|
       JSON.parse(user)['users'].each do |folio_user|
-        illiad_user = illiad_user(folio_user)
+        ill_user = illiad_user(folio_user)
         illiad_response(
-          IlliadRequest.new.post('ILLiadWebPlatform/Users', illiad_user), illiad_user
+          IlliadRequest.new.post('ILLiadWebPlatform/Users', ill_user), ill_user
         )
       end
     end
