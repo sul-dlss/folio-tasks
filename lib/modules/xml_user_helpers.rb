@@ -134,6 +134,15 @@ module XmlUserHelpers
   #   @priv_groups.select { |p| p.include?('folio:') && @person_hash['customFields']['workgroup'] = p }
   # end
 
+  def add_departments
+    @person_hash['departments'] = []
+    # Add the default SUL department
+    @person_hash['departments'] << 'Stanford Libraries (SUL)'
+    @priv_groups.select do |p|
+      p.include?('organization:gsb') && @person_hash['departments'] << 'Graduate School of Business (GSB)'
+    end
+  end
+
   def to_json(*)
     @hash.to_json
   end

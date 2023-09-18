@@ -23,7 +23,7 @@ module IlliadTaskHelpers
       Phone: user['personal']['phone'],
       ExpirationDate: user['expirationDate'],
       UserInfo1: user['externalSystemId'],
-      NVTGC: 'STF',
+      NVTGC: user_department(user),
       NotificationMethod: 'Electronic',
       DeliveryMethod: 'Hold for Pickup',
       AuthorizedUsers: 'SUL',
@@ -34,7 +34,9 @@ module IlliadTaskHelpers
     }.to_json
   end
 
-  def illiad_response(response, user)
-    puts "Got response #{response} for #{user}"
+  def user_department(user)
+    user['department']&.include?('90a61554-e4e5-476d-bd64-141822c4221f') && 'S7Z'
+
+    'STF'
   end
 end

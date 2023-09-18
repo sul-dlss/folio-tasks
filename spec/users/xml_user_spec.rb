@@ -73,6 +73,10 @@ RSpec.describe XmlUser do
       #   expect(JSON.parse(result.to_json)['users'][0]['customFields']['workgroup']).to eq 'folio:circ-staff'
       # end
 
+      it 'has the department field with the default value' do
+        expect(JSON.parse(result.to_json)['users'][0]['departments'].length).to be_positive
+      end
+
       it 'has the correct patron group' do
         expect(JSON.parse(result.to_json)['users'][0]['patronGroup']).to eq 'staff'
       end

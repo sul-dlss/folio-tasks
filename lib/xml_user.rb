@@ -53,6 +53,7 @@ class XmlUser
       home_phone(Nokogiri::XML(xmlline).xpath('//Person/telephone[@type="permanent"]'))
       address(Nokogiri::XML(xmlline).xpath('//Person/place'))
       affiliation(affiliation_nodes)
+      add_departments
       add_user_to_hash
     end
   end

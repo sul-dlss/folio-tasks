@@ -9,10 +9,16 @@ namespace :illiad do
   desc 'fetch and load illiad users from folio'
   task :fetch_and_load_users, [:date] do |_, args|
     folio_json_users(args[:date]).each do |user|
+      # skip unparseable log lines
+      begin
+        JSON.parse(user)
+      rescue JSON::ParserError
+        next
+      end
+
       JSON.parse(user)['users'].each do |folio_user|
-        illiad_response(
-          IlliadRequest.new.post('ILLiadWebPlatform/Users', illiad_user(folio_user)), illiad_user(folio_user)
-        )
+        ill_user = illiad_user(folio_user)
+        puts IlliadRequest.new.post('ILLiadWebPlatform/Users', ill_user), ill_user
       end
     end
   end
