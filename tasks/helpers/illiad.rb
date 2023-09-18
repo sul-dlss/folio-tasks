@@ -35,7 +35,7 @@ module IlliadTaskHelpers
   end
 
   def user_department(user)
-    user['department']&.include?('90a61554-e4e5-476d-bd64-141822c4221f') && 'S7Z'
+    user['department']&.include?('Graduate School of Business (GSB)') && 'S7Z'
 
     'STF'
   end
