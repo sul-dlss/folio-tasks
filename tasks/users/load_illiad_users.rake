@@ -12,7 +12,7 @@ namespace :illiad do
       # skip unparseable log lines
       begin
         JSON.parse(user)
-      rescue JSON::ParserError => e
+      rescue JSON::ParserError
         next
       end
 
