@@ -1,0 +1,8 @@
+ VALUES
+('jptori','Torigian','Joseph','2559244747','3684a786-6671-4268-8ed0-9db82ebca60b','jptori@stanford.edu','','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-19 15:15:42.551','SUL','Yes','Yes','','','','','','SUL','2017-07-04 17:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05423895',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('eacostag','Acosta','Eduardo','2553001516','3684a786-6671-4268-8ed0-9db82ebca60b','eacostag@stanford.edu','(708) 580-5829','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-19 15:15:42.551','SUL','Yes','Yes','','','','','','SUL','2017-07-04 17:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','50026073',NULL,NULL,NULL,NULL)
+
+-----------
