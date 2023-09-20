@@ -140,6 +140,8 @@ module XmlUserHelpers
     @person_hash['departments'] << 'Stanford Libraries (SUL)'
     @priv_groups.select do |p|
       p.include?('organization:gsb') && @person_hash['departments'] << 'Graduate School of Business (GSB)'
+      p.include?('organization:law') && @person_hash['departments'] << 'Law School (LAW)'
+      p.include?('organization:medicine') && @person_hash['departments'] << 'Medical School (LANE)'
     end
   end
 
