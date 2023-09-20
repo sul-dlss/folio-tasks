@@ -137,12 +137,12 @@ module XmlUserHelpers
   def add_departments
     @person_hash['departments'] = []
     # Add the default SUL department
-    @person_hash['departments'] << 'Stanford Libraries (SUL)'
     @priv_groups.select do |p|
       p.include?('organization:gsb') && @person_hash['departments'] << 'Graduate School of Business (GSB)'
       p.include?('organization:law') && @person_hash['departments'] << 'Law School (LAW)'
       p.include?('organization:medicine') && @person_hash['departments'] << 'Medical School (LANE)'
     end
+    @person_hash['departments'].length.zero? && @person_hash['departments'] << 'Stanford Libraries (SUL)'
   end
 
   def to_json(*)
