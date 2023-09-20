@@ -11,6 +11,6 @@ else
 fi
 
 cd $HARVEST_HOME
-java -jar jar/Person-jar-with-dependencies.jar $folio_users >> $LOG/illiad-userload.log  2>&1
+java -jar target/Person-jar-with-dependencies.jar $folio_users >> $LOG/illiad-userload.log  2>&1
 
 cat $LOG/illiad-userload.log | mailx -s 'ILLiad Userload Errors' sul-unicorn-devs@lists.stanford.edu
