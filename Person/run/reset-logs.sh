@@ -5,6 +5,7 @@ source $(dirname $0)/harvest.env
 # Save and reset log files
 mv $LOG/harvest.log $LOG/harvest.log.$DATE
 mv $LOG/illiad-userload.log $LOG/illiad-userload.log.$DATE
+mv $LOG/illiad-err.log $LOG/illiad-err.log.$DATE
 mv $LOG/folio-user.log $LOG/folio-user.log.$DATE
 mv $LOG/folio-err.log $LOG/folio-err.log.$DATE
 mv $LOG/folio-inactive.log $LOG/folio-inactive.log.$DATE
