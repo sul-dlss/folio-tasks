@@ -5,3 +5,4 @@
 /tsv/**/*.tsv
 /xml
 /yaml
+/Person/log/*

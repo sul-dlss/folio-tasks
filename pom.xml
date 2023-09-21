@@ -8,7 +8,7 @@
     <artifactId>registry-harvester</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>Registry Harvester for People and Courses</name>
+    <name>Folio to ILLiad Userload</name>
     <modules>
         <module>Person</module>
     </modules>

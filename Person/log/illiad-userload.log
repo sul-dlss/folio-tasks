@@ -1,8 +1,440 @@
  VALUES
-('jptori','Torigian','Joseph','2559244747','3684a786-6671-4268-8ed0-9db82ebca60b','jptori@stanford.edu','','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-19 15:15:42.551','SUL','Yes','Yes','','','','','','SUL','2017-07-04 17:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05423895',NULL,NULL,NULL,NULL)
+('aishan','Zhao','Aishan','2550559351','postdoctoral','aishan@stanford.edu','','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06407423',NULL,NULL,NULL,NULL)
 
 -----------
  VALUES
-('eacostag','Acosta','Eduardo','2553001516','3684a786-6671-4268-8ed0-9db82ebca60b','eacostag@stanford.edu','(708) 580-5829','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-19 15:15:42.551','SUL','Yes','Yes','','','','','','SUL','2017-07-04 17:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','50026073',NULL,NULL,NULL,NULL)
+('sbohles','Bohles','Sydney','2555525459','undergrad','sbohles@stanford.edu','(678) 228-6709','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06682274',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('abounasr','Abou-Nasr','Aya','2554250972','staff-casual','abounasr@stanford.edu','(510) 610-9914','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05596220',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('zainabgs','Garba Sani','Zainab','2559612771','NULL','zainabgs@stanford.edu','(510) 610-9914','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','50023362',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('elabuiga','Buiga','Petronela','2550642760','NULL','elabuiga@stanford.edu','(510) 610-9914','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06645523',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('luozm','Luo','Ziming','2552029812','NULL','luozm@stanford.edu','(510) 610-9914','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06406377',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('obedc','Camacho','Obed','2551996385','graduate','obedc@stanford.edu','17608279745','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06742777',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mpawar22','Pawar','Madhu','2551206907','graduate','mpawar22@stanford.edu','(312) 731-8934','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06680483',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('vlou','Lou','Vivian','2556360269','graduate','vlou@stanford.edu','(778) 279-8285','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06019984',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('youngsun','Sun','Young Joo','2553932806','staff','youngsun@stanford.edu','82-2-6356-4419','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05868798',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('kobbad','Obbad','Kamal','2556313489','graduate','kobbad@stanford.edu','(650) 313-8700','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05786666',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ewyleczu','Wyleczuk-Stern','Elizabeth','2550289074','NULL','ewyleczu@stanford.edu','(650) 313-8700','NULL','Graduate School of Business (GSB)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06000315',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('espie','Santiago','Espie','2554050211','NULL','espie@stanford.edu','(415) 601-8703','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09723941',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mbhan','Bhan','Mokshlakshmi','2555945619','NULL','mbhan@stanford.edu','918146420260','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06447432',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('sdc37','del Castillo','Sam','2557747844','NULL','sdc37@stanford.edu','918146420260','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09598067',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('iralu','Iralu','Elspeth','2559542762','NULL','iralu@stanford.edu','(505) 862-6322','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06034566',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('paularv','Rueda Villamil','Paula','2555974617','NULL','paularv@stanford.edu','(505) 862-6322','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09606496',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('gailmard','Gailmard','Lindsey','2550634564','postdoctoral','gailmard@stanford.edu','(510) 703-2803','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05949530',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mchang6','Chang','Michael','2558665997','graduate','mchang6@stanford.edu','+1 605-413-2105','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06254878',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('esegal','Segal','Ellyn','2557617271','NULL','esegal@stanford.edu','(650) 856-3061','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','03942349',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ianapt','Thompson','Ian','2558813111','NULL','ianapthompson@gmail.com','(650) 856-3061','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06265497',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('cytu','Tu','Chengyi','2552601424','staff','cytu@stanford.edu','(650) 856-3061','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06324783',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('amirouse','Mirouse','Adrien','2559921052','NULL','amirouse@stanford.edu','(650) 856-3061','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06733410',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('rwaida','Gharib','Rwaida','2559216060','graduate','rwaida@stanford.edu','(909) 851-4890','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05182951',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mgolub','Golub','Matt','2553165049','NULL','mgolub@stanford.edu','(909) 851-4890','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05287684',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('vanijzen','van IJzendoorn','David','2554214821','NULL','vanijzen@stanford.edu','(909) 851-4890','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06492721',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('pedro97','Gallardo','Pedro','2550466575','graduate','pedro97@stanford.edu','(909) 851-4890','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09657131',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('jfowlie','Fowlie','Jennifer','2552963291','staff','jfowlie@stanford.edu','(650) 334-8315','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06603659',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('knapenas','Napenas','Keith Rowen','2555020619','staff','knapenas@stanford.edu','(510) 564-6490','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','50018632',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('rhurley','Hurley','Robert','2555306339','NULL','rhurley@stanford.edu','(510) 564-6490','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06374984',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('kfirouzi','Firouzi','Kamyar','2558222078','staff-casual','kfirouzi@stanford.edu','(650) 861-7629','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05726788',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('dwac','Chambless','Daniel','2551648385','NULL','dwac@stanford.edu','(650) 861-7629','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06461878',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('samhofer','Hofer','Sam','2553465503','undergrad','samhofer@stanford.edu','(503) 524-7413','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06418589',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('kniehau','Niehaus','Kevin','2550775144','postdoctoral','kniehau@stanford.edu','(503) 524-7413','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05760545',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('makena','Pule','Makena','2551973534','postdoctoral','makena@stanford.edu','(503) 524-7413','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05894536',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mowarner','Warner','Meghan','2558608006','postdoctoral','mowarner@stanford.edu','(831) 359-0938','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06189697',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('krhee','Steffner','Kirsten','2550396948','staff-casual','krhee@stanford.edu','(203) 536-3731','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05116876',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('abrakman','Brakman','Anna-Luisa','2556205530','graduate','abrakman@stanford.edu','+1 203-655-4041','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06216575',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('csy123','Yuan','Christopher','2552790943','undergrad','csy123@stanford.edu','(510) 581-4898','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2023-09-26 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06172674',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('xli0429','Li','Cynthia','2554796370','graduate','xli0429@stanford.edu','(510) 581-4898','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06446215',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ylu12','Wong','Yanping','2553295453','postdoctoral','ylu12@stanford.edu','8613501796769','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05667400',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('pedro97','Gallardo','Pedro','2550466575','graduate','pedro97@stanford.edu','8613501796769','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09657131',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('fsolberg','Solberg','Fredrik Samdal','2552731989','postdoctoral','fsolberg@stanford.edu','8613501796769','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06435954',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('sguha22','Guha','Sreya','2553883767','graduate','sguha22@stanford.edu','+1 650-941-2081','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06298157',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('siranush','Babakhanova','Siranush','2557871731','graduate','siranush@stanford.edu','(857) 498-5747','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06158592',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('qcxue','Xue','Qiwei','2558304594','graduate','qcxue@stanford.edu','(857) 498-5747','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05957653',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('adamsk','Kirosingh','Adam','2557050796','graduate','adamsk@stanford.edu','(702) 350-0660','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06184446',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('sylvied','Dobrota','Sylvie','2558879173','graduate','sylvied@stanford.edu','(408) 223-6395','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05897340',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('chuey','Chuey','Aaron','2559008875','postdoctoral','chuey@stanford.edu','(408) 223-6395','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06087106',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('yoonjen','Yoon','Jennie','2554793294','postdoctoral','yoonjen@stanford.edu','(817) 320-6091','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05827612',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('folguin','Olguin','Francesca','2557546083','graduate','folguin@stanford.edu','(720) 232-3547','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05941476',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('asagi','Sagi','Andras','2552026795','postdoctoral','asagi@stanford.edu','(720) 232-3547','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05946686',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ckantor','Kantor','Charles','2552427634','graduate','ckantor@stanford.edu','(720) 232-3547','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06529821',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ybraimah','Braimah','Olayinka','2550547868','undergrad','ybraimah@stanford.edu','13105146620','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2023-09-26 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06250031',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('zfranks','Franks','Zachary','2552162275','NULL','zfranks@stanford.edu','(586) 623-8952','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2023-09-26 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09600583',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mar1aa','Angulo','Maria','2551560726','undergrad','mar1aa@stanford.edu','(213) 590-9231','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06828625',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('chantalq','Quintero','Chantal','2554036190','staff','chantalq@stanford.edu','(202) 422-0504','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','50027021',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('melaniem','Macdonald','Melanie','2558532258','NULL','melaniem@stanford.edu','(650) 814-7801','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05924066',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('jiajing2','Liu','Jiajing','2551750085','NULL','jiajing2@stanford.edu','(203) 907-8547','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09606620',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('onguti','Onguti','Sharon','2551601264','NULL','onguti@stanford.edu','(203) 907-8547','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','09612841',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mikabr','Braginsky','Mika','2550194640','staff','mikabr@stanford.edu','(617) 519-3623','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06002773',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('igunther','Gunther','Ian','2553623225','graduate','igunther@stanford.edu','+1 713-828-4604','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06250383',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('allya','Aranda','Alexandra','2554457967','NULL','allya@stanford.edu','(650) 839-3052','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','50018806',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('held','Held','William','2552852267','graduate','held@stanford.edu','16469612627','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06510253',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mtruizs','Ruiz Salinas','Maria Teresa','2555874687','graduate','mtruizs@stanford.edu','(011) 622-6303','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06660570',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('jontan11','Tan','Jonathan','2551296607','undergrad','jontan11@stanford.edu','(011) 622-6303','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06739522',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('antja','Thompson','Antja','2559345067','NULL','antja@stanford.edu','(530) 541-1244 ext. 109','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','04476933',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('jjv','Vavra','Jaroslav','2555550798','staff','jjv@SLAC.Stanford.EDU','(650) 941-1219','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','10002848',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('anniefan','Fan','Annie','2551265292','graduate','anniefan@stanford.edu','12063977279','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06763559',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('lisa20','Perkins','Lisa','2554022574','NULL','lisa20@stanford.edu','(914) 673-2955','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05173758',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ngoble','Goble','Necki','2553737265','NULL','ngoble@stanford.edu','(408) 726-7356','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05402211',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mas2022','Smerconish','Michael','2558202226','graduate','mas2022@stanford.edu','(610) 999-9396','NULL','Law School (LAW)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06318751',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('cam4567','Vaughan','Cameron','2555194686','graduate','cam4567@stanford.edu','+1 650-851-9015','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06251456',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('aroghair','Roghair','Aurora','2555216511','undergrad','aroghair@stanford.edu','+1 650-851-9015','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06495846',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ioanida','Costache','Ioanida','2553175163','faculty','ioanida@stanford.edu','14244709535','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05956429',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('erfan','Mojaddam','Erfan','2555105613','NULL','erfan@stanford.edu','(818) 970-9151','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05574567',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('kdantz','Press','Kassie','2557984813','staff','kdantz@stanford.edu','(818) 970-9151','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06241993',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('j101121','Aguilar','Jesus','2551112582','undergrad','j101121@stanford.edu','(626) 320-4960','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06828638',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('mpn13','Nielsen','Maxwell','2558013647','graduate','mpn13@stanford.edu','14065946886','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06769685',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('cotero','Otero','Christian','2559681631','graduate','cotero@stanford.edu','15046150645','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06360823',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('masadi','Asadi','Mohammad','2552996196','graduate','masadi@stanford.edu','989172938762','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06760330',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('kvmiller','Miller','Kate','2555468076','graduate','kvmiller@stanford.edu','15303046189','NULL','Medical School (LANE)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06748260',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('bparsons','Parsons','Bailey','2553032668','graduate','bparsons@stanford.edu','(205) 541-0274','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06407169',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('edebelen','De Belen','Eunice Joy','2552506614','undergrad','edebelen@stanford.edu','16716470667','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06647191',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('lzfowler','Fowler','Lina','2557258945','graduate','lzfowler@stanford.edu','16716470667','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06297261',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('marwanga','Marwanga','Moraa','2556875519','graduate','marwanga@stanford.edu','16716470667','NULL','Graduate School of Business (GSB)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06404440',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('aaronli9','Li','Aaron','2555453442','graduate','aaronli9@stanford.edu','+1 805-498-9688','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06369208',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('csymonds','Symonds','Charles','2553618256','undergrad','csymonds@stanford.edu','+1 805-498-9688','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06739521',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('amayam','Marion','Amaya','2553231466','staff','amayam@stanford.edu','16366149336','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06493850',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ashantin','Nez','Ashanti','2551529037','undergrad','ashantin@stanford.edu','16366149336','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06683493',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('cnoriega','Noriega','Celeste','2558755210','undergrad','cnoriega@stanford.edu','16366149336','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06682991',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('dklittle','Little','Dylan','2559979742','undergrad','dklittle@stanford.edu','(909) 244-9168','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06684980',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('ekuo8','Kuo','Emily','2550842730','graduate','ekuo8@stanford.edu','(909) 244-9168','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06657883',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('nanliao','Liao','Nancy','2555363352','graduate','nanliao@stanford.edu','(408) 857-5616','NULL','Graduate School of Business (GSB)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','05896518',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('dukesr','Dukes','Ryan','2554684933','staff','dukesr@stanford.edu','(408) 857-5616','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06651664',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('bameglio','Ameglio','Brandon','2553389416','graduate','bameglio@stanford.edu','12076537968','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06748525',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('nmartha','Nabukeera','Martha','2552807828','graduate','nmartha@stanford.edu','12076537968','NULL','Graduate School of Business (GSB)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06677825',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('aileener','Rubio','Aileen','2553344124','undergrad','aileener@stanford.edu','(925) 516-1451','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06684282',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('alanaesp','Esposito','Alana','2556079011','undergrad','alanaesp@stanford.edu','(925) 516-1451','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06683944',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('alexi26','Lindeman','Alexi','2553215214','undergrad','alexi26@stanford.edu','(925) 778-3736','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06684155',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('avi04','Iyengar','Aditya','2555133409','undergrad','avi04@stanford.edu','(510) 229-8572','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06684468',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('kjwhitt','Whittaker','Kullen','2557276182','undergrad','kjwhitt@stanford.edu','+1 503-682-7271','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06503960',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('jryan303','Ryan','Jack','2558103069','undergrad','jryan303@stanford.edu','+1 303-765-2301','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06486317',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('izabella','Smolnicka-Dos Santos','Izabella','2555293675','undergrad','izabella@stanford.edu','+1 303-765-2301','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06661117',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('hpoukish','Poukish','Hannah','2557127710','graduate','hpoukish@stanford.edu','15302186120','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06753625',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('chantale','Eiwanger','Chantal','2551712760','undergrad','chantale@stanford.edu','(604) 987-8848','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06683922',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('bnicol','Nicolson','Bailey','2552954717','undergrad','bnicol@stanford.edu','(604) 987-8848','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06349994',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('janlrudo','Rudolph','Janelle','2552172824','undergrad','janlrudo@stanford.edu','+1 425-401-6570','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06407175',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('etng','Ng','Ethan','2558926495','graduate','etng@stanford.edu','16465315348','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06245408',NULL,NULL,NULL,NULL)
+
+-----------
+ VALUES
+('espott','Pottebaum','Esther','2554954655','undergrad','espott@stanford.edu','16465315348','NULL','Stanford Libraries (SUL)','STF','','Electronic','Hold for Pickup','NULL','2023-09-20 23:43:30.350','SUL','Yes','Yes','','','','','','SUL','2024-01-08 00:00:00.0',NULL,NULL,'NULL',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'RemoteAuth','06739491',NULL,NULL,NULL,NULL)
 
 -----------

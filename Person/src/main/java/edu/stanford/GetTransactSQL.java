@@ -109,7 +109,7 @@ class GetTransactSQL {
       sql.append(" END\n\r");
     }
 
-    System.err.println(sqlv + "\n-----------");
+    System.out.println(sqlv + "\n-----------");
     return sql.toString();
   }
 }
