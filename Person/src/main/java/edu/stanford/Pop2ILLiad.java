@@ -150,7 +150,8 @@ public class Pop2ILLiad {
                   }
                 }
               } catch (Exception e) {
-                e.printStackTrace(System.out);
+                System.out.println("Skipping unparsable folio-user log line");
+                continue;
               }
             }
 
