@@ -140,7 +140,7 @@ module XmlUserHelpers
     @priv_groups.select do |p|
       p.include?('organization:gsb') && @person_hash['departments'] << 'Interlibrary Borrowing - GSB'
       p.include?('organization:law') && @person_hash['departments'] << 'Interlibrary Borrowing - LAW'
-      p.include?('organization:medicine') && @person_hash['departments'] << 'Interlibrary Borrowing -LANE'
+      p.include?('organization:medicine') && @person_hash['departments'] << 'Interlibrary Borrowing - LANE'
     end
     @person_hash['departments'].length.zero? && @person_hash['departments'] << 'Interlibrary Borrowing - SUL'
   end
