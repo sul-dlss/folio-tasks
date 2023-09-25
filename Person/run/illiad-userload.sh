@@ -14,5 +14,5 @@ cd $HARVEST_HOME
 
 java -jar target/Person-jar-with-dependencies.jar $folio_users >> $LOG/illiad-userload.log  2>> $LOG/illiad-err.log
 
-cat $LOG/illiad-userload.log | mailx -s 'ILLiad Userload Logs' sul-unicorn-devs@lists.stanford.edu
+cat $LOG/illiad-userload.log | sed '/\n/d' | mailx -s 'ILLiad Userload Logs' sul-unicorn-devs@lists.stanford.edu
 cat $LOG/illiad-err.log | mailx -s 'ILLiad Userload Errors' sul-unicorn-devs@lists.stanford.edu
