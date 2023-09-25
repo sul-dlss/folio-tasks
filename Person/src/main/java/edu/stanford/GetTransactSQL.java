@@ -25,10 +25,10 @@ class GetTransactSQL {
     StringBuilder sql = new StringBuilder();
     StringBuilder sqlv = new StringBuilder();
 
-    // sql.append(" declare @dept_").append(sunetid).append(" varchar(50)\n\r");
+    sql.append(" declare @dept_").append(sunetid).append(" varchar(50)\n\r");
     sql.append(" IF EXISTS (select * from ILLData.dbo.").append(table_name).append(" where UserName = '").append(sunetid).append("')\n\r");
     sql.append(" BEGIN\n\r");
-    // sql.append("  SET @dept_").append(sunetid).append(" = (select Department from ILLData.dbo.UsersALL where UserName = '").append(sunetid).append("')\n\r");
+    sql.append("  SET @dept_").append(sunetid).append(" = (select Department from ILLData.dbo.UsersALL where UserName = '").append(sunetid).append("')\n\r");
     sql.append("  UPDATE ILLData.dbo.").append(table_name).append("\n\r");
     sql.append("  SET\n\r");
 
@@ -38,12 +38,12 @@ class GetTransactSQL {
       String value = entry.getValue();
 
       /* Keep the same ignore_fields as previously loaded and update the rest with new values */
-      // if (key.equals(do_not_update_field)) {
-      //   sql.append(key).append("= @dept_").append(sunetid);
-      // }
-      // else {
-      //   sql.append(key).append("=").append(value);
-      // }
+      if (key.equals(do_not_update_field)) {
+        sql.append(key).append("= @dept_").append(sunetid);
+      }
+      else {
+        sql.append(key).append("=").append(value);
+      }
       sql.append(key).append("=").append(value);
 
       if (cnt < illData.size()) {
