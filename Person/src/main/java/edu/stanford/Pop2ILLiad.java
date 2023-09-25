@@ -59,6 +59,7 @@ public class Pop2ILLiad {
           JsonObject batch = jsonReader.readObject();
           JsonArray users = batch.getJsonArray("users");
 
+
           for (int u = 0; u < users.size(); u++) {
             try {
               JsonObject obj = users.getJsonObject(u);
@@ -91,6 +92,8 @@ public class Pop2ILLiad {
                 System.err.println("Skipping user: " + sunetid + ". No email address in folio user record.");
                 continue;
               }
+
+              System.err.println(sunetid);
 
               illData.clear();
               illData.put("UserName", "'" + sunetid + "'"); // 50 *
@@ -144,7 +147,6 @@ public class Pop2ILLiad {
               illData.put("UserInfo3", "NULL"); //
               illData.put("UserInfo4", "NULL"); //
               illData.put("UserInfo5", "NULL"); //
-
               if (NVTGC.equals("STF")) {
                 sqlSTF.append(GetTransactSQL.transactSql(illData, sunetid.toString())).append("\n\r");
               }
@@ -158,8 +160,10 @@ public class Pop2ILLiad {
             }
           }
         } catch (javax.json.stream.JsonParsingException e) {
+          System.err.println(e);
           continue;
         } catch (Exception e) {
+          System.err.println(e);
           continue;
         }
       }
@@ -183,15 +187,13 @@ public class Pop2ILLiad {
 
   public static String getString(JsonObject obj, String name) {
     try {
-      String objJson = obj.getString(name);
-      if (objJson != null) {
-        return objJson;
+      if (!obj.isNull(name)) {
+        return obj.getJsonString(name).toString();
       } else {
-        return "NULL";
+        return null;
       }
-    } catch (NullPointerException e) {
-      System.err.println("Missing folio field: " + name);
-      return "NULL";
+    } catch (ClassCastException e) {
+      return null;
     }
   }
 }
