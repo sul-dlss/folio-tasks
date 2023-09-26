@@ -1,36 +1,45 @@
 #!/bin/sh
-#$Id: fileLoad.sh,v 1.2 2008/07/22 19:43:28 dtayl Exp $
 
 source $(dirname $0)/harvest.env
 JAVA_HARVEST_HOME=/usr
-LOAD_FILE=$1
 
 cd $RUN
 
+HARNESS_LOG=$HARVEST_HOME/log/harness.log
+
+if [ ! -f $HARNESS_LOG ]
+then
+    touch $HARNESS_LOG
+fi
+
+dfmt='+%m/%d/%Y %H:%M'
+t_stamp=`date "$dfmt"`
+
+printf "\n$t_stamp $APP_NAME $0 harness starts\n"
+printf "\n\n$t_stamp $APP_NAME $0 harness starts\n" >> $HARNESS_LOG
+
 # looping to build classpath. skipping anything named old.*.jar
 #
-#
-#echo "building classpath"
+# Support jar files
+echo "$t_stamp harness building classpath" >> $HARNESS_LOG
 for file in `ls $HARVEST_HOME/jar/` ; do
  case "$file" in
-  old.*.jar)
-  ;;
-  *.jar|*.zip)
+  old.*.jar) echo skipping $file >>$HARNESS_LOG;;
+  *.jar|*.zip) echo ADDING $file >> $HARNESS_LOG
         if [ "$CLASSPATH" != "" ]; then
            CLASSPATH=${CLASSPATH}:$HARVEST_HOME/jar/$file
         else
            CLASSPATH=$HARVEST_HOME/jar/$file
         fi
-  ;;
+        ;;
  esac
 done
-
+#
 # Weblogic jar file
 for file in `ls $HARVEST_HOME/WebLogic_lib/` ; do
  case "$file" in
-  old.*.jar)
-  ;;
-  *.jar|*.zip)
+  old.*.jar) echo skipping $file >>$HARNESS_LOG;;
+  *.jar|*.zip) echo ADDING $file >> $HARNESS_LOG
         if [ "$CLASSPATH" != "" ]; then
            CLASSPATH=${CLASSPATH}:$HARVEST_HOME/WebLogic_lib/$file
         else
@@ -46,25 +55,10 @@ done
 #
 CLASSPATH=${CLASSPATH}:$CONF_HARVEST_HOME
 
-$JAVA_HARVEST_HOME/bin/java -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HARVEST_HOME/harvester.properties $CONF_HARVEST_HOME/processor.properties $LOAD_FILE
+
+$JAVA_HOME/bin/java -Dweblogic.StdoutSeverityLevel=16 -Dweblogic.security.SSL.ignoreHostnameVerification=true -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HARVEST_HOME/harvester.properties $CONF_HARVEST_HOME/processor.properties $1 >> $HARNESS_LOG 2>&1
+
 EXIT_CODE=$?
 
-sed -i '/DOCTYPE Person SYSTEM/d' $HARVEST
-
-HARVEST=$HARVEST $HARVEST_HOME/run/folio-userload.sh
-
-$HARVEST_HOME/run/illiad-userload.sh
-
-# Save output files
-if [[ -e $HARVEST ]]; then
-   mv $HARVEST $OUT $HARVEST.$DATE
-else
-   mv $OUT/harvest.xml.out $OUT/harvest.xml.out.$DATE
-fi
-
-$HARVEST_HOME/run/reset-logs.sh
-
-if [ $EXIT_CODE -gt 0 ] ; then
-  echo "Processor exited abnormally. Check log file for details"
-  exit $EXIT_CODE
-fi
+t_stamp=`date "$dfmt"`
+echo "$t_stamp $APP_NAME exit to harness, exit status $EXIT_CODE" >> $HARNESS_LOG
