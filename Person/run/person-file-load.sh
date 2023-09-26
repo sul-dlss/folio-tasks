@@ -46,27 +46,23 @@ done
 #
 CLASSPATH=${CLASSPATH}:$CONF_HARVEST_HOME
 
-$JAVA_HARVEST_HOME/bin/java -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HARVEST_HOME/harvester.properties $CONF_HARVEST_HOME/$PROCESSOR $LOAD_FILE
+$JAVA_HARVEST_HOME/bin/java -Djava.security.egd=file:///dev/urandom -Dlog4j.configuration=harvester.properties -Dhttps.protocols=TLSv1.2 -cp $CLASSPATH edu.stanford.harvester.Harvester $CONF_HARVEST_HOME/harvester.properties $CONF_HARVEST_HOME/processor.properties $LOAD_FILE
 EXIT_CODE=$?
 
 sed -i '/DOCTYPE Person SYSTEM/d' $HARVEST
 
 HARVEST=$HARVEST $HARVEST_HOME/run/folio-userload.sh
 
-rake illiad:fetch_and_load_users
+$HARVEST_HOME/run/illiad-userload.sh
 
 # Save output files
 if [[ -e $HARVEST ]]; then
    mv $HARVEST $OUT $HARVEST.$DATE
 else
-   mv $OUT/harvest.out $OUT/harvest.out.$DATE
    mv $OUT/harvest.xml.out $OUT/harvest.xml.out.$DATE
 fi
 
-# Save and reset log files
-mv $LOG/harvest.log $LOG/harvest.log.$DATE
-
-touch $LOG/harvest.log
+$HARVEST_HOME/run/reset-logs.sh
 
 if [ $EXIT_CODE -gt 0 ] ; then
   echo "Processor exited abnormally. Check log file for details"
