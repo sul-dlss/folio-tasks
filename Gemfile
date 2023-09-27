@@ -10,6 +10,8 @@ gem 'nokogiri'
 gem 'rake'
 gem 'require_all'
 gem 'uuidtools'
+# To query an sqlserver instance (illiad)
+gem 'tiny_tds'
 
 group :development, :test do
   gem 'json-schema'

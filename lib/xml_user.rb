@@ -25,6 +25,10 @@ class XmlUser
     @non_affiliated_users = 0
   end
 
+  def to_hash
+    @hash.to_h
+  end
+
   def init_arrays
     @effective_dates = []
     @expiration_dates = []
