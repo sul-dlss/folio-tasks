@@ -15,8 +15,8 @@ set :log_level, :info
 set :deploy_to, "/s/SUL/Bin/#{fetch(:application)}"
 
 set :linked_dirs,
-    %w[config/settings Person/src/main/resources Person/jar Person/etc Person/certs Person/log Person/out
-       Person/WebLogic_lib]
+    %w[config/settings userload-harvest/src/main/resources userload-harvest/jar userload-harvest/etc userload-harvest/certs userload-harvest/log userload-harvest/out
+       userload-harvest/WebLogic_lib]
 
 # Default value for keep_releases is 5
 set :keep_releases, 3
@@ -28,13 +28,6 @@ namespace :deploy do
   task :config do
     on roles(:app) do
       upload! "config/settings/#{fetch(:stage)}.yml", "#{release_path}/config/settings"
-    end
-  end
-
-  desc 'Upload the Person jar files'
-  task :jars do
-    on roles(:app) do
-      upload! 'Person/target/Person-jar-with-dependencies.jar', "#{release_path}/Person/jar"
     end
   end
 end
