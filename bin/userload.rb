@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/modules/illiad'
+require_relative '../lib/illiad'
 require_relative '../lib/folio_request'
 require_relative '../lib/xml_user'
 
