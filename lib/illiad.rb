@@ -19,13 +19,6 @@ class Illiad
                         database: 'ILLData', login_timeout: 5
   end
 
-  def get_stf_user
-    resrault = stf_client.active? ? stf_client.execute(user(@username)).each : stf_client.close
-    raise query_error("No results.") unless result.any?
-
-    result
-  end
-
   def load_illiad_users
     sql = []
     sql << begin_tran
