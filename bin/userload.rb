@@ -15,7 +15,7 @@ user_json = xml_user_result.to_json
 folio_response = folio.post('/user-import', user_json)
 
 # File used for emailing the user import result
-File.open('Person/log/user-import-response.log', 'a') do |f|
+File.open('userload-harvest/log/user-import-response.log', 'a') do |f|
   log_json = {
     'batch_number' => ARGV[1],
     'batch_response' => folio_response,
