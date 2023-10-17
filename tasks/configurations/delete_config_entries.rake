@@ -14,6 +14,15 @@ namespace :configurations do
     end
   end
 
+  desc 'delete config for specified module (see app config for list)'
+  task :delete_module_configs, [:module] do |_, args|
+    config_data = config_entry_get(args[:module])
+    config_ids = config_entry_ids(config_data)
+    config_ids.each do |id|
+      config_entry_delete(id)
+    end
+  end
+
   desc 'delete tenant addresses from folio'
   task :delete_tenant_addresses do
     ids = Uuids.tenant_addresses.values
