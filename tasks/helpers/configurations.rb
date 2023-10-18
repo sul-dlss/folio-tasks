@@ -47,6 +47,19 @@ module ConfigurationsTaskHelpers
     entry
   end
 
+  def config_entry_ids(hash)
+    ids = []
+    hash['configs'].each do |obj|
+      ids.push(obj['id'])
+    end
+    ids
+  end
+
+  def config_entry_get(module_code)
+    hash = @@folio_request.get("/configurations/entries?query=module==#{module_code}&limit=50")
+    trim_hash(hash, 'configs')
+  end
+
   def config_entry_post(hash)
     @@folio_request.post('/configurations/entries', hash.to_json)
   end
