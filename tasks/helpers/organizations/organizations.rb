@@ -128,7 +128,7 @@ module OrganizationsTaskHelpers
 
   def organizations_id(code)
     response = FolioRequest.new.get_cql('/organizations/organizations',
-                                        "code==#{CGI.escape(code).dump}")['organizations']
+                                        "code==#{code.dump}")['organizations']
     begin
       response[0]['id']
     rescue NoMethodError
