@@ -232,13 +232,13 @@ module PoLinesHelpers
 
   def holding_no_callnum(instance_id, location_id)
     query = "instanceId==#{instance_id} and permanentLocationId==#{location_id}"
-    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+    results = @@folio_request.get_cql('/holdings-storage/holdings', query.to_s)
     results['holdingsRecords'][0]['id'] if results['totalRecords'] != 0
   end
 
   def holding_with_callnum(instance_id, location_id, call_num)
     query = "instanceId==#{instance_id} and permanentLocationId==#{location_id} and callNumber==\"#{call_num}\""
-    results = @@folio_request.get_cql('/holdings-storage/holdings', CGI.escape(query).to_s)
+    results = @@folio_request.get_cql('/holdings-storage/holdings', query.to_s)
     results['holdingsRecords'][0]['id'] if results['totalRecords'] == 1
   end
 
