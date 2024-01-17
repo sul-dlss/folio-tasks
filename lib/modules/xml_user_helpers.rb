@@ -73,8 +73,8 @@ module XmlUserHelpers
 
   def belongs_to_patron_group(group, patron_group)
     method = group.downcase.gsub(/\W+/, '_')
-    return true if (patron_group.respond_to?(method) && patron_group.send(method)) ||
-                   Settings.send(method)&.include?(current_affiliation['type'])
+    true if (patron_group.respond_to?(method) && patron_group.send(method)) ||
+            Settings.send(method)&.include?(current_affiliation['type'])
   end
 
   def check_if_nil(element)
@@ -85,7 +85,7 @@ module XmlUserHelpers
 
   def effective?
     # new staff will have effective_date = tomorrow
-    (effective_date.nil? || effective_date <= Date.today || effective_date == Date.today + 1)
+    effective_date.nil? || effective_date <= Date.today || effective_date == Date.today + 1
   end
 
   def effective_date
@@ -139,7 +139,7 @@ module XmlUserHelpers
     # Add the default SUL department
     @person_hash['departments'] << 'Stanford Libraries (SUL)'
     @priv_groups.select do |p|
-      p.include?('organization:gsb') && @person_hash['departments'] << 'Graduate School of Business (GSB)'
+      p.include?('organization:gsb') && (@person_hash['departments'] << 'Graduate School of Business (GSB)')
     end
   end
 

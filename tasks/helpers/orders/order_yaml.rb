@@ -31,7 +31,8 @@ module OrderYamlTaskHelpers
     tag_fields = %w[BIGDEAL DATA]
     if tsv_hash['LIB'].eql?('SUL')
       return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
-      return map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD'])
+
+      map_to_tags(tsv_hash, yaml_hash) if tag_fields.include?(tsv_hash['XINFO_FIELD'])
     elsif tsv_hash['LIB'].eql?('LAW') && law_note_fields.include?(tsv_hash['XINFO_FIELD'])
       map_to_notes(tsv_hash, yaml_hash)
     end
@@ -39,7 +40,7 @@ module OrderYamlTaskHelpers
 
   def add_orderlin1_xinfo(tsv_hash, yaml_hash)
     note_fields = %w[COMMENT CONTACT DESC FUND INSTRUCT NOTE NOTIFY]
-    return map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
+    map_to_notes(tsv_hash, yaml_hash) if note_fields.include?(tsv_hash['XINFO_FIELD'])
   end
 
   def map_to_notes(tsv_hash, yaml_hash)
@@ -72,7 +73,7 @@ module OrderYamlTaskHelpers
 
   def add_orderline_xinfo(tsv_hash, yaml_hash)
     fields = %w[ACCOUNT SELECTOR]
-    return modify_orderline(tsv_hash, yaml_hash) if fields.include?(tsv_hash['XINFO_FIELD'])
+    modify_orderline(tsv_hash, yaml_hash) if fields.include?(tsv_hash['XINFO_FIELD'])
   end
 
   def modify_orderline(tsv_hash, yaml_hash)

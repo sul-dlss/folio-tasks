@@ -23,7 +23,7 @@ def open_file_and_pull(namespace, name, helper, **other)
   directories.each do |dir|
     dirname = "#{dir}/#{scope}"
     FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
-    File.open("#{dirname}/#{name}.json", 'w') { |file| file.puts helper.send("pull_#{name}") }
+    File.open("#{dirname}/#{name}.json", 'w') { |file| file.puts helper.send(:"pull_#{name}") }
   end
 end
 

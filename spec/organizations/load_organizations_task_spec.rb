@@ -212,7 +212,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'creates the hash key and value for liableForVat' do
-      expect(org_hash['liableForVat']).to eq true
+      expect(org_hash['liableForVat']).to be true
     end
 
     it 'creates a notes hash with typeId for Organization note type' do
@@ -236,7 +236,7 @@ describe 'organizations rake tasks' do
     end
 
     it 'creates the hash key and value for liableForVat' do
-      expect(org_hash['liableForVat']).to eq false
+      expect(org_hash['liableForVat']).to be false
     end
   end
 

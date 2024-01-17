@@ -247,8 +247,7 @@ describe 'tenant settings rake tasks' do
   context 'when creating calendars' do
     let(:calendars_json) { load_calendars.send(:calendars_json) }
 
-    # new json schemas not available for mod-calendar
-    xit 'supplies valid json for posting calendars' do
+    it 'supplies valid json for posting calendars', skip: 'new json schemas not available for mod-calendar' do
       expect(calendars_json['calendars'].sample).to match_json_schema('mod-calendar', 'calendars')
     end
 

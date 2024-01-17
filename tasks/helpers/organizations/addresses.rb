@@ -40,12 +40,12 @@ module AddressHelpers
 
   def city(node)
     city = node.at_xpath('entry[@name="City, State"]')&.text&.split(/,\s*/)
-    return city[0] unless city.nil?
+    city[0] unless city.nil?
   end
 
   def state_region(node)
     state_region = node.at_xpath('entry[@name="City, State"]')&.text&.split(/,\s*/)
-    return state_region[1] unless state_region.nil?
+    state_region[1] unless state_region.nil?
   end
 
   def zip_code(node)
