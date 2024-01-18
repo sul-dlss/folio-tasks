@@ -134,7 +134,8 @@ module PoLinesHelpers
 
   def distribution_type(funding_type)
     return 'percentage' if funding_type.match?(/0|2/) # Symphony funding type 0 and 2
-    return 'amount' if funding_type.match?(/3|4/) # Symphony funding type 3 and 4
+
+    'amount' if funding_type.match?(/3|4/) # Symphony funding type 3 and 4
   end
 
   def distribution_value(distribution, hldg_code)

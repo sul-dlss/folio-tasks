@@ -54,7 +54,7 @@ module OrganizationsTaskHelpers
   end
 
   def export_to_accounting?(vendor_id)
-    return true unless vendor_id.end_with?('-999', '-9999')
+    true unless vendor_id.end_with?('-999', '-9999')
   end
 
   def tax_paid_to_vendor?(obj)

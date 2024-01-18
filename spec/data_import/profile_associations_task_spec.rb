@@ -37,11 +37,11 @@ describe 'pulling and loading profile associations' do
   end
 
   # Skip because Webmock does not recognize successive mocks for the same uri (even with different query strings)
-  xit 'does a post for an new association id', skip: 'Webmock issue with successive mocks' do
+  it 'does a post for an new association id', skip: 'Webmock issue with successive mocks' do
     expect(WebMock).to have_requested(:post, 'http://example.com/data-import-profiles/profileAssociations?detail=MATCH_PROFILE&master=JOB_PROFILE').at_least_once
   end
 
-  xit 'does a put for an existing association id' do
+  it 'does a put for an existing association id', skip: 'Webmock issue with successive mocks' do
     expect(WebMock).to have_requested(:put, 'http://example.com/data-import-profiles/profileAssociations/d0ebbdbe-2f0f-11eb-adc1-0242ac120002?detail=ACTION_PROFILE&master=JOB_PROFILE').at_least_once
   end
 

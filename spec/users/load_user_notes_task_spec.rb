@@ -38,7 +38,7 @@ describe 'loading user notes and note types' do
         .to eq 'This patron record should have a circnote'
     end
 
-    xit 'construcs the note json for a user' do
+    it 'construcs the note json for a user', skip: 'content of circnote is null; fix if using code again' do
       note = load_user_notes_task.send(:user_notes, 'circnote')[0]
       user = user_id(note.values[0])
       expect(load_user_notes_task.send(:note_json, %w[circnote 1], note, user)).to eq json_for_note
