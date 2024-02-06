@@ -19,4 +19,25 @@ module FolioRequestHelper
     hash.delete('resultInfo')
     hash
   end
+
+  def trim_default_data(hash, name)
+    new_hash = []
+    hash[name].each do |obj|
+      if obj['userInfo']['userName'] == 'System'
+        next
+      end
+
+      obj.delete('childOf')
+      obj.delete('grantedTo')
+      obj.delete('dummy')
+      obj.delete('deprecated')
+      obj.delete('authentication')
+      obj.delete('parentProfiles')
+      obj.delete('childProfiles')
+      new_hash.append(obj)
+    end
+    hash.delete('totalRecords')
+    hash.delete('resultInfo')
+    hash[name] = new_hash
+  end
 end

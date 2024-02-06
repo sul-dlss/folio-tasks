@@ -150,7 +150,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             tenant:pull_calendars
                             tenant:pull_locations]
 
-desc 'Pull all data import profile json data (associations are excluded) (use STAGE=orig)'
+desc 'Pull all data import profile json data (associations and System defaults are excluded) (use STAGE=orig)'
 task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles
                                             data_import:pull_mapping_profiles
                                             data_import:pull_match_profiles
