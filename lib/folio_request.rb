@@ -41,8 +41,8 @@ class FolioRequest
     parse(authenticated_request(path, method: :put, body: json), **other)
   end
 
-  def delete(path)
-    parse(authenticated_request(path, method: :delete))
+  def delete(path, **other)
+    parse(authenticated_request(path, method: :delete), **other)
   end
 
   def parse(response, **other)
