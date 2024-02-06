@@ -162,6 +162,12 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_action_profiles
                                        data_import:load_mapping_profiles]
 
+desc 'Delete all user-created data import profiles (excludes System defaults) [job, match, action, and mapping].'
+task delete_all_data_import_profiles: %i[data_import:delete_job_profiles
+                                         data_import:delete_match_profiles
+                                         data_import:delete_action_profiles
+                                         data_import:delete_mapping_profiles]
+
 desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types, holding note types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_item_loan_types

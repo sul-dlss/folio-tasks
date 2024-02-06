@@ -18,6 +18,10 @@ module DataImportTaskHelpers
     @@folio_request.put("/data-import-profiles/jobProfiles/#{obj['profile']['id']}", obj.to_json)
   end
 
+  def job_profiles_delete(id)
+    @@folio_request.delete("/data-import-profiles/jobProfiles/#{id}", response_code: true)
+  end
+
   def job_profiles_get(name)
     response = @@folio_request.get_cql('/data-import-profiles/jobProfiles', "name==#{name}")['jobProfiles']
     begin
@@ -37,6 +41,10 @@ module DataImportTaskHelpers
 
   def match_profiles_put(obj)
     @@folio_request.put("/data-import-profiles/matchProfiles/#{obj['profile']['id']}", obj.to_json)
+  end
+
+  def match_profiles_delete(id)
+    @@folio_request.delete("/data-import-profiles/matchProfiles/#{id}", response_code: true)
   end
 
   def match_profiles_get(name)
@@ -60,6 +68,10 @@ module DataImportTaskHelpers
     @@folio_request.put("/data-import-profiles/actionProfiles/#{obj['profile']['id']}", obj.to_json)
   end
 
+  def action_profiles_delete(id)
+    @@folio_request.delete("/data-import-profiles/actionProfiles/#{id}", response_code: true)
+  end
+
   def action_profiles_get(name)
     response = @@folio_request.get_cql('/data-import-profiles/actionProfiles', "name==#{name}")['actionProfiles']
     begin
@@ -79,6 +91,10 @@ module DataImportTaskHelpers
 
   def mapping_profiles_put(obj)
     @@folio_request.put("/data-import-profiles/mappingProfiles/#{obj['profile']['id']}", obj.to_json)
+  end
+
+  def mapping_profiles_delete(id)
+    @@folio_request.delete("/data-import-profiles/mappingProfiles/#{id}", response_code: true)
   end
 
   def mapping_profiles_get(name)
