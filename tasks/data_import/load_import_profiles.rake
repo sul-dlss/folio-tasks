@@ -75,6 +75,16 @@ namespace :data_import do
     end
   end
 
+  desc 'update match profiles in folio'
+  task :update_match_profiles do
+    match_profiles_json.each_value do |v|
+      v.each do |obj|
+        payload = import_profile_hash(obj)
+        match_profiles_put(payload)
+      end
+    end
+  end
+
   desc 'load profile associations into folio. To avoid duplicate associations, only run this task ONCE!'
   task :load_profile_associations do
     profile_associations_json.each_value do |v|
