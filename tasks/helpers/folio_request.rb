@@ -23,9 +23,7 @@ module FolioRequestHelper
   def trim_default_data(hash, name)
     new_hash = []
     hash[name].each do |obj|
-      if obj['userInfo']['userName'] == 'System'
-        next
-      end
+      next if obj['userInfo']['userName'] == 'System'
 
       obj.delete('childOf')
       obj.delete('grantedTo')
