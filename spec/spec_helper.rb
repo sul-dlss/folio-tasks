@@ -4,7 +4,7 @@ require 'webmock/rspec'
 require 'support/schema_matcher'
 require 'json-schema'
 
-ENV['STAGE'] = 'test'
+ENV['STAGE'] = 'spec'
 
 RSpec.configure do |config|
   # assertion/expectation library such as wrong or the stdlib/minitest
