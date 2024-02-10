@@ -128,25 +128,29 @@ module DataImportTaskHelpers
 
   def pull_action_profiles
     hash = @@folio_request.get('/data-import-profiles/actionProfiles?withRelations=true&limit=999')
-    trim_default_data(hash, 'actionProfiles')
+    trim_hash(hash, 'actionProfiles')
+    remove_system_profiles(hash, 'actionProfiles')
     hash.to_json
   end
 
   def pull_job_profiles
     hash = @@folio_request.get('/data-import-profiles/jobProfiles?limit=999')
-    trim_default_data(hash, 'jobProfiles')
+    trim_hash(hash, 'jobProfiles')
+    remove_system_profiles(hash, 'jobProfiles')
     hash.to_json
   end
 
   def pull_mapping_profiles
     hash = @@folio_request.get('/data-import-profiles/mappingProfiles?withRelations=true&limit=999')
-    trim_default_data(hash, 'mappingProfiles')
+    trim_hash(hash, 'mappingProfiles')
+    remove_system_profiles(hash, 'mappingProfiles')
     hash.to_json
   end
 
   def pull_match_profiles
     hash = @@folio_request.get('/data-import-profiles/matchProfiles?withRelations=true&limit=999')
-    trim_default_data(hash, 'matchProfiles')
+    trim_hash(hash, 'matchProfiles')
+    remove_system_profiles(hash, 'matchProfiles')
     hash.to_json
   end
 
@@ -214,16 +218,16 @@ module DataImportTaskHelpers
     end
   end
 
-  def remove_values(hash, key_name)
-    hash.each do |k, v|
-      if k == key_name
-        hash.delete(k)
-      elsif v.is_a?(Hash)
-        remove_values(v, key_name)
-      elsif v.is_a?(Array)
-        v.flatten.each { |x| remove_values(x, key_name) if x.is_a?(Hash) }
-      end
+  def remove_system_profiles(hash, name)
+    new_hash = []
+    hash[name].each do |obj|
+      next if obj['userInfo']['userName'] == 'System'
+
+      obj.delete('parentProfiles')
+      obj.delete('childProfiles')
+      obj.delete('userInfo')
+      new_hash.append(obj)
     end
-    hash
+    hash[name] = new_hash
   end
 end
