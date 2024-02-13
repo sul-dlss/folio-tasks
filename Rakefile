@@ -150,7 +150,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             tenant:pull_calendars
                             tenant:pull_locations]
 
-desc 'Pull all data import profile json data (associations are excluded) (use STAGE=orig)'
+desc 'Pull all data import profile json data (associations and System defaults are excluded) (use STAGE=orig)'
 task pull_all_data_import_profiles_data: %i[data_import:pull_job_profiles
                                             data_import:pull_mapping_profiles
                                             data_import:pull_match_profiles
@@ -161,6 +161,12 @@ task load_all_data_import_profiles: %i[data_import:load_job_profiles
                                        data_import:load_match_profiles
                                        data_import:load_action_profiles
                                        data_import:load_mapping_profiles]
+
+desc 'Delete all user-created data import profiles (excludes System defaults) [job, match, action, and mapping].'
+task delete_all_data_import_profiles: %i[data_import:delete_job_profiles
+                                         data_import:delete_match_profiles
+                                         data_import:delete_action_profiles
+                                         data_import:delete_mapping_profiles]
 
 desc 'Load all inventory settings: [alt title types, item loan types, item note types, identifier types, material types, statistical codes, instance note types, holdings types, holding note types]'
 task load_all_inventory_settings: %i[inventory:load_alt_title_types
