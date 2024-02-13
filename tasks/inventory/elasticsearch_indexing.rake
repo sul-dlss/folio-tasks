@@ -19,7 +19,7 @@ namespace :inventory do
   end
 
   desc 'update index dynamic settings to defaults (2 replicas) for [instance, authority]'
-  task :default_index_settings, [:resource_name] do |_, args|
+  task :default_search_index_settings, [:resource_name] do |_, args|
     FolioRequest.new.put('/search/index/settings',
                          '{ "resourceName": "'"#{args[:resource_name]}"'",
                             "indexSettings": { "numberOfReplicas": 2, "refreshInterval": 1 } }')
