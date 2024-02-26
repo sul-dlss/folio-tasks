@@ -138,6 +138,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             circulation:pull_patron_notice_templates
                             circulation:pull_request_cancellation_reasons
                             circulation:pull_request_policies
+                            circulation:pull_staff_slips
                             configurations:pull_configs
                             courses:pull_course_terms
                             courses:pull_course_depts
@@ -181,7 +182,7 @@ task load_all_inventory_settings: %i[inventory:load_alt_title_types
                                      inventory:load_holdings_note_types
                                      inventory:load_copycat_profiles]
 
-desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, circ rules]'
+desc 'Load all circulation settings: [fixed due date schedule, loan policies, lost item fee policies, overdue fines policies, patron notice policies, patron notice templates, request cancellation reasons, request policies, staff slips, circ rules]'
 task load_circ_settings: %i[circulation:load_fixed_due_date_sched
                             circulation:load_loan_policies
                             circulation:load_lost_item_fees
@@ -190,6 +191,7 @@ task load_circ_settings: %i[circulation:load_fixed_due_date_sched
                             circulation:load_patron_notice_templates
                             circulation:load_request_cancellation_reasons
                             circulation:load_request_policies
+                            circulation:load_staff_slips
                             circulation:load_circ_rules]
 
 desc 'Delete all circulation settings'

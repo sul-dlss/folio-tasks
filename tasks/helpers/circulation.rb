@@ -110,6 +110,14 @@ module CirculationTaskHelpers
     @@folio_request.delete("/request-policy-storage/request-policies/#{id}")
   end
 
+  def staff_slips_json
+    JSON.parse(File.read("#{Settings.json}/circulation/staff_slips.json"))
+  end
+
+  def staff_slips_put(id, hash)
+    @@folio_request.put("/staff-slips-storage/staff-slips/#{id}", hash.to_json)
+  end
+
   def pull_circ_rules
     hash = @@folio_request.get('/circulation-rules-storage')
     hash.to_json
@@ -163,6 +171,12 @@ module CirculationTaskHelpers
   def pull_request_policies
     hash = @@folio_request.get('/request-policy-storage/request-policies')
     trim_hash(hash, 'requestPolicies')
+    hash.to_json
+  end
+
+  def pull_staff_slips
+    hash = @@folio_request.get('/staff-slips-storage/staff-slips')
+    trim_hash(hash, 'staffSlips')
     hash.to_json
   end
 end

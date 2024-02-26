@@ -243,6 +243,12 @@ namespace :circulation do |namespace|
     name = 'request_policies'
     open_file_and_pull(namespace, name, helper)
   end
+
+  desc 'pull staff slips from original folio instance (use STAGE=orig yaml)'
+  task :pull_staff_slips do
+    name = 'staff_slips'
+    open_file_and_pull(namespace, name, helper)
+  end
 end
 
 namespace :courses do |namespace|

@@ -61,6 +61,13 @@ namespace :circulation do
     end
   end
 
+  desc 'load staff slips into folio'
+  task :load_staff_slips do
+    staff_slips_json['staffSlips'].each do |obj|
+      staff_slips_put(obj['id'], obj)
+    end
+  end
+
   desc 'load circulation rules into folio'
   task :load_circ_rules do
     circulation_rules_put(circulation_rules_json)
