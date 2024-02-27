@@ -14,6 +14,7 @@ describe 'circ settings rake tasks' do
     Rake.application.invoke_task 'circulation:load_request_cancellation_reasons'
   end
   let(:load_request_policies) { Rake.application.invoke_task 'circulation:load_request_policies' }
+  let(:load_staff_slips) { Rake.application.invoke_task 'circulation:load_staff_slips' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
@@ -27,6 +28,7 @@ describe 'circ settings rake tasks' do
     stub_request(:post, 'http://example.com/templates')
     stub_request(:post, 'http://example.com/cancellation-reason-storage/cancellation-reasons')
     stub_request(:post, 'http://example.com/request-policy-storage/request-policies')
+    stub_request(:put, %r{.*staff-slips-storage/staff-slips.*})
   end
 
   context 'when creating fixed due date schedules' do
@@ -101,6 +103,14 @@ describe 'circ settings rake tasks' do
     it 'supplies valid json for posting request policies', skip: 'json is valid but schema validation is not working' do
       expect(request_policies_json['requestPolicies'].sample).to match_json_schema('mod-circulation-storage',
                                                                                    'request-policy')
+    end
+  end
+
+  context 'when creating staff slips' do
+    let(:staff_slips_json) { load_staff_slips.send(:staff_slips_json) }
+
+    it 'supplies valid json for putting staff slips' do
+      expect(staff_slips_json['staffSlips'].sample).to match_json_schema('mod-circulation-storage', 'staff-slip')
     end
   end
 end
