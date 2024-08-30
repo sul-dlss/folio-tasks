@@ -17,4 +17,17 @@ namespace :orders do
   task :link_po_lines_to_inventory, [:filedir] do |_, args|
     link_po_lines_to_inventory(args[:filedir])
   end
+
+  desc 'remove encumbrances from po lines'
+  task :remove_encumbrances_po_line, [:file] do |_, args|
+    File.readlines(args[:file], chomp: true).each do |id|
+      next if id.empty?
+
+      po_line = orders_get_polines(id)
+      new_po_line = remove_encumbrance(po_line)
+      puts 'New PO Line:'
+      pp new_po_line
+      orders_storage_put_polines(id, new_po_line)
+    end
+  end
 end

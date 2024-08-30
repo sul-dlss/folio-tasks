@@ -255,8 +255,19 @@ module PoLinesHelpers
     po_line_hash
   end
 
+  def remove_encumbrance(po_line_hash)
+    po_line_hash['fundDistribution'].each do |obj|
+      obj.delete('encumbrance')
+    end
+    po_line_hash
+  end
+
   def orders_get_polines_po_num(po_number)
     @@folio_request.get("/orders/order-lines?query=poLineNumber==#{po_number}*")
+  end
+
+  def orders_get_polines(id)
+    @@folio_request.get("/orders/order-lines/#{id}")
   end
 
   def orders_storage_put_polines(id, obj)
