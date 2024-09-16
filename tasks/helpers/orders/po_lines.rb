@@ -256,7 +256,10 @@ module PoLinesHelpers
   end
 
   def remove_encumbrance(po_line_hash)
-    po_line_hash['fundDistribution'].each do |obj|
+    funds = po_line_hash.fetch('fundDistribution', [])
+    return po_line_hash if funds.empty?
+
+    funds.each do |obj|
       obj.delete('encumbrance')
     end
     po_line_hash

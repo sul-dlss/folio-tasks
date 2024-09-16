@@ -24,6 +24,8 @@ namespace :orders do
       next if id.empty?
 
       po_line = orders_get_polines(id)
+      next if po_line.key?('errors')
+
       new_po_line = remove_encumbrance(po_line)
       puts 'New PO Line:'
       pp new_po_line
