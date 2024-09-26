@@ -140,6 +140,7 @@ task pull_all_json_data: %i[users:pull_waivers
                             circulation:pull_request_policies
                             circulation:pull_staff_slips
                             configurations:pull_configs
+                            configurations:pull_email_config
                             courses:pull_course_terms
                             courses:pull_course_depts
                             courses:pull_course_status
