@@ -4,7 +4,10 @@ namespace :inventory do
   desc 'recreate search index (drops existing indices) for [instance, authority]'
   task :recreate_search_index, [:resource_name] do |_, args|
     FolioRequest.new.post('/search/index/inventory/reindex',
-                          '{ "recreateIndex": "true", "resourceName": "'"#{args[:resource_name]}"'" }')
+                          '{ "recreateIndex": "true",
+                             "resourceName": "'"#{args[:resource_name]}"'",
+                             "indexSettings": { "numberOfShards": 4, "numberOfReplicas": 2, "refreshInterval": 1 }
+                            }')
   end
 
   desc 'reindex search index for [instance, authority]'
@@ -22,6 +25,6 @@ namespace :inventory do
   task :default_search_index_settings, [:resource_name] do |_, args|
     FolioRequest.new.put('/search/index/settings',
                          '{ "resourceName": "'"#{args[:resource_name]}"'",
-                            "indexSettings": { "numberOfReplicas": 2, "refreshInterval": 1 } }')
+                            "indexSettings": { "numberOfShards": 4, "numberOfReplicas": 2, "refreshInterval": 1 } }')
   end
 end
