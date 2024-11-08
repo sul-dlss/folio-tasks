@@ -24,8 +24,8 @@ class FolioRequest
     parse(authenticated_request(path))
   end
 
-  def get_cql_json(path, query)
-    path += "?query=#{CGI.escape(query)}"
+  def get_cql_json(path, limit, query)
+    path += "?limit=#{limit}&query=#{CGI.escape(query)}"
     puts JSON.pretty_generate(JSON.parse(authenticated_request(path)))
   end
 
