@@ -20,9 +20,8 @@ module OrgNoteTaskHelpers
   end
 
   def org_notes_from_xml(xml_obj, org_id, note_type_id)
-    notes = []
-    xml_obj.xpath('vendorExtendedInfo/entry').each do |note|
-      notes.push(note_hash(note_type_id, note&.text, org_id))
+    notes = xml_obj.xpath('vendorExtendedInfo/entry').map do |note|
+      note_hash(note_type_id, note&.text, org_id)
     end
     notes.compact
   end
