@@ -48,11 +48,9 @@ module ConfigurationsTaskHelpers
   end
 
   def config_entry_ids(hash)
-    ids = []
-    hash['configs'].each do |obj|
-      ids.push(obj['id'])
+    hash['configs'].map do |obj|
+      obj['id']
     end
-    ids
   end
 
   def config_entry_get(module_code)

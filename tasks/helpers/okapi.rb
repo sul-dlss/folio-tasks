@@ -44,11 +44,9 @@ module OkapiTaskHelpers
   end
 
   def all_timers
-    all_timers = []
-    timers_get.each do |obj|
-      all_timers.push(timer_id(obj))
+    timers_get.map do |obj|
+      timer_id(obj)
     end
-    all_timers
   end
 
   def circulation_timers

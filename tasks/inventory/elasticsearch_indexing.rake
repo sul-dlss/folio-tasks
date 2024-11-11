@@ -5,7 +5,7 @@ namespace :inventory do
   task :recreate_search_index, [:resource_name] do |_, args|
     FolioRequest.new.post('/search/index/inventory/reindex',
                           '{ "recreateIndex": "true",
-                             "resourceName": "'"#{args[:resource_name]}"'",
+                             "resourceName": "' + (args[:resource_name]).to_s + '",
                              "indexSettings": { "numberOfShards": 4, "numberOfReplicas": 2, "refreshInterval": 1 }
                             }')
   end
@@ -13,7 +13,7 @@ namespace :inventory do
   desc 'reindex search index for [instance, authority]'
   task :reindex_search, [:resource_name] do |_, args|
     FolioRequest.new.post('/search/index/inventory/reindex',
-                          '{ "resourceName": "'"#{args[:resource_name]}"'" }')
+                          "{ \"resourceName\": \"#{args[:resource_name]}\" }")
   end
 
   desc 'monitor instances published to Kafka for reindex with given job id'
@@ -24,7 +24,12 @@ namespace :inventory do
   desc 'update index dynamic settings to defaults (2 replicas) for [instance, authority]'
   task :default_search_index_settings, [:resource_name] do |_, args|
     FolioRequest.new.put('/search/index/settings',
-                         '{ "resourceName": "'"#{args[:resource_name]}"'",
-                            "indexSettings": { "numberOfShards": 4, "numberOfReplicas": 2, "refreshInterval": 1 } }')
+                         "{ \"resourceName\": \" #{args[:resource_name]} \",
+                            \"indexSettings\": {
+                                \"numberOfShards\": 4,
+                                \"numberOfReplicas\": 2,
+                                \"refreshInterval\": 1
+                              }
+                          }")
   end
 end

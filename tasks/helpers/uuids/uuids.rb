@@ -105,13 +105,11 @@ module Uuids
   end
 
   def profile_associations_ids
-    uuids = []
     associations = JSON.parse(pull_profile_associations)
 
-    associations['profileAssociations'].each do |obj|
-      uuids.push(obj['id'])
+    associations['profileAssociations'].map do |obj|
+      obj['id']
     end
-    uuids
   end
 
   def user_ids(username)

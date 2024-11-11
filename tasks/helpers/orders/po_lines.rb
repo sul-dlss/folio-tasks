@@ -98,11 +98,9 @@ module PoLinesHelpers
   end
 
   def add_fund_data(fund_data, hldg_code, funds)
-    fund_dist = []
-    fund_data.each do |distribution|
-      fund_dist.push(distribution_hash(distribution, hldg_code, funds))
+    fund_data.map do |distribution|
+      distribution_hash(distribution, hldg_code, funds)
     end
-    fund_dist
   end
 
   def distribution_hash(distribution, hldg_code, funds)
