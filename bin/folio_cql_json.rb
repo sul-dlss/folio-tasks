@@ -4,6 +4,21 @@ require_relative '../lib/folio_request'
 require 'json'
 folio = FolioRequest.new
 path = folio.make_path(ARGV[0])
-limit = ARGV[1] || '10'
-query = ARGV[2..]
-folio.get_cql_json(path, limit, query.join(' '))
+
+def usage
+    puts "USAGE: folio_cql_json.rb {folio API path} {limit (optional, default 10)} {cql query string}"
+    exit(0)
+end
+
+if ARGV.length < 2
+    usage
+end
+
+if ARGV.length == 2
+    query = ARGV[1..]
+else
+    limit = ARGV[1]
+    query = ARGV[2..]
+end
+
+folio.get_cql_json(path, limit || 10, query.join(' '))
