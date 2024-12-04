@@ -10,33 +10,26 @@ okapi:
 hostname: https://folio.stanford.edu
 namespace: folio
 
-encumbrance_file: 'tsv/finance/fix.encumbrance.awaiting.payment.amount.2.csv'
-json_orders: '/s/SUL/Dataload/folio_symphony_extract/acquisitions/orders/json'
-tsv_orders: '/s/SUL/Dataload/folio_symphony_extract/acquisitions/orders/tsv'
-yaml:
-  sul_orders: '/s/SUL/Dataload/folio_symphony_extract/acquisitions/orders/yaml/sul'
-  law_orders: '/s/SUL/Dataload/folio_symphony_extract/acquisitions/orders/yaml/law'
 tsv: tsv
 json: json
 xml: xml
 
 configurations:
-  - edge-sip2
   - BULKEDIT
   - CHECKOUT
+  - edge-sip2
   - FAST_ADD
   - INVOICE
   - LOAN_HISTORY
-  - CHECKOUT
-  - FAST_ADD
-  - INVOICE
+  - LOGIN-SAML
+  - NCIP
+  - OAIPMH
   - ORDERS
   - ORG
   - SETTINGS
   - TENANT
+  - USERS
   - USERSBL
-  - NCIP
-  - INVOICE
 
 # comment this out in order to use the user's real email address:
 user_email_override: foliotesting@lists.stanford.edu
