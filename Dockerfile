@@ -18,3 +18,5 @@ COPY Gemfile ./Gemfile
 COPY Gemfile.lock ./Gemfile.lock
 COPY Rakefile ./Rakefile
 COPY run_rake.sh ./run_rake.sh
+
+RUN bundle
