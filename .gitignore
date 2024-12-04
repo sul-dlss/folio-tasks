@@ -1,5 +1,6 @@
 /config/settings/*.yml
 !/config/settings/spec.yml
+!/config/settings/pod.yml
 /json/**/*.json
 /log/*
 /tsv/**/*.tsv

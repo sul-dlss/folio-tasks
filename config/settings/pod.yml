@@ -1,0 +1,149 @@
+okapi:
+  url: htts://okapi:9130
+  headers:
+    X-Okapi-Tenant: sul
+    User-Agent: FolioApiClient
+  login_params:
+    username: user
+    password: pass
+
+hostname: https://folio.stanford.edu
+namespace: folio
+
+tsv: tsv
+json: json
+xml: xml
+
+configurations:
+  - BULKEDIT
+  - CHECKOUT
+  - edge-sip2
+  - FAST_ADD
+  - INVOICE
+  - LOAN_HISTORY
+  - LOGIN-SAML
+  - NCIP
+  - OAIPMH
+  - ORDERS
+  - ORG
+  - SETTINGS
+  - TENANT
+  - USERS
+  - USERSBL
+
+# comment this out in order to use the user's real email address:
+user_email_override: foliotesting@lists.stanford.edu
+
+inactive_users_file: 'folio_err.log'
+
+self_check_service_codes:
+  - ENG
+  - BUS-IDESK
+  - EAST-ASIA
+  - ART
+  - LAW
+  - SCIENCE
+
+# This should be is ordered from highest to lowest Rank
+# https://docs.google.com/spreadsheets/d/10n77Zxgp3GCgwB9pPR80CZzNs6ERDzQkyCuolUQEoG0
+groups_ranked:
+  - faculty
+  - staff
+  - staff-casual
+  - fellow
+  - visiting scholar
+  - courtesy
+  - postdoctoral
+  - graduate
+  - undergrad
+
+faculty:
+  - faculty
+  - faculty:slac
+  - faculty:emeritus
+  - faculty:affiliate
+  - faculty:onleave
+  - faculty:otherteaching
+  - faculty:retired
+
+staff:
+  - staff
+  - staff:academic
+  - staff:otherteaching
+  - staff:parttime
+  - staff:temporary
+  - staff:temp
+  - staff:onleave
+  - staff:otherteaching
+  - staff:emeritus
+  - staff:retired
+
+staff_casual:
+  - staff:casual
+
+fellow:
+  - affiliate:fellow
+
+visiting_scholar:
+  - affiliate:visitscholarvs
+  - affiliate:visitscholarvt
+
+courtesy:
+  - affiliate:courtesy
+
+student:
+  - student
+  - student:postdoc
+
+student_recent:
+  - student:recent
+
+student_onleave:
+  - student:onleave
+
+nonactive_types:
+  - student:recent
+  - student:onleave
+  - student:nonactive
+  - staff:nonactive
+  - faculty:nonactive
+
+courtesygroups:
+  ASSO-BDRCT: courtesy
+  DOC-RLCPB: graduate
+  DOC-RLCPT: graduate
+  DOC-RSP: graduate
+  FAC-RLCPB: faculty
+  FAC-RLCPT: faculty
+  FAC-RSP: faculty
+  MXALUM-LAW: law-guest
+  MXAS-25LMT: sul-contractprograms
+  MXD-RLCP: graduate
+  MXFEE: sul-purchased
+  MXFEE-BUS: bus-guest
+  MXFEE-NO25: sul-purchased
+  PSEUDO: pseudopatron
+
+policygroups:
+  CNS: staff
+  CNF: faculty
+  CNAC: staff
+  REU: undergrad
+  RED: graduate
+  REG: graduate
+  MXAC: staff
+  MXF: faculty
+  MXAS: courtesy
+  MXD: graduate
+  MXS: staff
+  LAWFEE: courtesy
+  MXALUM: courtesy
+
+usergroups:
+  STAFF-NSTR: instructor
+  STAFF-ACT: acting instructor
+  STAFF-CLIN: clinical instructor
+  MXF: consulting instructor
+  STAFF-LECT: lecturer
+
+defaultgroup: courtesy
