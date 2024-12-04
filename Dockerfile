@@ -12,10 +12,8 @@ WORKDIR /home/folio-tasks
 
 COPY bin ./bin/
 COPY config/settings/pod.yml ./config/settings/pod.yml
-COPY json ./json/
 COPY lib ./lib/
 COPY tasks ./tasks/
-COPY tsv ./tsv/
 COPY Gemfile ./Gemfile
 COPY Gemfile.lock ./Gemfile.lock
 COPY Rakefile ./Rakefile
