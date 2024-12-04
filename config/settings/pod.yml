@@ -1,5 +1,5 @@
 okapi:
-  url: htts://okapi:9130
+  url: http://okapi:9130
   headers:
     X-Okapi-Tenant: sul
     User-Agent: FolioApiClient
