@@ -1,11 +1,7 @@
 okapi:
   url: http://okapi:9130
   headers:
-    X-Okapi-Tenant: sul
     User-Agent: FolioApiClient
-  login_params:
-    username: user
-    password: pass
 
 hostname: https://folio.stanford.edu
 namespace: folio
