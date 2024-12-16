@@ -32,7 +32,7 @@ namespace :orders do
       audit_events = audit_acq_order_lines(id, limit: 2, offset: 0)
       po_line_audit_events = audit_events.fetch('orderLineAuditEvents', [])
       previous_version = previous_version_audit_event(po_line_audit_events)
-      if (previous_version.empty?)
+      if previous_version.empty?
         puts "No audit events to restore for po line #{id}"
       else
         response = orders_storage_put_polines(id, previous_version)
