@@ -7,6 +7,7 @@ require_relative 'helpers/configurations'
 require_relative 'helpers/courses'
 require_relative 'helpers/data_import'
 require_relative 'helpers/inventory'
+require_relative 'helpers/orders'
 require_relative 'helpers/organizations/interfaces'
 require_relative 'helpers/tenant'
 require_relative 'helpers/users'
@@ -24,6 +25,16 @@ def open_file_and_pull(namespace, name, helper, **other)
     dirname = "#{dir}/#{scope}"
     FileUtils.mkdir_p(dirname) unless File.directory?(dirname)
     File.open("#{dirname}/#{name}.json", 'w') { |file| file.puts helper.send(:"pull_#{name}") }
+  end
+end
+
+namespace :orders do |namespace|
+  helper = OrderSettingsHelpers
+
+  desc 'pull custom acquisition methods from original folio instance (use STAGE=orig yaml)'
+  task :pull_custom_acq_methods do
+    name = 'custom_acq_methods'
+    open_file_and_pull(namespace, name, helper)
   end
 end
 

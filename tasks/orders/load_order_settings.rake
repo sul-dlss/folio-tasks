@@ -9,7 +9,7 @@ namespace :orders do
 
   desc 'load acquisition methods for orders'
   task :load_acq_methods do
-    acq_methods_tsv.each do |obj|
+    acq_methods_json['acquisitionMethods'].each do |obj|
       acq_methods_post(obj)
     end
   end
