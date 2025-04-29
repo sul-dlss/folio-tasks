@@ -7,12 +7,15 @@ require 'optparse'
 options = { limit: 10 }
 
 OptionParser.new do |opts|
-  opts.banner = "Usage: #{__FILE__} --path folio/API_path --limit (optional, default 10) --query 'cql,query,string' (i.e. use commas to conjoin query terms)"
-  opts.on("-pAPI_PATH", "--path API_PATH", "FOLIO API path (REQUIRED)") { |p| options[:path] = p }
-  opts.on("-lLIMIT", "--limit LIMIT", "The number of records to return (OPTIONAL)") { |l| options[:limit] = l }
-  opts.on("-qQUERY", "--query QUERY", Array, "cql query, single-quote, comma-seperated (REQUIRED)") { |q| options[:query] = q }
+  opts.banner = "Usage: #{__FILE__} --path folio/API_path --limit (optional, default 10) \
+                --query 'cql,query,string' (i.e. use commas to conjoin query terms)"
+  opts.on('-pAPI_PATH', '--path API_PATH', 'FOLIO API path (REQUIRED)') { |p| options[:path] = p }
+  opts.on('-lLIMIT', '--limit LIMIT', 'The number of records to return (OPTIONAL)') { |l| options[:limit] = l }
+  opts.on('-qQUERY', '--query QUERY', Array, 'cql query, single-quote, comma-seperated (REQUIRED)') do |q|
+    options[:query] = q
+  end
 
-  opts.on("-h", "--help", "Prints this help") do
+  opts.on('-h', '--help', 'Prints this help') do
     puts opts
     exit
   end
