@@ -7,12 +7,13 @@ module OkapiTaskHelpers
   include FolioRequestHelper
 
   def timers_get
-    JSON.parse(@@folio_request.request('/_/proxy/tenants/sul/timers'))
+    JSON.parse(@@folio_request.authenticated_request('/_/proxy/tenants/sul/timers'))
   end
 
   def timers_patch(json)
-    response = @@folio_request.request('/_/proxy/tenants/sul/timers', method: :patch, body: json)
+    response = @@folio_request.authenticated_request('/_/proxy/tenants/sul/timers', method: :patch, body: json)
     response.code
+    response.body
   end
 
   def timer_id(timer_object)
