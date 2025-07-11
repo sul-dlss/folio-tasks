@@ -20,16 +20,4 @@ namespace :inventory do
   task :search_index_job_status, [:job_id] do |_, args|
     FolioRequest.new.get("/instance-storage/reindex/#{args[:job_id]}")
   end
-
-  desc 'update index dynamic settings to defaults (2 replicas) for [instance, authority]'
-  task :default_search_index_settings, [:resource_name] do |_, args|
-    FolioRequest.new.put('/search/index/settings',
-                         "{ \"resourceName\": \" #{args[:resource_name]} \",
-                            \"indexSettings\": {
-                                \"numberOfShards\": 4,
-                                \"numberOfReplicas\": 2,
-                                \"refreshInterval\": 1
-                              }
-                          }")
-  end
 end
