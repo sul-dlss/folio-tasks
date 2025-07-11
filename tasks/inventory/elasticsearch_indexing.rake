@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 namespace :inventory do
-
   desc 'recreate resource index (drops index): [authority, location]'
   task :recreate_resource_index, [:resource_name] do |_, args|
     FolioRequest.new.post('/search/index/inventory/reindex',
