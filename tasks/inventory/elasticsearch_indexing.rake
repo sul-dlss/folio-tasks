@@ -11,7 +11,7 @@ namespace :inventory do
 
   desc 'recreate instances index (build new data model)'
   task :recreate_instances_index do
-    FolioRequest.new.post('/search/index/instance-records/reindex/full')
+    FolioRequest.new.post_no_body('/search/index/instance-records/reindex/full')
   end
 
   desc 'reindex index for resource: [authority, location]'
