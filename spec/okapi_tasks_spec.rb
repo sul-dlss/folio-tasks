@@ -11,6 +11,9 @@ describe 'okapi tasks' do
   let(:all_timers) { disable_timers_task.send(:all_timers) }
 
   before do
+    stub_request(:post, 'http://example.com/authn/login')
+      .with(body: Settings.okapi.login_params.to_h)
+
     stub_request(:get, 'http://example.com/_/proxy/tenants/sul/timers')
       .with(query: hash_including)
       .to_return(body: '[ {"id": "mod-circulation_0"}, {"id": "mod-circulation-storage_0"}, {"id": "mod-circulation_1"} ]')
