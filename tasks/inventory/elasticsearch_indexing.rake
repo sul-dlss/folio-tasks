@@ -25,7 +25,7 @@ namespace :inventory do
   desc 'reindex instances index'
   task :reindex_instances_index do
     FolioRequest.new.post('/search/index/instance-records/reindex/upload',
-                          '{ "entityTypes": ["instances"]
+                          '{ "entityTypes": ["instance"]
                            }')
   end
 
@@ -50,15 +50,27 @@ namespace :inventory do
                            }')
   end
 
+  desc 'reindex call-number index'
+  task :reindex_callnumber_index do
+    FolioRequest.new.post('/search/index/instance-records/reindex/upload',
+                          '{ "entityTypes": ["call-number"]
+                           }')
+  end
+
   desc 'reindex all entity type indexes'
   task :reindex_all_indexes do
     FolioRequest.new.post('/search/index/instance-records/reindex/upload',
-                          '{ "entityTypes": ["instance", "subject", "contributor", "classification"]
+                          '{ "entityTypes": ["instance", "subject", "contributor", "classification", "call-number"]
                            }')
   end
 
   desc 'monitor status for resource reindexing'
   task :search_index_job_status do
     FolioRequest.new.get('/search/index/instance-records/reindex/status')
+  end
+
+  desc 'reindex failed merge ranges'
+  task :reindex_failed_merge do
+    FolioRequest.new.post_no_body('/search/index/instance-records/reindex/merge/failed')
   end
 end
