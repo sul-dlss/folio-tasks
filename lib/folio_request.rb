@@ -9,7 +9,6 @@ class FolioRequest
   DEFAULT_HEADERS = {
     accept: 'application/json, text/plain',
     content_type: 'application/json'
-    # Authorization: Bearer token
   }.freeze
 
   def get(path)
