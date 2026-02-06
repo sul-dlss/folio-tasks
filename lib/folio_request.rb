@@ -9,6 +9,7 @@ class FolioRequest
   DEFAULT_HEADERS = {
     accept: 'application/json, text/plain',
     content_type: 'application/json'
+    # Authorization: Bearer token
   }.freeze
 
   def get(path)
@@ -60,7 +61,7 @@ class FolioRequest
   def session_token
     @session_token ||= begin
       response = request('/authn/login', json: Settings.okapi.login_params, method: :post)
-      response['x-okapi-token']
+      response.parse(:json)['okapiToken']
     end
   end
 

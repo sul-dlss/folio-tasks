@@ -9,6 +9,7 @@ describe 'load order settings rake tasks' do
   before do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)
+      .to_return(body: '{ "okapiToken": "adshjr34h" }')
 
     stub_request(:post, 'http://example.com/orders/acquisition-methods')
   end
