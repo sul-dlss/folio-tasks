@@ -15,6 +15,7 @@ describe 'loading user notes and note types' do
   before do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)
+      .to_return(body: '{ "okapiToken": "adshjr34h" }')
 
     stub_request(:post, 'http://example.com/note-types')
     stub_request(:get, 'http://example.com/note-types')

@@ -60,7 +60,7 @@ class FolioRequest
   def session_token
     @session_token ||= begin
       response = request('/authn/login', json: Settings.okapi.login_params, method: :post)
-      response['x-okapi-token']
+      response.parse(:json)['okapiToken']
     end
   end
 

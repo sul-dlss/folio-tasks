@@ -9,6 +9,7 @@ describe 'fix orders' do
   before do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)
+      .to_return(body: '{ "okapiToken": "adshjr34h" }')
 
     stub_request(:get, %r{.*audit-data/acquisition/order-line/28801a5f-396c-48c1-8f6b-cb92f5d428d1.*})
       .to_return(body: '{ "orderLineAuditEvents": [
