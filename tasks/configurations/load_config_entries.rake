@@ -28,7 +28,7 @@ namespace :configurations do
   desc 'load sip2 configurations info folio'
   task :load_sip2_configs do
     sip2_service_points.each do |obj|
-      sip2_config_post(sip2_config_json(sip2_service_point_ids(obj)))
+      sip2_config_post(sip2_config_json(sip2_service_point_ids(obj['code']), obj['library_name']))
     end
   end
 
