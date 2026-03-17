@@ -1,3 +1,10 @@
 [ 
-    { "code": "ART", "library_name": "Art Library" }
+    { "code": "ART", "library_name": "Art Library" },
+    { "code": "BUS-IDESK", "library_name": "Business Library" },
+    { "code": "SCIENCE", "library_name": "Science Library" },
+    { "code": "EDUCATION", "library_name": "Education Library" },
+    { "code": "ENG", "library_name": "Engineering Library" },
+    { "code": "EAST-ASIA", "library_name": "East Asia Library" },
+    { "code": "LAW", "library_name": "Law Library" },
+    { "code": "ONLINE", "library_name": "Stanford University Library" }
 ]
