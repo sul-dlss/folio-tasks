@@ -78,12 +78,14 @@ module ConfigurationsTaskHelpers
     @@folio_request.get_cql('/service-points', "code=#{servicepoint}")['servicepoints'][0]['id']
   end
 
+  # rubocop:disable Layout/LineLength
   def sip2_config_json(servicepoint, library_name)
     config = JSON.parse(File.read("#{Settings.json}/configurations/self_checkout_config.json"))
     config['configName'] = "selfCheckoutConfig.#{servicepoint}"
     config['value'] = "{\"timeoutPeriod\": 5,\"retriesAllowed\": 3,\"checkinOk\": true,\"checkoutOk\": true,\"acsRenewalPolicy\": false,\"libraryName\": \"#{library_name}\",\"terminalLocation\": \"#{servicepoint}\"}"
     config.to_json
   end
+  # rubocop:enable Layout/LineLength
 
   def sip2_config_post(servicepoint)
     @@folio_request.post('/configurations/entries', servicepoint)
