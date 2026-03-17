@@ -1,1 +1,3 @@
-[ "ART" ]
+[ 
+    { "code": "ART", "library_name": "Art Library" }
+]
