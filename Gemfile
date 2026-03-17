@@ -21,10 +21,3 @@ group :development, :test do
   gem 'webmock'
   gem 'byebug'
 end
-
-group :deployment do
-  gem 'capistrano'
-  gem 'capistrano-bundler'
-  gem 'dlss-capistrano'
-  gem 'capistrano-rvm'
-end
