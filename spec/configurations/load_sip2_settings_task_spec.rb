@@ -14,7 +14,7 @@ describe 'sip2 settings rake tasks' do
     stub_request(:post, 'http://example.com/configurations/entries')
     stub_request(:get, 'http://example.com/service-points')
       .with(query: hash_including)
-      .to_return(body: '{ "servicepoints": [{ "id": "b0aed71d", "code": "ART" }] }')
+      .to_return(body: '{ "servicepoints": [{ "id": "b0aed71d", "code": "ART", "name": "Art Library" }] }')
   end
 
   context 'when loading sip2 configurations' do
@@ -23,7 +23,7 @@ describe 'sip2 settings rake tasks' do
         module: 'edge-sip2',
         configName: 'selfCheckoutConfig.b0aed71d',
         enabled: true,
-        value: '{"timeoutPeriod": 5,"retriesAllowed": 3,"checkinOk": true,"checkoutOk": true,"acsRenewalPolicy": false,"libraryName": "Stanford University Libraries","terminalLocation": "b0aed71d"}'
+        value: '{"timeoutPeriod": 5,"retriesAllowed": 3,"checkinOk": true,"checkoutOk": true,"acsRenewalPolicy": false,"libraryName": "Art Library","terminalLocation": "b0aed71d"}'
       }
     end
 
