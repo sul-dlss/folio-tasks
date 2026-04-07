@@ -2,9 +2,10 @@
 
 source 'https://rubygems.org'
 
-ruby '3.2.2'
+ruby '3.4.9'
 
 gem 'config'
+gem 'csv'
 gem 'http'
 gem 'nokogiri'
 gem 'rake'
