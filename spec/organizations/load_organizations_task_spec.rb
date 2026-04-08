@@ -5,6 +5,7 @@ require 'spec_helper'
 
 describe 'organizations rake tasks' do
   let(:load_interfaces_task) { Rake.application.invoke_task 'organizations:load_interfaces' }
+
   before do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)

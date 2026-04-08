@@ -5,7 +5,7 @@ namespace :inventory do
   task :recreate_resource_index, [:resource_name] do |_, args|
     FolioRequest.new.post('/search/index/inventory/reindex',
                           '{ "recreateIndex": "true",
-                             "resourceName": "' + (args[:resource_name]).to_s + '"
+                             "resourceName": "' + args[:resource_name].to_s + '"
                             }')
   end
 
@@ -18,7 +18,7 @@ namespace :inventory do
   task :reindex_resource_index, [:resource_name] do |_, args|
     FolioRequest.new.post('/search/index/inventory/reindex',
                           '{ "recreateIndex": "false",
-                             "resourceName": "' + (args[:resource_name]).to_s + '"
+                             "resourceName": "' + args[:resource_name].to_s + '"
                             }')
   end
 

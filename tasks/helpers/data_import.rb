@@ -174,10 +174,10 @@ module DataImportTaskHelpers
   def duplicate_association(hash, obj)
     duplicate_association = false
     hash['profileAssociations'].each do |assoc|
-      (assoc.key(obj['masterProfileId']) &&
-      assoc.key(obj['detailProfileId']) &&
-      assoc.key(obj['masterProfileType']) &&
-      assoc.key(obj['detailProfileType'])) && duplicate_association = true
+      assoc.key(obj['masterProfileId']) &&
+        assoc.key(obj['detailProfileId']) &&
+        assoc.key(obj['masterProfileType']) &&
+        assoc.key(obj['detailProfileType']) && duplicate_association = true
     end
     duplicate_association
   end
