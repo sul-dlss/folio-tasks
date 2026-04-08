@@ -84,13 +84,4 @@ namespace :data_import do
       end
     end
   end
-
-  desc 'load profile associations into folio. To avoid duplicate associations, only run this task ONCE!'
-  task :load_profile_associations do
-    profile_associations_json.each_value do |v|
-      v.each do |obj|
-        profile_associations_load(obj, obj['masterProfileType'], obj['detailProfileType'])
-      end
-    end
-  end
 end

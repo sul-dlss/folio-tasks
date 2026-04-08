@@ -1,17 +1,9 @@
 # frozen_string_literal: true
 
-require 'csv'
 require_relative '../helpers/users'
 
 namespace :users do
   include UsersTaskHelpers
-
-  desc 'load user groups into folio'
-  task :load_user_groups do
-    groups_csv.each do |obj|
-      groups_post(obj)
-    end
-  end
 
   # Using instead the default reference data address types
   # desc 'load address types into folio'

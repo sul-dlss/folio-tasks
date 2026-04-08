@@ -133,12 +133,6 @@ namespace :users do |namespace|
     name = 'limits'
     open_file_and_pull(namespace, name, helper)
   end
-
-  desc 'pull permission sets from original folio instance (use STAGE=orig yaml)'
-  task :pull_permission_sets do
-    name = 'permission_sets'
-    open_file_and_pull(namespace, name, helper)
-  end
 end
 
 namespace :data_import do |namespace|

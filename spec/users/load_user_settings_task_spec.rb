@@ -4,7 +4,6 @@ require 'rake'
 require 'spec_helper'
 
 describe 'user settings rake tasks' do
-  let(:load_user_groups_task) { Rake.application.invoke_task 'users:load_user_groups' }
   # let(:load_address_types_task) { Rake.application.invoke_task 'users:load_address_types' }
   let(:load_waivers_task) { Rake.application.invoke_task 'users:load_waivers' }
   let(:load_payments_task) { Rake.application.invoke_task 'users:load_payments' }
@@ -15,14 +14,12 @@ describe 'user settings rake tasks' do
   let(:load_conditions_task) { Rake.application.invoke_task 'users:load_conditions' }
   let(:load_patron_blocks_templates_task) { Rake.application.invoke_task 'users:load_patron_blocks_templates' }
   let(:load_limits_task) { Rake.application.invoke_task 'users:load_limits' }
-  let(:load_permission_sets_task) { Rake.application.invoke_task 'users:load_permission_sets' }
 
   before do
     stub_request(:post, 'http://example.com/authn/login')
       .with(body: Settings.okapi.login_params.to_h)
       .to_return(body: '{ "okapiToken": "adshjr34h" }')
 
-    stub_request(:post, 'http://example.com/groups')
     stub_request(:post, 'http://example.com/addresstypes')
     stub_request(:post, 'http://example.com/waives')
     stub_request(:post, 'http://example.com/payments')
@@ -33,17 +30,6 @@ describe 'user settings rake tasks' do
     stub_request(:put, %r{.*patron-block-conditions/.*})
     stub_request(:post, 'http://example.com/manual-block-templates')
     stub_request(:post, 'http://example.com/patron-block-limits')
-    stub_request(:post, 'http://example.com/perms/permissions')
-  end
-
-  context 'when creating patron groups' do
-    it 'creates the hash key and value for group name' do
-      expect(load_user_groups_task.send(:groups_csv)[0]['group']).to eq 'GroupName'
-    end
-
-    it 'creates the hash key and value for the group description' do
-      expect(load_user_groups_task.send(:groups_csv)[0]['desc']).to eq 'Group description'
-    end
   end
 
   # Using instead the default reference data address types
@@ -126,20 +112,6 @@ describe 'user settings rake tasks' do
 
     it 'supplies valid json for posting patron block templates' do
       expect(limits_json['patronBlockLimits'].sample).to match_json_schema('mod-patron-blocks', 'patron-block-limit')
-    end
-  end
-
-  context 'when creating permission sets' do
-    let(:permission_sets_json) { load_permission_sets_task.send(:permission_sets_json) }
-
-    it 'supplies valid json for poasting permission sets' do
-      expect(permission_sets_json['permissions'].sample).to match_json_schema('mod-permissions', 'permissionUpload')
-    end
-
-    it 'sorts the permission sets according to level' do
-      UsersTaskHelpers.display_name_sort(permission_sets_json['permissions'], 'displayName').first(3).each do |obj|
-        expect(obj['displayName'].index(/1/)).to be_truthy
-      end
     end
   end
 end

@@ -7,10 +7,6 @@ require_relative '../../lib/folio_uuid'
 module UsersTaskHelpers
   include FolioRequestHelper
 
-  def groups_csv
-    CSV.parse(File.open("#{Settings.tsv}/users/patron-groups.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
   def groups_post(obj)
     @@folio_request.post('/groups', obj.to_json)
   end
@@ -135,14 +131,6 @@ module UsersTaskHelpers
     FolioUuid.new.generate('deterministic_user_id', 'users', username)
   end
 
-  def user_login(credentials)
-    @@folio_request.post('/authn/credentials', credentials.to_json)
-  end
-
-  def user_perms(permissions)
-    @@folio_request.post('/perms/users', permissions.to_json)
-  end
-
   def user_service_point(service_point)
     @@folio_request.post('/service-points-users', service_point.to_json)
   end
@@ -170,26 +158,6 @@ module UsersTaskHelpers
   def patron_group(user)
     patron_group_id = user['patronGroup']
     patron_group_get(patron_group_id) if patron_group_id
-  end
-
-  def inactive_user(user, affiliation)
-    patron_group = patron_group(user)
-    user['patronGroup'] = patron_group['group'] if patron_group
-    user['active'] = false
-    user['customFields'] = { 'affiliation' => affiliation }
-    user
-  end
-
-  def permission_sets_json
-    JSON.parse(File.read("#{Settings.json}/users/permission_sets.json"))
-  end
-
-  def permission_sets_post(hash)
-    @@folio_request.post('/perms/permissions', hash.to_json)
-  end
-
-  def user_permissions_get(uuid)
-    @@folio_request.get("/perms/users/#{uuid}/permissions?full=true&indexField=userId")
   end
 
   def pull_waivers
@@ -244,27 +212,5 @@ module UsersTaskHelpers
     hash = @@folio_request.get('/patron-block-limits?limit=100')
     trim_hash(hash, 'patronBlockLimits')
     hash.to_json
-  end
-
-  def pull_permission_sets
-    hash = @@folio_request.get('/perms/permissions?limit=9999&length=9999&query=mutable==true')
-    trim_hash(hash, 'permissions')
-    hash.to_json
-  end
-
-  def delete_user(username)
-    user_ids = user_ids(username)
-    @@folio_request.delete("/users/#{user_ids[0]}") if user_ids[0]
-    @@folio_request.delete("/perms/users/#{user_ids[1]}") if user_ids[1]
-    @@folio_request.delete("/service-points-users/#{user_ids[2]}") if user_ids[2]
-  end
-
-  def display_name_sort(records, *attrs)
-    records.sort_by do |h|
-      h.values_at(*attrs).map do |v|
-        idx = v.index(/[0-9]/)
-        idx.nil? ? [2] : [1, v[idx]]
-      end
-    end
   end
 end

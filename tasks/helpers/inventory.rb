@@ -6,24 +6,8 @@ require_relative '../helpers/folio_request'
 module InventoryTaskHelpers
   include FolioRequestHelper
 
-  def item_loan_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/inventory/item-loan-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
   def item_loan_types_post(obj)
     @@folio_request.post('/loan-types', obj.to_json)
-  end
-
-  def alt_title_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/inventory/alt-title-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
-  def holdings_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/inventory/holdings-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
-  def holdings_note_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/inventory/holdings-note-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
   end
 
   def alt_title_types_post(obj)
@@ -38,28 +22,8 @@ module InventoryTaskHelpers
     @@folio_request.post('/holdings-note-types', obj.to_json)
   end
 
-  def item_note_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/inventory/item-note-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
   def item_note_types_post(obj)
     @@folio_request.post('/item-note-types', obj.to_json)
-  end
-
-  def material_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/inventory/material-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
-  def identifier_types_csv
-    CSV.parse(File.open("#{Settings.tsv}/inventory/identifier-types.tsv"), headers: true, col_sep: "\t").map(&:to_h)
-  end
-
-  def bw_parts_csv(filename)
-    CSV.parse(File.open("#{Settings.tsv}/inventory/#{filename}"), headers: true).map(&:to_h)
-  end
-
-  def bw_parts_post(obj)
-    @@folio_request.post('/inventory-storage/bound-with-parts', obj.to_json)
   end
 
   def material_types_post(obj)
