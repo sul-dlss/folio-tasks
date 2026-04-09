@@ -1,8 +1,7 @@
 okapi:
   url: http://example.com
-  headers:
-    X-Okapi-Tenant: sul
-    User-Agent: FolioApiClient
+  tenant_id: sul
+  user_agent: folio-tasks
   login_params:
     username: user
     password: pass
