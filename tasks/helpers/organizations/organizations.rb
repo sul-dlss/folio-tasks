@@ -7,10 +7,10 @@ module OrganizationsTaskHelpers
   end
 
   def organizations_post(obj)
-    FolioRequest.new.post('/organizations/organizations', obj.to_json)
+    FolioRequest.new.post('/organizations/organizations', obj)
   end
 
   def organizations_put(id, obj)
-    FolioRequest.new.put("/organizations/organizations/#{id}", obj.to_json)
+    FolioRequest.new.put("/organizations/organizations/#{id}", obj)
   end
 end

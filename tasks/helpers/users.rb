@@ -8,7 +8,7 @@ module UsersTaskHelpers
   include FolioRequestHelper
 
   def groups_post(obj)
-    @@folio_request.post('/groups', obj.to_json)
+    @@folio_request.post('/groups', obj)
   end
 
   def address_types_json
@@ -16,7 +16,7 @@ module UsersTaskHelpers
   end
 
   def address_types_post(hash)
-    @@folio_request.post('/addresstypes', hash.to_json)
+    @@folio_request.post('/addresstypes', hash)
   end
 
   def waivers_json
@@ -24,7 +24,7 @@ module UsersTaskHelpers
   end
 
   def waivers_post(hash)
-    @@folio_request.post('/waives', hash.to_json)
+    @@folio_request.post('/waives', hash)
   end
 
   def waivers_delete(id)
@@ -36,7 +36,7 @@ module UsersTaskHelpers
   end
 
   def payments_post(hash)
-    @@folio_request.post('/payments', hash.to_json)
+    @@folio_request.post('/payments', hash)
   end
 
   def payments_delete(id)
@@ -48,7 +48,7 @@ module UsersTaskHelpers
   end
 
   def refunds_post(hash)
-    @@folio_request.post('/refunds', hash.to_json)
+    @@folio_request.post('/refunds', hash)
   end
 
   def refunds_delete(id)
@@ -60,7 +60,7 @@ module UsersTaskHelpers
   end
 
   def comments_post(hash)
-    @@folio_request.post('/comments', hash.to_json)
+    @@folio_request.post('/comments', hash)
   end
 
   def comments_delete(id)
@@ -72,7 +72,7 @@ module UsersTaskHelpers
   end
 
   def owners_post(hash)
-    @@folio_request.post('/owners', hash.to_json)
+    @@folio_request.post('/owners', hash)
   end
 
   def owners_delete(id)
@@ -84,7 +84,7 @@ module UsersTaskHelpers
   end
 
   def manual_charges_post(hash)
-    @@folio_request.post('/feefines', hash.to_json)
+    @@folio_request.post('/feefines', hash)
   end
 
   def manual_charges_delete(id)
@@ -96,7 +96,7 @@ module UsersTaskHelpers
   end
 
   def conditions_put(id, hash)
-    @@folio_request.put("/patron-block-conditions/#{id}", hash.to_json)
+    @@folio_request.put("/patron-block-conditions/#{id}", hash)
   end
 
   def templates_json
@@ -104,7 +104,7 @@ module UsersTaskHelpers
   end
 
   def templates_post(hash)
-    @@folio_request.post('/manual-block-templates', hash.to_json)
+    @@folio_request.post('/manual-block-templates', hash)
   end
 
   def templates_delete(id)
@@ -116,7 +116,7 @@ module UsersTaskHelpers
   end
 
   def limits_post(hash)
-    @@folio_request.post('/patron-block-limits', hash.to_json)
+    @@folio_request.post('/patron-block-limits', hash)
   end
 
   def limits_delete(id)
@@ -132,7 +132,7 @@ module UsersTaskHelpers
   end
 
   def user_service_point(service_point)
-    @@folio_request.post('/service-points-users', service_point.to_json)
+    @@folio_request.post('/service-points-users', service_point)
   end
 
   def user_service_point_hash(user_id, service_point_id)
@@ -144,11 +144,11 @@ module UsersTaskHelpers
   end
 
   def user_post(user)
-    @@folio_request.post('/users', user.to_json)
+    @@folio_request.post('/users', user)
   end
 
   def user_update(users)
-    @@folio_request.post('/user-import', users.to_json)
+    @@folio_request.post('/user-import', users)
   end
 
   def patron_group_get(id)

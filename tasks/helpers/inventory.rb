@@ -7,31 +7,31 @@ module InventoryTaskHelpers
   include FolioRequestHelper
 
   def item_loan_types_post(obj)
-    @@folio_request.post('/loan-types', obj.to_json)
+    @@folio_request.post('/loan-types', obj)
   end
 
   def alt_title_types_post(obj)
-    @@folio_request.post('/alternative-title-types', obj.to_json)
+    @@folio_request.post('/alternative-title-types', obj)
   end
 
   def holdings_types_post(obj)
-    @@folio_request.post('/holdings-types', obj.to_json)
+    @@folio_request.post('/holdings-types', obj)
   end
 
   def holdings_note_types_post(obj)
-    @@folio_request.post('/holdings-note-types', obj.to_json)
+    @@folio_request.post('/holdings-note-types', obj)
   end
 
   def item_note_types_post(obj)
-    @@folio_request.post('/item-note-types', obj.to_json)
+    @@folio_request.post('/item-note-types', obj)
   end
 
   def material_types_post(obj)
-    @@folio_request.post('/material-types', obj.to_json)
+    @@folio_request.post('/material-types', obj)
   end
 
   def identifier_types_post(obj)
-    @@folio_request.post('/identifier-types', obj.to_json)
+    @@folio_request.post('/identifier-types', obj)
   end
 
   def pull_statistical_code_types
@@ -41,7 +41,7 @@ module InventoryTaskHelpers
   end
 
   def statistical_code_types_post(obj)
-    @@folio_request.post('/statistical-code-types', obj.to_json)
+    @@folio_request.post('/statistical-code-types', obj)
   end
 
   def statistical_code_types_json
@@ -55,7 +55,7 @@ module InventoryTaskHelpers
   end
 
   def statistical_codes_post(obj)
-    @@folio_request.post('/statistical-codes', obj.to_json)
+    @@folio_request.post('/statistical-codes', obj)
   end
 
   def statistical_codes_json
@@ -73,7 +73,7 @@ module InventoryTaskHelpers
   end
 
   def instance_note_types_post(obj)
-    @@folio_request.post('/instance-note-types', obj.to_json)
+    @@folio_request.post('/instance-note-types', obj)
   end
 
   def pull_copycat_profiles
@@ -87,6 +87,6 @@ module InventoryTaskHelpers
   end
 
   def copycat_profiles_post(obj)
-    @@folio_request.post('/copycat/profiles', obj.to_json)
+    @@folio_request.post('/copycat/profiles', obj)
   end
 end

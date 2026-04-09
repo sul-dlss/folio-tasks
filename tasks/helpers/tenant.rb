@@ -8,17 +8,17 @@ module TenantTaskHelpers
 
   # Institutions
   def institutions_post(obj)
-    @@folio_request.post('/location-units/institutions', obj.to_json)
+    @@folio_request.post('/location-units/institutions', obj)
   end
 
   # Campuses
   def campuses_post(obj)
-    @@folio_request.post('/location-units/campuses', obj.to_json)
+    @@folio_request.post('/location-units/campuses', obj)
   end
 
   # Libraries
   def libraries_post(obj)
-    @@folio_request.post('/location-units/libraries', obj.to_json)
+    @@folio_request.post('/location-units/libraries', obj)
   end
 
   #  Service points
@@ -39,7 +39,7 @@ module TenantTaskHelpers
   end
 
   def service_points_post(obj)
-    @@folio_request.post('/service-points', obj.to_json)
+    @@folio_request.post('/service-points', obj)
   end
 
   #  Locations
@@ -48,7 +48,7 @@ module TenantTaskHelpers
   end
 
   def locations_post(obj)
-    @@folio_request.post('/locations', obj.to_json)
+    @@folio_request.post('/locations', obj)
   end
 
   def pull_locations
@@ -69,6 +69,6 @@ module TenantTaskHelpers
   end
 
   def calendars_post(obj)
-    @@folio_request.post('/calendar/calendars', obj.to_json)
+    @@folio_request.post('/calendar/calendars', obj)
   end
 end

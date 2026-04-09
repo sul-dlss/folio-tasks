@@ -17,7 +17,7 @@ module InterfacesHelpers
   end
 
   def interface_post(hash)
-    @@folio_request.post('/organizations-storage/interfaces', hash.to_json)
+    @@folio_request.post('/organizations-storage/interfaces', hash)
   end
 
   def pull_credentials
@@ -34,7 +34,7 @@ module InterfacesHelpers
   end
 
   def credential_post(interface_id, hash)
-    @@folio_request.post("/organizations-storage/interfaces/#{interface_id}/credentials", hash.to_json)
+    @@folio_request.post("/organizations-storage/interfaces/#{interface_id}/credentials", hash)
   end
 
   def credentials_json
