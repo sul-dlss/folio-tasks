@@ -8,8 +8,8 @@ module SearchTaskHelpers
 
   def resource_reindex_hash(recreate: :recreate, resource_name: :resource_name)
     {
-      "recreateIndex" => recreate,
-      "resourceName" => resource_name
+      'recreateIndex' => recreate,
+      'resourceName' => resource_name
     }
   end
 

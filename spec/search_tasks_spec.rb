@@ -19,14 +19,13 @@ describe 'search rake tasks' do
     stub_request(:post, 'http://example.com/search/index/inventory/reindex')
 
     stub_request(:post, %r{.*search/index/instance-records/reindex.*})
-      # .to_return({status: 201})
-    
+
     stub_request(:get, 'http://example.com/search/index/instance-records/reindex/status')
   end
 
   context 'when re-creating resource index' do
-    let(:obj) { {recreateIndex: true, resourceName: "authority"} }
-    let(:path) { "http://example.com" + recreate_resource_index_task.send(:resource_path) }
+    let(:obj) { { recreateIndex: true, resourceName: 'authority' } }
+    let(:path) { "http://example.com#{recreate_resource_index_task.send(:resource_path)}" }
 
     it 'posts correct json object with recreateIndex true' do
       expect(WebMock).to have_requested(:post, path)
@@ -35,8 +34,8 @@ describe 'search rake tasks' do
   end
 
   context 'when reindexing resource index' do
-    let(:obj) { {recreateIndex: false, resourceName: "authority"} }
-    let(:path) { "http://example.com" + reindex_resource_index_task.send(:resource_path) }
+    let(:obj) { { recreateIndex: false, resourceName: 'authority' } }
+    let(:path) { "http://example.com#{reindex_resource_index_task.send(:resource_path)}" }
 
     it 'posts correct json object with recreateIndex false' do
       expect(WebMock).to have_requested(:post, path)
@@ -45,7 +44,7 @@ describe 'search rake tasks' do
   end
 
   context 'when recreating instance index' do
-    let(:path) { "http://example.com" + recreate_instances_index_task.send(:instance_path) }
+    let(:path) { "http://example.com#{recreate_instances_index_task.send(:instance_path)}" }
 
     it 'uses to correct endpoint' do
       expect(path).to match(/full$/)
@@ -58,8 +57,8 @@ describe 'search rake tasks' do
   end
 
   context 'when uploading an entity index' do
-    let(:obj) { {entityTypes: ['instance']} }
-    let(:path) { "http://example.com" + upload_index_task.send(:upload_index_path) }
+    let(:obj) { { entityTypes: ['instance'] } }
+    let(:path) { "http://example.com#{upload_index_task.send(:upload_index_path)}" }
 
     it 'uses to correct endpoint' do
       expect(path).to match(/upload$/)
@@ -73,8 +72,8 @@ describe 'search rake tasks' do
   end
 
   context 'when uploading all entity type indexes' do
-    let(:obj) { {entityTypes: ['instance', 'subject', 'contributor', 'classification', 'call-number']} }
-    let(:path) { "http://example.com" + upload_index_task.send(:upload_index_path) }
+    let(:obj) { { entityTypes: %w[instance subject contributor classification call-number] } }
+    let(:path) { "http://example.com#{upload_index_task.send(:upload_index_path)}" }
 
     it 'uses to correct endpoint' do
       expect(path).to match(/upload$/)
@@ -95,10 +94,10 @@ describe 'search rake tasks' do
   end
 
   context 'when reindexing failed merge ranges' do
-    let(:path) { "http://example.com" + reindex_failed_merge_task.send(:failed_merge_path) }
+    let(:path) { "http://example.com#{reindex_failed_merge_task.send(:failed_merge_path)}" }
 
     it 'uses to correct endpoint' do
-      expect(path).to match(/merge\/failed$/)
+      expect(path).to match(%r{merge/failed$})
     end
 
     it 'makes the request' do

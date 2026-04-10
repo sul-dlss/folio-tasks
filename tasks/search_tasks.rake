@@ -5,13 +5,13 @@ require_relative 'helpers/search'
 namespace :search do
   include SearchTaskHelpers
 
-  desc 'recreate resource index (drops index): [authority, location, linked-data-instance, linked-data-work, linked-data-hub]'
+  desc 'recreate resource index (drops index): [authority, location, linked-data-instance|work|hub]'
   task :recreate_resource_index, [:resource_name] do |_, args|
     obj = resource_reindex_hash(recreate: true, resource_name: args[:resource_name].to_s)
     reindex(resource_path, obj)
   end
 
-  desc 'reindex index for resource: [authority, location, linked-data-instance, linked-data-work, linked-data-hub]'
+  desc 'reindex index for resource: [authority, location, linked-data-instance|work|hub]'
   task :reindex_resource_index, [:resource_name] do |_, args|
     obj = resource_reindex_hash(recreate: false, resource_name: args[:resource_name].to_s)
     reindex(resource_path, obj)
@@ -28,9 +28,9 @@ namespace :search do
     reindex(upload_index_path, obj)
   end
 
-  desc 'upload all entity type indexes'
+  desc 'upload all entity type indexes (instance, subject, contributor, classification, call-number)'
   task :upload_all_indexes do
-    obj = { 'entityTypes' => ['instance', 'subject', 'contributor', 'classification', 'call-number'] }
+    obj = { 'entityTypes' => %w[instance subject contributor classification call-number] }
     reindex(upload_index_path, obj)
   end
 
