@@ -14,8 +14,6 @@ module SearchTaskHelpers
   end
 
   def reindex(path, obj = nil)
-    # puts path
-    # puts obj.to_json
     @@folio_request.post(path, obj)
   end
 
