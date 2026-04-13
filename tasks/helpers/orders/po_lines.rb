@@ -23,6 +23,6 @@ module PoLinesHelpers
   end
 
   def orders_storage_put_polines(id, obj)
-    @@folio_request.put("/orders-storage/po-lines/#{id}", obj.to_json, response_code: true)
+    @@folio_request.put("/orders-storage/po-lines/#{id}", obj)
   end
 end

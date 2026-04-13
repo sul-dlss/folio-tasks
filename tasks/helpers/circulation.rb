@@ -11,7 +11,7 @@ module CirculationTaskHelpers
   end
 
   def circulation_rules_put(hash)
-    @@folio_request.put('/circulation/rules', hash.to_json)
+    @@folio_request.put('/circulation/rules', hash)
   end
 
   def fixed_due_date_sched_json
@@ -19,7 +19,7 @@ module CirculationTaskHelpers
   end
 
   def fixed_due_date_sched_post(hash)
-    @@folio_request.post('/fixed-due-date-schedule-storage/fixed-due-date-schedules', hash.to_json)
+    @@folio_request.post('/fixed-due-date-schedule-storage/fixed-due-date-schedules', hash)
   end
 
   def fixed_due_date_sched_delete(id)
@@ -31,7 +31,7 @@ module CirculationTaskHelpers
   end
 
   def loan_policies_post(hash)
-    @@folio_request.post('/loan-policy-storage/loan-policies', hash.to_json)
+    @@folio_request.post('/loan-policy-storage/loan-policies', hash)
   end
 
   def loan_policies_delete(id)
@@ -43,7 +43,7 @@ module CirculationTaskHelpers
   end
 
   def lost_item_fees_post(hash)
-    @@folio_request.post('/lost-item-fees-policies', hash.to_json)
+    @@folio_request.post('/lost-item-fees-policies', hash)
   end
 
   def lost_item_fees_delete(id)
@@ -55,7 +55,7 @@ module CirculationTaskHelpers
   end
 
   def overdue_fines_post(hash)
-    @@folio_request.post('/overdue-fines-policies', hash.to_json)
+    @@folio_request.post('/overdue-fines-policies', hash)
   end
 
   def overdue_fines_delete(id)
@@ -67,7 +67,7 @@ module CirculationTaskHelpers
   end
 
   def patron_notice_policies_post(hash)
-    @@folio_request.post('/patron-notice-policy-storage/patron-notice-policies', hash.to_json)
+    @@folio_request.post('/patron-notice-policy-storage/patron-notice-policies', hash)
   end
 
   def patron_notice_policies_delete(id)
@@ -79,7 +79,7 @@ module CirculationTaskHelpers
   end
 
   def patron_notice_templates_post(hash)
-    @@folio_request.post('/templates', hash.to_json)
+    @@folio_request.post('/templates', hash)
   end
 
   def patron_notice_templates_delete(id)
@@ -91,7 +91,7 @@ module CirculationTaskHelpers
   end
 
   def request_cancellation_reasons_post(hash)
-    @@folio_request.post('/cancellation-reason-storage/cancellation-reasons', hash.to_json)
+    @@folio_request.post('/cancellation-reason-storage/cancellation-reasons', hash)
   end
 
   def request_cancellation_reasons_delete(id)
@@ -103,7 +103,7 @@ module CirculationTaskHelpers
   end
 
   def request_policies_post(hash)
-    @@folio_request.post('/request-policy-storage/request-policies', hash.to_json)
+    @@folio_request.post('/request-policy-storage/request-policies', hash)
   end
 
   def request_policies_delete(id)
@@ -115,7 +115,7 @@ module CirculationTaskHelpers
   end
 
   def staff_slips_put(id, hash)
-    @@folio_request.put("/staff-slips-storage/staff-slips/#{id}", hash.to_json)
+    @@folio_request.put("/staff-slips-storage/staff-slips/#{id}", hash)
   end
 
   def pull_circ_rules

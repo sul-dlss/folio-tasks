@@ -16,6 +16,6 @@ module OrgCategoryTaskHelpers
   end
 
   def categories_post(obj)
-    @@folio_request.post('/organizations-storage/categories', obj.to_json)
+    @@folio_request.post('/organizations-storage/categories', obj)
   end
 end

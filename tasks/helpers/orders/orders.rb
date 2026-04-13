@@ -7,15 +7,15 @@ module OrdersTaskHelpers
   include FolioRequestHelper
 
   def orders_post(obj)
-    @@folio_request.post('/orders/composite-orders', obj.to_json, response_code: true)
+    @@folio_request.post('/orders/composite-orders', obj)
   end
 
   def orders_put(id, obj)
-    @@folio_request.put("/orders/composite-orders/#{id}", obj.to_json)
+    @@folio_request.put("/orders/composite-orders/#{id}", obj)
   end
 
   def orders_storage_put_po(id, obj)
-    @@folio_request.put("/orders-storage/purchase-orders/#{id}", obj.to_json, response_code: true)
+    @@folio_request.put("/orders-storage/purchase-orders/#{id}", obj)
   end
 
   def orders_delete(id)

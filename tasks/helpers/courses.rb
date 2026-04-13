@@ -15,11 +15,11 @@ module CoursesTaskHelpers
   end
 
   def course_terms_post(hash)
-    @@folio_request.post('/coursereserves/terms', hash.to_json)
+    @@folio_request.post('/coursereserves/terms', hash)
   end
 
   def course_types_post(hash)
-    @@folio_request.post('/coursereserves/coursetypes', hash.to_json)
+    @@folio_request.post('/coursereserves/coursetypes', hash)
   end
 
   def course_depts_json
@@ -27,7 +27,7 @@ module CoursesTaskHelpers
   end
 
   def course_depts_post(hash)
-    @@folio_request.post('/coursereserves/departments', hash.to_json)
+    @@folio_request.post('/coursereserves/departments', hash)
   end
 
   def course_status_json
@@ -35,7 +35,7 @@ module CoursesTaskHelpers
   end
 
   def course_status_post(hash)
-    @@folio_request.post('/coursereserves/processingstatuses', hash.to_json)
+    @@folio_request.post('/coursereserves/processingstatuses', hash)
   end
 
   def pull_course_terms

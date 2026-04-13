@@ -61,11 +61,11 @@ module DataImportTaskHelpers
   end
 
   def action_profiles_post(obj)
-    @@folio_request.post('/data-import-profiles/actionProfiles', obj.to_json)
+    @@folio_request.post('/data-import-profiles/actionProfiles', obj)
   end
 
   def action_profiles_put(obj)
-    @@folio_request.put("/data-import-profiles/actionProfiles/#{obj['profile']['id']}", obj.to_json)
+    @@folio_request.put("/data-import-profiles/actionProfiles/#{obj['profile']['id']}", obj)
   end
 
   def action_profiles_delete(id)
@@ -86,11 +86,11 @@ module DataImportTaskHelpers
   end
 
   def mapping_profiles_post(obj)
-    @@folio_request.post('/data-import-profiles/mappingProfiles', obj.to_json)
+    @@folio_request.post('/data-import-profiles/mappingProfiles', obj)
   end
 
   def mapping_profiles_put(obj)
-    @@folio_request.put("/data-import-profiles/mappingProfiles/#{obj['profile']['id']}", obj.to_json)
+    @@folio_request.put("/data-import-profiles/mappingProfiles/#{obj['profile']['id']}", obj)
   end
 
   def mapping_profiles_delete(id)
@@ -118,12 +118,12 @@ module DataImportTaskHelpers
 
   def profile_associations_post(payload, master, detail)
     @@folio_request.post("/data-import-profiles/profileAssociations?detail=#{detail}&master=#{master}",
-                         payload.to_json)
+                         payload)
   end
 
   def profile_associations_put(payload, master, detail)
     @@folio_request.put("/data-import-profiles/profileAssociations/#{payload['id']}?detail=#{detail}&master=#{master}",
-                        payload.to_json)
+                        payload)
   end
 
   def pull_action_profiles
@@ -197,7 +197,7 @@ module DataImportTaskHelpers
   end
 
   def marc_bib_mapping_put(obj)
-    @@folio_request.put('/mapping-rules/marc-bib', obj.to_json)
+    @@folio_request.put('/mapping-rules/marc-bib', obj)
   end
 
   def marc_hold_mapping_json
@@ -205,7 +205,7 @@ module DataImportTaskHelpers
   end
 
   def marc_hold_mapping_put(obj)
-    @@folio_request.put('/mapping-rules/marc-holdings', obj.to_json)
+    @@folio_request.put('/mapping-rules/marc-holdings', obj)
   end
 
   def profile_associations_load(payload, master, detail)

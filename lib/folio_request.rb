@@ -1,44 +1,49 @@
 # frozen_string_literal: true
 
+require 'folio_client'
 require 'config'
 require 'http'
 Config.load_and_set_settings(Config.setting_files('config', ENV['STAGE'] || 'dev'))
 
-# Class to post user data to FOLIO Users module
+# Class to use HTTP actions with FOLIO
 class FolioRequest
-  DEFAULT_HEADERS = {
-    accept: 'application/json, text/plain',
-    content_type: 'application/json'
-  }.freeze
+  def client
+    FolioClient.configure(
+      url: Settings.okapi.url,
+      login_params: Settings.okapi.login_params,
+      tenant_id: Settings.okapi.tenant_id,
+      user_agent: Settings.okapi.user_agent
+    )
+  end
 
   def get(path)
-    parse(authenticated_request(path))
+    response = client.get(path)
+    pp response unless response.nil?
   end
 
   def get_json(path)
-    puts JSON.pretty_generate(JSON.parse(authenticated_request(path)))
+    puts JSON.pretty_generate(client.get(path))
   end
 
   def get_cql(path, query)
     path += "?query=#{CGI.escape(query)}"
-    parse(authenticated_request(path))
+    response = client.get(path)
+    pp response unless response.nil?
   end
 
   def get_cql_json(path, limit, query)
     path += "?limit=#{limit}&query=#{CGI.escape(query)}"
-    puts JSON.pretty_generate(JSON.parse(authenticated_request(path)))
+    puts JSON.pretty_generate(client.get(path))
   end
 
-  def post_no_body(path)
-    parse(authenticated_request(path, method: :post))
+  def post(path, json = nil)
+    response = client.post(path, json)
+    pp response unless response.nil?
   end
 
-  def post(path, json, **other)
-    parse(authenticated_request(path, method: :post, body: json), **other)
-  end
-
-  def put(path, json, **other)
-    parse(authenticated_request(path, method: :put, body: json), **other)
+  def put(path, json = nil)
+    response = client.put(path, json)
+    pp response unless response.nil?
   end
 
   def delete(path, **other)
@@ -69,6 +74,12 @@ class FolioRequest
   end
 
   def request(path, headers: {}, method: :get, **other)
+    default_headers = {
+      accept: 'application/json, text/plain',
+      content_type: 'application/json',
+      user_agent: Settings.okapi.user_agent,
+      'x-okapi-tenant': Settings.okapi.tenant_id
+    }
     HTTP
       .timeout(150)
       .headers(default_headers.merge(headers))
@@ -82,9 +93,5 @@ class FolioRequest
   def make_path(path)
     path = path.gsub(/\s/, '%20')
     path.start_with?('/') ? path.strip : "/#{path.strip}"
-  end
-
-  def default_headers
-    DEFAULT_HEADERS.merge(Settings.okapi.headers || {})
   end
 end

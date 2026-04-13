@@ -7,10 +7,10 @@ module OrgNoteTaskHelpers
   include FolioRequestHelper
 
   def org_note_types_post(obj)
-    @@folio_request.post('/note-types', obj.to_json)
+    @@folio_request.post('/note-types', obj)
   end
 
   def org_notes_post(obj)
-    @@folio_request.post('/notes', obj.to_json)
+    @@folio_request.post('/notes', obj)
   end
 end

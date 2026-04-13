@@ -59,11 +59,11 @@ module ConfigurationsTaskHelpers
   end
 
   def config_entry_post(hash)
-    @@folio_request.post('/configurations/entries', hash.to_json)
+    @@folio_request.post('/configurations/entries', hash)
   end
 
   def config_entry_put(hash)
-    @@folio_request.put("/configurations/entries/#{hash['id']}", hash.to_json)
+    @@folio_request.put("/configurations/entries/#{hash['id']}", hash)
   end
 
   def config_entry_delete(id)
@@ -83,7 +83,7 @@ module ConfigurationsTaskHelpers
     config = JSON.parse(File.read("#{Settings.json}/configurations/self_checkout_config.json"))
     config['configName'] = "selfCheckoutConfig.#{servicepoint}"
     config['value'] = "{\"timeoutPeriod\": 5,\"retriesAllowed\": 3,\"checkinOk\": true,\"checkoutOk\": true,\"acsRenewalPolicy\": false,\"libraryName\": \"#{library_name}\",\"terminalLocation\": \"#{servicepoint}\"}"
-    config.to_json
+    config
   end
   # rubocop:enable Layout/LineLength
 
@@ -98,7 +98,7 @@ module ConfigurationsTaskHelpers
   end
 
   def email_config_post(hash)
-    @@folio_request.post('/smtp-configuration', hash.to_json)
+    @@folio_request.post('/smtp-configuration', hash)
   end
 
   def email_config_get
