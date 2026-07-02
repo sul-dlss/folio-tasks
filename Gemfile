@@ -7,7 +7,6 @@ ruby '3.4.9'
 gem 'config'
 gem 'csv'
 gem 'folio_client'
-gem 'http'
 gem 'rake'
 gem 'require_all'
 gem 'uuidtools'
@@ -22,5 +21,4 @@ group :development, :test do
   gem 'webmock'
   gem 'byebug'
 end
-
 

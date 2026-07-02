@@ -2,7 +2,6 @@
 
 require 'folio_client'
 require 'config'
-require 'http'
 Config.load_and_set_settings(Config.setting_files('config', ENV['STAGE'] || 'dev'))
 
 # Class to use FolioClient actions with FOLIO
