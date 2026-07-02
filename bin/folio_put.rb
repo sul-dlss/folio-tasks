@@ -6,4 +6,4 @@ require 'json'
 folio = FolioRequest.new
 path = folio.make_path(ARGV[0])
 ARGV[1] && json = JSON.parse(File.read(ARGV[1]))
-folio.put(path, json)
+folio.put(path, json, response_code: true)

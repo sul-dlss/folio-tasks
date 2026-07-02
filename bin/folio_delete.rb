@@ -4,4 +4,4 @@ require_relative '../lib/folio_request'
 require 'json'
 folio = FolioRequest.new
 path = folio.make_path(ARGV[0])
-folio.delete(path)
+folio.delete(path, response_code: true)
